@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const autoprefixer = require('autoprefixer')
+const precss = require('precss')
 
 const env = process.env.NODE_ENV || 'development'
 
@@ -23,8 +25,7 @@ const config = {
       },
       {
         test: /\.css$/,
-        loader: 'css-loader',
-        loader: ExtractTextPlugin.extract('style!css!postcss')
+        loader: ExtractTextPlugin.extract('style', 'css!postcss')
       }
     ]
   },
@@ -41,10 +42,10 @@ const config = {
     ]
   },
   plugins: [
+    new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       template: 'index.html'
-    }),
-    new ExtractTextPlugin('[name].css')
+    })
   ]
 }
 

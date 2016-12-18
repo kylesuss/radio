@@ -13,6 +13,9 @@ const config = {
     publicPath: '/'
   },
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     preLoaders: [],
     loaders: [

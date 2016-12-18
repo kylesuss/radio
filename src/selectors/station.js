@@ -1,4 +1,3 @@
 export const findStationBySlug = (stations, slug) => {
-  debugger
-  // TODO: Find it
+  return stations.find(station => station.slug === slug)
 }

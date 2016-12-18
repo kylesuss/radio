@@ -1,9 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 export default class Station extends Component {
+  static propTypes = {
+    station: PropTypes.object.isRequired
+  };
+
   render () {
     return (
-      <div>station</div>
+      <div>{this.props.station.name}</div>
     )
   }
 }

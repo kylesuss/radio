@@ -1,0 +1,11 @@
+@import 'variables.css';
+
+.player {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 80px;
+  padding: $spacing-common;
+  background: black;
+}

@@ -1,0 +1,8 @@
+$white: #fff;
+$black: #000;
+$blue: #27a2c0;
+$green: #0cbba1;
+
+$spacing-common: 1.5rem;
+
+$ease-out-back: cubic-bezier(0.175, 0.885, 0.320, 1.275);

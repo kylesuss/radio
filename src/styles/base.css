@@ -1,5 +1,18 @@
 @import 'normalize.min.css';
+@import 'variables.css';
+@import 'helpers.css';
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 body {
-  background: white;
+  background: $black;
+  font-family: 'PT Sans', sans-serif;
 }

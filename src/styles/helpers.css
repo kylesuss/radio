@@ -1,0 +1,53 @@
+@import 'variables.css';
+
+/* Appearance */
+.color-white {
+  color: $white;
+}
+
+/* Display */
+.flex {
+  display: flex;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* Fonts */
+.font-primary {
+  font-family: 'PT Sans', sans-serif;
+}
+
+.font-tertiary {
+  font-family: 'flood-std', sans-serif;
+}
+
+/* Text */
+.text-bold {
+  font-weight: 700;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
+}

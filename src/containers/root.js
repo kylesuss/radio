@@ -10,7 +10,7 @@ import App from 'components/app'
 import Home from 'containers/home'
 import Station from 'containers/station'
 import { STATION_PATH } from 'constants/routes'
-import 'styles/base.css'
+import 'styles/base'
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)

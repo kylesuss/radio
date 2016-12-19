@@ -1,0 +1,78 @@
+@import 'variables.css';
+@import 'animations.css';
+
+.app {
+  background: $white;
+  padding: $spacing-common;
+  margin-top: 6px;
+  min-height: calc(100vh - 6px);
+}
+
+.app__header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(to right, $green, $blue, $green, $blue, $green, $blue);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+  }
+
+  &::before {
+    animation: animateAppHeader 3000ms ease-out infinite;
+    background: linear-gradient(to right, $blue, $green, $blue, $green, $blue, $green);
+  }
+}
+
+.app__logo {
+  position: fixed;
+  width: 180px;
+  height: 200px;
+  padding: 4px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border: 2px solid transparent;
+    animation: animateAppLogoBackground 500ms $ease-out-back 250ms forwards;
+  }
+
+  &__inner {
+    position: absolute;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    z-index: 1;
+    animation: animateAppLogoInner 450ms ease-out 750ms forwards;
+  }
+
+  &__primary {
+    font-size: 3rem;
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, $blue), color-stop(0.5, $green), color-stop(0.99, $blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    animation: animateAppLogoPrimary 400ms $ease-out-back 1100ms forwards;
+  }
+
+  &__secondary {
+    font-size: 1.275rem;
+    opacity: 0;
+    animation: animateAppLogoPrimary 400ms $ease-out-back 1150ms forwards;
+  }
+}
+
+.app__container {
+  margin-left: calc(180px + $spacing-common);
+}

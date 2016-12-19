@@ -9,7 +9,7 @@ export default [
     slug: 'frission-radio'
   }, {
     name: 'Le Mellotron',
-    streamUrl: 'http://shouting.trinoma.net/stream/1',
+    streamUrl: 'http://shouting.trinoma.net/stream/1/',
     slug: 'le-mellotron'
   }
 ]

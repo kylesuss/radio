@@ -23,7 +23,7 @@ export default class Player extends Component {
   get soundPlayStatus () {
     if (this.isPaused) { return Sound.status.PAUSED }
     if (this.props.isPlaying) { return Sound.status.PLAYING }
-    return Sound.status.STOPPED;
+    return Sound.status.STOPPED
   }
 
   get wrapperClasses () {

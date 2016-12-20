@@ -46,7 +46,7 @@
     width: 0;
     height: 0;
     border: 2px solid transparent;
-    animation: animateAppLogoBackground 500ms $ease-out-back 250ms forwards;
+    animation: animateAppLogoBackground 450ms $ease-out-back 250ms forwards;
   }
 
   &__inner {
@@ -54,7 +54,7 @@
     width: calc(100% - 8px);
     height: calc(100% - 8px);
     z-index: 1;
-    animation: animateAppLogoInner 450ms ease-out 750ms forwards;
+    animation: animateAppLogoInner 200ms ease-out 750ms forwards;
   }
 
   &__primary {
@@ -63,13 +63,13 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     opacity: 0;
-    animation: animateAppLogoPrimary 400ms $ease-out-back 1100ms forwards;
+    animation: animateAppLogoPrimary 500ms $ease-out-back 950ms forwards;
   }
 
   &__secondary {
     font-size: 1.275rem;
     opacity: 0;
-    animation: animateAppLogoPrimary 400ms $ease-out-back 1150ms forwards;
+    animation: animateAppLogoPrimary 500ms $ease-out-back 1000ms forwards;
   }
 }
 

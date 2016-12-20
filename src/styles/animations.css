@@ -34,10 +34,12 @@
 @keyframes animateAppLogoInner {
   from {
     background: transparent;
+    transform: scale(.9);
   }
 
   to {
     background: $white;
+    transform: scale(1);
   }
 }
 

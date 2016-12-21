@@ -16,6 +16,19 @@ export default class Player extends Component {
     togglePlayState: PropTypes.func.isRequired
   }
 
+  constructor (props) {
+    super(props)
+    this.state = { isLoading: false }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { station } = this.props
+
+    if (!station || nextProps.station.slug !== station.slug) {
+      this.setState({ isLoading: true })
+    }
+  }
+
   get audioSrc () {
     return this.props.station.streamUrl
   }
@@ -38,24 +51,34 @@ export default class Player extends Component {
     })
   }
 
+  get playStateClasses () {
+    return classnames({
+      'player__controls__play-state__inner full-width full-height flex flex-justify-center flex-align-center': true,
+      'player__controls__play-state__inner--loading': this.state.isLoading
+    })
+  }
+
   get stationPath () {
     return buildStationPath(this.props.station.slug)
   }
 
   handlePlayToggle = () => this.props.togglePlayState()
 
+  handleSoundPlaying = () => this.setState({ isLoading: false })
+
   get stationTemplate () {
     return (
       <div className="flex">
         <Sound url={this.props.station.streamUrl}
-               playStatus={this.soundPlayStatus} />
+               playStatus={this.soundPlayStatus}
+               onPlaying={this.handleSoundPlaying} />
 
         <div className="player__controls m-r-3">
-          <button className="btn-reset full-width full-height color-white"
-                  onClick={this.handlePlayToggle}>
-            <div className="player__controls__play-state full-width
-                            full-height flex flex-justify-center
-                            flex-align-center">
+          <button className="player__controls__play-state__button btn-reset
+                             full-width full-height color-white"
+                  onClick={this.handlePlayToggle}
+                  disabled={this.state.isLoading}>
+            <div className={this.playStateClasses}>
               {
                 this.props.isPlaying
                   ? <PauseIcon />

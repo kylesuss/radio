@@ -25,6 +25,10 @@ body {
   background: transparent;
   cursor: pointer;
 
+  &:disabled {
+    cursor: default;
+  }
+
   &:active,
   &:focus {
     outline: none;

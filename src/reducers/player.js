@@ -18,7 +18,7 @@ export default function (state = initialState, action = {}) {
     case TOGGLE_PLAY_STATE:
       return {
         ...state,
-        isPlaying: !state.isPlaying
+        isPlaying: state.isOpen ? !state.isPlaying : state.isPlaying
       }
     default:
       return state

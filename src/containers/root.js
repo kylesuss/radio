@@ -12,7 +12,7 @@ import Station from 'containers/station'
 import { STATION_PATH } from 'constants/routes'
 import 'styles/base'
 
-const store = configureStore()
+export const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
 export default class Root extends Component {

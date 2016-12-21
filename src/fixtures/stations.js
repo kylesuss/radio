@@ -29,5 +29,25 @@ export default [
     streamUrl: 'http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a',
     slug: 'berlin-community-radio',
     location: 'Berlin, Germany'
+  }, {
+    name: 'Balamii',
+    streamUrl: 'http://soho.wavestreamer.com:5015/Live',
+    slug: 'balamii',
+    location: 'London, UK'
+  }, {
+    name: 'Noods Radio',
+    streamUrl: 'http://149.255.59.164:8051/live',
+    slug: 'noods-radio',
+    location: 'Bristol, UK'
+  }, {
+    name: 'Worldwide FM',
+    streamUrl: 'http://worldwidefm.out.airtime.pro:8000/worldwidefm_a',
+    slug: 'worldwide-fm',
+    location: 'Worldwide'
+  }, {
+    name: 'Radar Radio',
+    streamUrl: 'http://soho.wavestreamer.com:5831/1/;stream.mp3',
+    slug: 'radar-radio',
+    location: 'London, UK'
   }
 ]

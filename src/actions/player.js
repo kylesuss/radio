@@ -6,3 +6,11 @@ export const playStation = (slug) => {
     slug
   }
 }
+
+export const TOGGLE_PLAY_STATE = 'TOGGLE_PLAY_STATE'
+
+export const togglePlayState = () => {
+  return {
+    type: TOGGLE_PLAY_STATE
+  }
+}

@@ -1,7 +1,7 @@
-import { PLAY_STATION } from 'actions/player'
+import { PLAY_STATION, TOGGLE_PLAY_STATE } from 'actions/player'
 
 const initialState = {
-  isOpen: true,
+  isOpen: false,
   isPlaying: false,
   activeStation: null
 }
@@ -14,6 +14,11 @@ export default function (state = initialState, action = {}) {
         isOpen: true,
         isPlaying: true,
         activeStation: action.slug
+      }
+    case TOGGLE_PLAY_STATE:
+      return {
+        ...state,
+        isPlaying: !state.isPlaying
       }
     default:
       return state

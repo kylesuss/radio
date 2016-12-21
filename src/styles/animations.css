@@ -43,14 +43,14 @@
   }
 }
 
-@keyframes animateAppLogoPrimary {
+@keyframes animateAppLogo {
   from {
-    transform: translateY(-1rem);
+    transform: translate3d(0, -1rem, 0);
     opacity: 0;
   }
 
   to {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }

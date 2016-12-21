@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import Player from 'components/player'
 import { findStationBySlug } from 'selectors/station'
+import { togglePlayState } from 'actions/player'
 
 const mapStateToProps = (state) => {
   return {
@@ -10,7 +11,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    togglePlayState: () => dispatch(togglePlayState())
+  }
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Player)

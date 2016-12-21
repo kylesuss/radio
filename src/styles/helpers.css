@@ -5,6 +5,27 @@
   color: $white;
 }
 
+.color-blue-grey {
+  color: $blue-grey;
+}
+
+/* Links */
+.link-light {
+  &, > a {
+    color: $white;
+    text-decoration: none;
+  }
+
+  a&, > a {
+    border-bottom: 2px solid $blue;
+    transition: border 250ms ease-out;
+
+    &:hover {
+      border-bottom: 2px solid $purple;
+    }
+  }
+}
+
 /* Display */
 .flex {
   display: flex;
@@ -26,6 +47,10 @@
   width: 100%;
 }
 
+.full-height {
+  height: 100%;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -39,6 +64,14 @@
   font-family: 'flood-std', sans-serif;
 }
 
+.font-size-13 {
+  font-size: 13px;
+}
+
+.font-size-18 {
+  font-size: 18px;
+}
+
 /* Text */
 .text-bold {
   font-weight: 700;
@@ -50,4 +83,13 @@
 
 .text-center {
   text-align: center;
+}
+
+/* Spacing */
+.m-l-1 {
+  margin-left: 1rem;
+}
+
+.m-r-3 {
+  margin-right: 3rem;
 }

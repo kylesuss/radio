@@ -51,25 +51,28 @@
 
   &__inner {
     position: absolute;
+    left: 4px;
     width: calc(100% - 8px);
     height: calc(100% - 8px);
     z-index: 1;
     animation: animateAppLogoInner 200ms ease-out 750ms forwards;
   }
 
+  &__primary,
+  &__secondary {
+    opacity: 0;
+    animation: animateAppLogo 500ms $ease-out-back 1000ms forwards;
+  }
+
   &__primary {
     font-size: 3rem;
-    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, $blue), color-stop(0.5, $green), color-stop(0.99, $blue));
+    background: linear-gradient(to right, $blue, $green, $blue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    opacity: 0;
-    animation: animateAppLogoPrimary 500ms $ease-out-back 950ms forwards;
   }
 
   &__secondary {
     font-size: 1.275rem;
-    opacity: 0;
-    animation: animateAppLogoPrimary 500ms $ease-out-back 1000ms forwards;
   }
 }
 

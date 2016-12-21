@@ -11,17 +11,20 @@
 
 /* Links */
 .link-light {
-  &, > a {
+  a&, > a {
+    display: inline-block;
     color: $white;
     text-decoration: none;
-  }
-
-  a&, > a {
     border-bottom: 2px solid $blue;
-    transition: border 250ms ease-out;
+    transition: border 250ms ease-out,
+                transform 125ms ease-out;
 
     &:hover {
       border-bottom: 2px solid $purple;
+    }
+
+    &:active {
+      transform: translateX(1px) translateY(1px);
     }
   }
 }

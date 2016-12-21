@@ -1,9 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Player from 'containers/player'
 import addKeyboardShortcuts from 'higher-order/add-keyboard-shortcuts'
+import classnames from 'classnames'
 import 'styles/app'
 
 class App extends Component {
+  static propTypes = {
+    playerIsOpen: PropTypes.bool.isRequired
+  }
+
+  get containerClasses () {
+    return classnames({
+      'app__container': true,
+      'app__container--with-open-player': this.props.playerIsOpen
+    })
+  }
+
   render () {
     return (
       <div className="app">
@@ -23,7 +35,7 @@ class App extends Component {
           </div>
         </div>
 
-        <div className="app__container">
+        <div className={this.containerClasses}>
           {this.props.children}
         </div>
 

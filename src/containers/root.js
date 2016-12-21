@@ -6,10 +6,11 @@ import IndexRoute from 'react-router/lib/IndexRoute'
 import browserHistory from 'react-router/lib/browserHistory'
 import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from 'store/configureStore'
-import App from 'components/app'
+import App from 'containers/app'
 import Home from 'containers/home'
 import Station from 'containers/station'
 import { STATION_PATH } from 'constants/routes'
+import 'babel-polyfill'
 import 'styles/base'
 
 export const store = configureStore()

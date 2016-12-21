@@ -15,6 +15,8 @@
   right: 0;
   height: 6px;
   background: linear-gradient(to right, $green, $blue, $green, $blue, $green, $blue);
+  box-shadow: 0 1px 15px 0px rgba(0, 0, 0, .4);
+  z-index: 1;
 
   &::before {
     content: '';
@@ -78,4 +80,8 @@
 
 .app__container {
   margin-left: calc(180px + $spacing-common);
+
+  &--with-open-player {
+    padding-bottom: 5rem;
+  }
 }

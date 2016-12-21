@@ -1,0 +1,11 @@
+@import '../variables.css';
+
+.page--station {
+  display: flex;
+}
+
+.page--station__details,
+.page--station__feed {
+  position: relative;
+  flex: 1;
+}

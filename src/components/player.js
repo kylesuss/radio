@@ -88,7 +88,8 @@ export default class Player extends Component {
           </button>
         </div>
 
-        <div className="player__info flex flex-direction-column">
+        <div className="player__info player__info--with-link flex
+                        flex-direction-column flex-justify-center">
           <span className="color-blue-grey text-uppercase font-size-13">
             Now playing:
           </span>

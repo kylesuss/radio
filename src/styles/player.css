@@ -93,4 +93,8 @@
 
 .player__info {
   width: 200px;
+
+  &--with-link {
+    transform: translateY(-2px);
+  }
 }

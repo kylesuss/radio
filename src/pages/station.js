@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import TwitterFeed from 'components/twitter-feed'
+import 'styles/pages/station'
 
 export default class Station extends Component {
   static propTypes = {
@@ -13,11 +15,19 @@ export default class Station extends Component {
 
   render () {
     return (
-      <div>
-        <div>{this.props.station.name}</div>
-        <button onClick={this.handleButtonClick}>
-          Play
-        </button>
+      <div className="page--station">
+        <div className="page--station__details">
+          <div>{this.props.station.name}</div>
+          <button onClick={this.handleButtonClick}>
+            Play
+          </button>
+        </div>
+
+        <div className="page--station__feed">
+          <div className="page--station__feed__scrollable">
+            <TwitterFeed twitterHandle={this.props.station.twitterHandle} />
+          </div>
+        </div>
       </div>
     )
   }

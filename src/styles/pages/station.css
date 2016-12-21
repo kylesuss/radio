@@ -9,3 +9,9 @@
   position: relative;
   flex: 1;
 }
+
+.page--station__feed iframe {
+  opacity: 0;
+  animation: fadeIn 400ms ease-out forwards;
+  animation-delay: 500ms;
+}

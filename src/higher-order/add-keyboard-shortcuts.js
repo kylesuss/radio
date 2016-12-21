@@ -7,16 +7,17 @@ const SPACE_KEY = 32
 export default function (ComposedComponent) {
   return class extends Component {
     componentDidMount () {
-      window.addEventListener('keyup', this.handleKeyUp)
+      window.addEventListener('keydown', this.handleKeyUp)
     }
 
     componentWillUnMount () {
-      window.removeEventListener('keyup', this.handleKeyUp)
+      window.removeEventListener('keydown', this.handleKeyUp)
     }
 
     handleKeyUp = (event) => {
       switch (event.keyCode) {
         case SPACE_KEY:
+          event.preventDefault() // Prevent scroll
           this.handleSpaceKey()
       }
     }

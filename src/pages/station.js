@@ -24,9 +24,7 @@ export default class Station extends Component {
         </div>
 
         <div className="page--station__feed">
-          <div className="page--station__feed__scrollable">
-            <TwitterFeed twitterHandle={this.props.station.twitterHandle} />
-          </div>
+          <TwitterFeed twitterHandle={this.props.station.twitterHandle} />
         </div>
       </div>
     )

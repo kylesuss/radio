@@ -18,9 +18,11 @@ export default class TwitterFeed extends Component {
     }
   }
 
-  componentDidUpdate () {
-    this.timelineEl.innerHTML = ''
-    this.buildTimeline()
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.twitterHandle !== this.props.twitterHandle) {
+      this.timelineEl.innerHTML = ''
+      this.buildTimeline()
+    }
   }
 
   componentWillUnmount () {

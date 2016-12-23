@@ -14,13 +14,17 @@ const reducer = compose(
       player: {
         ...persistedState.player,
         isPlaying: initialState.player.isPlaying
+      },
+      stations: {
+        ...persistedState.stations,
+        items: initialState.stations.items
       }
     }
   })
 )(rootReducer)
 
 const storage = compose(
-  filter(['player']),
+  filter(['player', 'stations']),
 )(adapter(window.localStorage))
 
 const enhancer = compose(

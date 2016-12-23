@@ -107,7 +107,8 @@ export default class Player extends Component {
           </span>
         </div>
 
-        <div className="player__info flex flex-direction-column m-l-1">
+        <div className="player__info flex flex-direction-column m-l-1
+                        flex-justify-center">
           <span className="color-blue-grey text-uppercase font-size-13">
             Location:
           </span>

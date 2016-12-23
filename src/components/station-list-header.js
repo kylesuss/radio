@@ -5,6 +5,7 @@ import {
   NAME_SORT_KEY_ARRAY,
   COUNTRY_SORT_KEY_ARRAY
 } from 'constants/stations'
+import 'styles/station-list-header'
 
 export default class StationListHeader extends Component {
   static propTypes = {
@@ -30,18 +31,20 @@ export default class StationListHeader extends Component {
             Sort by:
           </span>
           <span>
-            <button className="btn-reset"
+            <button className="btn-reset station-list__header__button"
                     onClick={() => this.handleSort(NAME_SORT_KEY_ARRAY)}>
-              <span className="color-blue-grey text-uppercase font-size-13">
+              <span className="station-list__header__sort-link color-blue-grey
+                               text-uppercase font-size-13">
                 <Radio isChecked={this.isChecked(NAME_SORT_KEY_ARRAY)}
                        label="name" />
               </span>
             </button>
           </span>
           <span className="m-l-0__8">
-            <button className="btn-reset"
+            <button className="btn-reset station-list__header__button"
                     onClick={() => this.handleSort(COUNTRY_SORT_KEY_ARRAY)}>
-              <span className="color-blue-grey text-uppercase font-size-13">
+              <span className="station-list__header__sort-link color-blue-grey
+                               text-uppercase font-size-13">
                 <Radio isChecked={this.isChecked(COUNTRY_SORT_KEY_ARRAY)}
                        label="country" />
               </span>

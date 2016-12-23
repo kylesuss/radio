@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import RadioIconUnchecked from 'react-icons/lib/md/radio-button-unchecked'
 import RadioIconChecked from 'react-icons/lib/md/radio-button-checked'
+import 'styles/radio'
 
 export default class Radio extends Component {
   static propTypes = {
@@ -14,7 +15,7 @@ export default class Radio extends Component {
 
   render () {
     return (
-      <div>
+      <div className="radio">
         <label>
           <div className="flex flex-align-center">
             {
@@ -22,7 +23,7 @@ export default class Radio extends Component {
                 ? <RadioIconChecked />
                 : <RadioIconUnchecked />
             }
-            <span className="m-l-0__3">
+            <span className="radio__label-text m-l-0__3">
               {this.props.label}
             </span>
           </div>

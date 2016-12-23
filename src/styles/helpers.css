@@ -16,8 +16,7 @@
     color: $white;
     text-decoration: none;
     border-bottom: 2px solid $blue;
-    transition: border 250ms ease-out,
-                transform 125ms ease-out;
+    transition: border 250ms ease-out;
 
     &:hover {
       border-bottom: 2px solid $purple;

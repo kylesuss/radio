@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   const { slug } = ownProps.params
 
   return {
-    station: findStationBySlug(state.stations, slug)
+    station: findStationBySlug(state.stations.items, slug)
   }
 }
 

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Link from 'react-router/lib/Link'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
+import buildLocation from 'utils/build-location'
 import { buildStationPath } from 'constants/routes'
 import Sound from 'react-sound'
 import classnames from 'classnames'
@@ -67,9 +68,11 @@ export default class Player extends Component {
   handleSoundPlaying = () => this.setState({ isLoading: false })
 
   get stationTemplate () {
+    const { isPlaying, station } = this.props
+
     return (
       <div className="flex">
-        <Sound url={this.props.station.streamUrl}
+        <Sound url={station.streamUrl}
                playStatus={this.soundPlayStatus}
                onPlaying={this.handleSoundPlaying} />
 
@@ -80,7 +83,7 @@ export default class Player extends Component {
                   disabled={this.state.isLoading}>
             <div className={this.playStateClasses}>
               {
-                this.props.isPlaying
+                isPlaying
                   ? <PauseIcon />
                   : <PlayIcon />
               }
@@ -91,11 +94,15 @@ export default class Player extends Component {
         <div className="player__info player__info--with-link flex
                         flex-direction-column flex-justify-center">
           <span className="color-blue-grey text-uppercase font-size-13">
-            Now playing:
+            {
+              this.state.isLoading
+                ? 'Loading:'
+                : 'Now playing:'
+            }
           </span>
           <span className="color-white font-size-18 link-light">
             <Link to={this.stationPath}>
-              {this.props.station.name}
+              {station.name}
             </Link>
           </span>
         </div>
@@ -105,7 +112,7 @@ export default class Player extends Component {
             Location:
           </span>
           <span className="color-white font-size-18">
-            {this.props.station.location}
+            {buildLocation(station.city, station.country)}
           </span>
         </div>
       </div>

@@ -18,7 +18,12 @@ export default class TwitterFeed extends Component {
     }
   }
 
-  componentWillUnMount () {
+  componentDidUpdate () {
+    this.timelineEl.innerHTML = ''
+    this.buildTimeline()
+  }
+
+  componentWillUnmount () {
     this.timelineEl = null
   }
 
@@ -30,6 +35,7 @@ export default class TwitterFeed extends Component {
   }
 
   buildTimeline = () => {
+    console.log('buildTimeline')
     if (!window.twttr) { return }
     window.twttr.widgets.createTimeline(this.timelineOptions, this.timelineEl)
   }

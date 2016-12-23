@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 
 const mapStateToProps = (state) => {
   return {
-    stations: state.stations
+    stations: state.stations.items
   }
 }
 

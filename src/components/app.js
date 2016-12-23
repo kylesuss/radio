@@ -1,12 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import Player from 'containers/player'
 import addKeyboardShortcuts from 'higher-order/add-keyboard-shortcuts'
+import DocumentTitle from 'react-document-title'
 import classnames from 'classnames'
 import 'styles/app'
 
+const DEFAULT_TITLE = 'Fresh Transmission - Curated Internet Radio'
+
 class App extends Component {
   static propTypes = {
-    playerIsOpen: PropTypes.bool.isRequired
+    playerIsOpen: PropTypes.bool.isRequired,
+    playerIsPlaying: PropTypes.bool.isRequired,
+    activeStation: PropTypes.object.isRequired
   }
 
   get containerClasses () {
@@ -14,6 +19,14 @@ class App extends Component {
       'app__container': true,
       'app__container--with-open-player': this.props.playerIsOpen
     })
+  }
+
+  get documentTitle () {
+    const { activeStation, playerIsPlaying } = this.props
+
+    return activeStation && playerIsPlaying
+      ? `${activeStation.name} | ${DEFAULT_TITLE}`
+      : DEFAULT_TITLE
   }
 
   render () {
@@ -36,7 +49,9 @@ class App extends Component {
         </div>
 
         <div className={this.containerClasses}>
-          {this.props.children}
+          <DocumentTitle title={this.documentTitle}>
+            {this.props.children}
+          </DocumentTitle>
         </div>
 
         <Player />

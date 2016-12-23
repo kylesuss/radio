@@ -17,7 +17,7 @@ export default class Radio extends Component {
     return (
       <div className="radio">
         <label>
-          <div className="flex flex-align-center">
+          <div className="flex flex-align-center cursor-pointer">
             {
               this.props.isChecked
                 ? <RadioIconChecked />

@@ -101,5 +101,12 @@ export default [
     city: 'Basel',
     country: 'Switzerland',
     twitterHandle: 'radio_x_basel'
+  }, {
+    name: 'Rinse FM',
+    streamUrl: 'http://streamer.dgen.net:8000/rinseradio',
+    slug: 'rinse-fm',
+    city: 'London',
+    country: 'UK',
+    twitterHandle: 'RinseFM'
   }
 ]

@@ -54,7 +54,7 @@ export default class Player extends Component {
 
   get playStateClasses () {
     return classnames({
-      'player__controls__play-state__inner full-width full-height flex flex-justify-center flex-align-center': true,
+      'player__controls__play-state__inner full-width full-height flex flex-justify-center flex-align-center cursor-pointer': true,
       'player__controls__play-state__inner--loading': this.state.isLoading
     })
   }

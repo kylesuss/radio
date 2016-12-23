@@ -1,8 +1,4 @@
-@import '../variables.css';
-
-.station-list {
-  width: 50%;
-}
+@import 'variables.css';
 
 .station-list__items {
   position: absolute;

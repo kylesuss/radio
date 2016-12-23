@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import StationList from 'containers/station-list'
 import TwitterFeed from 'components/twitter-feed'
-import 'styles/pages/station'
+import 'styles/pages/common'
 
 export default class Station extends Component {
   static propTypes = {
@@ -15,15 +16,16 @@ export default class Station extends Component {
 
   render () {
     return (
-      <div className="page--station">
-        <div className="page--station__details">
+      <div className="page--list">
+        <div className="page--list__details">
+          <StationList />
+        </div>
+
+        <div className="page--list__feed">
           <div>{this.props.station.name}</div>
           <button onClick={this.handleButtonClick}>
             Play
           </button>
-        </div>
-
-        <div className="page--station__feed">
           <TwitterFeed twitterHandle={this.props.station.twitterHandle} />
         </div>
       </div>

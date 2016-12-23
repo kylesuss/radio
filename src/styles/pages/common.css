@@ -1,16 +1,16 @@
 @import '../variables.css';
 
-.page--station {
+.page--list {
   display: flex;
 }
 
-.page--station__details,
-.page--station__feed {
+.page--list__details,
+.page--list__feed {
   position: relative;
   flex: 1;
 }
 
-.page--station__feed iframe {
+.page--list__feed iframe {
   opacity: 0;
   animation: fadeIn 400ms ease-out forwards;
   animation-delay: 500ms;

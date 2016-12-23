@@ -37,7 +37,6 @@ export default class TwitterFeed extends Component {
   }
 
   buildTimeline = () => {
-    console.log('buildTimeline')
     if (!window.twttr) { return }
     window.twttr.widgets.createTimeline(this.timelineOptions, this.timelineEl)
   }

@@ -27,16 +27,26 @@ export default class StationList extends Component {
                   <Link className="station-list__item__link"
                         to={buildStationPath(station.slug)}>
                     <div className="flex font-size-18">
-                      <div className="flex-grow-1">
-                        {station.name}
+                      <div>
+                        <img className="station-list__item__logo m-r-1__2"
+                             src={station.logo} />
                       </div>
-                      <div className="flex-grow-1 text-right">
-                        {
-                          buildLocation(
-                            station.city,
-                            station.country
-                          )
-                        }
+                      <div className="flex flex-direction-column
+                                      flex-justify-center flex-grow-1">
+                        <div>
+                          <span className="station-list__item__name">
+                            {station.name}
+                          </span>
+                        </div>
+                        <div className="color-blue-grey text-uppercase
+                                        font-size-13 m-t-0__5">
+                          {
+                            buildLocation(
+                              station.city,
+                              station.country
+                            )
+                          }
+                        </div>
                       </div>
                     </div>
                   </Link>

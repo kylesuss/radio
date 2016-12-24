@@ -11,7 +11,7 @@ class App extends Component {
   static propTypes = {
     playerIsOpen: PropTypes.bool.isRequired,
     playerIsPlaying: PropTypes.bool.isRequired,
-    activeStation: PropTypes.object.isRequired
+    activeStation: PropTypes.object
   }
 
   get containerClasses () {

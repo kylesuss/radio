@@ -29,6 +29,10 @@ const config = {
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css!postcss')
+      },
+      {
+        test: /\.(png|jpg|jpeg)$/,
+        loader: 'file'
       }
     ]
   },

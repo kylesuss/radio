@@ -84,7 +84,7 @@
   right: 0;
   bottom: 0;
   left: 1.5rem;
-  margin-left: calc(180px + $spacing-common);
+  margin-left: 180px;
 
   &--with-open-player {
     padding-bottom: 5rem;

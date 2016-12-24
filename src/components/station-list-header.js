@@ -22,7 +22,7 @@ export default class StationListHeader extends Component {
   render () {
     return (
       <div className="station-list__header flex">
-        <div className="flex-grow-1 font-primary text-bold text-uppercase">
+        <div className="flex-grow-1 font-primary text-uppercase color-white">
           Stations
         </div>
         <div className="flex-grow-1 flex flex-justify-end color-blue-grey

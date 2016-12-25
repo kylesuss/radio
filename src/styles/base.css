@@ -18,6 +18,10 @@ body {
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
+a {
+  cursor: pointer;
+}
+
 .btn-reset {
   padding: 0;
   border: 0;

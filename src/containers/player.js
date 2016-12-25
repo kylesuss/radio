@@ -1,19 +1,28 @@
 import { connect } from 'react-redux'
 import Player from 'components/player'
-import { findStationBySlug } from 'selectors/station'
-import { togglePlayState } from 'actions/player'
+import {
+  findStationBySlug,
+  findPrevStationBySlug,
+  findNextStationBySlug
+} from 'selectors/station'
+import { togglePlayState, playStation } from 'actions/player'
 
 const mapStateToProps = (state) => {
+  const { stations, player } = state
+
   return {
     isOpen: state.player.isOpen,
     isPlaying: state.player.isPlaying,
-    station: findStationBySlug(state.stations.items, state.player.activeStation)
+    station: findStationBySlug(stations.items, player.activeStation),
+    prevStation: findPrevStationBySlug(stations.items, player.activeStation),
+    nextStation: findNextStationBySlug(stations.items, player.activeStation)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    togglePlayState: () => dispatch(togglePlayState())
+    togglePlayState: () => dispatch(togglePlayState()),
+    playStation: (args) => dispatch(playStation(args))
   }
 }
 

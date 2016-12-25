@@ -8,7 +8,7 @@ export const findPrevStationBySlug = (stations, activeStationSlug) => {
   const lastIndex = stations.length - 1
 
   return activeIndex - 1 >= 0
-    ? stations[activeIndex -1]
+    ? stations[activeIndex - 1]
     : stations[lastIndex]
 }
 

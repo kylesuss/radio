@@ -109,3 +109,10 @@
     transform: translateY(-2px);
   }
 }
+
+.player__keyboard-shortcuts {
+  background: #1d1d1d;
+  border-radius: 5px;
+  padding: .5rem 1rem;
+  font-size: .7rem;
+}

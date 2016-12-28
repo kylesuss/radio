@@ -90,6 +90,10 @@
   font-size: 18px;
 }
 
+.font-style-italic {
+  font-style: italic;
+}
+
 /* Text */
 .text-bold {
   font-weight: 700;

@@ -93,7 +93,7 @@ export default class Player extends Component {
             </button>
           </div>
 
-          <div className="player__play-controls m-l-0__8">
+          <div className="player__play-controls--player m-l-0__8">
             <button className="player__play-controls__play-state__button btn-reset
                                full-width full-height color-white"
                     onClick={this.handlePlayToggleClick}

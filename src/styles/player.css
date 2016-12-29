@@ -20,6 +20,7 @@
 .player__inner {
   height: 80px;
   padding: .8rem $spacing-common;
+  min-width: 1127px;
 }
 
 .player__controls {

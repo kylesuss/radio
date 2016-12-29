@@ -21,7 +21,7 @@ export default class StationListHeader extends Component {
 
   render () {
     return (
-      <div className="station-list__header flex">
+      <div className="page--list__header flex">
         <div className="flex-grow-1 font-primary text-uppercase color-white">
           Stations
         </div>
@@ -31,9 +31,9 @@ export default class StationListHeader extends Component {
             Sort by:
           </span>
           <span>
-            <button className="btn-reset station-list__header__button"
+            <button className="btn-reset page--list__header__button"
                     onClick={() => this.handleSort(NAME_SORT_KEY_ARRAY)}>
-              <span className="station-list__header__sort-link color-blue-grey
+              <span className="page--list__header__sort-link color-blue-grey
                                text-uppercase font-size-13">
                 <Radio isChecked={this.isChecked(NAME_SORT_KEY_ARRAY)}
                        label="name" />
@@ -41,9 +41,9 @@ export default class StationListHeader extends Component {
             </button>
           </span>
           <span className="m-l-0__8">
-            <button className="btn-reset station-list__header__button"
+            <button className="btn-reset page--list__header__button"
                     onClick={() => this.handleSort(COUNTRY_SORT_KEY_ARRAY)}>
-              <span className="station-list__header__sort-link color-blue-grey
+              <span className="page--list__header__sort-link color-blue-grey
                                text-uppercase font-size-13">
                 <Radio isChecked={this.isChecked(COUNTRY_SORT_KEY_ARRAY)}
                        label="country" />

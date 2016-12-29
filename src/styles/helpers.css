@@ -112,6 +112,10 @@
 }
 
 /* Spacing */
+.p-1__5 {
+  padding: 1.5rem;
+}
+
 .m-l-0__3 {
   margin-left: .3rem;
 }
@@ -130,6 +134,10 @@
 
 .m-r-1 {
   margin-right: 1rem;
+}
+
+.m-r-1__5 {
+  margin-right: 1.5rem;
 }
 
 .m-r-1__2 {

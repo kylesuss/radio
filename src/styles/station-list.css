@@ -1,13 +1,5 @@
 @import 'variables.css';
 
-.station-list__items {
-  position: absolute;
-  top: 50px;
-  width: 100%;
-  height: calc(100% - 50px);
-  overflow: auto;
-}
-
 .station-list__item {
   background: #f1f1f1;
 }

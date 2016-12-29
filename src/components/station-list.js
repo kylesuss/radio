@@ -19,7 +19,7 @@ export default class StationList extends Component {
       <div className="station-list relative overflow-hidden full-height">
         <StationListHeader />
 
-        <div className="station-list__items">
+        <div className="page--list__scrollable">
           {
             this.props.stations.map((station) => {
               return (

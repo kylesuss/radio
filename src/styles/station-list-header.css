@@ -1,6 +1,6 @@
 @import 'variables.css';
 
-.station-list__header {
+.page--list__header {
   position: absolute;
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@
   z-index: 1;
 }
 
-.station-list__header__sort-link {
+.page--list__header__sort-link {
   .radio__label-text {
     border-bottom: 2px solid $blue;
     transition: color 250ms ease-out,
@@ -30,7 +30,7 @@
   }
 }
 
-.station-list__header__button {
+.page--list__header__button {
   display: inline-block;
 
   .radio svg {

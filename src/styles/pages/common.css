@@ -15,3 +15,11 @@
   animation: fadeIn 400ms ease-out forwards;
   animation-delay: 500ms;
 }
+
+.page--list__scrollable {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow: auto;
+}

@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import Player from 'containers/player'
+import StationList from 'containers/station-list'
 import addKeyboardShortcuts from 'higher-order/add-keyboard-shortcuts'
 import DocumentTitle from 'react-document-title'
 import classnames from 'classnames'
 import 'styles/app'
+import 'styles/pages/common'
 
 const DEFAULT_TITLE = 'Fresh Transmission - Curated Internet Radio'
 
@@ -50,7 +52,13 @@ class App extends Component {
 
         <div className={this.containerClasses}>
           <DocumentTitle title={this.documentTitle}>
-            {this.props.children}
+            <div className="page--list m-r-1__5">
+              <div className="page--list__details">
+                <StationList />
+              </div>
+
+              {this.props.children}
+            </div>
           </DocumentTitle>
         </div>
 

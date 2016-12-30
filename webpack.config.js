@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const autoprefixer = require('autoprefixer')
 const precss = require('precss')
+const webpack = require('webpack')
 
 const env = process.env.NODE_ENV || 'development'
 
@@ -11,10 +12,6 @@ const config = {
     filename: 'bundle.js',
     path: 'dist',
     publicPath: '/'
-  },
-  devtool: 'source-map',
-  devServer: {
-    historyApiFallback: true
   },
   module: {
     preLoaders: [],
@@ -49,6 +46,11 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(env)
+      }
+    }),
     new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       template: 'index.html'
@@ -57,6 +59,8 @@ const config = {
 }
 
 if (env === 'development') {
+  config.devtool = 'source-map'
+  config.devServer = { historyApiFallback: true }
   config.module.preLoaders.push({
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,

@@ -16,7 +16,10 @@ import 'styles/base'
 
 export const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
-history.listen(location => ga('send', location))
+history.listen(location => {
+  ga('set', 'page', location.pathname + location.search)
+  ga('send', 'pageview')
+})
 
 export default class Root extends Component {
   render () {

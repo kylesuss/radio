@@ -13,7 +13,7 @@ export default function (ComposedComponent) {
       window.addEventListener('keydown', this.handleKeyDown)
     }
 
-    componentWillUnMount () {
+    componentWillUnmount () {
       window.removeEventListener('keydown', this.handleKeyDown)
     }
 

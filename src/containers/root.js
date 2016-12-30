@@ -10,11 +10,13 @@ import App from 'containers/app'
 import Home from 'pages/home'
 import Station from 'containers/station'
 import { STATION_PATH } from 'constants/routes'
+import ga from 'ga-react-router'
 import 'babel-polyfill'
 import 'styles/base'
 
 export const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
+history.listen(location => ga('send', location))
 
 export default class Root extends Component {
   render () {

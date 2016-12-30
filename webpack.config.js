@@ -1,3 +1,4 @@
+require('dotenv').config()
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const autoprefixer = require('autoprefixer')
@@ -66,6 +67,15 @@ if (env === 'development') {
     exclude: /node_modules/,
     loader: 'eslint-loader'
   })
+}
+
+if (env === 'production') {
+  config.plugins = config.plugins.concat([
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      'GA_TRACKING_CODE': JSON.stringify(process.env.GA_TRACKING_CODE)
+    })
+  ])
 }
 
 module.exports = config

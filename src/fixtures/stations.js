@@ -13,6 +13,7 @@ import logoURLRinseFM from 'images/logo-rinse-fm.jpg'
 import logoURLSOHORadio from 'images/logo-soho-radio.jpeg'
 import logoURLTheLotRadio from 'images/logo-the-lot-radio.png'
 import logoURLWorldwideFM from 'images/logo-worldwide-fm.jpg'
+import logoTederFM from 'images/logo-teder-fm.png'
 
 export default [
   {
@@ -140,5 +141,13 @@ export default [
     country: 'UK',
     twitterHandle: 'RinseFM',
     logo: logoURLRinseFM
+  }, {
+    name: 'TEDER.FM',
+    streamUrl: 'http://server1.live1.co.il:8014/teder',
+    slug: 'teder-fm',
+    city: 'Tel Aviv',
+    country: 'Israel',
+    twitterHandle: 'teder_fm',
+    logo: logoTederFM
   }
 ]

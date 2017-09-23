@@ -14,6 +14,7 @@ import logoURLSOHORadio from 'images/logo-soho-radio.jpeg'
 import logoURLTheLotRadio from 'images/logo-the-lot-radio.png'
 import logoURLWorldwideFM from 'images/logo-worldwide-fm.jpg'
 import logoTederFM from 'images/logo-teder-fm.png'
+import logoRedLightRadio from 'images/logo-red-light-radio.png'
 
 export default [
   {
@@ -149,5 +150,13 @@ export default [
     country: 'Israel',
     twitterHandle: 'teder_fm',
     logo: logoTederFM
+  }, {
+    name: 'Red Light Radio',
+    streamUrl: 'http://www.michielgardner.nl:8000/redlightradio',
+    slug: 'red-light-radio',
+    city: 'Amsterdam',
+    country: 'Netherlands',
+    twitterHandle: 'Red_Light_Radio',
+    logo: logoRedLightRadio
   }
 ]

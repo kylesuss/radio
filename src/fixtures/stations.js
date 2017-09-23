@@ -15,6 +15,7 @@ import logoURLTheLotRadio from 'images/logo-the-lot-radio.png'
 import logoURLWorldwideFM from 'images/logo-worldwide-fm.jpg'
 import logoTederFM from 'images/logo-teder-fm.png'
 import logoRedLightRadio from 'images/logo-red-light-radio.png'
+import logoN10asRadio from 'images/logo-n10as-radio.jpg'
 
 export default [
   {
@@ -158,5 +159,13 @@ export default [
     country: 'Netherlands',
     twitterHandle: 'Red_Light_Radio',
     logo: logoRedLightRadio
+  }, {
+    name: 'n10as Radio',
+    streamUrl: 'http://n10as.out.airtime.pro:8000/n10as_a',
+    slug: 'n10as-radio',
+    city: 'Montreal',
+    country: 'Canada',
+    twitterHandle: 'n10asradio',
+    logo: logoN10asRadio
   }
 ]

@@ -40,7 +40,7 @@ export default [
     logo: logoURLLeMellotron
   }, {
     name: 'LYL Radio',
-    streamUrl: 'http://149.202.197.165:8000/lyl',
+    streamUrl: 'http://airtime.lyl.live:8000/live',
     slug: 'lyl-radio',
     city: 'Lyon',
     country: 'France',
@@ -48,7 +48,7 @@ export default [
     logo: logoURLLYLRadio
   }, {
     name: 'Soho Radio',
-    streamUrl: 'http://149.202.90.221:9036/;',
+    streamUrl: 'http://streaming.radio.co/s57043ec0a/listen',
     slug: 'soho-radio',
     city: 'London',
     country: 'UK',
@@ -64,7 +64,7 @@ export default [
     logo: logoURLBerlinCommunityRadio
   }, {
     name: 'Balamii',
-    streamUrl: 'http://soho.wavestreamer.com:5015/Live',
+    streamUrl: 'http://balamii.out.airtime.pro:8000/balamii_a',
     slug: 'balamii',
     city: 'London',
     country: 'UK',

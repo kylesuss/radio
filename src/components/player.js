@@ -141,32 +141,6 @@ export default class Player extends Component {
             {buildLocation(station.city, station.country)}
           </span>
         </div>
-
-        <div className="flex flex-grow-1 flex-justify-end">
-          <div className="player__keyboard-shortcuts color-blue-grey">
-
-            <div className="text-center text-bold text-uppercase">
-              Keyboard shortcuts:
-            </div>
-
-            <div className="flex flex-align-center">
-              <span className="m-r-1" title="Left arrow key">
-                <span className="font-style-italic">left</span>
-                <span> - previous station</span>
-              </span>
-
-              <span className="m-r-1" title="Space key">
-                <span className="font-style-italic">space</span>
-                <span> - play / pause</span>
-              </span>
-
-              <span title="Right arrow key">
-                <span className="font-style-italic">right</span>
-                <span> - next station</span>
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
     )
   }

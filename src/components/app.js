@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Player from 'containers/player'
 import StationList from 'containers/station-list'
 import addKeyboardShortcuts from 'higher-order/add-keyboard-shortcuts'

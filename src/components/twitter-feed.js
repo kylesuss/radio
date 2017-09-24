@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { loadScript } from 'utils/async'
 
 const TWITTER_SCRIPT = '//platform.twitter.com/widgets.js'

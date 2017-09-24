@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import RadioIconUnchecked from 'react-icons/lib/md/radio-button-unchecked'
 import RadioIconChecked from 'react-icons/lib/md/radio-button-checked'
 import 'styles/radio'

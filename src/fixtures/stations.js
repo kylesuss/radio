@@ -18,6 +18,8 @@ import logoRedLightRadio from 'images/logo-red-light-radio.png'
 import logoN10asRadio from 'images/logo-n10as-radio.jpg'
 import logoBoxoutFM from 'images/logo-boxout-fm.png'
 import logoNetilRadio from 'images/logo-netil-radio.png'
+import logoRadioLaBici from 'images/logo-radio-la-bici.png'
+import logoSeoulCommunityRadio from 'images/logo-seoul-community-radio.jpg'
 
 export default [
   {
@@ -185,5 +187,21 @@ export default [
     country: 'UK',
     twitterHandle: 'netilradio',
     logo: logoNetilRadio
+  }, {
+    name: 'Radio LaBici',
+    streamUrl: 'http://stream.radiolabici.com:8000/stream',
+    slug: 'radio-la-bici',
+    city: 'Buenos Aires',
+    country: 'Argentina',
+    twitterHandle: 'radiolabici',
+    logo: logoRadioLaBici
+  }, {
+    name: 'Seoul Community Radio',
+    streamUrl: 'http://seoulcommunityradio.out.airtime.pro:8000/seoulcommunityradio_a',
+    slug: 'seoul-community-radio',
+    city: 'Seoul',
+    country: 'South Korea',
+    twitterHandle: 'radio_scr',
+    logo: logoSeoulCommunityRadio
   }
 ]

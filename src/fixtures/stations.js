@@ -16,6 +16,8 @@ import logoURLWorldwideFM from 'images/logo-worldwide-fm.jpg'
 import logoTederFM from 'images/logo-teder-fm.png'
 import logoRedLightRadio from 'images/logo-red-light-radio.png'
 import logoN10asRadio from 'images/logo-n10as-radio.jpg'
+import logoBoxoutFM from 'images/logo-boxout-fm.png'
+import logoNetilRadio from 'images/logo-netil-radio.png'
 
 export default [
   {
@@ -160,12 +162,28 @@ export default [
     twitterHandle: 'Red_Light_Radio',
     logo: logoRedLightRadio
   }, {
-    name: 'n10as Radio',
+    name: 'n10.as Radio',
     streamUrl: 'http://n10as.out.airtime.pro:8000/n10as_a',
     slug: 'n10as-radio',
     city: 'Montreal',
     country: 'Canada',
     twitterHandle: 'n10asradio',
     logo: logoN10asRadio
+  }, {
+    name: 'Boxout.fm',
+    streamUrl: 'http://boxoutfm.out.airtime.pro:8000/boxoutfm_a',
+    slug: 'boxout-fm',
+    city: 'New Delhi',
+    country: 'India',
+    twitterHandle: 'boxoutfm',
+    logo: logoBoxoutFM
+  }, {
+    name: 'Netil Radio',
+    streamUrl: 'http://edge.mixlr.com/channel/otuyv',
+    slug: 'netil-radio',
+    city: 'London',
+    country: 'UK',
+    twitterHandle: 'netilradio',
+    logo: logoNetilRadio
   }
 ]

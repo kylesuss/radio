@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm test",
     "start": "webpack-dev-server --progress --colors",
-    "build": "NODE_ENV=production webpack -p --optimize-minimize --progress --colors"
+    "deploy": "NODE_ENV=production webpack -p --optimize-minimize --progress --colors"
   },
   "author": "",
   "license": "MIT",
@@ -51,6 +51,7 @@
     "precss": "1.4.0",
     "style-loader": "0.13.1",
     "webpack": "1.14.0",
-    "webpack-dev-server": "1.16.2"
+    "webpack-dev-server": "1.16.2",
+    "webpack-s3-plugin": "1.0.0-rc.0"
   }
 }

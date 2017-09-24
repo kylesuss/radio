@@ -1,6 +1,7 @@
 require('dotenv').config()
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const S3Plugin = require('webpack-s3-plugin')
 const autoprefixer = require('autoprefixer')
 const precss = require('precss')
 const webpack = require('webpack')
@@ -77,6 +78,20 @@ if (isProd) {
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.DefinePlugin({
       'GA_TRACKING_CODE': JSON.stringify(process.env.GA_TRACKING_CODE)
+    }),
+    new S3Plugin({
+      s3Options: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        region: 'us-west-1'
+      },
+      s3UploadOptions: {
+        Bucket: 'freshtransmission.com'
+      },
+      cloudfrontInvalidateOptions: {
+        DistributionId: process.env.CLOUDFRONT_DISTRIBUTION_ID,
+        Items: ['/*']
+      }
     })
   ])
 }

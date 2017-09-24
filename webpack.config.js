@@ -6,6 +6,8 @@ const precss = require('precss')
 const webpack = require('webpack')
 
 const env = process.env.NODE_ENV || 'development'
+const isProd = env === 'production'
+const isDev = env === 'development'
 
 const config = {
   entry: ['./src/app.js'],
@@ -54,12 +56,13 @@ const config = {
     }),
     new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
-      template: 'index.html'
+      template: 'index.html',
+      hash: isProd
     })
   ]
 }
 
-if (env === 'development') {
+if (isDev) {
   config.devtool = 'source-map'
   config.devServer = { historyApiFallback: true }
   config.module.preLoaders.push({
@@ -69,7 +72,7 @@ if (env === 'development') {
   })
 }
 
-if (env === 'production') {
+if (isProd) {
   config.plugins = config.plugins.concat([
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.DefinePlugin({

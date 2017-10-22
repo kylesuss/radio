@@ -6,7 +6,7 @@ import logoURLBerlinCommunityRadio from 'images/logo-berlin-community-radio.png'
 import logoURLFrissionRadio from 'images/logo-frission-radio.jpg'
 import logoURLNTS from 'images/logo-nts.jpg'
 import logoURLNoodsRadio from 'images/logo-noods-radio.jpg'
-import logoURLRBMARadio from 'images/logo-rbma-radio.jpg'
+import logoURLRedBullRadio from 'images/logo-red-bull-radio.jpg'
 import logoURLRadarRadio from 'images/logo-radar-radio.jpg'
 import logoURLRadioX from 'images/logo-radio-x.jpg'
 import logoURLRinseFM from 'images/logo-rinse-fm.jpg'
@@ -125,12 +125,12 @@ export default [
     twitterHandle: 'bassomedia',
     logo: logoURLBasso
   }, {
-    name: 'RBMA Radio',
+    name: 'Red Bull Radio',
     streamUrl: 'http://broadcast.rbmaradio.net/main',
-    slug: 'rbma-radio',
+    slug: 'red-bull-radio',
     country: 'Worldwide',
-    twitterHandle: 'rbmaradio',
-    logo: logoURLRBMARadio
+    twitterHandle: 'redbull_radio',
+    logo: logoURLRedBullRadio
   }, {
     name: 'Radio X',
     streamUrl: 'http://mp3.radiox.ch:8000/standard.mp3',

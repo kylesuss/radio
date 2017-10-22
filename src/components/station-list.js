@@ -1,10 +1,70 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import * as spacing from 'styles/spacing'
+import * as colors from 'styles/colors'
 import Link from 'react-router/lib/Link'
-import StationListHeader from 'containers/station-list-header'
+import StationListHeader from 'components/station-list-header'
 import buildLocation from 'utils/build-location'
 import { buildStationPath } from 'constants/routes'
-import 'styles/station-list'
+import StyledPage from 'styled/page'
+
+const StyledStationList = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+`
+
+const StyledListItem = styled.div`
+  background: #f1f1f1;
+`
+
+const StyledListItemLink = styled(Link)`
+  display: flex;
+  font-size: 18px;
+  padding: ${spacing.COMMON};
+  text-decoration: none;
+
+  &:active {
+    transform: translateX(1px) translateY(1px);
+  }
+
+  &:hover {
+    background: #f7f7f7;
+  }
+`
+
+const StyledListItemText = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+`
+
+const StyledNameText = styled.div`
+  display: inline-block;
+  color: ${colors.BLACK};
+  text-decoration: none;
+  border-bottom: 2px solid ${colors.BLUE};
+  transition: border 250ms ease-out;
+
+  .station-list__item__link:hover & {
+    border-bottom: 2px solid ${colors.PURPLE};
+  }
+`
+
+const StyledLogo = styled.img`
+  width: 70px;
+  border-radius: 5px;
+  margin-right: 1.2rem;
+`
+
+const StyledLocationText = styled.div`
+  color: ${colors.BLUE_GREY};
+  text-transform: uppercase;
+  font-size: 13px;
+  margin-top: .5rem;
+`
 
 export default class StationList extends Component {
   static propTypes = {
@@ -16,47 +76,44 @@ export default class StationList extends Component {
   }
 
   render () {
+    const { stations } = this.props
+
     return (
-      <div className="station-list relative overflow-hidden full-height">
+      <StyledStationList>
         <StationListHeader />
 
-        <div className="page--list__scrollable">
+        <StyledPage.ListPageScrollable>
           {
-            this.props.stations.map((station) => {
+            stations.map((station) => {
               return (
-                <div className="station-list__item" key={station.name}>
-                  <Link className="station-list__item__link"
-                        to={buildStationPath(station.slug)}>
-                    <div className="flex font-size-18">
-                      <div>
-                        <img className="station-list__item__logo m-r-1__2"
-                             src={station.logo} />
-                      </div>
-                      <div className="flex flex-direction-column
-                                      flex-justify-center flex-grow-1">
-                        <div>
-                          <span className="station-list__item__name">
-                            {station.name}
-                          </span>
-                        </div>
-                        <div className="color-blue-grey text-uppercase
-                                        font-size-13 m-t-0__5">
-                          {
-                            buildLocation(
-                              station.city,
-                              station.country
-                            )
-                          }
-                        </div>
-                      </div>
+                <StyledListItem key={station.name}>
+                  <StyledListItemLink to={buildStationPath(station.slug)}>
+                    <div>
+                      <StyledLogo src={station.logo} />
                     </div>
-                  </Link>
-                </div>
+                    <StyledListItemText>
+                      <div>
+                        <StyledNameText>
+                          {station.name}
+                        </StyledNameText>
+                      </div>
+
+                      <StyledLocationText>
+                        {
+                          buildLocation(
+                            station.city,
+                            station.country
+                          )
+                        }
+                      </StyledLocationText>
+                    </StyledListItemText>
+                  </StyledListItemLink>
+                </StyledListItem>
               )
             })
           }
-        </div>
-      </div>
+        </StyledPage.ListPageScrollable>
+      </StyledStationList>
     )
   }
 }

@@ -1,9 +1,6 @@
 require('dotenv').config()
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const S3Plugin = require('webpack-s3-plugin')
-const autoprefixer = require('autoprefixer')
-const precss = require('precss')
 const webpack = require('webpack')
 
 const env = process.env.NODE_ENV || 'development'
@@ -22,14 +19,11 @@ const config = {
     loaders: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react', 'stage-1']
-        }
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss')
+        loader: 'raw-loader'
       },
       {
         test: /\.(png|jpg|jpeg)$/,
@@ -41,21 +35,12 @@ const config = {
     extensions: ['', '.js', '.jsx', '.css'],
     modulesDirectories: ['', 'src', 'node_modules']
   },
-  postcss: function(webpackInstance) {
-    return [
-      autoprefixer({
-        browsers: ['last 2 versions']
-      }),
-      precss
-    ]
-  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(env)
       }
     }),
-    new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       template: 'index.html',
       hash: isProd
@@ -83,10 +68,10 @@ if (isProd) {
       s3Options: {
         accessKeyId: process.env.AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: 'us-west-1'
+        region: process.env.S3_REGION
       },
       s3UploadOptions: {
-        Bucket: 'freshtransmission.com'
+        Bucket: process.env.S3_BUCKET
       },
       cloudfrontInvalidateOptions: {
         DistributionId: process.env.CLOUDFRONT_DISTRIBUTION_ID,

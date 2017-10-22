@@ -1,12 +1,17 @@
-import React, { Component } from 'react'
-import 'styles/pages/common'
+import React from 'react'
+import StyledPage from 'styled/page'
+import styled from 'styled-components'
 
-export default class Home extends Component {
-  render () {
-    return (
-      <div className="page--list__feed">
-        <div className="relative overflow-hidden full-height"></div>
-      </div>
-    )
-  }
-}
+const StyledEmptyDetails = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+`
+
+const Home = () => (
+  <StyledPage.ListPageDetails>
+    <StyledEmptyDetails />
+  </StyledPage.ListPageDetails>
+)
+
+export default Home

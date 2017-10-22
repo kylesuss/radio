@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import StyledPlayer from 'styled/player'
+import StyledButton from 'styled/button'
+import StyledLink from 'styled/link'
+import * as colors from 'styles/colors'
 import Link from 'react-router/lib/Link'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
@@ -8,9 +13,30 @@ import BackwardIcon from 'react-icons/lib/fa/backward'
 import buildLocation from 'utils/build-location'
 import { buildStationPath } from 'constants/routes'
 import Sound from 'react-sound'
-import classnames from 'classnames'
 import isNil from 'lodash/isNil'
-import 'styles/player'
+
+const StyledSeekButton = styled(StyledButton)`
+  color: ${colors.WHITE};
+`
+
+const StyledPlayerInfoHeaderText = styled.span`
+  color: ${colors.BLUE_GREY};
+  text-transform: uppercase;
+  font-size: 13px;
+`
+
+const sharedPlayerInfoTextStyles = `
+  color: ${colors.WHITE};
+  font-size: 18px;
+`
+
+const StyledPlayerInfoStationText = styled(StyledLink.Light)`
+  ${sharedPlayerInfoTextStyles}
+`
+
+const StyledPlayerInfoLocationText = styled.span`
+  ${sharedPlayerInfoTextStyles}
+`
 
 export default class Player extends Component {
   static propTypes = {
@@ -23,9 +49,8 @@ export default class Player extends Component {
     nextStation: PropTypes.object.isRequired
   }
 
-  constructor (props) {
-    super(props)
-    this.state = { isLoading: false }
+  state = {
+    isLoading: false
   }
 
   componentWillReceiveProps (nextProps) {
@@ -34,10 +59,6 @@ export default class Player extends Component {
     if (!station || nextProps.station.slug !== station.slug) {
       this.setState({ isLoading: true })
     }
-  }
-
-  get audioSrc () {
-    return this.props.station.streamUrl
   }
 
   get isPaused () {
@@ -49,20 +70,6 @@ export default class Player extends Component {
     if (this.isPaused) { return Sound.status.PAUSED }
     if (this.props.isPlaying) { return Sound.status.PLAYING }
     return Sound.status.STOPPED
-  }
-
-  get wrapperClasses () {
-    return classnames({
-      'player color-white': true,
-      'player--open': this.props.isOpen
-    })
-  }
-
-  get playStateClasses () {
-    return classnames({
-      'player__play-controls__play-state__inner full-width full-height flex flex-justify-center flex-align-center cursor-pointer': true,
-      'player__play-controls__play-state__inner--loading': this.state.isLoading
-    })
   }
 
   get stationPath () {
@@ -77,82 +84,77 @@ export default class Player extends Component {
 
   handleSoundPlaying = () => this.setState({ isLoading: false })
 
-  get stationTemplate () {
-    const { isPlaying, station } = this.props
-
-    return (
-      <div className="flex flex-grow-1">
-        <Sound url={station.streamUrl}
-               playStatus={this.soundPlayStatus}
-               onPlaying={this.handleSoundPlaying} />
-
-        <div className="player__controls flex flex-justify-center">
-          <div className="player__prev-controls flex">
-            <button className="btn-reset color-white"
-                    onClick={this.handlePrevClick}>
-              <BackwardIcon />
-            </button>
-          </div>
-
-          <div className="player__play-controls--player m-l-0__8">
-            <button className="player__play-controls__play-state__button btn-reset
-                               full-width full-height color-white"
-                    onClick={this.handlePlayToggleClick}
-                    disabled={this.state.isLoading}>
-              <div className={this.playStateClasses}>
-                {
-                  isPlaying
-                    ? <PauseIcon />
-                    : <PlayIcon />
-                }
-              </div>
-            </button>
-          </div>
-
-          <div className="player__next-controls flex m-l-0__8">
-            <button className="btn-reset color-white"
-                    onClick={this.handleNextClick}>
-              <ForwardIcon />
-            </button>
-          </div>
-        </div>
-
-        <div className="player__info player__info--with-link flex m-l-1__5
-                        flex-direction-column flex-justify-center">
-          <span className="color-blue-grey text-uppercase font-size-13">
-            {
-              this.state.isLoading
-                ? 'Loading:'
-                : 'Now playing:'
-            }
-          </span>
-          <span className="color-white font-size-18 link-light">
-            <Link to={this.stationPath}>
-              {station.name}
-            </Link>
-          </span>
-        </div>
-
-        <div className="player__info flex flex-direction-column m-l-1
-                        flex-justify-center">
-          <span className="color-blue-grey text-uppercase font-size-13">
-            Location:
-          </span>
-          <span className="color-white font-size-18">
-            {buildLocation(station.city, station.country)}
-          </span>
-        </div>
-      </div>
-    )
-  }
-
   render () {
+    const { station, isPlaying, isOpen } = this.props
+    const { isLoading } = this.state
+
     return (
-      <div className={this.wrapperClasses}>
-        <div className="player__inner flex flex-align-center">
-          {this.props.station && this.stationTemplate}
-        </div>
-      </div>
+      <StyledPlayer.Container isOpen={isOpen}>
+        <StyledPlayer.Inner>
+          {station && (
+            <StyledPlayer.StationContainer>
+              <Sound
+                url={station.streamUrl}
+                playStatus={this.soundPlayStatus}
+                onPlaying={this.handleSoundPlaying}
+              />
+
+              <StyledPlayer.Controls>
+                <StyledPlayer.PrevControls>
+                  <StyledSeekButton onClick={this.handlePrevClick}>
+                    <BackwardIcon />
+                  </StyledSeekButton>
+                </StyledPlayer.PrevControls>
+
+                <StyledPlayer.PlayStateControls>
+                  <StyledPlayer.PlayStateButton
+                    onClick={this.handlePlayToggleClick}
+                    disabled={isLoading}
+                  >
+                    <StyledPlayer.PlayStateInner isLoading={isLoading}>
+                      {
+                        isPlaying
+                          ? <PauseIcon />
+                          : <PlayIcon />
+                      }
+                    </StyledPlayer.PlayStateInner>
+                  </StyledPlayer.PlayStateButton>
+                </StyledPlayer.PlayStateControls>
+
+                <StyledPlayer.NextControls>
+                  <StyledSeekButton onClick={this.handleNextClick}>
+                    <ForwardIcon />
+                  </StyledSeekButton>
+                </StyledPlayer.NextControls>
+              </StyledPlayer.Controls>
+
+              <StyledPlayer.Info withLink>
+                <StyledPlayerInfoHeaderText>
+                  {
+                    isLoading
+                      ? 'Loading:'
+                      : 'Now playing:'
+                  }
+                </StyledPlayerInfoHeaderText>
+                <StyledPlayerInfoStationText>
+                  <Link to={this.stationPath}>
+                    {station.name}
+                  </Link>
+                </StyledPlayerInfoStationText>
+              </StyledPlayer.Info>
+
+              <StyledPlayer.Info>
+                <StyledPlayerInfoHeaderText>
+                  Location:
+                </StyledPlayerInfoHeaderText>
+                <StyledPlayerInfoLocationText>
+                  {buildLocation(station.city, station.country)}
+                </StyledPlayerInfoLocationText>
+              </StyledPlayer.Info>
+            </StyledPlayer.StationContainer>
+          )}
+        </StyledPlayer.Inner>
+      </StyledPlayer.Container>
     )
   }
 }

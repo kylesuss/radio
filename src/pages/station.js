@@ -1,9 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import TwitterFeed from 'components/twitter-feed'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
-import 'styles/pages/common'
+import StyledPage from 'styled/page'
+import StyledPlayer from 'styled/player'
+
+const StyledScrollable = styled(StyledPage.ListPageScrollable)`
+  padding: 1.5rem;
+`
+
+const PlayControls = styled.div`
+  width: 30px;
+  height: 30px;
+  margin-left: .8rem;
+`
 
 export default class Station extends Component {
   static propTypes = {
@@ -34,36 +46,36 @@ export default class Station extends Component {
   }
 
   render () {
-    return (
-      <div className="page--list__feed">
-        <div className="relative overflow-hidden full-height">
-          <div className="page--list__header flex">
-            <div className="flex-grow-1 font-primary text-uppercase color-white">
-              {this.props.station.name}
-            </div>
+    const { playerIsPlaying, station } = this.props
 
-            <div className="player__play-controls--header m-l-0__8">
-              <button className="player__play-controls__play-state__button btn-reset
-                                 full-width full-height color-white"
-                      onClick={this.handlePlayToggleClick}>
-                <div className="player__play-controls__play-state__inner
-                                full-width full-height flex flex-justify-center
-                                flex-align-center cursor-pointer">
+    return (
+      <StyledPage.ListPageDetails>
+        <div className="relative overflow-hidden full-height">
+          <StyledPage.ListHeader>
+            <StyledPage.ListHeaderText>
+              {station.name}
+            </StyledPage.ListHeaderText>
+
+            <PlayControls>
+              <StyledPlayer.PlayStateButton
+                onClick={this.handlePlayToggleClick}
+              >
+                <StyledPlayer.PlayStateInner>
                   {
-                    this.props.playerIsPlaying && this.isActiveStation
+                    playerIsPlaying && this.isActiveStation
                       ? <PauseIcon />
                       : <PlayIcon />
                   }
-                </div>
-              </button>
-            </div>
-          </div>
+                </StyledPlayer.PlayStateInner>
+              </StyledPlayer.PlayStateButton>
+            </PlayControls>
+          </StyledPage.ListHeader>
 
-          <div className="page--list__scrollable p-1__5">
-            <TwitterFeed twitterHandle={this.props.station.twitterHandle} />
-          </div>
+          <StyledScrollable>
+            <TwitterFeed twitterHandle={station.twitterHandle} />
+          </StyledScrollable>
         </div>
-      </div>
+      </StyledPage.ListPageDetails>
     )
   }
 }

@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Player from 'containers/player'
 import StationList from 'containers/station-list'
+import StyledApp from 'styled/app'
+import StyledPage from 'styled/page'
 import addKeyboardShortcuts from 'higher-order/add-keyboard-shortcuts'
 import DocumentTitle from 'react-document-title'
-import classnames from 'classnames'
-import 'styles/app'
-import 'styles/pages/common'
 
 const DEFAULT_TITLE = 'Fresh Transmission - Curated Internet Radio'
 
@@ -15,13 +14,6 @@ class App extends Component {
     playerIsOpen: PropTypes.bool.isRequired,
     playerIsPlaying: PropTypes.bool.isRequired,
     activeStation: PropTypes.object
-  }
-
-  get containerClasses () {
-    return classnames({
-      'app__container': true,
-      'app__container--with-open-player': this.props.playerIsOpen
-    })
   }
 
   get documentTitle () {
@@ -33,38 +25,38 @@ class App extends Component {
   }
 
   render () {
+    const { playerIsOpen } = this.props
+
     return (
-      <div className="app">
-        <div className="app__header"></div>
+      <StyledApp.Container>
+        <StyledApp.Header />
 
-        <div className="app__logo text-center flex flex-justify-center">
+        <StyledApp.Logo>
 
-          <div className="app__logo__inner flex flex-justify-center
-                          flex-direction-column">
-            <span className="app__logo__primary font-tertiary">
+          <StyledApp.LogoInner>
+            <StyledApp.LogoPrimary>
               Fresh
-            </span>
-            <span className="app__logo__secondary font-primary text-uppercase
-                             text-bold">
+            </StyledApp.LogoPrimary>
+            <StyledApp.LogoSecondary>
               Transmission
-            </span>
-          </div>
-        </div>
+            </StyledApp.LogoSecondary>
+          </StyledApp.LogoInner>
+        </StyledApp.Logo>
 
-        <div className={this.containerClasses}>
+        <StyledApp.Main withOpenPlayer={playerIsOpen}>
           <DocumentTitle title={this.documentTitle}>
-            <div className="page--list m-r-1__5">
-              <div className="page--list__details">
+            <StyledPage.ListPage>
+              <StyledPage.ListPageDetails>
                 <StationList />
-              </div>
+              </StyledPage.ListPageDetails>
 
               {this.props.children}
-            </div>
+            </StyledPage.ListPage>
           </DocumentTitle>
-        </div>
+        </StyledApp.Main>
 
         <Player />
-      </div>
+      </StyledApp.Container>
     )
   }
 }

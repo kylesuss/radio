@@ -13,30 +13,13 @@ const base = `
   }
 
   body {
-    background: ${colors.BLACK};
+    background: ${colors.LIGHT_GREY};
     font-family: ${fonts.PRIMARY};
     -webkit-font-smoothing: subpixel-antialiased;
   }
 
   a {
     cursor: pointer;
-  }
-
-  .btn-reset {
-    padding: 0;
-    border: 0;
-    outline: none;
-    background: transparent;
-    cursor: pointer;
-
-    &:disabled {
-      cursor: default;
-    }
-
-    &:active,
-    &:focus {
-      outline: none;
-    }
   }
 `
 

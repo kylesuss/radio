@@ -3,7 +3,8 @@ import StationList from 'components/station-list'
 
 const mapStateToProps = (state) => {
   return {
-    stations: state.stations.items
+    stations: state.stations.items,
+    activeStation: state.player.activeStation
   }
 }
 

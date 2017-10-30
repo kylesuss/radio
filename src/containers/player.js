@@ -11,7 +11,6 @@ const mapStateToProps = (state) => {
   const { stations, player } = state
 
   return {
-    isOpen: state.player.isOpen,
     isPlaying: state.player.isPlaying,
     station: findStationBySlug(stations.items, player.activeStation),
     prevStation: findPrevStationBySlug(stations.items, player.activeStation),

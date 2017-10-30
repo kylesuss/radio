@@ -1,11 +1,26 @@
 import styled from 'styled-components'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
+import * as spacing from 'styles/spacing'
+import * as positioning from 'styles/positioning'
+import * as shadow from 'styles/shadow'
+
+const Container = styled.div`
+  width: 100%;
+  min-height: calc(100vh - ${positioning.HEIGHT_HEADER});
+  background: ${colors.WHITE};
+  padding: ${spacing.COMMON};
+  box-shadow: ${shadow.SETTINGS_COMMON} ${colors.SHADOW};
+`
+
+const Column = styled.div`
+  width: 50%;
+`
 
 const ListPage = styled.div`
   display: flex;
   min-width: 792px;
-  margin-right: 1.5rem;
+  margin: 0 ${spacing.COMMON};
 `
 
 const ListPageDetails = styled.div`
@@ -13,19 +28,9 @@ const ListPageDetails = styled.div`
   flex: 1;
 `
 
-const ListPageScrollable = styled.div`
-  position: absolute;
-  top: 50px;
-  width: 100%;
-  height: calc(100% - 50px);
-  overflow: auto;
-`
-
 const ListHeader = styled.div`
-  position: absolute;
   display: flex;
   align-items: center;
-  top: 0;
   width: 100%;
   height: 50px;
   background: ${colors.BLACK};
@@ -42,9 +47,10 @@ const ListHeaderText = styled.div`
 `
 
 export default {
+  Container,
+  Column,
   ListPage,
   ListPageDetails,
-  ListPageScrollable,
   ListHeader,
   ListHeaderText
 }

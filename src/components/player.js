@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import StyledPlayer from 'styled/player'
 import StyledButton from 'styled/button'
-import StyledLink from 'styled/link'
 import * as colors from 'styles/colors'
-import Link from 'react-router/lib/Link'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
 import ForwardIcon from 'react-icons/lib/fa/forward'
 import BackwardIcon from 'react-icons/lib/fa/backward'
-import buildLocation from 'utils/build-location'
 import { buildStationPath } from 'constants/routes'
 import Sound from 'react-sound'
 import isNil from 'lodash/isNil'
@@ -19,29 +17,9 @@ const StyledSeekButton = styled(StyledButton)`
   color: ${colors.WHITE};
 `
 
-const StyledPlayerInfoHeaderText = styled.span`
-  color: ${colors.BLUE_GREY};
-  text-transform: uppercase;
-  font-size: 13px;
-`
-
-const sharedPlayerInfoTextStyles = `
-  color: ${colors.WHITE};
-  font-size: 18px;
-`
-
-const StyledPlayerInfoStationText = styled(StyledLink.Light)`
-  ${sharedPlayerInfoTextStyles}
-`
-
-const StyledPlayerInfoLocationText = styled.span`
-  ${sharedPlayerInfoTextStyles}
-`
-
-export default class Player extends Component {
+class Player extends Component {
   static propTypes = {
     station: PropTypes.object,
-    isOpen: PropTypes.bool.isRequired,
     isPlaying: PropTypes.bool.isRequired,
     togglePlayState: PropTypes.func.isRequired,
     playStation: PropTypes.func.isRequired,
@@ -51,6 +29,10 @@ export default class Player extends Component {
 
   state = {
     isLoading: false
+  }
+
+  componentDidMount () {
+    window.soundManager && window.soundManager.setup({ debugMode: false })
   }
 
   componentWillReceiveProps (nextProps) {
@@ -76,20 +58,27 @@ export default class Player extends Component {
     return buildStationPath(this.props.station.slug)
   }
 
+  playStation = (slug) => {
+    const { router, playStation } = this.props
+
+    playStation(slug)
+    router.push(`/${slug}`)
+  }
+
   handlePlayToggleClick = () => this.props.togglePlayState()
 
-  handleNextClick = () => this.props.playStation(this.props.nextStation.slug)
+  handleNextClick = () => this.playStation(this.props.nextStation.slug)
 
-  handlePrevClick = () => this.props.playStation(this.props.prevStation.slug)
+  handlePrevClick = () => this.playStation(this.props.prevStation.slug)
 
   handleSoundPlaying = () => this.setState({ isLoading: false })
 
   render () {
-    const { station, isPlaying, isOpen } = this.props
+    const { station, isPlaying } = this.props
     const { isLoading } = this.state
 
     return (
-      <StyledPlayer.Container isOpen={isOpen}>
+      <StyledPlayer.Container>
         <StyledPlayer.Inner>
           {station && (
             <StyledPlayer.StationContainer>
@@ -127,30 +116,6 @@ export default class Player extends Component {
                   </StyledSeekButton>
                 </StyledPlayer.NextControls>
               </StyledPlayer.Controls>
-
-              <StyledPlayer.Info withLink>
-                <StyledPlayerInfoHeaderText>
-                  {
-                    isLoading
-                      ? 'Loading:'
-                      : 'Now playing:'
-                  }
-                </StyledPlayerInfoHeaderText>
-                <StyledPlayerInfoStationText>
-                  <Link to={this.stationPath}>
-                    {station.name}
-                  </Link>
-                </StyledPlayerInfoStationText>
-              </StyledPlayer.Info>
-
-              <StyledPlayer.Info>
-                <StyledPlayerInfoHeaderText>
-                  Location:
-                </StyledPlayerInfoHeaderText>
-                <StyledPlayerInfoLocationText>
-                  {buildLocation(station.city, station.country)}
-                </StyledPlayerInfoLocationText>
-              </StyledPlayer.Info>
             </StyledPlayer.StationContainer>
           )}
         </StyledPlayer.Inner>
@@ -158,3 +123,5 @@ export default class Player extends Component {
     )
   }
 }
+
+export default withRouter(Player)

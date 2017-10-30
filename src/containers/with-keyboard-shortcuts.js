@@ -47,13 +47,19 @@ export default function (ComposedComponent) {
     handleSpaceKey = () => store.dispatch(togglePlayState())
 
     handleLeftArrowKey = () => {
+      const { router } = this.props
       const prevStation = findPrevStationBySlug(this.stationList, this.activeSlug)
+
       store.dispatch(playStation(prevStation.slug))
+      router.push(`/${prevStation.slug}`)
     }
 
     handleRightArrowKey = () => {
+      const { router } = this.props
       const nextStation = findNextStationBySlug(this.stationList, this.activeSlug)
+
       store.dispatch(playStation(nextStation.slug))
+      router.push(`/${nextStation.slug}`)
     }
 
     render () {

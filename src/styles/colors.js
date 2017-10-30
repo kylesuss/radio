@@ -1,5 +1,6 @@
-export const WHITE = '#fff'
-export const BLACK = '#000'
+export const WHITE = '#fefefe'
+export const PURE_BLACK = '#000'
+export const BLACK = '#333'
 export const BLUE = '#27a2c0'
 export const GREEN = '#0cbba1'
 export const RED = '#bb4e86'
@@ -7,3 +8,9 @@ export const PURPLE = '#a84ebb'
 export const PURPLE_DARK = '#440e58'
 export const BLUE_GREY = '#7a8b8f'
 export const BLUE_GREY_BORDER = '#a3b8bd'
+
+/* New Layout */
+export const LIGHT_GREY = '#e6e6e6'
+export const BORDER = '#ddd'
+export const SHADOW = '#ccc'
+export const LIGHT_GREEN = '#c3ebe5'

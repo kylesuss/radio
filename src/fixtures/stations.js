@@ -8,13 +8,13 @@ import logoURLNTS from 'images/logo-nts.jpg'
 import logoURLNoodsRadio from 'images/logo-noods-radio.jpg'
 import logoURLRedBullRadio from 'images/logo-red-bull-radio.jpg'
 import logoURLRadarRadio from 'images/logo-radar-radio.jpg'
-import logoURLRadioX from 'images/logo-radio-x.jpg'
 import logoURLRinseFM from 'images/logo-rinse-fm.jpg'
 import logoURLSOHORadio from 'images/logo-soho-radio.jpeg'
 import logoURLTheLotRadio from 'images/logo-the-lot-radio.png'
 import logoURLWorldwideFM from 'images/logo-worldwide-fm.jpg'
 import logoTederFM from 'images/logo-teder-fm.png'
 import logoRedLightRadio from 'images/logo-red-light-radio.png'
+import profileRedLightRadio from 'images/profile-red-light-radio.jpg'
 import logoN10asRadio from 'images/logo-n10as-radio.jpg'
 import logoBoxoutFM from 'images/logo-boxout-fm.png'
 import logoNetilRadio from 'images/logo-netil-radio.png'
@@ -132,14 +132,6 @@ export default [
     twitterHandle: 'redbull_radio',
     logo: logoURLRedBullRadio
   }, {
-    name: 'Radio X',
-    streamUrl: 'http://mp3.radiox.ch:8000/standard.mp3',
-    slug: 'radio-x',
-    city: 'Basel',
-    country: 'Switzerland',
-    twitterHandle: 'radio_x_basel',
-    logo: logoURLRadioX
-  }, {
     name: 'Rinse FM',
     streamUrl: 'http://streamer.dgen.net:8000/rinseradio',
     slug: 'rinse-fm',
@@ -162,7 +154,8 @@ export default [
     city: 'Amsterdam',
     country: 'Netherlands',
     twitterHandle: 'Red_Light_Radio',
-    logo: logoRedLightRadio
+    logo: logoRedLightRadio,
+    profileImage: profileRedLightRadio
   }, {
     name: 'n10.as Radio',
     streamUrl: 'http://n10as.out.airtime.pro:8000/n10as_a',

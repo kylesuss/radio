@@ -1,36 +1,27 @@
 import styled, { keyframes } from 'styled-components'
 import StyledButton from 'styled/button'
 import * as colors from 'styles/colors'
-import * as easing from 'styles/easing'
 import * as spacing from 'styles/spacing'
+import * as positioning from 'styles/positioning'
 
 const Container = styled.div`
-  position: fixed;
+  position: absolute;
   bottom: 0;
-  right: 0;
   left: 0;
-  height: 100px;
-  background: ${colors.BLACK};
-  transition: transform 250ms ${easing.EASE_OUT_BACK},
-              box-shadow 250ms ease-out;
-  transform: translate3d(0, 100px, 0);
-  ${props => props.isOpen && `
-    transform: translate3d(0, 20px, 0);
-    box-shadow: 0 -1px 15px 1px rgba(0, 0, 0, .4);
-  `}
+  width: ${positioning.WIDTH_LEFT_COLUMN_PX};
+  background: ${colors.PURE_BLACK};
 `
 
 const Inner = styled.div`
   display: flex;
   align-items: center;
-  height: 80px;
+  justify-content: center;
+  height: ${positioning.HEIGHT_PLAYER};
   padding: .8rem ${spacing.COMMON};
-  min-width: 1127px;
 `
 
 const StationContainer = styled.div`
   display: flex;
-  flex-grow: 1;
 `
 
 const Controls = styled.div`
@@ -88,7 +79,7 @@ const PlayStateInner = styled.div`
   cursor: pointer;
   border-radius: 50%;
   margin: 0 auto;
-  background: linear-gradient(to bottom, ${colors.RED}, ${colors.PURPLE});
+  background: ${colors.PURPLE};
   transition: width 150ms ease-out,
               height 150ms ease-out;
 
@@ -100,7 +91,7 @@ const PlayStateInner = styled.div`
     bottom: 0;
     left: 0;
     z-index: -1;
-    background: ${colors.PURPLE};
+    background: ${colors.PURPLE_DARK};
     border-radius: 50%;
     ${props => props.isLoading && `
       animation: ${animatePlayStateLoading} 1s ease-out infinite;
@@ -151,17 +142,6 @@ const PlayStateButton = styled(StyledButton)`
   }
 `
 
-const Info = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 1rem;
-  width: 200px;
-  ${props => props.withLink && `
-    transform: translateY(-2px);
-  `}
-`
-
 export default {
   Container,
   Inner,
@@ -171,6 +151,5 @@ export default {
   NextControls,
   PlayStateControls,
   PlayStateInner,
-  PlayStateButton,
-  Info
+  PlayStateButton
 }

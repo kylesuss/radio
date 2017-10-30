@@ -7,10 +7,6 @@ import PauseIcon from 'react-icons/lib/md/pause'
 import StyledPage from 'styled/page'
 import StyledPlayer from 'styled/player'
 
-const StyledScrollable = styled(StyledPage.ListPageScrollable)`
-  padding: 1.5rem;
-`
-
 const PlayControls = styled.div`
   width: 30px;
   height: 30px;
@@ -24,12 +20,26 @@ export default class Station extends Component {
     playerIsPlaying: PropTypes.bool.isRequired,
     activeStation: PropTypes.string.isRequired,
     togglePlayState: PropTypes.func.isRequired
-  };
+  }
 
-  handleButtonClick = () => {
+  componentDidMount () {
+    this.playStation()
+  }
+
+  componentDidUpdate (prevProps) {
+    const { station: { slug } } = this.props
+
+    if (slug !== prevProps.station.slug) {
+      this.playStation()
+    }
+  }
+
+  playStation = () => {
     const { playStation, station } = this.props
     playStation(station.slug)
   }
+
+  handleButtonClick = () => this.playStation()
 
   handlePlayToggleClick = () => {
     const { playStation, togglePlayState, station } = this.props
@@ -49,8 +59,8 @@ export default class Station extends Component {
     const { playerIsPlaying, station } = this.props
 
     return (
-      <StyledPage.ListPageDetails>
-        <div className="relative overflow-hidden full-height">
+      <StyledPage.Container>
+        <StyledPage.Column>
           <StyledPage.ListHeader>
             <StyledPage.ListHeaderText>
               {station.name}
@@ -71,11 +81,9 @@ export default class Station extends Component {
             </PlayControls>
           </StyledPage.ListHeader>
 
-          <StyledScrollable>
-            <TwitterFeed twitterHandle={station.twitterHandle} />
-          </StyledScrollable>
-        </div>
-      </StyledPage.ListPageDetails>
+          <TwitterFeed twitterHandle={station.twitterHandle} />
+        </StyledPage.Column>
+      </StyledPage.Container>
     )
   }
 }

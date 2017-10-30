@@ -2,21 +2,24 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { loadScript } from 'utils/async'
-import * as animations from 'styles/animations'
+import * as transitions from 'styles/transitions'
 
 const TWITTER_SCRIPT = '//platform.twitter.com/widgets.js'
 
 const StyledContainer = styled.div`
   iframe {
-    opacity: 0;
-    animation: ${animations.fadeIn} 400ms ease-out forwards;
-    animation-delay: 500ms;
+    opacity: ${props => props.isShowingFeed ? '1' : '0'};
+    transition: opacity ${props => props.isShowingFeed ? transitions.LENGTH_DOUBLE_MS : transitions.LENGTH_COMMON_MS} ease-out;
   }
 `
 
 export default class TwitterFeed extends Component {
   static propTypes = {
-    twitterHandle: PropTypes.string.isRequired
+    twitterHandle: PropTypes.string
+  }
+
+  state = {
+    isShowingFeed: false
   }
 
   componentDidMount () {
@@ -24,19 +27,32 @@ export default class TwitterFeed extends Component {
       this.buildTimeline()
     } else {
       loadScript(TWITTER_SCRIPT)
-        .then(this.buildTimeline)
+        .then(() => {
+          window.twttr.events.bind('rendered', this.showFeed)
+          this.buildTimeline()
+        })
         .catch((error) => { console.log(error) })
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (prevProps.twitterHandle !== this.props.twitterHandle) {
-      this.timelineEl.innerHTML = ''
-      this.buildTimeline()
+  componentWillReceiveProps (nextProps) {
+    const { twitterHandle } = this.props
+    const isChangingHandle = nextProps.twitterHandle !== twitterHandle
+
+    if (isChangingHandle) {
+      this.hideFeed()
+
+      clearTimeout(this.buildTimelineTimeout)
+      this.buildTimelineTimeout = setTimeout(() => {
+        this.timelineEl.innerHTML = ''
+        this.buildTimeline()
+      }, transitions.LENGTH_DOUBLE)
     }
   }
 
   componentWillUnmount () {
+    clearTimeout(this.buildTimelineTimeout)
+    this.buildTimelineTimeout = null
     this.timelineEl = null
   }
 
@@ -47,14 +63,24 @@ export default class TwitterFeed extends Component {
     }
   }
 
+  hideFeed = () => this.setState({ isShowingFeed: false })
+
+  showFeed = () => this.setState({ isShowingFeed: true })
+
   buildTimeline = () => {
-    if (!window.twttr) { return }
+    const { twitterHandle } = this.props
+    if (!window.twttr || !twitterHandle) { return }
     window.twttr.widgets.createTimeline(this.timelineOptions, this.timelineEl)
   }
 
   render () {
+    const { isShowingFeed } = this.state
+
     return (
-      <StyledContainer innerRef={(el) => this.timelineEl = el} />
+      <StyledContainer
+        innerRef={(el) => this.timelineEl = el}
+        isShowingFeed={isShowingFeed}
+      />
     )
   }
 }

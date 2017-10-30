@@ -1,7 +1,6 @@
 import { PLAY_STATION, TOGGLE_PLAY_STATE } from 'actions/player'
 
 const initialState = {
-  isOpen: false,
   isPlaying: false,
   activeStation: null
 }
@@ -11,7 +10,6 @@ export default function (state = initialState, action = {}) {
     case PLAY_STATION:
       return {
         ...state,
-        isOpen: true,
         isPlaying: true,
         activeStation: action.slug
       }

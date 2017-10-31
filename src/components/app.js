@@ -50,9 +50,9 @@ class App extends Component {
         <StyledApp.Header />
 
         <StyledApp.Main>
-          <StyledPage.ListPage>
+          <StyledPage.Container>
             {this.props.children}
-          </StyledPage.ListPage>
+          </StyledPage.Container>
         </StyledApp.Main>
 
         <StyledApp.LeftColumn isShowingTwitterPreview={!!activeTwitterPreviewHandle}>

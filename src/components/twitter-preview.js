@@ -11,10 +11,10 @@ import * as spacing from 'styles/spacing'
 import * as easing from 'styles/easing'
 
 const StyledFeedContainer = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
-  top: ${positioning.HEIGHT_HEADER};
+  top: ${positioning.HEIGHT_HEADER_PX};
   right: ${positioning.WIDTH_LEFT_COLUMN_PX};
   bottom: 0;
   overflow: auto;
@@ -32,8 +32,8 @@ const StyledFeedContainer = styled.div`
 `
 
 const StyledUnderlay = styled.div`
-  position: absolute;
-  top: ${positioning.HEIGHT_HEADER};
+  position: fixed;
+  top: ${positioning.HEIGHT_HEADER_PX};
   right: 0;
   bottom: 0;
   left: ${positioning.WIDTH_LEFT_COLUMN_PX};

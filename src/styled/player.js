@@ -16,7 +16,7 @@ const Inner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: ${positioning.HEIGHT_PLAYER};
+  height: ${positioning.HEIGHT_PLAYER_PX};
   padding: .8rem ${spacing.COMMON};
 `
 

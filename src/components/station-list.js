@@ -11,7 +11,7 @@ import { buildStationPath } from 'constants/routes'
 const StyledStationList = styled.div`
   position: absolute;
   top: 0;
-  bottom: ${positioning.HEIGHT_PLAYER};
+  bottom: ${positioning.HEIGHT_PLAYER_PX};
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
   overflow-y: auto;
 `
@@ -19,7 +19,7 @@ const StyledStationList = styled.div`
 const StyledStationListBackground = styled.div`
   position: absolute;
   top: 0;
-  bottom: ${positioning.HEIGHT_PLAYER};
+  bottom: ${positioning.HEIGHT_PLAYER_PX};
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
   z-index: -3;
   background: ${colors.WHITE};

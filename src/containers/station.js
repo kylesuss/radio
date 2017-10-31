@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Station from 'pages/station'
-import { playStation, togglePlayState } from 'actions/player'
+import { playStation } from 'actions/player'
 import { findStationBySlug } from 'selectors/station'
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,8 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    playStation: (args) => dispatch(playStation(args)),
-    togglePlayState: () => dispatch(togglePlayState())
+    playStation: (args) => dispatch(playStation(args))
   }
 }
 

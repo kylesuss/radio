@@ -19,7 +19,6 @@ export default class Station extends Component {
     station: PropTypes.object.isRequired,
     playStation: PropTypes.func.isRequired,
     activeStation: PropTypes.string.isRequired,
-    togglePlayState: PropTypes.func.isRequired
   }
 
   componentDidMount () {
@@ -43,18 +42,9 @@ export default class Station extends Component {
 
   handleButtonClick = () => this.playStation()
 
-  handlePlayToggleClick = () => {
-    const { playStation, togglePlayState, station } = this.props
-
-    if (this.isActiveStation) {
-      togglePlayState()
-    } else {
-      playStation(station.slug)
-    }
-  }
-
   get isActiveStation () {
-    return this.props.station.slug === this.props.activeStation
+    const { station, activeStation } = this.props
+    return station.slug === activeStation
   }
 
   render () {

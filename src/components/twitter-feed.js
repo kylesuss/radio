@@ -5,6 +5,7 @@ import { loadScript } from 'utils/async'
 import * as transitions from 'styles/transitions'
 
 const TWITTER_SCRIPT = '//platform.twitter.com/widgets.js'
+const TWEET_LIMIT = 5
 
 const StyledContainer = styled.div`
   iframe {
@@ -56,10 +57,17 @@ export default class TwitterFeed extends Component {
     this.timelineEl = null
   }
 
-  get timelineOptions () {
+  get timelineDataSource () {
     return {
       sourceType: 'profile',
       screenName: this.props.twitterHandle
+    }
+  }
+
+  get timelineOptions () {
+    return {
+      tweetLimit: TWEET_LIMIT,
+      chrome: 'noheader nofooter noborders'
     }
   }
 
@@ -70,7 +78,12 @@ export default class TwitterFeed extends Component {
   buildTimeline = () => {
     const { twitterHandle } = this.props
     if (!window.twttr || !twitterHandle) { return }
-    window.twttr.widgets.createTimeline(this.timelineOptions, this.timelineEl)
+
+    window.twttr.widgets.createTimeline(
+      this.timelineDataSource,
+      this.timelineEl,
+      this.timelineOptions
+    )
   }
 
   render () {

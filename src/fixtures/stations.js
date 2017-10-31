@@ -40,6 +40,8 @@ import logoRadioLaBici from 'images/logo-radio-la-bici.png'
 import profileRadioLaBici from 'images/profile-radio-la-bici.jpeg'
 import logoSeoulCommunityRadio from 'images/logo-seoul-community-radio.jpg'
 import profileSeoulCommunityRadio from 'images/profile-seoul-community-radio.jpeg'
+import logoKmahRadio from 'images/logo-kmah-radio.jpeg'
+import profileKmahRadio from 'images/profile-kmah-radio.jpeg'
 
 export default [
   {
@@ -237,5 +239,14 @@ export default [
     twitterHandle: 'radio_scr',
     logo: logoSeoulCommunityRadio,
     profileImage: profileSeoulCommunityRadio
+  }, {
+    name: 'KMAH Radio',
+    streamUrl: 'http://66.55.143.200/proxy/kmahradi?mp=/;stream/1',
+    slug: 'kmah-radio',
+    city: 'Leeds',
+    country: 'United Kingdom',
+    twitterHandle: 'kmahradio',
+    logo: logoKmahRadio,
+    profileImage: profileKmahRadio
   }
 ]

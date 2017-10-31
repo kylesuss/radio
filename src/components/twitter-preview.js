@@ -42,7 +42,7 @@ const StyledUnderlay = styled.div`
   transition:
     opacity ${transitions.LENGTH_SHORT_MS} ease-out ${props => props.isVisible ? '0ms' : transitions.LENGTH_SHORT_MS},
     z-index 0ms linear ${props => props.isVisible ? '0ms' : transitions.LENGTH_DOUBLE_MS};
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0, 0, 0, .5);
 `
 
 const StyledCloseContainer = styled.div`

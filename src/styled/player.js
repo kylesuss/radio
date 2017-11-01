@@ -9,7 +9,6 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
-  background: ${colors.PURE_BLACK};
 `
 
 const Inner = styled.div`
@@ -91,7 +90,7 @@ const PlayStateInner = styled.div`
     bottom: 0;
     left: 0;
     z-index: -1;
-    background: ${colors.PURPLE_DARK};
+    background: ${colors.PURPLE};
     border-radius: 50%;
     ${props => props.isLoading && `
       animation: ${animatePlayStateLoading} 1s ease-out infinite;

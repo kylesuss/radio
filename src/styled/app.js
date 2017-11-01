@@ -29,6 +29,7 @@ const LeftColumn = styled.div`
   box-shadow: ${shadow.SETTINGS_COMMON} ${props => props.isShowingTwitterPreview ? 'transparent' : colors.SHADOW};
   transition: box-shadow ${props => props.isShowingTwitterPreview ? '0ms' : transitions.LENGTH_COMMON_MS} ease-out ${props => props.isShowingTwitterPreview ? '0ms' : transitions.LENGTH_COMMON_MS};
   z-index: ${positioning.Z_INDEX_APP_LEFT_COLUMN};
+  background: ${colors.PURE_BLACK};
 `
 
 const Main = styled.main`

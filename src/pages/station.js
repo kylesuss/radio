@@ -2,23 +2,28 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
-import StationProfileImage from 'components/station-profile-image'
+import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import StyledPage from 'styled/page'
+import * as spacing from 'styles/spacing'
 
 const StyledStation = styled.div`
   width: 100%;
 `
 
+const StyledPageContent = styled(StyledPage.Content)`
+  padding-top: ${spacing.DOUBLE};
+`
+
 const scrollOptions = {
-  speed: 350
+  speed: 500
 }
 
 export default class Station extends Component {
   static propTypes = {
     station: PropTypes.object.isRequired,
     playStation: PropTypes.func.isRequired,
-    activeStation: PropTypes.string.isRequired,
+    activeStation: PropTypes.string.isRequired
   }
 
   componentDidMount () {
@@ -52,13 +57,13 @@ export default class Station extends Component {
 
     return (
       <StyledStation>
-        <StationProfileImage station={station} />
+        <StationHeader station={station} />
 
-        <StyledPage.Content>
+        <StyledPageContent>
           <StyledPage.Column>
             <TwitterFeed twitterHandle={station.twitterHandle} />
           </StyledPage.Column>
-        </StyledPage.Content>
+        </StyledPageContent>
       </StyledStation>
     )
   }

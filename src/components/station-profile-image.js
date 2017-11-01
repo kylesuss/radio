@@ -3,22 +3,21 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import * as positioning from 'styles/positioning'
 
-const imageHeight = 250
-const imageBottomOffset = imageHeight + positioning.HEIGHT_HEADER
+const imageBottomOffset = positioning.HEIGHT_STATION_HEADER_IMAGE + positioning.HEIGHT_HEADER
 const ProfileImageContainer = styled.div`
   width: 100%;
-  height: ${imageHeight}px;
+  height: ${positioning.HEIGHT_STATION_HEADER_IMAGE}px;
   overflow: hidden;
 `
 
 const ProfileImage = styled.img`
   width: 100%;
-  transform: translate3d(0, calc(-50% + ${props => imageHeight / 2 + (props.offsetPercentage * 30)}px), 0);
+  transform: translate3d(0, calc(-50% + ${props => positioning.HEIGHT_STATION_HEADER_IMAGE / 2 + (props.offsetPercentage * 30)}px), 0);
 `
 
 class StationProfileImage extends Component {
   static propTypes = {
-    station: PropTypes.string.isRequired
+    station: PropTypes.object.isRequired
   }
 
   state = {

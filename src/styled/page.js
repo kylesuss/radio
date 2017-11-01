@@ -7,15 +7,16 @@ import * as shadow from 'styles/shadow'
 const Container = styled.div`
   display: flex;
   min-width: 792px;
+  min-height: calc(100vh - ${positioning.HEIGHT_HEADER_PX});
+  background: ${colors.WHITE};
   margin: 0 ${spacing.COMMON};
+  box-shadow: ${shadow.SETTINGS_COMMON} ${colors.SHADOW};
 `
 
 const Content = styled.div`
   width: 100%;
   min-height: calc(100vh - ${positioning.HEIGHT_HEADER_PX});
-  background: ${colors.WHITE};
   padding: ${spacing.COMMON};
-  box-shadow: ${shadow.SETTINGS_COMMON} ${colors.SHADOW};
 `
 
 const Column = styled.div`

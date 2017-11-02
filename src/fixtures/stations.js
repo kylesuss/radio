@@ -244,7 +244,7 @@ export default [
     streamUrl: 'http://66.55.143.200/proxy/kmahradi?mp=/;stream/1',
     slug: 'kmah-radio',
     city: 'Leeds',
-    country: 'United Kingdom',
+    country: 'UK',
     twitterHandle: 'kmahradio',
     logo: logoKmahRadio,
     profileImage: profileKmahRadio

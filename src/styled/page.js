@@ -15,7 +15,6 @@ const Container = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  min-height: calc(100vh - ${positioning.HEIGHT_HEADER_PX});
   padding: ${spacing.COMMON};
 `
 

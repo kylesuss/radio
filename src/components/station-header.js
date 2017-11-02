@@ -4,6 +4,7 @@ import StationProfileImage from 'components/station-profile-image'
 import * as colors from 'styles/colors'
 import * as positioning from 'styles/positioning'
 import * as spacing from 'styles/spacing'
+import buildLocation from 'utils/build-location'
 
 const commonShadow = 'box-shadow: 1px 1px 15px rgba(0,0,0,0.2)'
 
@@ -15,26 +16,43 @@ const StyledStationHeader = styled.header`
 const StyledStationStickyHeader = styled.div`
   background: ${colors.PURE_BLACK};
   height: ${positioning.HEIGHT_STICKY_STATION_HEADER_PX};
+  display: flex;
 `
 
 const StyledLogo = styled.img`
-  float: left;
   border-radius: 50%;
-  width: 84px;
+  width: 54px;
   margin-left: ${spacing.COMMON};
-  margin-top: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   ${commonShadow};
 `
 
-const StyledStationName = styled.div`
-  float: left;
+const StyledStationDetails = styled.div`
   height: ${positioning.HEIGHT_STICKY_STATION_HEADER_PX};
   display: flex;
-  align-items: center;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+  margin-right: ${spacing.COMMON};
+`
+
+const StyledStationDetailsTopRow = styled.div`
+  margin-bottom: .4rem;
+`
+
+const StyledStationDetailsBottomRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: .85rem;
+  color: ${colors.LIGHT_GREY};
+`
+
+const StyledStationName = styled.div`
   color: ${colors.WHITE};
-  font-size: 1.4rem;
-  margin-left: ${spacing.COMMON};
-  ${commonShadow};
+  font-size: 1.15rem;
+  text-transform: uppercase;
 `
 
 const StationHeader = ({ station }) => (
@@ -44,9 +62,26 @@ const StationHeader = ({ station }) => (
     <StyledStationStickyHeader>
       <StyledLogo src={station.logo} />
 
-      <StyledStationName>
-        {station.name}
-      </StyledStationName>
+      <StyledStationDetails>
+        <StyledStationDetailsTopRow>
+          <StyledStationName>
+            {station.name}
+          </StyledStationName>
+        </StyledStationDetailsTopRow>
+
+        <StyledStationDetailsBottomRow>
+          <div>
+            {buildLocation(
+              station.city,
+              station.country
+            )}
+          </div>
+
+          <div>
+
+          </div>
+        </StyledStationDetailsBottomRow>
+      </StyledStationDetails>
     </StyledStationStickyHeader>
   </StyledStationHeader>
 )

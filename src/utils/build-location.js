@@ -1,3 +1,3 @@
-export default function buildLocation (city, country) {
+export default (city, country) => {
   return city ? `${city}, ${country}` : country
 }

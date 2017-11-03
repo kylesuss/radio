@@ -49,7 +49,7 @@ class Player extends Component {
   }
 
   get soundPlayStatus () {
-    if (this.isPaused) { return Sound.status.PAUSED }
+    if (this.isPaused) { return Sound.status.STOPPED }
     if (this.props.isPlaying) { return Sound.status.PLAYING }
     return Sound.status.STOPPED
   }

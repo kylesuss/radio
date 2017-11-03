@@ -11,10 +11,6 @@ const StyledStation = styled.div`
   width: 100%;
 `
 
-const StyledPageContent = styled(StyledPage.Content)`
-  padding-top: ${spacing.DOUBLE};
-`
-
 const scrollOptions = {
   speed: 500
 }
@@ -26,44 +22,51 @@ export default class Station extends Component {
     activeStation: PropTypes.string.isRequired
   }
 
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      activeStation: props.station
+    }
+  }
+
   componentDidMount () {
     this.playStation()
     animateScrollTo(0, scrollOptions)
   }
 
   componentDidUpdate (prevProps) {
-    const { station: { slug } } = this.props
+    const { station } = this.props
 
-    if (slug !== prevProps.station.slug) {
-      this.playStation()
-      animateScrollTo(0, scrollOptions)
+    if (station.slug !== prevProps.station.slug) {
+      animateScrollTo(0, {
+        ...scrollOptions,
+        onComplete: () => this.setState({
+          activeStation: station
+        }, () => this.playStation())
+      })
     }
   }
 
   playStation = () => {
-    const { playStation, station } = this.props
-    playStation(station.slug)
-  }
+    const { playStation } = this.props
+    const { activeStation } = this.state
 
-  handleButtonClick = () => this.playStation()
-
-  get isActiveStation () {
-    const { station, activeStation } = this.props
-    return station.slug === activeStation
+    playStation(activeStation.slug)
   }
 
   render () {
-    const { station } = this.props
+    const { activeStation } = this.state
 
     return (
       <StyledStation>
-        <StationHeader station={station} />
+        <StationHeader station={activeStation} />
 
-        <StyledPageContent>
+        <StyledPage.Content>
           <StyledPage.Column>
-            <TwitterFeed twitterHandle={station.twitterHandle} />
+            <TwitterFeed twitterHandle={activeStation.twitterHandle} />
           </StyledPage.Column>
-        </StyledPageContent>
+        </StyledPage.Content>
       </StyledStation>
     )
   }

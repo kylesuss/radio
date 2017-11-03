@@ -5,7 +5,7 @@ import * as colors from 'styles/colors'
 import * as easing from 'styles/easing'
 import * as transitions from 'styles/transitions'
 
-const GREEN_BG_TRANSITION_DELAY = 650
+const GREEN_BG_TRANSITION_DELAY = 750
 const GREEN_BG_ANIMATION_LENGTH = transitions.LENGTH_DOUBLE + GREEN_BG_TRANSITION_DELAY
 
 const StyledListItem = styled.div`

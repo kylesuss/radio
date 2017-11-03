@@ -5,7 +5,6 @@ import animateScrollTo from 'animated-scroll-to'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import StyledPage from 'styled/page'
-import * as spacing from 'styles/spacing'
 
 const StyledStation = styled.div`
   width: 100%;

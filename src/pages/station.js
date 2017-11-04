@@ -40,9 +40,7 @@ export default class Station extends Component {
     if (station.slug !== prevProps.station.slug) {
       animateScrollTo(0, {
         ...scrollOptions,
-        onComplete: () => this.setState({
-          activeStation: station
-        }, () => this.playStation())
+        onComplete: () => this.handleScrollCompletion(station)
       })
     }
   }
@@ -52,6 +50,16 @@ export default class Station extends Component {
     const { activeStation } = this.state
 
     playStation(activeStation.slug)
+  }
+
+  handleScrollCompletion = (station) => {
+    const { station: { name } } = this.props
+
+    if (name !== station.name) { return }
+
+    this.setState({
+      activeStation: station
+    }, () => this.playStation())
   }
 
   render () {

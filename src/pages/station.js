@@ -11,7 +11,7 @@ const StyledStation = styled.div`
 `
 
 const scrollOptions = {
-  speed: 500
+  speed: 400
 }
 
 export default class Station extends Component {

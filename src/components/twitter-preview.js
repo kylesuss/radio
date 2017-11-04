@@ -22,7 +22,7 @@ const StyledFeedContainer = styled.div`
   background: #333;
   z-index: ${positioning.Z_INDEX_TWITTER_PREVIEW};
   transition:
-    transform ${transitions.LENGTH_DOUBLE_MS} ${easing.EASE_OUT_QUINT},
+    transform ${transitions.LENGTH_DOUBLE_MS} ${easing.EASE_OUT_QUINT} ${props => props.isVisible ? transitions.LENGTH_COMMON_MS : '0ms'},
     box-shadow ${transitions.LENGTH_COMMON_MS} ease-out;
   transform: translateX(0);
   box-shadow: ${props => props.isVisible ? `${shadow.SETTINGS_COMMON} ${shadow.COLOR_DARK}` : 'none'};

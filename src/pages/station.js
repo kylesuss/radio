@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
+import StationLiveInfo from 'components/station-live-info'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import StyledPage from 'styled/page'
@@ -25,7 +26,8 @@ export default class Station extends Component {
     super(props)
 
     this.state = {
-      activeStation: props.station
+      activeStation: props.station,
+      liveStationInfo: null
     }
   }
 
@@ -58,16 +60,29 @@ export default class Station extends Component {
     if (name !== station.name) { return }
 
     this.setState({
-      activeStation: station
+      activeStation: station,
+      liveStationInfo: null
     }, () => this.playStation())
   }
 
+  handleInfoResponse = (info) => this.setState({
+    liveStationInfo: info
+  })
+
   render () {
-    const { activeStation } = this.state
+    const { activeStation, liveStationInfo } = this.state
 
     return (
       <StyledStation>
-        <StationHeader station={activeStation} />
+        <StationLiveInfo
+          station={activeStation}
+          handleInfoResponse={this.handleInfoResponse}
+        />
+
+        <StationHeader
+          station={activeStation}
+          liveStationInfo={liveStationInfo}
+        />
 
         <StyledPage.Content>
           <StyledPage.Column>

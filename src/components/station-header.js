@@ -55,7 +55,7 @@ const StyledStationName = styled.div`
   text-transform: uppercase;
 `
 
-const StationHeader = ({ station }) => (
+const StationHeader = ({ station, liveStationInfo }) => (
   <StyledStationHeader>
     <StationProfileImage station={station} />
 
@@ -71,14 +71,16 @@ const StationHeader = ({ station }) => (
 
         <StyledStationDetailsBottomRow>
           <div>
-            {buildLocation(
-              station.city,
-              station.country
+            {liveStationInfo && (
+              liveStationInfo.shows.current.name
             )}
-          </div>
 
-          <div>
-
+            {!liveStationInfo && (
+              buildLocation(
+                station.city,
+                station.country
+              )
+            )}
           </div>
         </StyledStationDetailsBottomRow>
       </StyledStationDetails>

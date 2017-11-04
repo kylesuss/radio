@@ -50,19 +50,21 @@ const StyledCloseContainer = styled.div`
   top: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   left: ${positioning.WIDTH_LEFT_COLUMN_PX};
 `
 
 const StyledMessageContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
   display: flex;
   background: ${colors.PURE_BLACK};
   color: ${colors.WHITE};
   padding: ${spacing.HALF};
   align-items: center;
   box-shadow: ${shadow.SETTINGS_COMMON} ${shadow.COLOR_DARK};
+  opacity: ${props => props.isVisible ? '1' : '0'};
+  transition: opacity ${transitions.LENGTH_COMMON_MS} ease-out ${props => props.isVisible ? transitions.LENGTH_DOUBLE_MS : '0ms'};
 `
 
 const StyledCloseIcon = styled(CloseIcon)`
@@ -96,7 +98,7 @@ class TwitterPreview extends Component {
 
         <StyledUnderlay isVisible={isVisible}>
           <StyledCloseContainer onMouseEnter={this.handleCloseFeed}>
-            <StyledMessageContainer>
+            <StyledMessageContainer isVisible={isVisible}>
               <StyledCloseIcon />
 
               <StyledCloseMessage>

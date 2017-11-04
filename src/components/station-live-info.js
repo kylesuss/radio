@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { get } from 'utils/async'
-import modelAirtimeResponse from 'models/airtime-response'
+import modelAirtimeLiveInfo from 'models/live-info-airtime'
 
 class StationLiveInfo extends Component {
   static propTypes = {
@@ -24,14 +24,18 @@ class StationLiveInfo extends Component {
     const { station } = this.props
 
     if (station.airtime) {
-      get({ url: station.airtime.liveInfoUrl })
-        .then(this.handleInfoResponse)
+      this.getLiveInfo(station.airtime.liveInfoUrl)
     }
+  }
+
+  getLiveInfo = (url) => {
+    get({ url })
+      .then(this.handleInfoResponse)
   }
 
   handleInfoResponse = (response) => {
     const { handleInfoResponse } = this.props
-    const normalizedResponse = modelAirtimeResponse(response.body)
+    const normalizedResponse = modelAirtimeLiveInfo(response.body)
 
     handleInfoResponse(normalizedResponse)
   }

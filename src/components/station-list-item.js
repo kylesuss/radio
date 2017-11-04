@@ -9,17 +9,19 @@ import * as transitions from 'styles/transitions'
 
 const GREEN_BG_TRANSITION_DELAY = 750
 const GREEN_BG_ANIMATION_LENGTH = transitions.LENGTH_DOUBLE + GREEN_BG_TRANSITION_DELAY
-const PREVIEW_SECTION_WIDTH_PX = '14px'
+const PREVIEW_SECTION_WIDTH_PX = '16px'
 
 const StyledPreviewContainer = styled(Button)`
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
+  width: ${PREVIEW_SECTION_WIDTH_PX};
   background: rgba(0, 0, 0, .1);
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   transform: translateX(${PREVIEW_SECTION_WIDTH_PX});
   transition:
     transform ${transitions.LENGTH_COMMON_MS} ${easing.EASE_OUT_QUINT},
@@ -66,7 +68,7 @@ const StyledListItem = styled.div`
   }
 
   &::after {
-    opacity: 0;
+    opacity: ${props => props.isActive ? '1' : '0'};
     background: ${colors.LIGHT_GREY};
     z-index: -2;
     transition: opacity ${transitions.LENGTH_COMMON_MS} ease-out;
@@ -96,15 +98,15 @@ const StyledListItem = styled.div`
 const StyledArrowIcon = styled(ArrowIcon)`
   color: ${colors.BLACK};
   opacity: .25;
-  width: ${PREVIEW_SECTION_WIDTH_PX};
-  height: ${PREVIEW_SECTION_WIDTH_PX};
+  width: 14px;
+  height: 14px;
 `
 
 class StationListItem extends Component {
   static propTypes = {
     isActive: PropTypes.bool.isRequired,
-    handleOpenFeed: PropTypes.func.isRequired,
-    twitterHandle: PropTypes.string.isRequired
+    handleOpenPreview: PropTypes.func.isRequired,
+    station: PropTypes.object.isRequired
   }
 
   state = {
@@ -126,14 +128,14 @@ class StationListItem extends Component {
   }
 
   handleMouseEnter = () => {
-    const { handleOpenFeed, twitterHandle } = this.props
+    const { handleOpenPreview, station } = this.props
 
     this.setState({ isMousingOver: true })
 
     clearTimeout(this.mouseOverTimeout)
 
     this.mouseOverTimeout = setTimeout(() => {
-      handleOpenFeed(twitterHandle)
+      handleOpenPreview(station)
     }, GREEN_BG_ANIMATION_LENGTH)
   }
 
@@ -142,8 +144,8 @@ class StationListItem extends Component {
     clearTimeout(this.mouseOverTimeout)
   }
 
-  handlePreviewButtonClick = () => this.props.handleOpenFeed(
-    this.props.twitterHandle
+  handlePreviewButtonClick = () => this.props.handleOpenPreview(
+    this.props.station
   )
 
   render () {

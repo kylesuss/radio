@@ -26,8 +26,8 @@ const LeftColumn = styled.div`
   left: 0;
   bottom: 0;
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
-  box-shadow: ${shadow.SETTINGS_COMMON} ${props => props.isShowingTwitterPreview ? 'transparent' : colors.SHADOW};
-  transition: box-shadow ${props => props.isShowingTwitterPreview ? '0ms' : transitions.LENGTH_COMMON_MS} ease-out ${props => props.isShowingTwitterPreview ? '0ms' : transitions.LENGTH_COMMON_MS};
+  box-shadow: ${shadow.SETTINGS_COMMON} ${props => props.isShowingStationPreview ? 'transparent' : colors.SHADOW};
+  transition: box-shadow ${props => props.isShowingStationPreview ? '0ms' : transitions.LENGTH_COMMON_MS} ease-out ${props => props.isShowingStationPreview ? '0ms' : transitions.LENGTH_COMMON_MS};
   z-index: ${positioning.Z_INDEX_APP_LEFT_COLUMN};
   background: ${colors.PURE_BLACK};
 `

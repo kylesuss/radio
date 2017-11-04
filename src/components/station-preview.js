@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import TwitterFeed from 'components/twitter-feed'
-import CloseIcon from 'react-icons/lib/md/close'
 import * as positioning from 'styles/positioning'
 import * as transitions from 'styles/transitions'
 import * as shadow from 'styles/shadow'
-import * as colors from 'styles/colors'
-import * as spacing from 'styles/spacing'
 import * as easing from 'styles/easing'
 
 const StyledFeedContainer = styled.div`
@@ -56,60 +53,29 @@ const StyledCloseContainer = styled.div`
   left: ${positioning.WIDTH_LEFT_COLUMN_PX};
 `
 
-const StyledMessageContainer = styled.div`
-  display: flex;
-  background: ${colors.PURE_BLACK};
-  color: ${colors.WHITE};
-  padding: ${spacing.HALF};
-  align-items: center;
-  box-shadow: ${shadow.SETTINGS_COMMON} ${shadow.COLOR_DARK};
-  opacity: ${props => props.isVisible ? '1' : '0'};
-  transition: opacity ${transitions.LENGTH_COMMON_MS} ease-out ${props => props.isVisible ? transitions.LENGTH_DOUBLE_MS : '0ms'};
-`
-
-const StyledCloseIcon = styled(CloseIcon)`
-  width: 21px;
-  height: 21px;
-  margin-right: 5px;
-`
-
-const StyledCloseMessage = styled.div`
-  text-transform: uppercase;
-  font-size: 15px;
-  margin-right: 5px;
-`
-
-class TwitterPreview extends Component {
+class StationPreview extends Component {
   static propTypes = {
-    handleCloseFeed: PropTypes.func.isRequired,
-    twitterHandle: PropTypes.string
+    handleClosePreview: PropTypes.func.isRequired,
+    station: PropTypes.object
   }
 
-  handleCloseFeed = () => this.props.handleCloseFeed()
+  handleClosePreview = () => this.props.handleClosePreview()
 
   render () {
-    const { isVisible, twitterHandle } = this.props
+    const { isVisible, station } = this.props
 
     return (
       <div>
         <StyledFeedContainer isVisible={isVisible}>
-          <TwitterFeed twitterHandle={twitterHandle} />
+          <TwitterFeed twitterHandle={station.twitterHandle} />
         </StyledFeedContainer>
 
         <StyledUnderlay isVisible={isVisible}>
-          <StyledCloseContainer onMouseEnter={this.handleCloseFeed}>
-            <StyledMessageContainer isVisible={isVisible}>
-              <StyledCloseIcon />
-
-              <StyledCloseMessage>
-                Close
-              </StyledCloseMessage>
-            </StyledMessageContainer>
-          </StyledCloseContainer>
+          <StyledCloseContainer onMouseEnter={this.handleClosePreview} />
         </StyledUnderlay>
       </div>
     )
   }
 }
 
-export default TwitterPreview
+export default StationPreview

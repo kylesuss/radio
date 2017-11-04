@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import TwitterPreview from 'components/twitter-preview'
+import StationPreview from 'components/station-preview'
 import Player from 'containers/player'
 import StationList from 'containers/station-list'
 import StyledApp from 'styled/app'
@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   state = {
-    activeTwitterPreviewHandle: null
+    activePreviewStation: {}
   }
 
   get documentTitle () {
@@ -28,20 +28,21 @@ class App extends Component {
       : DEFAULT_TITLE
   }
 
-  handleOpenFeed = (twitterHandle) => {
+  handleOpenPreview = (station) => {
     const { activeStation } = this.props
 
-    if (activeStation.twitterHandle === twitterHandle) { return }
+    if (activeStation.station === station) { return }
 
-    this.setState({ activeTwitterPreviewHandle: twitterHandle })
+    this.setState({ activePreviewStation: station })
   }
 
-  handleCloseFeed = () => this.setState({
-    activeTwitterPreviewHandle: null
+  handleClosePreview = () => this.setState({
+    activePreviewStation: {}
   })
 
   render () {
-    const { activeTwitterPreviewHandle } = this.state
+    const { activePreviewStation } = this.state
+    const isShowingStationPreview = !!activePreviewStation.name
 
     return (
       <StyledApp.Container>
@@ -55,20 +56,20 @@ class App extends Component {
           </StyledPage.Container>
         </StyledApp.Main>
 
-        <StyledApp.LeftColumn isShowingTwitterPreview={!!activeTwitterPreviewHandle}>
+        <StyledApp.LeftColumn isShowingStationPreview={isShowingStationPreview}>
           <StationList
-            handleOpenFeed={this.handleOpenFeed}
-            handleCloseFeed={this.handleCloseFeed}
-            activeTwitterPreviewHandle={activeTwitterPreviewHandle}
+            handleOpenPreview={this.handleOpenPreview}
+            handleClosePreview={this.handleClosePreview}
+            activePreviewStation={activePreviewStation}
           />
 
           <Player />
         </StyledApp.LeftColumn>
 
-        <TwitterPreview
-          isVisible={!!activeTwitterPreviewHandle}
-          twitterHandle={activeTwitterPreviewHandle}
-          handleCloseFeed={this.handleCloseFeed}
+        <StationPreview
+          isVisible={isShowingStationPreview}
+          station={activePreviewStation}
+          handleClosePreview={this.handleClosePreview}
         />
       </StyledApp.Container>
     )

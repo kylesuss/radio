@@ -12,7 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "animated-scroll-to": "1.1.7",
-    "babel-polyfill": "6.20.0",
     "classnames": "2.2.5",
     "ga-react-router": "2.1.1",
     "lodash": "4.17.4",

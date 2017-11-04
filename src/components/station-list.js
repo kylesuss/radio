@@ -59,9 +59,9 @@ export default class StationList extends Component {
   static propTypes = {
     activeStation: PropTypes.string.isRequired,
     stations: PropTypes.array.isRequired,
-    handleOpenFeed: PropTypes.func.isRequired,
-    handleCloseFeed: PropTypes.func.isRequired,
-    activeTwitterPreviewHandle: PropTypes.string
+    handleOpenPreview: PropTypes.func.isRequired,
+    handleClosePreview: PropTypes.func.isRequired,
+    activePreviewStation: PropTypes.object
   }
 
   static defaultProps = {
@@ -70,14 +70,17 @@ export default class StationList extends Component {
 
   isActiveStation = (slug) => slug === this.props.activeStation
 
-  isPreviewingStation = (twitterHandle) => twitterHandle === this.props.activeTwitterPreviewHandle
+  isPreviewingStation = (name) => {
+    const { activePreviewStation } = this.props
+    return activePreviewStation && name === activePreviewStation.name
+  }
 
   handlePlayStation = (slug) => this.props.playStation(slug)
 
-  handleCloseFeed = () => this.props.handleCloseFeed()
+  handleClosePreview = () => this.props.handleClosePreview()
 
   render () {
-    const { stations, handleOpenFeed } = this.props
+    const { stations, handleOpenPreview } = this.props
 
     return (
       <div>
@@ -89,13 +92,13 @@ export default class StationList extends Component {
                   <StationListItem
                     key={station.name}
                     isActive={this.isActiveStation(station.slug)}
-                    isPreviewing={this.isPreviewingStation(station.twitterHandle)}
-                    twitterHandle={station.twitterHandle}
-                    handleOpenFeed={handleOpenFeed}
+                    isPreviewing={this.isPreviewingStation(station.name)}
+                    station={station}
+                    handleOpenPreview={handleOpenPreview}
                   >
                     <StyledListItemLink
                       to={buildStationPath(station.slug)}
-                      onClick={this.handleCloseFeed}
+                      onClick={this.handleClosePreview}
                     >
                       <div>
                         <StyledLogo src={station.logo} />

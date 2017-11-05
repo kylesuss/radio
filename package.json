@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm test",
-    "start": "webpack-dev-server --progress --colors",
+    "start": "webpack-dev-server --progress --colors --https",
     "deploy": "NODE_ENV=production webpack -p --optimize-minimize --progress --colors"
   },
   "author": "",

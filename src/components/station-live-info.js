@@ -2,6 +2,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { get } from 'utils/async'
 import modelAirtimeLiveInfo from 'models/live-info-airtime'
+import modelMixlrLiveInfo from 'models/live-info-mixlr'
+
+const liveInfoModelMap = {
+  'netil-radio': modelMixlrLiveInfo
+}
 
 class StationLiveInfo extends Component {
   static propTypes = {
@@ -22,10 +27,15 @@ class StationLiveInfo extends Component {
 
   fetchStationData = () => {
     const { station } = this.props
+    let liveInfoUrl
 
     if (station.airtime) {
-      this.getLiveInfo(station.airtime.liveInfoUrl)
+      liveInfoUrl = station.airtime.liveInfoUrl
+    } else if (station.liveInfoUrl) {
+      liveInfoUrl = station.liveInfoUrl
     }
+
+    liveInfoUrl && this.getLiveInfo(liveInfoUrl)
   }
 
   getLiveInfo = (url) => {
@@ -34,8 +44,14 @@ class StationLiveInfo extends Component {
   }
 
   handleInfoResponse = (response) => {
-    const { handleInfoResponse } = this.props
-    const normalizedResponse = modelAirtimeLiveInfo(response.body)
+    const { handleInfoResponse, station } = this.props
+    let normalizedResponse
+
+    if (station.airtime) {
+      normalizedResponse = modelAirtimeLiveInfo(response.body)
+    } else {
+      normalizedResponse = liveInfoModelMap[station.slug](response.body)
+    }
 
     handleInfoResponse(normalizedResponse)
   }

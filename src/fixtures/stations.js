@@ -241,7 +241,8 @@ export default [
     country: 'UK',
     twitterHandle: 'netilradio',
     logo: logoNetilRadio,
-    profileImage: profileNetilRadio
+    profileImage: profileNetilRadio,
+    liveInfoUrl: 'http://api.mixlr.com/users/5498175?source=embed'
   }, {
     name: 'Radio LaBici',
     streamUrl: 'http://stream.radiolabici.com:8000/stream',

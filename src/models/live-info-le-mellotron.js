@@ -1,10 +1,10 @@
 import he from 'he'
 
 export default ({ body }) => ({
-  timezone: body.time_zone,
+  timezone: null,
   shows: {
     current: {
-      name: he.decode(body.broadcasts[0].title)
+      name: he.decode(body.track.display)
     }
   }
 })

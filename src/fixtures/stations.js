@@ -75,7 +75,8 @@ export default [
     country: 'France',
     twitterHandle: 'LeMellotron',
     logo: logoLeMellotron,
-    profileImage: profileLeMellotron
+    profileImage: profileLeMellotron,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/le-mellotron'
   }, {
     name: 'LYL Radio',
     streamUrl: 'http://airtime.lyl.live:8000/live',
@@ -208,7 +209,8 @@ export default [
     country: 'Netherlands',
     twitterHandle: 'Red_Light_Radio',
     logo: logoRedLightRadio,
-    profileImage: profileRedLightRadio
+    profileImage: profileRedLightRadio,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/red-light-radio'
   }, {
     name: 'n10.as Radio',
     streamUrl: 'http://n10as.out.airtime.pro:8000/n10as_a',

@@ -52,7 +52,7 @@ class StationLiveInfo extends Component {
     let normalizedResponse
 
     if (station.airtime) {
-      normalizedResponse = modelAirtimeLiveInfo(response.body)
+      normalizedResponse = modelAirtimeLiveInfo({ body: response.body })
     } else {
       normalizedResponse = liveInfoModelMap[station.slug]({
         text: response.text,

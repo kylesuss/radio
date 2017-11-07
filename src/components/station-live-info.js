@@ -5,11 +5,13 @@ import modelAirtimeLiveInfo from 'models/live-info-airtime'
 import modelMixlrLiveInfo from 'models/live-info-mixlr'
 import modelLeMellotronInfo from 'models/live-info-le-mellotron'
 import modelRedLightRadio from 'models/live-info-red-light-radio'
+import modelRadioCoLiveInfo from 'models/live-info-radio-co'
 
 const liveInfoModelMap = {
   'netil-radio': modelMixlrLiveInfo,
   'le-mellotron': modelLeMellotronInfo,
-  'red-light-radio': modelRedLightRadio
+  'red-light-radio': modelRedLightRadio,
+  'soho-radio': modelRadioCoLiveInfo
 }
 
 class StationLiveInfo extends Component {

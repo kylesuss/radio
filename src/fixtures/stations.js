@@ -88,13 +88,14 @@ export default [
     profileImage: profileLYLRadio
   }, {
     name: 'Soho Radio',
-    streamUrl: 'http://streaming.radio.co/s57043ec0a/listen',
+    streamUrl: 'https://streaming.radio.co/s57043ec0a/listen',
     slug: 'soho-radio',
     city: 'London',
     country: 'UK',
     twitterHandle: 'sohoradio',
     logo: logoSOHORadio,
-    profileImage: profileSOHORadio
+    profileImage: profileSOHORadio,
+    liveInfoUrl: 'https://public.radio.co/stations/s57043ec0a/status'
   }, {
     name: 'Berlin Community Radio',
     streamUrl: 'http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a',

@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { get } from 'utils/async'
-import modelAirtimeLiveInfo from 'models/live-info-airtime'
+import modelAirtimeV1LiveInfo from 'models/live-info-airtime-v1'
+import modelAirtimeV2LiveInfo from 'models/live-info-airtime-v2'
 import modelMixlrLiveInfo from 'models/live-info-mixlr'
 import modelLeMellotronInfo from 'models/live-info-le-mellotron'
 import modelRedLightRadio from 'models/live-info-red-light-radio'
@@ -11,7 +12,8 @@ const liveInfoModelMap = {
   'netil-radio': modelMixlrLiveInfo,
   'le-mellotron': modelLeMellotronInfo,
   'red-light-radio': modelRedLightRadio,
-  'soho-radio': modelRadioCoLiveInfo
+  'soho-radio': modelRadioCoLiveInfo,
+  'lyl-radio': modelAirtimeV1LiveInfo
 }
 
 class StationLiveInfo extends Component {
@@ -54,7 +56,7 @@ class StationLiveInfo extends Component {
     let normalizedResponse
 
     if (station.airtime) {
-      normalizedResponse = modelAirtimeLiveInfo({ body: response.body })
+      normalizedResponse = modelAirtimeV2LiveInfo({ body: response.body })
     } else {
       normalizedResponse = liveInfoModelMap[station.slug]({
         text: response.text,

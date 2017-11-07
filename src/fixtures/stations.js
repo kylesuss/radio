@@ -79,13 +79,14 @@ export default [
     liveInfoUrl: 'https://freshtransmission.com/live-info/le-mellotron'
   }, {
     name: 'LYL Radio',
-    streamUrl: 'http://airtime.lyl.live:8000/live',
+    streamUrl: 'http://icecast.lyl.live/live',
     slug: 'lyl-radio',
     city: 'Lyon',
     country: 'France',
     twitterHandle: 'lyl_radio',
     logo: logoLYLRadio,
-    profileImage: profileLYLRadio
+    profileImage: profileLYLRadio,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/lyl-radio'
   }, {
     name: 'Soho Radio',
     streamUrl: 'https://streaming.radio.co/s57043ec0a/listen',

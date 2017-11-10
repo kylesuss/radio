@@ -16,6 +16,8 @@ const liveInfoModelMap = {
   'lyl-radio': modelAirtimeV1LiveInfo
 }
 
+const REFETCH_INTERVAL = 30000 // 30 seconds
+
 class StationLiveInfo extends Component {
   static propTypes = {
     handleInfoResponse: PropTypes.func.isRequired
@@ -33,22 +35,40 @@ class StationLiveInfo extends Component {
     }
   }
 
-  fetchStationData = () => {
-    const { station } = this.props
-    let liveInfoUrl
-
-    if (station.airtime) {
-      liveInfoUrl = station.airtime.liveInfoUrl
-    } else if (station.liveInfoUrl) {
-      liveInfoUrl = station.liveInfoUrl
-    }
-
-    liveInfoUrl && this.getLiveInfo(liveInfoUrl)
+  componentWillUnmount () {
+    clearInterval(this.refetchInterval)
+    this.refetchInterval = null
   }
 
-  getLiveInfo = (url) => {
-    get({ url })
+  get liveInfoUrl () {
+    const { station } = this.props
+
+    if (station.airtime) {
+      return station.airtime.liveInfoUrl
+    }
+
+    if (station.liveInfoUrl) {
+      return station.liveInfoUrl
+    }
+  }
+
+  fetchStationData = () => {
+    if (!this.liveInfoUrl) { return }
+    this.getLiveInfo()
+    this.refetchLiveInfo()
+  }
+
+  getLiveInfo = () => {
+    get({ url: this.liveInfoUrl })
       .then(this.handleInfoResponse)
+  }
+
+  refetchLiveInfo = () => {
+    clearInterval(this.refetchInterval)
+
+    this.refetchInterval = setInterval(() => {
+      this.getLiveInfo()
+    }, REFETCH_INTERVAL)
   }
 
   handleInfoResponse = (response) => {

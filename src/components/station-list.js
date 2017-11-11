@@ -14,6 +14,7 @@ const StyledStationList = styled.div`
   bottom: ${positioning.HEIGHT_PLAYER_PX};
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch
 `
 
 const StyledStationListBackground = styled.div`

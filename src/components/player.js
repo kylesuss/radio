@@ -27,8 +27,13 @@ class Player extends Component {
     nextStation: PropTypes.object.isRequired
   }
 
-  state = {
-    isLoading: false
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      isLoading: false,
+      streamUrl: props.station.streamUrl
+    }
   }
 
   componentDidMount () {
@@ -37,10 +42,18 @@ class Player extends Component {
 
   componentWillReceiveProps (nextProps) {
     const { station } = this.props
+    const isChangingStations = nextProps.station.slug !== station.slug
+    const stateUpdates = {}
 
-    if (!station || nextProps.station.slug !== station.slug) {
-      this.setState({ isLoading: true })
+    if (isChangingStations) {
+      stateUpdates.streamUrl = nextProps.station.streamUrl
     }
+
+    if (!station || isChangingStations) {
+      stateUpdates.isLoading = true
+    }
+
+    Object.keys(stateUpdates).length && this.setState(stateUpdates)
   }
 
   get isPaused () {
@@ -65,7 +78,19 @@ class Player extends Component {
     router.push(`/${slug}`)
   }
 
-  handlePlayToggleClick = () => this.props.togglePlayState()
+  handlePlayToggleClick = () => {
+    const { station } = this.props
+
+    if (this.isPaused) {
+       // Its going to become active
+      this.setState({ streamUrl: station.streamUrl })
+    } else {
+      // Its going to become paused
+      this.setState({ streamUrl: null })
+    }
+
+    this.props.togglePlayState()
+  }
 
   handleNextClick = () => this.playStation(this.props.nextStation.slug)
 
@@ -75,18 +100,20 @@ class Player extends Component {
 
   render () {
     const { station, isPlaying } = this.props
-    const { isLoading } = this.state
+    const { isLoading, streamUrl } = this.state
 
     return (
       <StyledPlayer.Container>
         <StyledPlayer.Inner>
           {station && (
             <StyledPlayer.StationContainer>
-              <Sound
-                url={station.streamUrl}
-                playStatus={this.soundPlayStatus}
-                onPlaying={this.handleSoundPlaying}
-              />
+              {streamUrl && (
+                <Sound
+                  url={streamUrl}
+                  playStatus={this.soundPlayStatus}
+                  onPlaying={this.handleSoundPlaying}
+                />
+              )}
 
               <StyledPlayer.Controls>
                 <StyledPlayer.PrevControls>

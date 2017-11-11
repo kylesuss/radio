@@ -129,7 +129,8 @@ export default [
     country: 'UK',
     twitterHandle: 'noodsradio',
     logo: logoNoodsRadio,
-    profileImage: profileNoodsRadio
+    profileImage: profileNoodsRadio,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/noods-radio'
   }, {
     name: 'Worldwide FM',
     streamUrl: 'http://worldwidefm.out.airtime.pro:8000/worldwidefm_a',

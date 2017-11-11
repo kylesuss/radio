@@ -5,15 +5,17 @@ import modelAirtimeV1LiveInfo from 'models/live-info-airtime-v1'
 import modelAirtimeV2LiveInfo from 'models/live-info-airtime-v2'
 import modelMixlrLiveInfo from 'models/live-info-mixlr'
 import modelLeMellotronInfo from 'models/live-info-le-mellotron'
-import modelRedLightRadio from 'models/live-info-red-light-radio'
+import modelRedLightRadioLiveInfo from 'models/live-info-red-light-radio'
 import modelRadioCoLiveInfo from 'models/live-info-radio-co'
+import modelNoodsRadioLiveInfo from 'models/live-info-noods-radio'
 
 const liveInfoModelMap = {
-  'netil-radio': modelMixlrLiveInfo,
   'le-mellotron': modelLeMellotronInfo,
-  'red-light-radio': modelRedLightRadio,
-  'soho-radio': modelRadioCoLiveInfo,
-  'lyl-radio': modelAirtimeV1LiveInfo
+  'lyl-radio': modelAirtimeV1LiveInfo,
+  'netil-radio': modelMixlrLiveInfo,
+  'noods-radio': modelNoodsRadioLiveInfo,
+  'red-light-radio': modelRedLightRadioLiveInfo,
+  'soho-radio': modelRadioCoLiveInfo
 }
 
 const REFETCH_INTERVAL = 30000 // 30 seconds

@@ -72,7 +72,7 @@ const StationHeader = ({ station, liveStationInfo }) => (
         <StyledStationDetailsBottomRow>
           <div>
             {liveStationInfo && (
-              liveStationInfo.shows.current.name
+              liveStationInfo.current.name
             )}
 
             {!liveStationInfo && (

@@ -5,10 +5,8 @@ export default ({ body }) => {
 
   return {
     timezone: null,
-    shows: {
-      current: {
-        name: he.decode(body.current.name)
-      }
+    current: {
+      name: he.decode(body.current.name)
     }
   }
 }

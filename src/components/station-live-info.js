@@ -1,22 +1,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { get } from 'utils/async'
-import modelAirtimeV1LiveInfo from 'models/live-info-airtime-v1'
-import modelAirtimeV2LiveInfo from 'models/live-info-airtime-v2'
-import modelMixlrLiveInfo from 'models/live-info-mixlr'
-import modelLeMellotronInfo from 'models/live-info-le-mellotron'
-import modelRedLightRadioLiveInfo from 'models/live-info-red-light-radio'
-import modelRadioCoLiveInfo from 'models/live-info-radio-co'
-import modelNoodsRadioLiveInfo from 'models/live-info-noods-radio'
-
-const liveInfoModelMap = {
-  'le-mellotron': modelLeMellotronInfo,
-  'lyl-radio': modelAirtimeV1LiveInfo,
-  'netil-radio': modelMixlrLiveInfo,
-  'noods-radio': modelNoodsRadioLiveInfo,
-  'red-light-radio': modelRedLightRadioLiveInfo,
-  'soho-radio': modelRadioCoLiveInfo
-}
+import liveInfoModels from 'constants/live-info-models'
 
 const REFETCH_INTERVAL = 30000 // 30 seconds
 
@@ -44,14 +29,7 @@ class StationLiveInfo extends Component {
 
   get liveInfoUrl () {
     const { station } = this.props
-
-    if (station.airtime) {
-      return station.airtime.liveInfoUrl
-    }
-
-    if (station.liveInfoUrl) {
-      return station.liveInfoUrl
-    }
+    return station.liveInfoUrl
   }
 
   fetchStationData = () => {
@@ -75,16 +53,10 @@ class StationLiveInfo extends Component {
 
   handleInfoResponse = (response) => {
     const { handleInfoResponse, station } = this.props
-    let normalizedResponse
-
-    if (station.airtime) {
-      normalizedResponse = modelAirtimeV2LiveInfo({ body: response.body })
-    } else {
-      normalizedResponse = liveInfoModelMap[station.slug]({
-        text: response.text,
-        body: response.body
-      })
-    }
+    const normalizedResponse = liveInfoModels[station.slug]({
+      text: response.text,
+      body: response.body
+    })
 
     handleInfoResponse(normalizedResponse)
   }

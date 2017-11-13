@@ -53,9 +53,7 @@ export default [
     twitterHandle: 'TheLotRadio',
     logo: logoTheLotRadio,
     profileImage: profileTheLotRadio,
-    airtime: {
-      liveInfoUrl: 'https://thelot.airtime.pro/api/live-info-v2/'
-    }
+    liveInfoUrl: 'https://thelot.airtime.pro/api/live-info-v2/'
   }, {
     name: 'Frission Radio',
     streamUrl: 'http://frission.out.airtime.pro:8000/frission_a',
@@ -64,9 +62,7 @@ export default [
     twitterHandle: 'frissionradio',
     logo: logoFrissionRadio,
     profileImage: profileFrissionRadio,
-    airtime: {
-      liveInfoUrl: 'https://frission.airtime.pro/api/live-info-v2/'
-    }
+    liveInfoUrl: 'https://frission.airtime.pro/api/live-info-v2/'
   }, {
     name: 'Le Mellotron',
     streamUrl: 'http://shouting.trinoma.net/stream/1/',
@@ -106,9 +102,7 @@ export default [
     twitterHandle: 'BCR_Radio',
     logo: logoBerlinCommunityRadio,
     profileImage: profileBerlinCommunityRadio,
-    airtime: {
-      liveInfoUrl: 'https://berlincommunityradio.airtime.pro/api/live-info-v2/'
-    }
+    liveInfoUrl: 'https://berlincommunityradio.airtime.pro/api/live-info-v2/'
   }, {
     name: 'Balamii',
     streamUrl: 'http://balamii.out.airtime.pro:8000/balamii_a',
@@ -118,9 +112,7 @@ export default [
     twitterHandle: 'Balamii',
     logo: logoBalamii,
     profileImage: profileBalamii,
-    airtime: {
-      liveInfoUrl: 'https://balamii.airtime.pro/api/live-info-v2/'
-    }
+    liveInfoUrl: 'https://balamii.airtime.pro/api/live-info-v2/'
   }, {
     name: 'Noods Radio',
     streamUrl: 'http://149.255.59.164:8051/live',
@@ -139,9 +131,7 @@ export default [
     twitterHandle: 'worldwidefm',
     logo: logoWorldwideFM,
     profileImage: profileWorldwideFM,
-    airtime: {
-      liveInfoUrl: 'https://worldwidefm.airtime.pro/api/live-info-v2/'
-    }
+    liveInfoUrl: 'https://worldwidefm.airtime.pro/api/live-info-v2/'
   }, {
     name: 'Radar Radio',
     streamUrl: 'http://soho.wavestreamer.com:5831/1/;stream.mp3',
@@ -223,9 +213,7 @@ export default [
     twitterHandle: 'n10asradio',
     logo: logoN10asRadio,
     profileImage: profileN10asRadio,
-    airtime: {
-      liveInfoUrl: 'https://n10as.airtime.pro/api/live-info-v2/'
-    }
+    liveInfoUrl: 'https://n10as.airtime.pro/api/live-info-v2/'
   }, {
     name: 'Boxout.fm',
     streamUrl: 'http://boxoutfm.out.airtime.pro:8000/boxoutfm_a',
@@ -235,9 +223,7 @@ export default [
     twitterHandle: 'boxoutfm',
     logo: logoBoxoutFM,
     profileImage: profileBoxoutFM,
-    airtime: {
-      liveInfoUrl: 'https://boxoutfm.airtime.pro/api/live-info-v2/'
-    }
+    liveInfoUrl: 'https://boxoutfm.airtime.pro/api/live-info-v2/'
   }, {
     name: 'Netil Radio',
     streamUrl: 'http://edge.mixlr.com/channel/otuyv',
@@ -266,9 +252,7 @@ export default [
     twitterHandle: 'radio_scr',
     logo: logoSeoulCommunityRadio,
     profileImage: profileSeoulCommunityRadio,
-    airtime: {
-      liveInfoUrl: 'https://seoulcommunityradio.airtime.pro/api/live-info-v2/'
-    }
+    liveInfoUrl: 'https://seoulcommunityradio.airtime.pro/api/live-info-v2/'
   }, {
     name: 'KMAH Radio',
     streamUrl: 'http://66.55.143.200/proxy/kmahradi?mp=/;stream/1',

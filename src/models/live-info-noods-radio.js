@@ -7,10 +7,8 @@ export default ({ body }) => {
 
   return {
     timezone: null,
-    shows: {
-      current: {
-        name: he.decode(body.currentlyPlayingLive || body.currentlyPlayingAuto)
-      }
+    current: {
+      name: he.decode(body.currentlyPlayingLive || body.currentlyPlayingAuto)
     }
   }
 }

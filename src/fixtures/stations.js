@@ -142,23 +142,15 @@ export default [
     logo: logoRadarRadio,
     profileImage: profileRadarRadio
   }, {
-    name: 'NTS LDN',
+    name: 'NTS Radio',
     streamUrl: 'http://stream-relay-geo.ntslive.net/stream',
-    slug: 'nts-ldn',
+    slug: 'nts-radio',
     city: 'London',
     country: 'UK',
     twitterHandle: 'ntslive',
     logo: logoNTS,
-    profileImage: profileNTS
-  }, {
-    name: 'NTS Worldwide',
-    streamUrl: 'http://stream-relay-geo.ntslive.net/stream2',
-    slug: 'nts-worldwide',
-    city: 'Los Angeles',
-    country: 'USA',
-    twitterHandle: 'ntslive',
-    logo: logoNTS,
-    profileImage: profileNTS
+    profileImage: profileNTS,
+    liveInfoUrl: 'https://www.nts.live/api/v2/live'
   }, {
     name: 'Basso Radio',
     streamUrl: 'http://stream.basso.fi:8000/stream',

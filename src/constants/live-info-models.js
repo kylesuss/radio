@@ -1,6 +1,6 @@
 import modelAirtimeV1LiveInfo from 'models/live-info-airtime-v1'
 import modelAirtimeV2LiveInfo from 'models/live-info-airtime-v2'
-import modelMixlrLiveInfo from 'models/live-info-mixlr'
+import modelNetilRadioLiveInfo from 'models/live-info-netil-radio'
 import modelLeMellotronInfo from 'models/live-info-le-mellotron'
 import modelRedLightRadioLiveInfo from 'models/live-info-red-light-radio'
 import modelRadioCoLiveInfo from 'models/live-info-radio-co'
@@ -19,7 +19,7 @@ const liveInfoModels = {
   'le-mellotron': modelLeMellotronInfo,
   'lyl-radio': modelAirtimeV1LiveInfo,
   'n10as-radio': modelAirtimeV2LiveInfo,
-  'netil-radio': modelMixlrLiveInfo,
+  'netil-radio': modelNetilRadioLiveInfo,
   'noods-radio': modelNoodsRadioLiveInfo,
   'nts-radio': modelNTSRadioLiveInfo,
   'radar-radio': modelRadarRadioLiveInfo,

@@ -8,6 +8,7 @@ import modelNoodsRadioLiveInfo from 'models/live-info-noods-radio'
 import modelWorldWideFmLiveInfo from 'models/live-info-worldwide-fm'
 import modelNTSRadioLiveInfo from 'models/live-info-nts-radio'
 import modelKmahRadioLiveInfo from 'models/live-info-kmah-radio'
+import modelRadarRadioLiveInfo from 'models/live-info-radar-radio'
 
 const liveInfoModels = {
   'balamii': modelAirtimeV2LiveInfo,
@@ -21,6 +22,7 @@ const liveInfoModels = {
   'netil-radio': modelMixlrLiveInfo,
   'noods-radio': modelNoodsRadioLiveInfo,
   'nts-radio': modelNTSRadioLiveInfo,
+  'radar-radio': modelRadarRadioLiveInfo,
   'red-light-radio': modelRedLightRadioLiveInfo,
   'seoul-community-radio': modelAirtimeV2LiveInfo,
   'soho-radio': modelRadioCoLiveInfo,

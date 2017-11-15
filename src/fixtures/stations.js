@@ -140,7 +140,8 @@ export default [
     country: 'UK',
     twitterHandle: 'RadarRadioLDN',
     logo: logoRadarRadio,
-    profileImage: profileRadarRadio
+    profileImage: profileRadarRadio,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/radar-radio'
   }, {
     name: 'NTS Radio',
     streamUrl: 'http://stream-relay-geo.ntslive.net/stream',

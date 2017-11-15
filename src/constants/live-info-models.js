@@ -7,12 +7,14 @@ import modelRadioCoLiveInfo from 'models/live-info-radio-co'
 import modelNoodsRadioLiveInfo from 'models/live-info-noods-radio'
 import modelWorldWideFmLiveInfo from 'models/live-info-worldwide-fm'
 import modelNTSRadioLiveInfo from 'models/live-info-nts-radio'
+import modelKmahRadioLiveInfo from 'models/live-info-kmah-radio'
 
 const liveInfoModels = {
   'balamii': modelAirtimeV2LiveInfo,
   'berlin-community-radio': modelAirtimeV2LiveInfo,
   'boxout-fm': modelAirtimeV2LiveInfo,
   'frission-radio': modelAirtimeV2LiveInfo,
+  'kmah-radio': modelKmahRadioLiveInfo,
   'le-mellotron': modelLeMellotronInfo,
   'lyl-radio': modelAirtimeV1LiveInfo,
   'n10as-radio': modelAirtimeV2LiveInfo,

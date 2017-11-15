@@ -253,6 +253,7 @@ export default [
     country: 'UK',
     twitterHandle: 'kmahradio',
     logo: logoKmahRadio,
-    profileImage: profileKmahRadio
+    profileImage: profileKmahRadio,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/kmah-radio'
   }
 ]

@@ -1,4 +1,4 @@
-import he from 'he'
+import cleanLiveInfo from 'utils/clean-live-info'
 
 export default ({ text }) => {
   const parser = new window.DOMParser()
@@ -9,7 +9,7 @@ export default ({ text }) => {
 
   return {
     current: {
-      name: he.decode(nameNode.textContent)
+      name: cleanLiveInfo(nameNode.textContent)
     }
   }
 }

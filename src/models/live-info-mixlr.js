@@ -1,8 +1,8 @@
-import he from 'he'
+import cleanLiveInfo from 'utils/clean-live-info'
 
 export default ({ body }) => ({
   timezone: body.time_zone,
   current: {
-    name: he.decode(body.broadcasts[0].title)
+    name: cleanLiveInfo(body.broadcasts[0].title)
   }
 })

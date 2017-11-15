@@ -1,4 +1,4 @@
-import he from 'he'
+import cleanLiveInfo from 'utils/clean-live-info'
 
 export default ({ body }) => {
   if (!body.current) { return null }
@@ -6,7 +6,7 @@ export default ({ body }) => {
   return {
     timezone: null,
     current: {
-      name: he.decode(body.current.name)
+      name: cleanLiveInfo(body.current.name)
     }
   }
 }

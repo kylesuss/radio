@@ -1,4 +1,4 @@
-import he from 'he'
+import cleanLiveInfo from 'utils/clean-live-info'
 
 export default ({ body }) => {
   if (!body.currentlyPlayingAuto && !body.currentlyPlayingLive) {
@@ -8,7 +8,7 @@ export default ({ body }) => {
   return {
     timezone: null,
     current: {
-      name: he.decode(body.currentlyPlayingLive || body.currentlyPlayingAuto)
+      name: cleanLiveInfo(body.currentlyPlayingLive || body.currentlyPlayingAuto)
     }
   }
 }

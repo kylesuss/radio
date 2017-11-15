@@ -1,4 +1,4 @@
-import he from 'he'
+import cleanLiveInfo from 'utils/clean-live-info'
 
 export default ({ body }) => {
   if (!body.results) { return null }
@@ -10,7 +10,7 @@ export default ({ body }) => {
   return {
     timezone: null,
     current: {
-      name: he.decode(channel1.now.broadcast_title)
+      name: cleanLiveInfo(channel1.now.broadcast_title)
     }
   }
 }

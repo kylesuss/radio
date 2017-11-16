@@ -160,7 +160,8 @@ export default [
     country: 'Finland',
     twitterHandle: 'bassomedia',
     logo: logoBasso,
-    profileImage: profileBasso
+    profileImage: profileBasso,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/basso-radio'
   }, {
     name: 'Red Bull Radio',
     streamUrl: 'http://broadcast.rbmaradio.net/main',

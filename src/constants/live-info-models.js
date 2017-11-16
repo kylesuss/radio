@@ -9,9 +9,11 @@ import modelWorldWideFmLiveInfo from 'models/live-info-worldwide-fm'
 import modelNTSRadioLiveInfo from 'models/live-info-nts-radio'
 import modelKmahRadioLiveInfo from 'models/live-info-kmah-radio'
 import modelRadarRadioLiveInfo from 'models/live-info-radar-radio'
+import modelBassoRadioLiveInfro from 'models/live-info-basso-radio'
 
 const liveInfoModels = {
   'balamii': modelAirtimeV2LiveInfo,
+  'basso-radio': modelBassoRadioLiveInfro,
   'berlin-community-radio': modelAirtimeV2LiveInfo,
   'boxout-fm': modelAirtimeV2LiveInfo,
   'frission-radio': modelAirtimeV2LiveInfo,

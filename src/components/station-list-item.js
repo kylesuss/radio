@@ -18,6 +18,7 @@ const StyledPreviewContainer = styled(Button)`
   bottom: 0;
   width: ${PREVIEW_SECTION_WIDTH_PX};
   background: rgba(0, 0, 0, .1);
+  border-radius: 0;
   cursor: pointer;
   display: flex;
   align-items: center;

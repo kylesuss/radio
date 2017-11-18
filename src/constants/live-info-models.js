@@ -3,7 +3,7 @@ import modelAirtimeV2LiveInfo from 'models/live-info-airtime-v2'
 import modelNetilRadioLiveInfo from 'models/live-info-netil-radio'
 import modelLeMellotronInfo from 'models/live-info-le-mellotron'
 import modelRedLightRadioLiveInfo from 'models/live-info-red-light-radio'
-import modelRadioCoLiveInfo from 'models/live-info-radio-co'
+import modelSohoRadioLiveInfo from 'models/live-info-soho-radio'
 import modelNoodsRadioLiveInfo from 'models/live-info-noods-radio'
 import modelWorldWideFmLiveInfo from 'models/live-info-worldwide-fm'
 import modelNTSRadioLiveInfo from 'models/live-info-nts-radio'
@@ -27,7 +27,7 @@ const liveInfoModels = {
   'radar-radio': modelRadarRadioLiveInfo,
   'red-light-radio': modelRedLightRadioLiveInfo,
   'seoul-community-radio': modelAirtimeV2LiveInfo,
-  'soho-radio': modelRadioCoLiveInfo,
+  'soho-radio': modelSohoRadioLiveInfo,
   'the-lot-radio': modelAirtimeV2LiveInfo,
   'worldwide-fm': modelWorldWideFmLiveInfo
 }

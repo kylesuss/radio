@@ -56,13 +56,20 @@ if (isDev) {
     exclude: /node_modules/,
     loader: 'eslint-loader'
   })
+  config.plugins = config.plugins.concat([
+    new webpack.DefinePlugin({
+      IS_SENTRY_ENABLED: JSON.stringify(false)
+    })
+  ])
 }
 
 if (isProd) {
   config.plugins = config.plugins.concat([
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.DefinePlugin({
-      'GA_TRACKING_CODE': JSON.stringify(process.env.GA_TRACKING_CODE)
+      GA_TRACKING_CODE: JSON.stringify(process.env.GA_TRACKING_CODE),
+      IS_SENTRY_ENABLED: JSON.stringify(true),
+      SENTRY_CONFIG_URL: JSON.stringify(process.env.SENTRY_CONFIG_URL)
     }),
     new S3Plugin({
       s3Options: {

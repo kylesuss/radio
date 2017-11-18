@@ -186,7 +186,8 @@ export default [
     country: 'UK',
     twitterHandle: 'RinseFM',
     logo: logoRinseFM,
-    profileImage: profileRinseFM
+    profileImage: profileRinseFM,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/rinse-fm'
   }, {
     name: 'TEDER.FM',
     streamUrl: 'http://server1.live1.co.il:8014/teder',

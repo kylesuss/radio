@@ -10,6 +10,7 @@ import modelNTSRadioLiveInfo from 'models/live-info-nts-radio'
 import modelKmahRadioLiveInfo from 'models/live-info-kmah-radio'
 import modelRadarRadioLiveInfo from 'models/live-info-radar-radio'
 import modelBassoRadioLiveInfro from 'models/live-info-basso-radio'
+import modelRinseFmLiveInfo from 'models/live-info-rinse-fm'
 
 const liveInfoModels = {
   'balamii': modelAirtimeV2LiveInfo,
@@ -26,6 +27,7 @@ const liveInfoModels = {
   'nts-radio': modelNTSRadioLiveInfo,
   'radar-radio': modelRadarRadioLiveInfo,
   'red-light-radio': modelRedLightRadioLiveInfo,
+  'rinse-fm': modelRinseFmLiveInfo,
   'seoul-community-radio': modelAirtimeV2LiveInfo,
   'soho-radio': modelSohoRadioLiveInfo,
   'the-lot-radio': modelAirtimeV2LiveInfo,

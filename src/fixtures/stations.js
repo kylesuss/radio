@@ -54,10 +54,10 @@ export default [
     logo: logoTheLotRadio,
     profileImage: profileTheLotRadio,
     liveInfoUrl: 'https://thelot.airtime.pro/api/live-info-v2/',
-    video: {
+    videos: [{
       type: 'iframe',
       url: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=true'
-    }
+    }]
   }, {
     name: 'Frission Radio',
     streamUrl: 'http://frission.out.airtime.pro:8000/frission_a',
@@ -77,10 +77,13 @@ export default [
     logo: logoLeMellotron,
     profileImage: profileLeMellotron,
     liveInfoUrl: 'https://freshtransmission.com/live-info/le-mellotron',
-    video: {
+    videos: [{
+      type: 'stream',
+      url: 'http://www.dailymotion.com/video/x2ek01k'
+    }, {
       type: 'stream',
       url: 'https://www.youtube.com/watch?v=gnUg6QuPWFg'
-    }
+    }]
   }, {
     name: 'LYL Radio',
     streamUrl: 'http://icecast.lyl.live/live',
@@ -207,10 +210,10 @@ export default [
     logo: logoRedLightRadio,
     profileImage: profileRedLightRadio,
     liveInfoUrl: 'https://freshtransmission.com/live-info/red-light-radio',
-    video: {
+    videos: [{
       type: 'stream',
       url: 'https://cdn-hlm-1.streamnerd.nl/live/redlightradio/playlist.m3u8'
-    }
+    }]
   }, {
     name: 'n10.as Radio',
     streamUrl: 'http://n10as.out.airtime.pro:8000/n10as_a',

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ReactPlayer from 'react-player'
 import * as transitions from 'styles/transitions'
@@ -37,24 +38,44 @@ const STREAM = 'stream'
 const IFRAME = 'iframe'
 
 class VideoPlayer extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    videos: PropTypes.arrayOf(PropTypes.shape({
+      type: PropTypes.oneOf([STREAM, IFRAME]).isRequired,
+      url: PropTypes.string.isRequired
+    })).isRequired
+  }
+
   state = {
-    hasError: false,
+    activeVideoIndex: 0,
+    hasErrorOnAllVideos: false,
     hasStarted: false
   }
 
   componentWillReceiveProps (nextProps) {
-    const { url } = this.props
+    const { name } = this.props
 
-    if (url === nextProps.url) { return }
+    if (name === nextProps.name) { return }
 
     this.setState({
-      hasError: false,
+      activeVideoIndex: 0,
+      hasErrorOnAllVideos: false,
       hasStarted: false
     })
   }
 
+  get activeVideo () {
+    const { videos } = this.props
+    const { activeVideoIndex } = this.state
+    return videos[activeVideoIndex]
+  }
+
   get config () {
     return {
+      dailymotion: {
+        controls: false,
+        quality: '1080'
+      },
       youtube: {
         playerVars: {
           autoplay: 1,
@@ -67,20 +88,31 @@ class VideoPlayer extends Component {
 
   handleStart = () => this.setState({ hasStarted: true })
 
-  handleError = () => this.setState({ hasError: true })
+  handleError = () => {
+    const { videos } = this.props
+    const { activeVideoIndex } = this.state
+    const isLastVideo = activeVideoIndex === (videos.length - 1)
+
+    if (isLastVideo) {
+      this.setState({ hasErrorOnAllVideos: true })
+      return
+    }
+
+    this.setState({ activeVideoIndex: activeVideoIndex + 1 })
+  }
 
   render () {
-    const { type, url } = this.props
-    const { hasError, hasStarted } = this.state
+    const { hasErrorOnAllVideos, hasStarted } = this.state
+    const activeVideo = this.activeVideo
 
-    if (hasError) { return null }
+    if (hasErrorOnAllVideos) { return null }
 
     return (
       <StyledVideoContainer hasStarted={hasStarted}>
-        {type === STREAM && (
+        {activeVideo.type === STREAM && (
           <ReactPlayer
             playing
-            url={url}
+            url={activeVideo.url}
             config={this.config}
             width="100%"
             height="100%"
@@ -90,9 +122,9 @@ class VideoPlayer extends Component {
           />
         )}
 
-        {type === IFRAME && (
+        {activeVideo.type === IFRAME && (
           <iframe
-            src={url}
+            src={activeVideo.url}
             width="100%"
             height="100%"
             frameborder="0"

@@ -91,8 +91,11 @@ export default class Station extends Component {
           </StyledPage.Column>
 
           <StyledPage.Column>
-            {activeStation.video && (
-              <VideoPlayer {...activeStation.video} />
+            {activeStation.videos && (
+              <VideoPlayer
+                name={activeStation.name}
+                videos={activeStation.videos}
+              />
             )}
           </StyledPage.Column>
         </StyledPage.Content>

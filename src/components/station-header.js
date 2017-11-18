@@ -4,6 +4,7 @@ import StationProfileImage from 'components/station-profile-image'
 import * as colors from 'styles/colors'
 import * as positioning from 'styles/positioning'
 import * as spacing from 'styles/spacing'
+import * as transitions from 'styles/transitions'
 import buildLocation from 'utils/build-location'
 
 const commonShadow = 'box-shadow: 1px 1px 15px rgba(0,0,0,0.2)'
@@ -55,6 +56,11 @@ const StyledStationName = styled.div`
   text-transform: uppercase;
 `
 
+const StyledLiveCurrentName = styled.div`
+  opacity: ${props => props.hasLiveInfo ? '1' : '0'};
+  transition: opacity ${transitions.LENGTH_COMMON_MS} ease-out;
+`
+
 const StationHeader = ({ station, liveStationInfo }) => (
   <StyledStationHeader>
     <StationProfileImage station={station} />
@@ -71,17 +77,17 @@ const StationHeader = ({ station, liveStationInfo }) => (
 
         <StyledStationDetailsBottomRow>
           <div>
+            {buildLocation(
+              station.city,
+              station.country
+            )}
+          </div>
+
+          <StyledLiveCurrentName hasLiveInfo={!!liveStationInfo}>
             {liveStationInfo && (
               liveStationInfo.current.name
             )}
-
-            {!liveStationInfo && (
-              buildLocation(
-                station.city,
-                station.country
-              )
-            )}
-          </div>
+          </StyledLiveCurrentName>
         </StyledStationDetailsBottomRow>
       </StyledStationDetails>
     </StyledStationStickyHeader>

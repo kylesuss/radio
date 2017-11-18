@@ -53,7 +53,11 @@ export default [
     twitterHandle: 'TheLotRadio',
     logo: logoTheLotRadio,
     profileImage: profileTheLotRadio,
-    liveInfoUrl: 'https://thelot.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://thelot.airtime.pro/api/live-info-v2/',
+    video: {
+      type: 'youtube',
+      streamUrl: 'https://www.youtube.com/watch?v=bCsu7Wu-k2I'
+    }
   }, {
     name: 'Frission Radio',
     streamUrl: 'http://frission.out.airtime.pro:8000/frission_a',
@@ -72,7 +76,11 @@ export default [
     twitterHandle: 'LeMellotron',
     logo: logoLeMellotron,
     profileImage: profileLeMellotron,
-    liveInfoUrl: 'https://freshtransmission.com/live-info/le-mellotron'
+    liveInfoUrl: 'https://freshtransmission.com/live-info/le-mellotron',
+    video: {
+      type: 'youtube',
+      streamUrl: 'https://www.youtube.com/watch?v=gnUg6QuPWFg'
+    }
   }, {
     name: 'LYL Radio',
     streamUrl: 'http://icecast.lyl.live/live',

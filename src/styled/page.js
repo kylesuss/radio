@@ -16,10 +16,16 @@ const Container = styled.div`
 const Content = styled.div`
   width: 100%;
   padding: ${spacing.COMMON};
+  display: flex;
 `
 
 const Column = styled.div`
-  width: 50%;
+  flex: 1;
+  margin-left: ${spacing.COMMON};
+
+  &:first-child {
+    margin-left: 0;
+  }
 `
 
 export default {

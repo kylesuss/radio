@@ -5,6 +5,7 @@ import animateScrollTo from 'animated-scroll-to'
 import StationLiveInfo from 'components/station-live-info'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
+import VideoPlayer from 'components/video-player'
 import StyledPage from 'styled/page'
 
 const StyledStation = styled.div`
@@ -87,6 +88,12 @@ export default class Station extends Component {
         <StyledPage.Content>
           <StyledPage.Column>
             <TwitterFeed twitterHandle={activeStation.twitterHandle} />
+          </StyledPage.Column>
+
+          <StyledPage.Column>
+            {activeStation.video && (
+              <VideoPlayer {...activeStation.video} />
+            )}
           </StyledPage.Column>
         </StyledPage.Content>
       </StyledStation>

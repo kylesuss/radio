@@ -1,3 +1,4 @@
+/* global IS_SENTRY_ENABLED, SENTRY_CONFIG_URL */
 import React from 'react'
 import { render } from 'react-dom'
 import Root from 'containers/root'

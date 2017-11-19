@@ -5,7 +5,7 @@ import animateScrollTo from 'animated-scroll-to'
 import StationLiveInfo from 'components/station-live-info'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
-import VideoPlayer from 'components/video-player'
+import VideoPlayer from 'containers/video-player'
 import StyledPage from 'styled/page'
 
 const StyledStation = styled.div`

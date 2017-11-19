@@ -40,6 +40,7 @@ const IFRAME = 'iframe'
 class VideoPlayer extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    playerIsPlaying: PropTypes.bool.isRequired,
     videos: PropTypes.arrayOf(PropTypes.shape({
       type: PropTypes.oneOf([STREAM, IFRAME]).isRequired,
       url: PropTypes.string.isRequired
@@ -52,16 +53,28 @@ class VideoPlayer extends Component {
     hasStarted: false
   }
 
+  componentDidMount () {
+    const { videoWillLoad } = this.props
+    videoWillLoad()
+  }
+
   componentWillReceiveProps (nextProps) {
-    const { name } = this.props
+    const { name, videoWillLoad } = this.props
 
     if (name === nextProps.name) { return }
+
+    videoWillLoad()
 
     this.setState({
       activeVideoIndex: 0,
       hasErrorOnAllVideos: false,
       hasStarted: false
     })
+  }
+
+  componentWillUnmount () {
+    const { videoDidEnd } = this.props
+    videoDidEnd()
   }
 
   get activeVideo () {
@@ -86,7 +99,11 @@ class VideoPlayer extends Component {
     }
   }
 
-  handleStart = () => this.setState({ hasStarted: true })
+  handleStart = () => {
+    const { videoDidStart } = this.props
+    videoDidStart()
+    this.setState({ hasStarted: true })
+  }
 
   handleError = () => {
     const { videos } = this.props
@@ -102,6 +119,7 @@ class VideoPlayer extends Component {
   }
 
   render () {
+    const { playerIsPlaying } = this.props
     const { hasErrorOnAllVideos, hasStarted } = this.state
     const activeVideo = this.activeVideo
 
@@ -116,7 +134,7 @@ class VideoPlayer extends Component {
             config={this.config}
             width="100%"
             height="100%"
-            volume={0}
+            volume={playerIsPlaying ? 1 : 0}
             onStart={this.handleStart}
             onError={this.handleError}
           />
@@ -124,7 +142,7 @@ class VideoPlayer extends Component {
 
         {activeVideo.type === IFRAME && (
           <iframe
-            src={activeVideo.url}
+            src={playerIsPlaying ? activeVideo.url : activeVideo.mutedUrl}
             width="100%"
             height="100%"
             frameBorder="0"

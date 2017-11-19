@@ -56,7 +56,8 @@ export default [
     liveInfoUrl: 'https://thelot.airtime.pro/api/live-info-v2/',
     videos: [{
       type: 'iframe',
-      url: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=true'
+      url: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true',
+      mutedUrl: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=true'
     }]
   }, {
     name: 'Frission Radio',

@@ -10,7 +10,7 @@ import PauseIcon from 'react-icons/lib/md/pause'
 import ForwardIcon from 'react-icons/lib/fa/forward'
 import BackwardIcon from 'react-icons/lib/fa/backward'
 import { buildStationPath } from 'constants/routes'
-import Sound from 'react-sound'
+import AudioPlayer from 'containers/audio-player'
 import isNil from 'lodash/isNil'
 
 const StyledSeekButton = styled(StyledButton)`
@@ -21,6 +21,7 @@ class Player extends Component {
   static propTypes = {
     station: PropTypes.object,
     isPlaying: PropTypes.bool.isRequired,
+    isPlayingVideo: PropTypes.bool.isRequired,
     togglePlayState: PropTypes.func.isRequired,
     playStation: PropTypes.func.isRequired,
     prevStation: PropTypes.object.isRequired,
@@ -53,18 +54,16 @@ class Player extends Component {
       stateUpdates.isLoading = true
     }
 
+    if (nextProps.isPlayingVideo) {
+      stateUpdates.isLoading = false
+    }
+
     Object.keys(stateUpdates).length && this.setState(stateUpdates)
   }
 
   get isPaused () {
     const { station, isPlaying } = this.props
     return !isNil(station) && !isPlaying
-  }
-
-  get soundPlayStatus () {
-    if (this.isPaused) { return Sound.status.STOPPED }
-    if (this.props.isPlaying) { return Sound.status.PLAYING }
-    return Sound.status.STOPPED
   }
 
   get stationPath () {
@@ -108,10 +107,11 @@ class Player extends Component {
           {station && (
             <StyledPlayer.StationContainer>
               {streamUrl && (
-                <Sound
-                  url={streamUrl}
-                  playStatus={this.soundPlayStatus}
-                  onPlaying={this.handleSoundPlaying}
+                <AudioPlayer
+                  handleSoundPlaying={this.handleSoundPlaying}
+                  isPaused={this.isPaused}
+                  playerIsPlaying={isPlaying}
+                  streamUrl={streamUrl}
                 />
               )}
 

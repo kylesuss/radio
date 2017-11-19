@@ -8,7 +8,7 @@ export default ({ body }) => {
   return {
     timezone: null,
     current: {
-      name: cleanLiveInfo(isLive ? body.live.status : body.track)
+      name: cleanLiveInfo(isLive ? body.live.status : body.track.display)
     }
   }
 }

@@ -12,7 +12,6 @@ const ProfileImageContainer = styled.div`
 
 const ProfileImage = styled.img`
   width: 100%;
-  transform: translate3d(0, calc(-50% + ${props => positioning.HEIGHT_STATION_HEADER_IMAGE / 2 + (props.offsetPercentage * 30)}px), 0);
 `
 
 class StationProfileImage extends Component {
@@ -33,6 +32,15 @@ class StationProfileImage extends Component {
     window.cancelAnimationFrame(this.animationFrame)
   }
 
+  get yTransform () {
+    const { offsetPercentage } = this.state
+    return positioning.HEIGHT_STATION_HEADER_IMAGE / 2 + (offsetPercentage * 30)
+  }
+
+  get transformStyle () {
+    return `translate3d(0, calc(-50% + ${this.yTransform}px), 0)`
+  }
+
   handleScroll = () => {
     const scrollTop = document.body.scrollTop
 
@@ -45,13 +53,12 @@ class StationProfileImage extends Component {
 
   render () {
     const { station } = this.props
-    const { offsetPercentage } = this.state
 
     return (
       <ProfileImageContainer>
         <ProfileImage
           src={station.profileImage}
-          offsetPercentage={offsetPercentage}
+          style={{ transform: this.transformStyle }}
         />
       </ProfileImageContainer>
     )

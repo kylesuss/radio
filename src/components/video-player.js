@@ -90,10 +90,6 @@ class VideoPlayer extends Component {
   }
 
   handleNewVideo = () => {
-    const { videoWillLoad } = this.props
-
-    videoWillLoad()
-
     clearTimeout(this.waitForLoadTimeout)
     this.waitForLoadTimeout = setTimeout(() => {
       const { hasStarted } = this.state

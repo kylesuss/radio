@@ -11,8 +11,7 @@ class AudioPlayer extends Component {
     isPaused: PropTypes.bool.isRequired,
     playerIsPlaying: PropTypes.bool.isRequired,
     isPlayingVideo: PropTypes.bool.isRequired,
-    streamUrl: PropTypes.string.isRequired,
-    willLoadVideo: PropTypes.bool.isRequired
+    streamUrl: PropTypes.string.isRequired
   }
 
   constructor (props) {
@@ -28,10 +27,6 @@ class AudioPlayer extends Component {
     const { streamUrl } = this.props
     const isChangingStreamUrls = nextProps.streamUrl !== streamUrl
     const stateUpdates = {}
-
-    if (nextProps.willLoadVideo) {
-      stateUpdates.volume = MIN_VOLUME
-    }
 
     if (nextProps.isPlayingVideo) {
       stateUpdates.streamUrl = null

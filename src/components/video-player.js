@@ -36,53 +36,43 @@ const StyledPlayerOverlay = styled.div`
 
 const STREAM = 'stream'
 const IFRAME = 'iframe'
+const WAIT_FOR_LOAD_DELAY = 2500
 
 class VideoPlayer extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     playerIsPlaying: PropTypes.bool.isRequired,
-    videos: PropTypes.arrayOf(PropTypes.shape({
+    video: PropTypes.shape({
       type: PropTypes.oneOf([STREAM, IFRAME]).isRequired,
       url: PropTypes.string.isRequired
-    })).isRequired
+    }).isRequired
   }
 
   state = {
-    activeVideoIndex: 0,
-    hasErrorOnAllVideos: false,
     hasStarted: false
   }
 
   componentDidMount () {
-    const { videoWillLoad } = this.props
-    videoWillLoad()
+    this.handleNewVideo()
   }
 
   componentWillReceiveProps (nextProps) {
-    const { name, videoWillLoad } = this.props
+    const { name } = this.props
 
     if (name === nextProps.name) { return }
 
-    videoWillLoad()
-
-    this.setState({
-      activeVideoIndex: 0,
-      hasErrorOnAllVideos: false,
-      hasStarted: false
-    })
+    this.handleNewVideo()
+    this.setState({ hasStarted: false })
   }
 
   componentWillUnmount () {
     const { videoDidEnd } = this.props
+
     videoDidEnd()
-  }
 
-  get activeVideo () {
-    const { videos } = this.props
-    const { activeVideoIndex } = this.state
-    return videos[activeVideoIndex]
+    clearTimeout(this.waitForLoadTimeout)
+    this.waitForLoadTimeout = null
   }
-
   get config () {
     return {
       dailymotion: {
@@ -99,38 +89,40 @@ class VideoPlayer extends Component {
     }
   }
 
+  handleNewVideo = () => {
+    const { videoWillLoad } = this.props
+
+    videoWillLoad()
+
+    clearTimeout(this.waitForLoadTimeout)
+    this.waitForLoadTimeout = setTimeout(() => {
+      const { hasStarted } = this.state
+      if (!hasStarted) { this.handleError() }
+    }, WAIT_FOR_LOAD_DELAY)
+  }
+
   handleStart = () => {
     const { videoDidStart } = this.props
+
     videoDidStart()
+
     this.setState({ hasStarted: true })
   }
 
-  handleError = () => {
-    const { videos } = this.props
-    const { activeVideoIndex } = this.state
-    const isLastVideo = activeVideoIndex === (videos.length - 1)
-
-    if (isLastVideo) {
-      this.setState({ hasErrorOnAllVideos: true })
-      return
-    }
-
-    this.setState({ activeVideoIndex: activeVideoIndex + 1 })
-  }
+  handleError = () => this.setState({ hasError: true })
 
   render () {
-    const { playerIsPlaying } = this.props
-    const { hasErrorOnAllVideos, hasStarted } = this.state
-    const activeVideo = this.activeVideo
+    const { playerIsPlaying, video } = this.props
+    const { hasError, hasStarted } = this.state
 
-    if (hasErrorOnAllVideos) { return null }
+    if (hasError) { return null }
 
     return (
       <StyledVideoContainer hasStarted={hasStarted}>
-        {activeVideo.type === STREAM && (
+        {video.type === STREAM && (
           <ReactPlayer
             playing
-            url={activeVideo.url}
+            url={video.url}
             config={this.config}
             width="100%"
             height="100%"
@@ -140,9 +132,9 @@ class VideoPlayer extends Component {
           />
         )}
 
-        {activeVideo.type === IFRAME && (
+        {video.type === IFRAME && (
           <iframe
-            src={playerIsPlaying ? activeVideo.url : activeVideo.mutedUrl}
+            src={playerIsPlaying ? video.url : video.mutedUrl}
             width="100%"
             height="100%"
             frameBorder="0"

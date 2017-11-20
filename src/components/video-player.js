@@ -36,7 +36,7 @@ const StyledPlayerOverlay = styled.div`
 
 const STREAM = 'stream'
 const IFRAME = 'iframe'
-const WAIT_FOR_LOAD_DELAY = 2500
+const WAIT_FOR_LOAD_DELAY = 10000
 
 class VideoPlayer extends Component {
   static propTypes = {
@@ -61,8 +61,8 @@ class VideoPlayer extends Component {
 
     if (name === nextProps.name) { return }
 
-    this.handleNewVideo()
     this.setState({ hasStarted: false })
+    this.handleNewVideo()
   }
 
   componentWillUnmount () {

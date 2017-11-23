@@ -10,7 +10,7 @@ export default ({ body }) => {
   return {
     timezone: null,
     current: {
-      name: cleanLiveInfo(channel1.now.broadcast_title)
+      show: cleanLiveInfo(channel1.now.broadcast_title)
     }
   }
 }

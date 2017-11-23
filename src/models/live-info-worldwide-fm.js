@@ -4,12 +4,14 @@ export default ({ body }) => {
   if (!body.shows.current) { return null }
 
   const trackName = body.tracks && body.tracks.current && body.tracks.current.name
-  const name = trackName || body.shows.current.name
+  const showName = body.shows && body.shows.current && body.shows.current.name
+  const showNameTextToReplace = ' (Follow @wwfmnowplaying Twitter for details)'
 
   return {
     timezone: body.station.timezone,
     current: {
-      name: cleanLiveInfo(name),
+      ...(showName ? { show: cleanLiveInfo(showName.replace(showNameTextToReplace, '')) } : {}),
+      ...(trackName ? { track: cleanLiveInfo(trackName) } : {}),
       starts: body.shows.current.starts,
       ends: body.shows.current.ends
     }

@@ -5,7 +5,7 @@ export default ({ body }) => {
 
   return {
     current: {
-      name: cleanLiveInfo(body[0].showName)
+      show: cleanLiveInfo(body[0].showName)
     }
   }
 }

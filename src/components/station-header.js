@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import StationProfileImage from 'components/station-profile-image'
 import * as colors from 'styles/colors'
+import * as fonts from 'styles/fonts'
 import * as positioning from 'styles/positioning'
 import * as spacing from 'styles/spacing'
 import * as transitions from 'styles/transitions'
@@ -56,9 +57,34 @@ const StyledStationName = styled.div`
   text-transform: uppercase;
 `
 
-const StyledLiveCurrentName = styled.div`
+const StyledLiveInfo = styled.div`
+  display: flex;
   opacity: ${props => props.hasLiveInfo ? '1' : '0'};
   transition: opacity ${transitions.LENGTH_COMMON_MS} ease-out;
+`
+
+const sharedLabelStyles = `
+  border-radius: 2px;
+  color: #111;
+  font-weight: ${fonts.WEIGHT_BOLD};
+  text-transform: uppercase;
+  font-size: 11px;
+  padding: 2px 6px;
+  margin-right: 8px;
+`
+
+const StyledLiveShowLabel = styled.span`
+  ${sharedLabelStyles}
+  background: ${colors.GREEN};
+`
+
+const StyledLiveTrackLabel = styled.span`
+  ${sharedLabelStyles}
+  background: ${colors.BLUE};
+`
+
+const StyledLiveTrack = styled.div`
+  margin-left: ${spacing.COMMON};
 `
 
 const StationHeader = ({ station, liveStationInfo }) => (
@@ -83,11 +109,21 @@ const StationHeader = ({ station, liveStationInfo }) => (
             )}
           </div>
 
-          <StyledLiveCurrentName hasLiveInfo={!!liveStationInfo}>
-            {liveStationInfo && (
-              liveStationInfo.current.name
+          <StyledLiveInfo hasLiveInfo={!!liveStationInfo}>
+            {liveStationInfo && liveStationInfo.current.show && (
+              <div>
+                <StyledLiveShowLabel>Show</StyledLiveShowLabel>
+                <span>{liveStationInfo.current.show}</span>
+              </div>
             )}
-          </StyledLiveCurrentName>
+
+            {liveStationInfo && liveStationInfo.current.track && (
+              <StyledLiveTrack>
+                <StyledLiveTrackLabel>Track</StyledLiveTrackLabel>
+                <span>{liveStationInfo.current.track}</span>
+              </StyledLiveTrack>
+            )}
+          </StyledLiveInfo>
         </StyledStationDetailsBottomRow>
       </StyledStationDetails>
     </StyledStationStickyHeader>

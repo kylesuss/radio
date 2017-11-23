@@ -6,7 +6,7 @@ export default ({ body }) => {
   return {
     timezone: null,
     current: {
-      name: cleanLiveInfo(body.current_track.title)
+      show: cleanLiveInfo(body.current_track.title)
     }
   }
 }

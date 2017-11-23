@@ -9,7 +9,7 @@ export default ({ text }) => {
 
   return {
     current: {
-      name: cleanLiveInfo(nameNode.textContent)
+      show: cleanLiveInfo(nameNode.textContent)
     }
   }
 }

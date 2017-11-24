@@ -5,7 +5,7 @@ export default ({ text }) => {
   const dom = parser.parseFromString(text, 'text/html')
   const nameNode = dom.querySelector('#switch-now .tstarheavyupper')
 
-  if (!nameNode || !nameNode.textContent) { return }
+  if (!nameNode || !nameNode.textContent.trim()) { return }
 
   return {
     current: {

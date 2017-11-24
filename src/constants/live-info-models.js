@@ -9,12 +9,13 @@ import modelWorldWideFmLiveInfo from 'models/live-info-worldwide-fm'
 import modelNTSRadioLiveInfo from 'models/live-info-nts-radio'
 import modelKmahRadioLiveInfo from 'models/live-info-kmah-radio'
 import modelRadarRadioLiveInfo from 'models/live-info-radar-radio'
-import modelBassoRadioLiveInfro from 'models/live-info-basso-radio'
+import modelBassoRadioLiveInfo from 'models/live-info-basso-radio'
 import modelRinseFmLiveInfo from 'models/live-info-rinse-fm'
+import modelSeoulCommunityRadioLiveInfo from 'models/live-info-seoul-community-radio'
 
 const liveInfoModels = {
   'balamii': modelAirtimeV2LiveInfo,
-  'basso-radio': modelBassoRadioLiveInfro,
+  'basso-radio': modelBassoRadioLiveInfo,
   'berlin-community-radio': modelAirtimeV2LiveInfo,
   'boxout-fm': modelAirtimeV2LiveInfo,
   'frission-radio': modelAirtimeV2LiveInfo,
@@ -28,7 +29,7 @@ const liveInfoModels = {
   'radar-radio': modelRadarRadioLiveInfo,
   'red-light-radio': modelRedLightRadioLiveInfo,
   'rinse-fm': modelRinseFmLiveInfo,
-  'seoul-community-radio': modelAirtimeV2LiveInfo,
+  'seoul-community-radio': modelSeoulCommunityRadioLiveInfo,
   'soho-radio': modelSohoRadioLiveInfo,
   'the-lot-radio': modelAirtimeV2LiveInfo,
   'worldwide-fm': modelWorldWideFmLiveInfo

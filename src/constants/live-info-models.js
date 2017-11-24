@@ -12,6 +12,7 @@ import modelRadarRadioLiveInfo from 'models/live-info-radar-radio'
 import modelBassoRadioLiveInfo from 'models/live-info-basso-radio'
 import modelRinseFmLiveInfo from 'models/live-info-rinse-fm'
 import modelSeoulCommunityRadioLiveInfo from 'models/live-info-seoul-community-radio'
+import modelTederFmLiveInfo from 'models/live-info-teder-fm'
 
 const liveInfoModels = {
   'balamii': modelAirtimeV2LiveInfo,
@@ -31,6 +32,7 @@ const liveInfoModels = {
   'rinse-fm': modelRinseFmLiveInfo,
   'seoul-community-radio': modelSeoulCommunityRadioLiveInfo,
   'soho-radio': modelSohoRadioLiveInfo,
+  'teder-fm': modelTederFmLiveInfo,
   'the-lot-radio': modelAirtimeV2LiveInfo,
   'worldwide-fm': modelWorldWideFmLiveInfo
 }

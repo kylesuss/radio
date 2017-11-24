@@ -197,7 +197,8 @@ export default [
     country: 'Israel',
     twitterHandle: 'teder_fm',
     logo: logoTederFM,
-    profileImage: profileTederFM
+    profileImage: profileTederFM,
+    liveInfoUrl: 'https://freshtransmission.com/live-info/teder-fm'
   }, {
     name: 'Red Light Radio',
     streamUrl: 'http://www.michielgardner.nl:8000/redlightradio',

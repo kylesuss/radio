@@ -150,8 +150,8 @@ class VideoPlayer extends Component {
 
   componentWillReceiveProps (nextProps) {
     const {
-      hasActiveAudio,
       name,
+      hasActiveAudio,
       toggleVideoAudioState,
       unmuteAudioPlayer
     } = this.props
@@ -159,11 +159,11 @@ class VideoPlayer extends Component {
     if (name === nextProps.name) { return }
 
     this.setState({ hasStarted: false })
+    this.reset()
+  }
 
-    if (hasActiveAudio) {
-      toggleVideoAudioState()
-      unmuteAudioPlayer()
-    }
+  componentWillUnmount () {
+    this.reset()
   }
 
   get config () {
@@ -221,6 +221,19 @@ class VideoPlayer extends Component {
     if (hasActiveAudio && !playerIsPlaying) {
       return 'Audio paused'
     }
+  }
+
+  reset = () => {
+    const {
+      hasActiveAudio,
+      toggleVideoAudioState,
+      unmuteAudioPlayer
+    } = this.props
+
+    if (!hasActiveAudio) { return }
+
+    toggleVideoAudioState()
+    unmuteAudioPlayer()
   }
 
   handleStart = () => this.setState({ hasStarted: true })

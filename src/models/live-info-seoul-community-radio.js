@@ -6,8 +6,7 @@ export default ({ body }) => {
   return {
     timezone: body.station.timezone,
     current: {
-      show: cleanLiveInfo(body.shows.current.name),
-      track: cleanLiveInfo(body.tracks.current.name),
+      show: cleanLiveInfo(body.tracks.current.name),
       starts: body.shows.current.starts,
       ends: body.shows.current.ends
     }

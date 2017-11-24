@@ -12,10 +12,10 @@ const mapStateToProps = (state) => {
 
   return {
     isPlaying: state.player.isPlaying,
-    isPlayingVideo: state.video.isPlaying,
     station: findStationBySlug(stations.items, player.activeStation),
     prevStation: findPrevStationBySlug(stations.items, player.activeStation),
-    nextStation: findNextStationBySlug(stations.items, player.activeStation)
+    nextStation: findNextStationBySlug(stations.items, player.activeStation),
+    videoHasActiveAudio: state.video.hasActiveAudio
   }
 }
 

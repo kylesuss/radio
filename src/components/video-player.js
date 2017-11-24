@@ -121,7 +121,7 @@ const StyledToggleIndicator = styled.div`
   width: 18px;
   background: ${colors.PURPLE};
   height: 10px;
-  transform: translateX(${props => props.isUsingVideoAudio ? '22px' : '0px'});
+  transform: translateX(${props => props.hasActiveAudio ? '22px' : '0px'});
   transition: transform ${easing.EASE_OUT_QUINT} ${transitions.LENGTH_COMMON_MS};
 `
 
@@ -145,17 +145,25 @@ class VideoPlayer extends Component {
   }
 
   state = {
-    hasStarted: false,
-    isUsingVideoAudio: false
+    hasStarted: false
   }
 
   componentWillReceiveProps (nextProps) {
-    const { name, unmuteAudioPlayer } = this.props
+    const {
+      hasActiveAudio,
+      name,
+      toggleVideoAudioState,
+      unmuteAudioPlayer
+    } = this.props
 
     if (name === nextProps.name) { return }
 
-    this.setState({ hasStarted: false, isUsingVideoAudio: false })
-    unmuteAudioPlayer()
+    this.setState({ hasStarted: false })
+
+    if (hasActiveAudio) {
+      toggleVideoAudioState()
+      unmuteAudioPlayer()
+    }
   }
 
   get config () {
@@ -175,10 +183,9 @@ class VideoPlayer extends Component {
   }
 
   get iframeSrc () {
-    const { playerIsPlaying, video } = this.props
-    const { isUsingVideoAudio } = this.state
+    const { hasActiveAudio, playerIsPlaying, video } = this.props
 
-    if (!playerIsPlaying || !isUsingVideoAudio) {
+    if (!playerIsPlaying || !hasActiveAudio) {
       return video.mutedUrl
     }
 
@@ -186,10 +193,9 @@ class VideoPlayer extends Component {
   }
 
   get reactPlayerVolume () {
-    const { playerIsPlaying } = this.props
-    const { isUsingVideoAudio } = this.state
+    const { hasActiveAudio, playerIsPlaying } = this.props
 
-    if (!playerIsPlaying || !isUsingVideoAudio) {
+    if (!playerIsPlaying || !hasActiveAudio) {
       return REACT_PLAYER_MIN_VOLUME
     }
 
@@ -197,24 +203,22 @@ class VideoPlayer extends Component {
   }
 
   get isAudioInactive () {
-    const { playerIsPlaying } = this.props
-    const { isUsingVideoAudio } = this.state
-    return !playerIsPlaying || !isUsingVideoAudio
+    const { hasActiveAudio, playerIsPlaying } = this.props
+    return !playerIsPlaying || !hasActiveAudio
   }
 
   get audioMessage () {
-    const { playerIsPlaying } = this.props
-    const { isUsingVideoAudio } = this.state
+    const { hasActiveAudio, playerIsPlaying } = this.props
 
-    if (!isUsingVideoAudio) {
+    if (!hasActiveAudio) {
       return 'Video audio inactive'
     }
 
-    if (isUsingVideoAudio && playerIsPlaying) {
+    if (hasActiveAudio && playerIsPlaying) {
       return 'Video audio active'
     }
 
-    if (isUsingVideoAudio && !playerIsPlaying) {
+    if (hasActiveAudio && !playerIsPlaying) {
       return 'Audio paused'
     }
   }
@@ -223,25 +227,28 @@ class VideoPlayer extends Component {
 
   handleError = () => this.setState({ hasError: true })
 
-  handleToggleButtonClick = () => this.setState({
-    isUsingVideoAudio: !this.state.isUsingVideoAudio
-  }, this.handleAudioPlayerState)
+  handleToggleButtonClick = () => {
+    const {
+      hasActiveAudio,
+      toggleVideoAudioState,
+      muteAudioPlayer,
+      unmuteAudioPlayer
+    } = this.props
 
-  handleAudioPlayerState = () => {
-    const { muteAudioPlayer, unmuteAudioPlayer } = this.props
-    const { isUsingVideoAudio } = this.state
-
-    if (isUsingVideoAudio) {
+    if (hasActiveAudio) {
+      // Video audio is going to become inactive
+      unmuteAudioPlayer()
+    } else {
+      // Video audio is going to become active
       muteAudioPlayer()
-      return
     }
 
-    unmuteAudioPlayer()
+    toggleVideoAudioState()
   }
 
   render () {
-    const { video } = this.props
-    const { hasError, hasStarted, isUsingVideoAudio } = this.state
+    const { hasActiveAudio, video } = this.props
+    const { hasError, hasStarted } = this.state
 
     if (hasError) { return null }
 
@@ -296,7 +303,7 @@ class VideoPlayer extends Component {
                 <Button onClick={this.handleToggleButtonClick}>
                   <StyledToggle>
                     <StyledToggleIndicator
-                      isUsingVideoAudio={isUsingVideoAudio}
+                      hasActiveAudio={hasActiveAudio}
                     />
                   </StyledToggle>
                 </Button>

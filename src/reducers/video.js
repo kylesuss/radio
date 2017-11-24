@@ -1,25 +1,15 @@
-import {
-  VIDEO_DID_START,
-  VIDEO_DID_END
-} from 'actions/video'
+import * as actions from 'actions/video'
 
 const initialState = {
-  isPlaying: false
+  hasActiveAudio: false
 }
 
 export default function (state = initialState, action = {}) {
   switch (action.type) {
-    case VIDEO_DID_START:
+    case actions.TOGGLE_VIDEO_AUDIO_STATE:
       return {
         ...state,
-        isPlaying: true,
-        willLoadVideo: false
-      }
-    case VIDEO_DID_END:
-      return {
-        ...state,
-        isPlaying: false,
-        willLoadVideo: false
+        hasActiveAudio: !state.hasActiveAudio
       }
     default:
       return state

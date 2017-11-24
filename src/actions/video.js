@@ -1,11 +1,5 @@
-export const VIDEO_DID_START = 'VIDEO_DID_START'
+export const TOGGLE_VIDEO_AUDIO_STATE = 'TOGGLE_VIDEO_AUDIO_STATE'
 
-export const videoDidStart = () => ({
-  type: VIDEO_DID_START
-})
-
-export const VIDEO_DID_END = 'VIDEO_DID_END'
-
-export const videoDidEnd = () => ({
-  type: VIDEO_DID_END
+export const toggleVideoAudioState = () => ({
+  type: TOGGLE_VIDEO_AUDIO_STATE
 })

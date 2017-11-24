@@ -21,18 +21,18 @@ class Player extends Component {
   static propTypes = {
     station: PropTypes.object,
     isPlaying: PropTypes.bool.isRequired,
-    isPlayingVideo: PropTypes.bool.isRequired,
     togglePlayState: PropTypes.func.isRequired,
     playStation: PropTypes.func.isRequired,
     prevStation: PropTypes.object.isRequired,
-    nextStation: PropTypes.object.isRequired
+    nextStation: PropTypes.object.isRequired,
+    videoHasActiveAudio: PropTypes.bool.isRequired
   }
 
   constructor (props) {
     super(props)
 
     this.state = {
-      isLoading: false,
+      isLoadingAudioSrc: true,
       streamUrl: props.station.streamUrl
     }
   }
@@ -51,11 +51,7 @@ class Player extends Component {
     }
 
     if (!station || isChangingStations) {
-      stateUpdates.isLoading = true
-    }
-
-    if (nextProps.isPlayingVideo) {
-      stateUpdates.isLoading = false
+      stateUpdates.isLoadingAudioSrc = true
     }
 
     Object.keys(stateUpdates).length && this.setState(stateUpdates)
@@ -95,11 +91,11 @@ class Player extends Component {
 
   handlePrevClick = () => this.playStation(this.props.prevStation.slug)
 
-  handleSoundPlaying = () => this.setState({ isLoading: false })
+  handleSoundPlaying = () => this.setState({ isLoadingAudioSrc: false })
 
   render () {
-    const { station, isPlaying } = this.props
-    const { isLoading, streamUrl } = this.state
+    const { station, isPlaying, videoHasActiveAudio } = this.props
+    const { isLoadingAudioSrc, streamUrl } = this.state
 
     return (
       <StyledPlayer.Container>
@@ -125,9 +121,11 @@ class Player extends Component {
                 <StyledPlayer.PlayStateControls>
                   <StyledPlayer.PlayStateButton
                     onClick={this.handlePlayToggleClick}
-                    disabled={isLoading}
+                    disabled={isLoadingAudioSrc && !videoHasActiveAudio}
                   >
-                    <StyledPlayer.PlayStateInner isLoading={isLoading}>
+                    <StyledPlayer.PlayStateInner
+                      isLoading={isLoadingAudioSrc && !videoHasActiveAudio}
+                    >
                       {
                         isPlaying
                           ? <PauseIcon />

@@ -13,7 +13,8 @@ const reducer = compose(
       ...persistedState,
       player: {
         ...persistedState.player,
-        isPlaying: initialState.player.isPlaying
+        isPlaying: initialState.player.isPlaying,
+        audioPlayerVolume: initialState.player.audioPlayerVolume
       },
       stations: {
         ...persistedState.stations,

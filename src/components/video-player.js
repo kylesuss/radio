@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import ReactPlayer from 'react-player'
+import InfoIcon from 'react-icons/lib/md/info'
+import VolumeIcon from 'react-icons/lib/md/volume-up'
+import MutedIcon from 'react-icons/lib/md/volume-off'
+import Button from 'styled/button'
+import * as colors from 'styles/colors'
+import * as easing from 'styles/easing'
 import * as transitions from 'styles/transitions'
 
 const StyledVideoContainer = styled.div`
@@ -34,9 +40,99 @@ const StyledPlayerOverlay = styled.div`
   background: transparent;
 `
 
+const StyledAudioIndicator = styled.div`
+  position: absolute;
+  background: ${colors.PURE_BLACK};
+  color: #888;
+  border-radius: 2px;
+  padding: 10px;
+  right: 15px;
+  top: 15px;
+  font-size: 18px;
+`
+
+const StyledAudioMessage = styled.span`
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-left: 8px;
+`
+
+const HOVER_DELAY = 3000
+
+const StyledPlayerOverlayDetails = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: ${props => props.hasStarted ? 'hidden' : 'visible'};
+  opacity: ${props => props.hasStarted ? '0' : '1'};
+  transition:
+    visibility 0ms linear ${transitions.LENGTH_COMMON + HOVER_DELAY}ms,
+    opacity ${transitions.LENGTH_COMMON_MS} ${HOVER_DELAY}ms;
+
+  ${StyledPlayerOverlay}:hover & {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity ${transitions.LENGTH_COMMON_MS};
+  }
+`
+
+const StyledControls = styled.div`
+  position: absolute;
+  height: 46px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: ${colors.PURE_BLACK};
+  color: #888;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+`
+
+const StyledControlsSection = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const StyledInfoIcon = styled(InfoIcon)`
+  margin-right: 8px;
+  height: 20px;
+  width: 18px;
+`
+
+const StyledToggle = styled.div`
+  position: relative;
+  width: 50px;
+  border: 2px solid ${colors.WHITE};
+  padding: 4px;
+  height: 20px;
+  border-radius: 2px;
+`
+
+const StyledToggleIndicator = styled.div`
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 18px;
+  background: ${colors.PURPLE};
+  height: 10px;
+  transform: translateX(${props => props.isUsingVideoAudio ? '22px' : '0px'});
+  transition: transform ${easing.EASE_OUT_QUINT} ${transitions.LENGTH_COMMON_MS};
+`
+
+const StyledToggleMessage = styled.div`
+  margin-right: 10px;
+`
+
 const STREAM = 'stream'
 const IFRAME = 'iframe'
-const WAIT_FOR_LOAD_DELAY = 10000
+const REACT_PLAYER_MAX_VOLUME = 1
+const REACT_PLAYER_MIN_VOLUME = 0
 
 class VideoPlayer extends Component {
   static propTypes = {
@@ -49,30 +145,19 @@ class VideoPlayer extends Component {
   }
 
   state = {
-    hasStarted: false
-  }
-
-  componentDidMount () {
-    this.handleNewVideo()
+    hasStarted: false,
+    isUsingVideoAudio: false
   }
 
   componentWillReceiveProps (nextProps) {
-    const { name } = this.props
+    const { name, unmuteAudioPlayer } = this.props
 
     if (name === nextProps.name) { return }
 
-    this.setState({ hasStarted: false })
-    this.handleNewVideo()
+    this.setState({ hasStarted: false, isUsingVideoAudio: false })
+    unmuteAudioPlayer()
   }
 
-  componentWillUnmount () {
-    const { videoDidEnd } = this.props
-
-    videoDidEnd()
-
-    clearTimeout(this.waitForLoadTimeout)
-    this.waitForLoadTimeout = null
-  }
   get config () {
     return {
       dailymotion: {
@@ -89,27 +174,74 @@ class VideoPlayer extends Component {
     }
   }
 
-  handleNewVideo = () => {
-    clearTimeout(this.waitForLoadTimeout)
-    this.waitForLoadTimeout = setTimeout(() => {
-      const { hasStarted } = this.state
-      if (!hasStarted) { this.handleError() }
-    }, WAIT_FOR_LOAD_DELAY)
+  get iframeSrc () {
+    const { playerIsPlaying, video } = this.props
+    const { isUsingVideoAudio } = this.state
+
+    if (!playerIsPlaying || !isUsingVideoAudio) {
+      return video.mutedUrl
+    }
+
+    return video.url
   }
 
-  handleStart = () => {
-    const { videoDidStart } = this.props
+  get reactPlayerVolume () {
+    const { playerIsPlaying } = this.props
+    const { isUsingVideoAudio } = this.state
 
-    videoDidStart()
+    if (!playerIsPlaying || !isUsingVideoAudio) {
+      return REACT_PLAYER_MIN_VOLUME
+    }
 
-    this.setState({ hasStarted: true })
+    return REACT_PLAYER_MAX_VOLUME
   }
+
+  get isAudioInactive () {
+    const { playerIsPlaying } = this.props
+    const { isUsingVideoAudio } = this.state
+    return !playerIsPlaying || !isUsingVideoAudio
+  }
+
+  get audioMessage () {
+    const { playerIsPlaying } = this.props
+    const { isUsingVideoAudio } = this.state
+
+    if (!isUsingVideoAudio) {
+      return 'Video audio inactive'
+    }
+
+    if (isUsingVideoAudio && playerIsPlaying) {
+      return 'Video audio active'
+    }
+
+    if (isUsingVideoAudio && !playerIsPlaying) {
+      return 'Audio paused'
+    }
+  }
+
+  handleStart = () => this.setState({ hasStarted: true })
 
   handleError = () => this.setState({ hasError: true })
 
+  handleToggleButtonClick = () => this.setState({
+    isUsingVideoAudio: !this.state.isUsingVideoAudio
+  }, this.handleAudioPlayerState)
+
+  handleAudioPlayerState = () => {
+    const { muteAudioPlayer, unmuteAudioPlayer } = this.props
+    const { isUsingVideoAudio } = this.state
+
+    if (isUsingVideoAudio) {
+      muteAudioPlayer()
+      return
+    }
+
+    unmuteAudioPlayer()
+  }
+
   render () {
-    const { playerIsPlaying, video } = this.props
-    const { hasError, hasStarted } = this.state
+    const { video } = this.props
+    const { hasError, hasStarted, isUsingVideoAudio } = this.state
 
     if (hasError) { return null }
 
@@ -122,7 +254,7 @@ class VideoPlayer extends Component {
             config={this.config}
             width="100%"
             height="100%"
-            volume={playerIsPlaying ? 1 : 0}
+            volume={this.reactPlayerVolume}
             onStart={this.handleStart}
             onError={this.handleError}
           />
@@ -130,7 +262,7 @@ class VideoPlayer extends Component {
 
         {video.type === IFRAME && (
           <iframe
-            src={playerIsPlaying ? video.url : video.mutedUrl}
+            src={this.iframeSrc}
             width="100%"
             height="100%"
             frameBorder="0"
@@ -141,7 +273,37 @@ class VideoPlayer extends Component {
           />
         )}
 
-        <StyledPlayerOverlay />
+        <StyledPlayerOverlay>
+          <StyledPlayerOverlayDetails hasStarted={hasStarted}>
+            <StyledAudioIndicator>
+              {this.isAudioInactive ? <MutedIcon /> : <VolumeIcon />}
+
+              <StyledAudioMessage>
+                {this.audioMessage}
+              </StyledAudioMessage>
+            </StyledAudioIndicator>
+
+            <StyledControls>
+              <StyledControlsSection>
+                <StyledInfoIcon />
+
+                <span>Video and audio feeds may not sync</span>
+              </StyledControlsSection>
+
+              <StyledControlsSection>
+                <StyledToggleMessage>Switch source:</StyledToggleMessage>
+
+                <Button onClick={this.handleToggleButtonClick}>
+                  <StyledToggle>
+                    <StyledToggleIndicator
+                      isUsingVideoAudio={isUsingVideoAudio}
+                    />
+                  </StyledToggle>
+                </Button>
+              </StyledControlsSection>
+            </StyledControls>
+          </StyledPlayerOverlayDetails>
+        </StyledPlayerOverlay>
       </StyledVideoContainer>
     )
   }

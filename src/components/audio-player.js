@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Sound from 'react-sound'
 
-const MIN_VOLUME = 0
-const MAX_VOLUME = 100
-
 class AudioPlayer extends Component {
   static propTypes = {
+    audioPlayerVolume: PropTypes.number.isRequired,
     handleSoundPlaying: PropTypes.func.isRequired,
     isPaused: PropTypes.bool.isRequired,
     playerIsPlaying: PropTypes.bool.isRequired,
-    isPlayingVideo: PropTypes.bool.isRequired,
     streamUrl: PropTypes.string.isRequired
   }
 
@@ -18,8 +15,7 @@ class AudioPlayer extends Component {
     super(props)
 
     this.state = {
-      streamUrl: props.streamUrl,
-      volume: props.isPlayingVideo ? MIN_VOLUME : MAX_VOLUME
+      streamUrl: props.streamUrl
     }
   }
 
@@ -28,13 +24,7 @@ class AudioPlayer extends Component {
     const isChangingStreamUrls = nextProps.streamUrl !== streamUrl
     const stateUpdates = {}
 
-    if (nextProps.isPlayingVideo) {
-      stateUpdates.streamUrl = null
-      stateUpdates.volume = MIN_VOLUME
-    }
-
     if (isChangingStreamUrls) {
-      stateUpdates.volume = MAX_VOLUME
       stateUpdates.streamUrl = nextProps.streamUrl
     }
 
@@ -53,7 +43,8 @@ class AudioPlayer extends Component {
   handleSoundPlaying = () => this.props.handleSoundPlaying()
 
   render () {
-    const { streamUrl, volume } = this.state
+    const { audioPlayerVolume } = this.props
+    const { streamUrl } = this.state
 
     if (!streamUrl) { return null }
 
@@ -62,7 +53,7 @@ class AudioPlayer extends Component {
         url={streamUrl}
         playStatus={this.soundPlayStatus}
         onPlaying={this.handleSoundPlaying}
-        volume={volume}
+        volume={audioPlayerVolume}
       />
     )
   }

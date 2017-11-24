@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import VideoPlayer from 'components/video-player'
-import { videoDidStart, videoDidEnd } from 'actions/video'
+import { muteAudioPlayer, unmuteAudioPlayer } from 'actions/player'
 
 const mapStateToProps = (state) => {
   return {
@@ -10,8 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    videoDidStart: () => dispatch(videoDidStart()),
-    videoDidEnd: () => dispatch(videoDidEnd())
+    muteAudioPlayer: () => dispatch(muteAudioPlayer()),
+    unmuteAudioPlayer: () => dispatch(unmuteAudioPlayer())
   }
 }
 

@@ -4,7 +4,7 @@ import AudioPlayer from 'components/audio-player'
 const mapStateToProps = (state) => {
   return {
     playerIsPlaying: state.player.isPlaying,
-    isPlayingVideo: state.video.isPlaying
+    audioPlayerVolume: state.player.audioPlayerVolume
   }
 }
 

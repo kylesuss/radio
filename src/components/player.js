@@ -37,10 +37,6 @@ class Player extends Component {
     }
   }
 
-  componentDidMount () {
-    window.soundManager && window.soundManager.setup({ debugMode: false })
-  }
-
   componentWillReceiveProps (nextProps) {
     const { station } = this.props
     const isChangingStations = nextProps.station.slug !== station.slug

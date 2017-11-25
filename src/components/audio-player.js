@@ -19,6 +19,10 @@ class AudioPlayer extends Component {
     }
   }
 
+  componentDidMount () {
+    window.soundManager && window.soundManager.setup({ debugMode: false })
+  }
+
   componentWillReceiveProps (nextProps) {
     const { streamUrl } = this.props
     const isChangingStreamUrls = nextProps.streamUrl !== streamUrl

@@ -7,9 +7,12 @@ export default ({ text }) => {
 
   if (!nameNode || !nameNode.textContent) { return }
 
+  const isInactive = !!nameNode.textContent.match(/Back at midday/)
+  const status = cleanLiveInfo(nameNode.textContent)
+
   return {
     current: {
-      show: cleanLiveInfo(nameNode.textContent)
+      ...(isInactive ? { isInactive: true, inactiveStatus: status } : { show: status })
     }
   }
 }

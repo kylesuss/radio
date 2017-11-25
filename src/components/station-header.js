@@ -83,6 +83,11 @@ const StyledLiveTrackLabel = styled.span`
   background: ${colors.BLUE};
 `
 
+const StyledInactiveLabel = styled.span`
+  ${sharedLabelStyles}
+  background: ${colors.BLUE_GREY};
+`
+
 const StyledLiveTrack = styled.div`
   margin-left: ${spacing.COMMON};
 `
@@ -110,6 +115,13 @@ const StationHeader = ({ station, liveStationInfo }) => (
           </div>
 
           <StyledLiveInfo hasLiveInfo={!!liveStationInfo}>
+            {liveStationInfo && liveStationInfo.current.isInactive && (
+              <div>
+                <StyledInactiveLabel>Station currently inactive</StyledInactiveLabel>
+                <span>{liveStationInfo.current.inactiveStatus}</span>
+              </div>
+            )}
+
             {liveStationInfo && liveStationInfo.current.show && (
               <div>
                 <StyledLiveShowLabel>Show</StyledLiveShowLabel>

@@ -1,4 +1,4 @@
-import modelAirtimeV1LiveInfo from 'models/live-info-airtime-v1'
+import modelLiveInfoLylRadio from 'models/live-info-lyl-radio'
 import modelAirtimeV2LiveInfo from 'models/live-info-airtime-v2'
 import modelNetilRadioLiveInfo from 'models/live-info-netil-radio'
 import modelLeMellotronInfo from 'models/live-info-le-mellotron'
@@ -22,7 +22,7 @@ const liveInfoModels = {
   'frission-radio': modelAirtimeV2LiveInfo,
   'kmah-radio': modelKmahRadioLiveInfo,
   'le-mellotron': modelLeMellotronInfo,
-  'lyl-radio': modelAirtimeV1LiveInfo,
+  'lyl-radio': modelLiveInfoLylRadio,
   'n10as-radio': modelAirtimeV2LiveInfo,
   'netil-radio': modelNetilRadioLiveInfo,
   'noods-radio': modelNoodsRadioLiveInfo,

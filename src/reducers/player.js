@@ -1,9 +1,10 @@
 import * as actions from 'actions/player'
 import * as constants from 'constants/player'
+import stationsFixtures from 'fixtures/stations'
 
 const initialState = {
   isPlaying: false,
-  activeStation: null,
+  activeStation: stationsFixtures[0].slug,
   audioPlayerVolume: constants.AUDIO_PLAYER_MAX_VOLUME
 }
 

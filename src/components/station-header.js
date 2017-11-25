@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import StationProfileImage from 'components/station-profile-image'
+import TimeInTimezone from 'components/time-in-timezone'
 import PinIcon from 'react-icons/lib/md/place'
 import ClockIcon from 'react-icons/lib/md/access-time'
 import * as colors from 'styles/colors'
@@ -42,6 +43,10 @@ const StyledStationDetails = styled.div`
   margin-right: ${spacing.COMMON};
 `
 
+const StyledStationMeta = styled.div`
+  display: flex;
+`
+
 const StyledStationDetailsTopRow = styled.div`
   margin-bottom: .25rem;
 `
@@ -63,16 +68,31 @@ const StyledStationInfoElement = styled.div`
   display: flex;
   align-items: center;
   line-height: 1rem;
+  margin-left: ${spacing.HALF};
+
+  &:first-child {
+    margin-left: 0;
+  }
+`
+
+const sharedIconStyled = css`
+  color: ${colors.BLUE_GREY};
+  margin-right: 4px;
 `
 
 const StyledPinIcon = styled(PinIcon)`
-  color: ${colors.BLUE_GREY};
+  ${sharedIconStyled}
   font-size: 18px;
-  margin-right: 4px;
+`
+
+const StyledClockIcon = styled(ClockIcon)`
+  ${sharedIconStyled}
+  font-size: 20px;
 `
 
 const StyledLiveInfo = styled.div`
   display: flex;
+  align-items: center;
   opacity: ${props => props.hasLiveInfo ? '1' : '0'};
   transition: opacity ${transitions.LENGTH_COMMON_MS} ease-out;
 `
@@ -121,7 +141,7 @@ const StationHeader = ({ station, liveStationInfo }) => (
         </StyledStationDetailsTopRow>
 
         <StyledStationDetailsBottomRow>
-          <div>
+          <StyledStationMeta>
             <StyledStationInfoElement>
               <StyledPinIcon />
 
@@ -132,7 +152,15 @@ const StationHeader = ({ station, liveStationInfo }) => (
                 )}
               </span>
             </StyledStationInfoElement>
-          </div>
+
+            {station.timezone && (
+              <StyledStationInfoElement>
+                <StyledClockIcon />
+
+                <TimeInTimezone timezone={station.timezone} />
+              </StyledStationInfoElement>
+            )}
+          </StyledStationMeta>
 
           <StyledLiveInfo hasLiveInfo={!!liveStationInfo}>
             {liveStationInfo && liveStationInfo.current.isInactive && (

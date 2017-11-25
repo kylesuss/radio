@@ -22,6 +22,10 @@ const config = {
         loader: 'babel-loader'
       },
       {
+        test: /\.(json)$/,
+        loader: 'json-loader'
+      },
+      {
         test: /\.css$/,
         loader: 'raw-loader'
       },
@@ -32,7 +36,7 @@ const config = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css'],
+    extensions: ['', '.js', '.jsx', '.css', '.json'],
     modulesDirectories: ['', 'src', 'node_modules']
   },
   plugins: [

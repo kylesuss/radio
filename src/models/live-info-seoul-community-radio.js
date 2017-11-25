@@ -1,7 +1,7 @@
 import cleanLiveInfo from 'utils/clean-live-info'
 
 export default ({ body }) => {
-  if (!body.shows.current) { return null }
+  if (!body.tracks.current) { return null }
 
   return {
     timezone: body.station.timezone,

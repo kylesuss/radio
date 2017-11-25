@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import StationProfileImage from 'components/station-profile-image'
+import PinIcon from 'react-icons/lib/md/place'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as positioning from 'styles/positioning'
@@ -57,6 +58,18 @@ const StyledStationName = styled.div`
   text-transform: uppercase;
 `
 
+const StyledStationInfo = styled.div`
+  display: flex;
+  align-items: center;
+  line-height: 1rem;
+`
+
+const StyledPinIcon = styled(PinIcon)`
+  color: ${colors.BLUE_GREY};
+  font-size: 18px;
+  margin-right: 4px;
+`
+
 const StyledLiveInfo = styled.div`
   display: flex;
   opacity: ${props => props.hasLiveInfo ? '1' : '0'};
@@ -107,12 +120,16 @@ const StationHeader = ({ station, liveStationInfo }) => (
         </StyledStationDetailsTopRow>
 
         <StyledStationDetailsBottomRow>
-          <div>
-            {buildLocation(
-              station.city,
-              station.country
-            )}
-          </div>
+          <StyledStationInfo>
+            <StyledPinIcon />
+
+            <span>
+              {buildLocation(
+                station.city,
+                station.country
+              )}
+            </span>
+          </StyledStationInfo>
 
           <StyledLiveInfo hasLiveInfo={!!liveStationInfo}>
             {liveStationInfo && liveStationInfo.current.isInactive && (

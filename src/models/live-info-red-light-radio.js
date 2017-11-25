@@ -1,6 +1,8 @@
+import cleanLiveInfo from 'utils/clean-live-info'
+
 export default ({ text }) => ({
   timezone: null,
   current: {
-    show: text.trim()
+    show: cleanLiveInfo(text.trim())
   }
 })

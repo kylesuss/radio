@@ -65,6 +65,7 @@ const StyledPlayerOverlayDetails = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
   visibility: ${props => props.hasStarted ? 'hidden' : 'visible'};
   opacity: ${props => props.hasStarted ? '0' : '1'};
   transition:
@@ -84,6 +85,7 @@ const StyledControls = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   background: ${colors.PURE_BLACK};
   color: #888;
   font-size: 12px;

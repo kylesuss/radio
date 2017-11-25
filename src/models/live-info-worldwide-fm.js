@@ -11,9 +11,7 @@ export default ({ body }) => {
     timezone: body.station.timezone,
     current: {
       ...(showName ? { show: cleanLiveInfo(showName.replace(showNameTextToReplace, '')) } : {}),
-      ...(trackName ? { track: cleanLiveInfo(trackName) } : {}),
-      starts: body.shows.current.starts,
-      ends: body.shows.current.ends
+      ...(trackName ? { track: cleanLiveInfo(trackName) } : {})
     }
   }
 }

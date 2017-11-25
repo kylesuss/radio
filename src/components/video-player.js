@@ -149,12 +149,7 @@ class VideoPlayer extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const {
-      name,
-      hasActiveAudio,
-      toggleVideoAudioState,
-      unmuteAudioPlayer
-    } = this.props
+    const { name } = this.props
 
     if (name === nextProps.name) { return }
 

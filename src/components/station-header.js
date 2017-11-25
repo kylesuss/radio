@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import StationProfileImage from 'components/station-profile-image'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
@@ -63,14 +63,14 @@ const StyledLiveInfo = styled.div`
   transition: opacity ${transitions.LENGTH_COMMON_MS} ease-out;
 `
 
-const sharedLabelStyles = `
+const sharedLabelStyles = css`
   border-radius: 2px;
   color: #111;
   font-weight: ${fonts.WEIGHT_BOLD};
   text-transform: uppercase;
   font-size: 11px;
   padding: 2px 6px;
-  margin-right: 8px;
+  margin-right: ${props => props.hasMessage ? '8px' : '0'};
 `
 
 const StyledLiveShowLabel = styled.span`
@@ -117,21 +117,26 @@ const StationHeader = ({ station, liveStationInfo }) => (
           <StyledLiveInfo hasLiveInfo={!!liveStationInfo}>
             {liveStationInfo && liveStationInfo.current.isInactive && (
               <div>
-                <StyledInactiveLabel>Station currently inactive</StyledInactiveLabel>
-                <span>{liveStationInfo.current.inactiveStatus}</span>
+                <StyledInactiveLabel hasMessage={!!liveStationInfo.current.inactiveStatus}>
+                  Station currently inactive
+                </StyledInactiveLabel>
+
+                {!!liveStationInfo.current.inactiveStatus && (
+                  <span>{liveStationInfo.current.inactiveStatus}</span>
+                )}
               </div>
             )}
 
             {liveStationInfo && liveStationInfo.current.show && (
               <div>
-                <StyledLiveShowLabel>Show</StyledLiveShowLabel>
+                <StyledLiveShowLabel hasMessage>Show</StyledLiveShowLabel>
                 <span>{liveStationInfo.current.show}</span>
               </div>
             )}
 
             {liveStationInfo && liveStationInfo.current.track && (
               <StyledLiveTrack>
-                <StyledLiveTrackLabel>Track</StyledLiveTrackLabel>
+                <StyledLiveTrackLabel hasMessage>Track</StyledLiveTrackLabel>
                 <span>{liveStationInfo.current.track}</span>
               </StyledLiveTrack>
             )}

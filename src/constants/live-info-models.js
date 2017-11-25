@@ -13,12 +13,13 @@ import modelBassoRadioLiveInfo from 'models/live-info-basso-radio'
 import modelRinseFmLiveInfo from 'models/live-info-rinse-fm'
 import modelSeoulCommunityRadioLiveInfo from 'models/live-info-seoul-community-radio'
 import modelTederFmLiveInfo from 'models/live-info-teder-fm'
+import modelBoxoutFmLiveInfo from 'models/live-info-boxout-fm'
 
 const liveInfoModels = {
   'balamii': modelAirtimeV2LiveInfo,
   'basso-radio': modelBassoRadioLiveInfo,
   'berlin-community-radio': modelAirtimeV2LiveInfo,
-  'boxout-fm': modelAirtimeV2LiveInfo,
+  'boxout-fm': modelBoxoutFmLiveInfo,
   'frission-radio': modelAirtimeV2LiveInfo,
   'kmah-radio': modelKmahRadioLiveInfo,
   'le-mellotron': modelLeMellotronInfo,

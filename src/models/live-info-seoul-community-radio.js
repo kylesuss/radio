@@ -1,12 +1,14 @@
 import cleanLiveInfo from 'utils/clean-live-info'
 
 export default ({ body }) => {
-  if (!body.tracks.current) { return null }
+  if (!body.shows.current) { return null }
+
+  const isInactive = !body.tracks.current
 
   return {
     timezone: body.station.timezone,
     current: {
-      show: cleanLiveInfo(body.tracks.current.name)
+      ...(isInactive ? { isInactive: true } : { show: cleanLiveInfo(body.tracks.current.name) })
     }
   }
 }

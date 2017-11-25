@@ -73,7 +73,7 @@ class Player extends Component {
     router.push(`/${slug}`)
   }
 
-  handlePlayToggleClick = () => {
+  handleTogglePlayState = () => {
     const { station } = this.props
 
     if (this.isPaused) {
@@ -120,7 +120,7 @@ class Player extends Component {
 
                 <StyledPlayer.PlayStateControls>
                   <StyledPlayer.PlayStateButton
-                    onClick={this.handlePlayToggleClick}
+                    onClick={this.handleTogglePlayState}
                     disabled={isLoadingAudioSrc && !videoHasActiveAudio}
                   >
                     <StyledPlayer.PlayStateInner

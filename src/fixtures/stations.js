@@ -54,6 +54,7 @@ export default [
     logo: logoTheLotRadio,
     profileImage: profileTheLotRadio,
     liveInfoUrl: 'https://thelot.airtime.pro/api/live-info-v2/',
+    timezone: 'America/New_York',
     video: {
       type: 'iframe',
       url: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true',
@@ -78,6 +79,7 @@ export default [
     logo: logoLeMellotron,
     profileImage: profileLeMellotron,
     liveInfoUrl: 'https://freshtransmission.com/live-info/le-mellotron',
+    timezone: 'Europe/Paris',
     video: {
       type: 'stream',
       url: 'http://www.dailymotion.com/video/x2ek01k'
@@ -91,7 +93,8 @@ export default [
     twitterHandle: 'lyl_radio',
     logo: logoLYLRadio,
     profileImage: profileLYLRadio,
-    liveInfoUrl: 'https://freshtransmission.com/live-info/lyl-radio'
+    liveInfoUrl: 'https://freshtransmission.com/live-info/lyl-radio',
+    timezone: 'Europe/Paris'
   }, {
     name: 'Soho Radio',
     streamUrl: 'https://streaming.radio.co/s57043ec0a/listen',
@@ -101,7 +104,8 @@ export default [
     twitterHandle: 'sohoradio',
     logo: logoSOHORadio,
     profileImage: profileSOHORadio,
-    liveInfoUrl: 'https://public.radio.co/stations/s57043ec0a/status'
+    liveInfoUrl: 'https://public.radio.co/stations/s57043ec0a/status',
+    timezone: 'Europe/London'
   }, {
     name: 'Berlin Community Radio',
     streamUrl: 'http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a',
@@ -111,7 +115,8 @@ export default [
     twitterHandle: 'BCR_Radio',
     logo: logoBerlinCommunityRadio,
     profileImage: profileBerlinCommunityRadio,
-    liveInfoUrl: 'https://berlincommunityradio.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://berlincommunityradio.airtime.pro/api/live-info-v2/',
+    timezone: 'Europe/Berlin'
   }, {
     name: 'Balamii',
     streamUrl: 'http://balamii.out.airtime.pro:8000/balamii_a',
@@ -121,7 +126,8 @@ export default [
     twitterHandle: 'Balamii',
     logo: logoBalamii,
     profileImage: profileBalamii,
-    liveInfoUrl: 'https://balamii.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://balamii.airtime.pro/api/live-info-v2/',
+    timezone: 'Europe/London'
   }, {
     name: 'Noods Radio',
     streamUrl: 'http://149.255.59.164:8051/live',
@@ -131,7 +137,8 @@ export default [
     twitterHandle: 'noodsradio',
     logo: logoNoodsRadio,
     profileImage: profileNoodsRadio,
-    liveInfoUrl: 'https://freshtransmission.com/live-info/noods-radio'
+    liveInfoUrl: 'https://freshtransmission.com/live-info/noods-radio',
+    timezone: 'Europe/London'
   }, {
     name: 'Worldwide FM',
     streamUrl: 'http://worldwidefm.out.airtime.pro:8000/worldwidefm_a',
@@ -150,7 +157,8 @@ export default [
     twitterHandle: 'RadarRadioLDN',
     logo: logoRadarRadio,
     profileImage: profileRadarRadio,
-    liveInfoUrl: 'https://freshtransmission.com/live-info/radar-radio'
+    liveInfoUrl: 'https://freshtransmission.com/live-info/radar-radio',
+    timezone: 'Europe/London'
   }, {
     name: 'NTS Radio',
     streamUrl: 'http://stream-relay-geo.ntslive.net/stream',
@@ -160,7 +168,8 @@ export default [
     twitterHandle: 'ntslive',
     logo: logoNTS,
     profileImage: profileNTS,
-    liveInfoUrl: 'https://www.nts.live/api/v2/live'
+    liveInfoUrl: 'https://www.nts.live/api/v2/live',
+    timezone: 'Europe/London'
   }, {
     name: 'Basso Radio',
     streamUrl: 'http://stream.basso.fi:8000/stream',
@@ -170,7 +179,8 @@ export default [
     twitterHandle: 'bassomedia',
     logo: logoBasso,
     profileImage: profileBasso,
-    liveInfoUrl: 'https://freshtransmission.com/live-info/basso-radio'
+    liveInfoUrl: 'https://freshtransmission.com/live-info/basso-radio',
+    timezone: 'Europe/Helsinki'
   }, {
     name: 'Red Bull Radio',
     streamUrl: 'http://broadcast.rbmaradio.net/main',
@@ -188,7 +198,8 @@ export default [
     twitterHandle: 'RinseFM',
     logo: logoRinseFM,
     profileImage: profileRinseFM,
-    liveInfoUrl: 'https://freshtransmission.com/live-info/rinse-fm'
+    liveInfoUrl: 'https://freshtransmission.com/live-info/rinse-fm',
+    timezone: 'Europe/London'
   }, {
     name: 'TEDER.FM',
     streamUrl: 'http://server1.live1.co.il:8014/teder',
@@ -198,7 +209,8 @@ export default [
     twitterHandle: 'teder_fm',
     logo: logoTederFM,
     profileImage: profileTederFM,
-    liveInfoUrl: 'https://freshtransmission.com/live-info/teder-fm'
+    liveInfoUrl: 'https://freshtransmission.com/live-info/teder-fm',
+    timezone: 'Asia/Tel_Aviv'
   }, {
     name: 'Red Light Radio',
     streamUrl: 'http://www.michielgardner.nl:8000/redlightradio',
@@ -209,6 +221,7 @@ export default [
     logo: logoRedLightRadio,
     profileImage: profileRedLightRadio,
     liveInfoUrl: 'https://freshtransmission.com/live-info/red-light-radio',
+    timezone: 'Europe/Amsterdam',
     video: {
       type: 'stream',
       url: 'https://cdn-hlm-1.streamnerd.nl/live/redlightradio/playlist.m3u8'
@@ -222,7 +235,8 @@ export default [
     twitterHandle: 'n10asradio',
     logo: logoN10asRadio,
     profileImage: profileN10asRadio,
-    liveInfoUrl: 'https://n10as.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://n10as.airtime.pro/api/live-info-v2/',
+    timezone: 'America/Montreal'
   }, {
     name: 'Boxout.fm',
     streamUrl: 'http://boxoutfm.out.airtime.pro:8000/boxoutfm_a',
@@ -232,7 +246,8 @@ export default [
     twitterHandle: 'boxoutfm',
     logo: logoBoxoutFM,
     profileImage: profileBoxoutFM,
-    liveInfoUrl: 'https://boxoutfm.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://boxoutfm.airtime.pro/api/live-info-v2/',
+    timezone: 'Asia/Kolkata'
   }, {
     name: 'Netil Radio',
     streamUrl: 'http://edge.mixlr.com/channel/otuyv',
@@ -242,7 +257,8 @@ export default [
     twitterHandle: 'netilradio',
     logo: logoNetilRadio,
     profileImage: profileNetilRadio,
-    liveInfoUrl: 'https://api.mixlr.com/users/5498175?source=embed'
+    liveInfoUrl: 'https://api.mixlr.com/users/5498175?source=embed',
+    timezone: 'Europe/London'
   }, {
     name: 'Radio LaBici',
     streamUrl: 'http://stream.radiolabici.com:8000/stream',
@@ -251,7 +267,8 @@ export default [
     country: 'Argentina',
     twitterHandle: 'radiolabici',
     logo: logoRadioLaBici,
-    profileImage: profileRadioLaBici
+    profileImage: profileRadioLaBici,
+    timezone: 'America/Argentina/Buenos_Aires'
   }, {
     name: 'Seoul Community Radio',
     streamUrl: 'http://seoulcommunityradio.out.airtime.pro:8000/seoulcommunityradio_a',
@@ -261,7 +278,8 @@ export default [
     twitterHandle: 'radio_scr',
     logo: logoSeoulCommunityRadio,
     profileImage: profileSeoulCommunityRadio,
-    liveInfoUrl: 'https://seoulcommunityradio.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://seoulcommunityradio.airtime.pro/api/live-info-v2/',
+    timezone: 'Asia/Seoul'
   }, {
     name: 'KMAH Radio',
     streamUrl: 'http://66.55.143.200/proxy/kmahradi?mp=/;stream/1',
@@ -271,6 +289,7 @@ export default [
     twitterHandle: 'kmahradio',
     logo: logoKmahRadio,
     profileImage: profileKmahRadio,
-    liveInfoUrl: 'https://freshtransmission.com/live-info/kmah-radio'
+    liveInfoUrl: 'https://freshtransmission.com/live-info/kmah-radio',
+    timezone: 'Europe/London'
   }
 ]

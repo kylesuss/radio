@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import StationProfileImage from 'components/station-profile-image'
 import PinIcon from 'react-icons/lib/md/place'
+import ClockIcon from 'react-icons/lib/md/access-time'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as positioning from 'styles/positioning'
@@ -42,7 +43,7 @@ const StyledStationDetails = styled.div`
 `
 
 const StyledStationDetailsTopRow = styled.div`
-  margin-bottom: .4rem;
+  margin-bottom: .25rem;
 `
 
 const StyledStationDetailsBottomRow = styled.div`
@@ -58,7 +59,7 @@ const StyledStationName = styled.div`
   text-transform: uppercase;
 `
 
-const StyledStationInfo = styled.div`
+const StyledStationInfoElement = styled.div`
   display: flex;
   align-items: center;
   line-height: 1rem;
@@ -120,16 +121,18 @@ const StationHeader = ({ station, liveStationInfo }) => (
         </StyledStationDetailsTopRow>
 
         <StyledStationDetailsBottomRow>
-          <StyledStationInfo>
-            <StyledPinIcon />
+          <div>
+            <StyledStationInfoElement>
+              <StyledPinIcon />
 
-            <span>
-              {buildLocation(
-                station.city,
-                station.country
-              )}
-            </span>
-          </StyledStationInfo>
+              <span>
+                {buildLocation(
+                  station.city,
+                  station.country
+                )}
+              </span>
+            </StyledStationInfoElement>
+          </div>
 
           <StyledLiveInfo hasLiveInfo={!!liveStationInfo}>
             {liveStationInfo && liveStationInfo.current.isInactive && (

@@ -11,8 +11,6 @@ import * as spacing from 'styles/spacing'
 import * as transitions from 'styles/transitions'
 import buildLocation from 'utils/build-location'
 
-const commonShadow = 'box-shadow: 1px 1px 15px rgba(0,0,0,0.2)'
-
 const StyledStationHeader = styled.header`
   position: sticky;
   top: -244px;
@@ -30,7 +28,6 @@ const StyledLogo = styled.img`
   margin-left: ${spacing.COMMON};
   margin-top: 15px;
   margin-bottom: 15px;
-  ${commonShadow};
 `
 
 const StyledStationDetails = styled.div`

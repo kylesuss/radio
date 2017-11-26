@@ -10,7 +10,6 @@ import App from 'containers/app'
 import Station from 'containers/station'
 import randomStation from 'utils/random-station'
 import { STATION_PATH, buildStationPath } from 'constants/routes'
-import sortBy from 'lodash/sortBy'
 import ga from 'ga-react-router'
 
 export const store = configureStore()

@@ -18,6 +18,7 @@ const Header = styled.header`
   height: ${positioning.HEIGHT_HEADER_PX};
   background: linear-gradient(to right, ${colors.GREEN}, ${colors.BLUE}, ${colors.GREEN}, ${colors.BLUE}, ${colors.GREEN}, ${colors.BLUE});
   z-index: ${positioning.Z_INDEX_APP_HEADER};
+  box-shadow: 0px 0px 15px -2px ${colors.BLACK};
 `
 
 const LeftColumn = styled.div`

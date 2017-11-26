@@ -17,6 +17,7 @@ const Inner = styled.div`
   justify-content: center;
   height: ${positioning.HEIGHT_PLAYER_PX};
   padding: .8rem ${spacing.COMMON};
+  box-shadow: 0px 0px 15px -4px ${colors.BLACK};
 `
 
 const StationContainer = styled.div`

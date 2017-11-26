@@ -20,6 +20,7 @@ const StyledStationStickyHeader = styled.div`
   background: ${colors.PURE_BLACK};
   height: ${positioning.HEIGHT_STICKY_STATION_HEADER_PX};
   display: flex;
+  box-shadow: 0px 0px 15px -4px ${colors.BLACK};
 `
 
 const StyledLogo = styled.img`

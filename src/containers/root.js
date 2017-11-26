@@ -8,7 +8,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import configureStore from 'store/configureStore'
 import App from 'containers/app'
 import Station from 'containers/station'
-import stationsFixtures from 'fixtures/stations'
+import randomStation from 'utils/random-station'
 import { STATION_PATH, buildStationPath } from 'constants/routes'
 import sortBy from 'lodash/sortBy'
 import ga from 'ga-react-router'
@@ -20,15 +20,13 @@ history.listen(location => {
   ga('send', 'pageview')
 })
 
-const firstStation = sortBy(stationsFixtures, 'name')[0]
-
 export default class Root extends Component {
   render () {
     return (
       <Provider store={store}>
         <Router history={history}>
           <Route path="/" component={App}>
-            <IndexRedirect to={buildStationPath(firstStation.slug)} />
+            <IndexRedirect to={buildStationPath(randomStation.slug)} />
             <Route path={STATION_PATH} component={Station} />
           </Route>
         </Router>

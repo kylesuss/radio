@@ -1,11 +1,11 @@
 import * as actions from 'actions/player'
 import * as constants from 'constants/player'
-import stationsFixtures from 'fixtures/stations'
+import randomStation from 'utils/random-station'
 
 const initialState = {
   isPlaying: false,
   hasError: false,
-  activeStation: stationsFixtures[0].slug,
+  activeStation: randomStation.slug,
   audioPlayerVolume: constants.AUDIO_PLAYER_MAX_VOLUME
 }
 

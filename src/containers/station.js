@@ -8,7 +8,8 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     station: findStationBySlug(state.stations.items, slug),
-    activeStation: state.player.activeStation
+    activeStation: state.player.activeStation,
+    playerHasError: state.player.hasError
   }
 }
 

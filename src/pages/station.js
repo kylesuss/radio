@@ -20,7 +20,8 @@ export default class Station extends Component {
   static propTypes = {
     station: PropTypes.object.isRequired,
     playStation: PropTypes.func.isRequired,
-    activeStation: PropTypes.string.isRequired
+    activeStation: PropTypes.string.isRequired,
+    playerHasError: PropTypes.bool.isRequired
   }
 
   constructor (props) {
@@ -71,6 +72,7 @@ export default class Station extends Component {
   })
 
   render () {
+    const { playerHasError } = this.props
     const { activeStation, liveStationInfo } = this.state
 
     return (
@@ -83,6 +85,7 @@ export default class Station extends Component {
         <StationHeader
           station={activeStation}
           liveStationInfo={liveStationInfo}
+          playerHasError={playerHasError}
         />
 
         <StyledPage.Content>

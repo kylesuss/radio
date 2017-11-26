@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import AudioPlayer from 'components/audio-player'
+import { setPlayerError } from 'actions/player'
 
 const mapStateToProps = (state) => {
   return {
@@ -8,7 +9,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setPlayerError: () => dispatch(setPlayerError())
+  }
+}
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(AudioPlayer)

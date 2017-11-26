@@ -9,7 +9,8 @@ class AudioPlayer extends Component {
     handleSoundError: PropTypes.func.isRequired,
     isPaused: PropTypes.bool.isRequired,
     playerIsPlaying: PropTypes.bool.isRequired,
-    streamUrl: PropTypes.string.isRequired
+    streamUrl: PropTypes.string.isRequired,
+    setPlayerError: PropTypes.func.isRequired
   }
 
   constructor (props) {
@@ -47,7 +48,12 @@ class AudioPlayer extends Component {
 
   handleSoundPlaying = () => this.props.handleSoundPlaying()
 
-  handleSoundError = () => this.props.handleSoundError()
+  handleSoundError = () => {
+    const { handleSoundError, setPlayerError } = this.props
+
+    handleSoundError()
+    setPlayerError()
+  }
 
   render () {
     const { audioPlayerVolume } = this.props

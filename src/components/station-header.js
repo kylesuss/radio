@@ -123,73 +123,79 @@ const StyledLiveTrack = styled.div`
   margin-left: ${spacing.COMMON};
 `
 
-const StationHeader = ({ station, liveStationInfo }) => (
-  <StyledStationHeader>
-    <StationProfileImage station={station} />
+const StationHeader = ({ station, liveStationInfo, playerHasError }) => {
+  const hasInactiveStatus = liveStationInfo && liveStationInfo.current.isInactive
+  const hasInactiveMessage = liveStationInfo && !!liveStationInfo.current.inactiveStatus
+  const shouldShowInactiveMessage = playerHasError || hasInactiveStatus
 
-    <StyledStationStickyHeader>
-      <StyledLogo src={station.logo} />
+  return (
+    <StyledStationHeader>
+      <StationProfileImage station={station} />
 
-      <StyledStationDetails>
-        <StyledStationDetailsTopRow>
-          <StyledStationName>
-            {station.name}
-          </StyledStationName>
-        </StyledStationDetailsTopRow>
+      <StyledStationStickyHeader>
+        <StyledLogo src={station.logo} />
 
-        <StyledStationDetailsBottomRow>
-          <StyledStationMeta>
-            <StyledStationInfoElement>
-              <StyledPinIcon />
+        <StyledStationDetails>
+          <StyledStationDetailsTopRow>
+            <StyledStationName>
+              {station.name}
+            </StyledStationName>
+          </StyledStationDetailsTopRow>
 
-              <span>
-                {buildLocation(
-                  station.city,
-                  station.country
-                )}
-              </span>
-            </StyledStationInfoElement>
-
-            {station.timezone && (
+          <StyledStationDetailsBottomRow>
+            <StyledStationMeta>
               <StyledStationInfoElement>
-                <StyledClockIcon />
+                <StyledPinIcon />
 
-                <TimeInTimezone timezone={station.timezone} />
+                <span>
+                  {buildLocation(
+                    station.city,
+                    station.country
+                  )}
+                </span>
               </StyledStationInfoElement>
-            )}
-          </StyledStationMeta>
 
-          <StyledLiveInfo hasLiveInfo={!!liveStationInfo}>
-            {liveStationInfo && liveStationInfo.current.isInactive && (
-              <div>
-                <StyledInactiveLabel hasMessage={!!liveStationInfo.current.inactiveStatus}>
-                  Station currently inactive
-                </StyledInactiveLabel>
+              {station.timezone && (
+                <StyledStationInfoElement>
+                  <StyledClockIcon />
 
-                {!!liveStationInfo.current.inactiveStatus && (
-                  <span>{liveStationInfo.current.inactiveStatus}</span>
-                )}
-              </div>
-            )}
+                  <TimeInTimezone timezone={station.timezone} />
+                </StyledStationInfoElement>
+              )}
+            </StyledStationMeta>
 
-            {liveStationInfo && liveStationInfo.current.show && (
-              <div>
-                <StyledLiveShowLabel hasMessage>Show</StyledLiveShowLabel>
-                <span>{liveStationInfo.current.show}</span>
-              </div>
-            )}
+            <StyledLiveInfo hasLiveInfo={shouldShowInactiveMessage || !!liveStationInfo}>
+              {shouldShowInactiveMessage && (
+                <div>
+                  <StyledInactiveLabel hasMessage={hasInactiveMessage}>
+                    Station currently inactive
+                  </StyledInactiveLabel>
 
-            {liveStationInfo && liveStationInfo.current.track && (
-              <StyledLiveTrack>
-                <StyledLiveTrackLabel hasMessage>Track</StyledLiveTrackLabel>
-                <span>{liveStationInfo.current.track}</span>
-              </StyledLiveTrack>
-            )}
-          </StyledLiveInfo>
-        </StyledStationDetailsBottomRow>
-      </StyledStationDetails>
-    </StyledStationStickyHeader>
-  </StyledStationHeader>
-)
+                  {hasInactiveMessage && (
+                    <span>{liveStationInfo.current.inactiveStatus}</span>
+                  )}
+                </div>
+              )}
+
+              {liveStationInfo && liveStationInfo.current.show && (
+                <div>
+                  <StyledLiveShowLabel hasMessage>Show</StyledLiveShowLabel>
+                  <span>{liveStationInfo.current.show}</span>
+                </div>
+              )}
+
+              {liveStationInfo && liveStationInfo.current.track && (
+                <StyledLiveTrack>
+                  <StyledLiveTrackLabel hasMessage>Track</StyledLiveTrackLabel>
+                  <span>{liveStationInfo.current.track}</span>
+                </StyledLiveTrack>
+              )}
+            </StyledLiveInfo>
+          </StyledStationDetailsBottomRow>
+        </StyledStationDetails>
+      </StyledStationStickyHeader>
+    </StyledStationHeader>
+  )
+}
 
 export default StationHeader

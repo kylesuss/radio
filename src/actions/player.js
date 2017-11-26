@@ -22,3 +22,9 @@ export const UNMUTE_AUDIO_PLAYER = 'UNMUTE_AUDIO_PLAYER'
 export const unmuteAudioPlayer = () => ({
   type: UNMUTE_AUDIO_PLAYER
 })
+
+export const SET_PLAYER_ERROR = 'SET_PLAYER_ERROR'
+
+export const setPlayerError = () => ({
+  type: SET_PLAYER_ERROR
+})

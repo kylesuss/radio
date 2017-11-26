@@ -42,6 +42,8 @@ import logoSeoulCommunityRadio from 'images/logo-seoul-community-radio.jpg'
 import profileSeoulCommunityRadio from 'images/profile-seoul-community-radio.jpeg'
 import logoKmahRadio from 'images/logo-kmah-radio.jpeg'
 import profileKmahRadio from 'images/profile-kmah-radio.jpeg'
+import logoNoFunRadio from 'images/logo-no-fun-radio.jpg'
+import profileNoFunRadio from 'images/profile-no-fun-radio.jpeg'
 
 export default [
   {
@@ -291,5 +293,16 @@ export default [
     profileImage: profileKmahRadio,
     liveInfoUrl: 'https://freshtransmission.com/live-info/kmah-radio',
     timezone: 'Europe/London'
+  }, {
+    name: 'No Fun Radio',
+    streamUrl: 'http://nofun.out.airtime.pro:8000/nofun_a',
+    slug: 'no-fun-radio',
+    city: 'Vancouver',
+    country: 'Canada',
+    twitterHandle: 'NoFunRadio',
+    logo: logoNoFunRadio,
+    profileImage: profileNoFunRadio,
+    liveInfoUrl: 'https://nofun.airtime.pro/api/live-info-v2',
+    timezone: 'America/Vancouver'
   }
 ]

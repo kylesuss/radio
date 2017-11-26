@@ -26,6 +26,7 @@ const liveInfoModels = {
   'lyl-radio': modelLiveInfoLylRadio,
   'n10as-radio': modelAirtimeV2LiveInfo,
   'netil-radio': modelNetilRadioLiveInfo,
+  'no-fun-radio': modelAirtimeV2LiveInfo,
   'noods-radio': modelNoodsRadioLiveInfo,
   'nts-radio': modelNTSRadioLiveInfo,
   'radar-radio': modelRadarRadioLiveInfo,

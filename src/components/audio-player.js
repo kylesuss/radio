@@ -6,6 +6,7 @@ class AudioPlayer extends Component {
   static propTypes = {
     audioPlayerVolume: PropTypes.number.isRequired,
     handleSoundPlaying: PropTypes.func.isRequired,
+    handleSoundError: PropTypes.func.isRequired,
     isPaused: PropTypes.bool.isRequired,
     playerIsPlaying: PropTypes.bool.isRequired,
     streamUrl: PropTypes.string.isRequired
@@ -46,6 +47,8 @@ class AudioPlayer extends Component {
 
   handleSoundPlaying = () => this.props.handleSoundPlaying()
 
+  handleSoundError = () => this.props.handleSoundError()
+
   render () {
     const { audioPlayerVolume } = this.props
     const { streamUrl } = this.state
@@ -57,6 +60,7 @@ class AudioPlayer extends Component {
         url={streamUrl}
         playStatus={this.soundPlayStatus}
         onPlaying={this.handleSoundPlaying}
+        onError={this.handleSoundError}
         volume={audioPlayerVolume}
       />
     )

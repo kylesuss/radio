@@ -71,15 +71,17 @@ class Player extends Component {
 
   handleTogglePlayState = () => {
     const { station } = this.props
+    const stateUpdates = { isLoadingAudioSrc: false }
 
     if (this.isPaused) {
-       // Its going to become active
-      this.setState({ streamUrl: station.streamUrl })
+      // Its going to become active
+      stateUpdates.streamUrl = station.streamUrl
     } else {
       // Its going to become paused
-      this.setState({ streamUrl: null })
+      stateUpdates.streamUrl = null
     }
 
+    this.setState(stateUpdates)
     this.props.togglePlayState()
   }
 
@@ -101,6 +103,7 @@ class Player extends Component {
               {streamUrl && (
                 <AudioPlayer
                   handleSoundPlaying={this.handleSoundPlaying}
+                  handleSoundError={this.handleTogglePlayState}
                   isPaused={this.isPaused}
                   playerIsPlaying={isPlaying}
                   streamUrl={streamUrl}

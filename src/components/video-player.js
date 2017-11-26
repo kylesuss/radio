@@ -43,12 +43,13 @@ const StyledPlayerOverlay = styled.div`
 const StyledAudioIndicator = styled.div`
   position: absolute;
   background: ${colors.PURE_BLACK};
-  color: #888;
+  color: ${props => props.isVideoAudioActive ? colors.GREEN : '#888'};
   border-radius: 2px;
   padding: 10px;
   right: 15px;
   top: 15px;
   font-size: 18px;
+  transition: color ${transitions.LENGTH_COMMON_MS} ease-out;
 `
 
 const StyledAudioMessage = styled.span`
@@ -204,6 +205,11 @@ class VideoPlayer extends Component {
     return !playerIsPlaying || !hasActiveAudio
   }
 
+  get isVideoAudioActive () {
+    const { hasActiveAudio, playerIsPlaying } = this.props
+    return hasActiveAudio && playerIsPlaying
+  }
+
   get audioMessage () {
     const { hasActiveAudio, playerIsPlaying } = this.props
 
@@ -211,7 +217,7 @@ class VideoPlayer extends Component {
       return 'Video audio inactive'
     }
 
-    if (hasActiveAudio && playerIsPlaying) {
+    if (this.isVideoAudioActive) {
       return 'Video audio active'
     }
 
@@ -292,7 +298,7 @@ class VideoPlayer extends Component {
 
         <StyledPlayerOverlay>
           <StyledPlayerOverlayDetails hasStarted={hasStarted}>
-            <StyledAudioIndicator>
+            <StyledAudioIndicator isVideoAudioActive={this.isVideoAudioActive}>
               {this.isAudioInactive ? <MutedIcon /> : <VolumeIcon />}
 
               <StyledAudioMessage>

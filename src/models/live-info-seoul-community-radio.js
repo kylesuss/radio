@@ -6,7 +6,6 @@ export default ({ body }) => {
   const isInactive = !body.tracks.current
 
   return {
-    timezone: body.station.timezone,
     current: {
       ...(isInactive ? { isInactive: true } : { show: cleanLiveInfo(body.tracks.current.name) })
     }

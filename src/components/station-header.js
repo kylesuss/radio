@@ -128,6 +128,8 @@ const StationHeader = ({ station, liveStationInfo, playerHasError }) => {
   const hasInactiveStatus = liveStationInfo && liveStationInfo.current.isInactive
   const hasInactiveMessage = liveStationInfo && !!liveStationInfo.current.inactiveStatus
   const shouldShowInactiveMessage = playerHasError || hasInactiveStatus
+  const shouldShowCurrentShowMessage = !shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.show
+  const shouldShowCurrentTrackMessage = !shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.track
 
   return (
     <StyledStationHeader>
@@ -178,14 +180,14 @@ const StationHeader = ({ station, liveStationInfo, playerHasError }) => {
                 </div>
               )}
 
-              {liveStationInfo && liveStationInfo.current.show && (
+              {shouldShowCurrentShowMessage && (
                 <div>
                   <StyledLiveShowLabel hasMessage>Show</StyledLiveShowLabel>
                   <span>{liveStationInfo.current.show}</span>
                 </div>
               )}
 
-              {liveStationInfo && liveStationInfo.current.track && (
+              {shouldShowCurrentTrackMessage && (
                 <StyledLiveTrack>
                   <StyledLiveTrackLabel hasMessage>Track</StyledLiveTrackLabel>
                   <span>{liveStationInfo.current.track}</span>

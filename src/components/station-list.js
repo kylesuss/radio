@@ -52,7 +52,9 @@ const StyledListItemLink = styled(({
   }
 `
 
-const StyledArrowIcon = styled(ArrowIcon)`
+const StyledArrowIcon = styled(({
+  isActive, ...rest
+}) => <ArrowIcon {...rest} />)`
   position: absolute;
   right: 8px;
   top: 50%;

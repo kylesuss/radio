@@ -18,6 +18,8 @@ const StyledSeekButton = styled(StyledButton)`
   color: ${colors.WHITE};
 `
 
+const uniqueStreamUrl = (url) => `${url}?t=${Date.now()}`
+
 class Player extends Component {
   static propTypes = {
     station: PropTypes.object,
@@ -34,7 +36,7 @@ class Player extends Component {
 
     this.state = {
       isLoadingAudioSrc: true,
-      streamUrl: props.station.streamUrl
+      streamUrl: uniqueStreamUrl(props.station.streamUrl)
     }
   }
 
@@ -44,7 +46,7 @@ class Player extends Component {
     const stateUpdates = {}
 
     if (isChangingStations) {
-      stateUpdates.streamUrl = nextProps.station.streamUrl
+      stateUpdates.streamUrl = uniqueStreamUrl(nextProps.station.streamUrl)
     }
 
     if (!station || isChangingStations) {
@@ -89,7 +91,7 @@ class Player extends Component {
 
     if (this.isPaused) {
       // Its going to become active
-      stateUpdates.streamUrl = station.streamUrl
+      stateUpdates.streamUrl = uniqueStreamUrl(station.streamUrl)
       stateUpdates.isLoadingAudioSrc = true
     } else {
       // Its going to become paused

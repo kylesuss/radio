@@ -1,3 +1,4 @@
+export const PURE_WHITE = '#fff'
 export const WHITE = '#fefefe'
 export const PURE_BLACK = '#000'
 export const BLACK = '#333'

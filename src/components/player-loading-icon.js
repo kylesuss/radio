@@ -44,7 +44,10 @@ const StyledDot = styled.span`
 const PlayerLoadingIcon = () => (
   <StyledPlayerLoadingIcon>
     {[...Array(3)].map((item, index) => (
-      <StyledDot index={index} />
+      <StyledDot
+        index={index}
+        key={index}
+      />
     ))}
   </StyledPlayerLoadingIcon>
 )

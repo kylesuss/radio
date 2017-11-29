@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import StationListItem from 'components/station-list-item'
-import * as spacing from 'styles/spacing'
+import ArrowIcon from 'react-icons/lib/md/play-arrow'
 import * as colors from 'styles/colors'
+import * as easing from 'styles/easing'
+import * as spacing from 'styles/spacing'
 import * as positioning from 'styles/positioning'
+import * as transitions from 'styles/transitions'
 import Link from 'react-router/lib/Link'
 import { buildStationPath } from 'constants/routes'
 
@@ -13,28 +15,9 @@ const StyledStationList = styled.div`
   top: 0;
   bottom: ${positioning.HEIGHT_PLAYER_PX};
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
+  background: ${colors.PURE_WHITE};
   overflow-y: auto;
   -webkit-overflow-scrolling: touch
-`
-
-const StyledStationListBackground = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: ${positioning.HEIGHT_PLAYER_PX};
-  width: ${positioning.WIDTH_LEFT_COLUMN_PX};
-  z-index: -3;
-  background: ${colors.WHITE};
-`
-
-const StyledListItemLink = styled(Link)`
-  display: flex;
-  font-size: 14px;
-  padding: ${spacing.HALF};
-  text-decoration: none;
-
-  &:active {
-    transform: translateX(1px) translateY(1px);
-  }
 `
 
 const StyledListItemText = styled.div`
@@ -42,6 +25,43 @@ const StyledListItemText = styled.div`
   flex-direction: column;
   justify-content: center;
   flex-grow: 1;
+`
+
+const StyledLogoWrapper = styled.div`
+  display: flex;
+`
+
+const StyledListItemLink = styled(({
+  isActive, ...rest
+}) => <Link {...rest} />)`
+  position: relative;
+  display: flex;
+  font-size: 14px;
+  padding: ${spacing.HALF};
+  text-decoration: none;
+  transition: background ${transitions.LENGTH_COMMON_MS} ease-out;
+  background: ${props => props.isActive ? colors.LIGHT_GREY : 'transparent'};
+
+  &:hover {
+    background: ${colors.LIGHT_GREY};
+  }
+
+  &:active > ${StyledLogoWrapper},
+  &:active > ${StyledListItemText} {
+    transform: translateX(1px) translateY(1px);
+  }
+`
+
+const StyledArrowIcon = styled(ArrowIcon)`
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateX(${props => props.isActive ? '0' : '24px'}) translateY(-50%) scale(1);
+  transition: transform ${transitions.LENGTH_COMMON_MS} ${easing.EASE_OUT_QUINT};
+  color: ${colors.BLACK};
+  opacity: .25;
+  width: 14px;
+  height: 14px;
 `
 
 const StyledNameText = styled.div`
@@ -60,7 +80,6 @@ export default class StationList extends Component {
   static propTypes = {
     activeStation: PropTypes.string.isRequired,
     stations: PropTypes.array.isRequired,
-    handleOpenPreview: PropTypes.func.isRequired,
     handleClosePreview: PropTypes.func.isRequired,
     activePreviewStation: PropTypes.object
   }
@@ -71,56 +90,43 @@ export default class StationList extends Component {
 
   isActiveStation = (slug) => slug === this.props.activeStation
 
-  isPreviewingStation = (name) => {
-    const { activePreviewStation } = this.props
-    return activePreviewStation && name === activePreviewStation.name
-  }
-
   handlePlayStation = (slug) => this.props.playStation(slug)
 
-  handleClosePreview = () => this.props.handleClosePreview()
-
   render () {
-    const { stations, handleOpenPreview } = this.props
+    const { stations } = this.props
 
     return (
-      <div>
-        <StyledStationList>
-          <div>
-            {
-              stations.map((station) => {
-                return (
-                  <StationListItem
-                    key={station.name}
-                    isActive={this.isActiveStation(station.slug)}
-                    isPreviewing={this.isPreviewingStation(station.name)}
-                    station={station}
-                    handleOpenPreview={handleOpenPreview}
-                  >
-                    <StyledListItemLink
-                      to={buildStationPath(station.slug)}
-                      onClick={this.handleClosePreview}
-                    >
-                      <div>
-                        <StyledLogo src={station.logo} />
-                      </div>
-                      <StyledListItemText>
-                        <div>
-                          <StyledNameText>
-                            {station.name}
-                          </StyledNameText>
-                        </div>
-                      </StyledListItemText>
-                    </StyledListItemLink>
-                  </StationListItem>
-                )
-              })
-            }
-          </div>
-        </StyledStationList>
+      <StyledStationList>
+        <div>
+          {
+            stations.map((station) => {
+              return (
+                <StyledListItemLink
+                  key={station.name}
+                  isActive={this.isActiveStation(station.slug)}
+                  to={buildStationPath(station.slug)}
+                  onClick={this.handleClosePreview}
+                >
+                  <StyledLogoWrapper>
+                    <StyledLogo src={station.logo} />
+                  </StyledLogoWrapper>
+                  <StyledListItemText>
+                    <div>
+                      <StyledNameText>
+                        {station.name}
+                      </StyledNameText>
+                    </div>
+                  </StyledListItemText>
 
-        <StyledStationListBackground />
-      </div>
+                  <StyledArrowIcon
+                    isActive={this.isActiveStation(station.slug)}
+                  />
+                </StyledListItemLink>
+              )
+            })
+          }
+        </div>
+      </StyledStationList>
     )
   }
 }

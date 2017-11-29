@@ -41,16 +41,20 @@ class Player extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const { station } = this.props
+    const { isPlaying, station } = this.props
     const isChangingStations = nextProps.station.slug !== station.slug
+    const isStartingToPlay = nextProps.isPlaying && !isPlaying
+    const isStartingToPause = !nextProps.isPlaying && isPlaying
     const stateUpdates = {}
 
-    if (isChangingStations) {
+    if (isChangingStations || isStartingToPlay) {
       stateUpdates.streamUrl = uniqueStreamUrl(nextProps.station.streamUrl)
+      stateUpdates.isLoadingAudioSrc = true
     }
 
-    if (!station || isChangingStations) {
-      stateUpdates.isLoadingAudioSrc = true
+    if (isStartingToPause) {
+      stateUpdates.streamUrl = null
+      stateUpdates.isLoadingAudioSrc = false
     }
 
     Object.keys(stateUpdates).length && this.setState(stateUpdates)
@@ -85,23 +89,7 @@ class Player extends Component {
     router.push(`/${slug}`)
   }
 
-  handleTogglePlayState = () => {
-    const { station } = this.props
-    const stateUpdates = {}
-
-    if (this.isPaused) {
-      // Its going to become active
-      stateUpdates.streamUrl = uniqueStreamUrl(station.streamUrl)
-      stateUpdates.isLoadingAudioSrc = true
-    } else {
-      // Its going to become paused
-      stateUpdates.streamUrl = null
-      stateUpdates.isLoadingAudioSrc = false
-    }
-
-    this.setState(stateUpdates)
-    this.props.togglePlayState()
-  }
+  handleTogglePlayState = () => this.props.togglePlayState()
 
   handleNextClick = () => this.playStation(this.props.nextStation.slug)
 

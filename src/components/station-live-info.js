@@ -33,14 +33,15 @@ class StationLiveInfo extends Component {
   }
 
   fetchStationData = () => {
+    const { station } = this.props
     if (!this.liveInfoUrl) { return }
-    this.getLiveInfo()
+    this.getLiveInfo(station.slug)
     this.refetchLiveInfo()
   }
 
-  getLiveInfo = () => {
+  getLiveInfo = (stationSlug) => {
     get({ url: this.liveInfoUrl })
-      .then(this.handleInfoResponse)
+      .then((response) => this.handleInfoResponse(stationSlug, response))
   }
 
   refetchLiveInfo = () => {
@@ -51,8 +52,11 @@ class StationLiveInfo extends Component {
     }, REFETCH_INTERVAL)
   }
 
-  handleInfoResponse = (response) => {
+  handleInfoResponse = (stationSlug, response) => {
     const { handleInfoResponse, station } = this.props
+
+    if (stationSlug !== station.slug) { return }
+
     const normalizedResponse = liveInfoModels[station.slug]({
       text: response.text,
       body: response.body

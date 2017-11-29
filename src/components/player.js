@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, createElement } from 'react'
 import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -10,6 +10,7 @@ import PauseIcon from 'react-icons/lib/md/pause'
 import ForwardIcon from 'react-icons/lib/fa/forward'
 import BackwardIcon from 'react-icons/lib/fa/backward'
 import { buildStationPath } from 'constants/routes'
+import PlayerLoadingIcon from 'components/player-loading-icon'
 import AudioPlayer from 'containers/audio-player'
 import isNil from 'lodash/isNil'
 
@@ -60,6 +61,19 @@ class Player extends Component {
 
   get stationPath () {
     return buildStationPath(this.props.station.slug)
+  }
+
+  get playStateIcon () {
+    const { isPlaying } = this.props
+    const { isLoadingAudioSrc } = this.state
+
+    if (isLoadingAudioSrc) {
+      return createElement(PlayerLoadingIcon)
+    }
+
+    return isPlaying
+      ? createElement(PauseIcon)
+      : createElement(PlayIcon)
   }
 
   playStation = (slug) => {
@@ -127,11 +141,7 @@ class Player extends Component {
                     <StyledPlayer.PlayStateInner
                       isLoading={isLoadingAudioSrc && !videoHasActiveAudio}
                     >
-                      {
-                        isPlaying
-                          ? <PauseIcon />
-                          : <PlayIcon />
-                      }
+                      {this.playStateIcon}
                     </StyledPlayer.PlayStateInner>
                   </StyledPlayer.PlayStateButton>
                 </StyledPlayer.PlayStateControls>

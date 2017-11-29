@@ -76,7 +76,7 @@ const PlayStateInner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: ${props => props.isLoading ? 'default' : 'pointer'};
   border-radius: 50%;
   margin: 0 auto;
   background: ${colors.PURPLE};

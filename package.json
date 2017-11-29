@@ -28,7 +28,7 @@
     "react-redux": "5.0.6",
     "react-router": "3.0.5",
     "react-router-redux": "4.0.7",
-    "react-sound": "kylesuss/react-sound.git#with-build",
+    "react-sound": "0.10.0",
     "redux": "3.7.2",
     "redux-localstorage": "1.0.0-rc4",
     "redux-localstorage-filter": "0.1.1",

@@ -41,6 +41,7 @@ const StyledListItemLink = styled(({
   text-decoration: none;
   transition: background ${transitions.LENGTH_COMMON_MS} ease-out;
   background: ${props => props.isActive ? colors.LIGHT_GREY : 'transparent'};
+  overflow: hidden;
 
   &:hover {
     background: ${colors.LIGHT_GREY};

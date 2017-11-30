@@ -8,24 +8,36 @@ import MutedIcon from 'react-icons/lib/md/volume-off'
 import Button from 'styled/button'
 import * as colors from 'styles/colors'
 import * as easing from 'styles/easing'
+import * as spacing from 'styles/spacing'
 import * as transitions from 'styles/transitions'
 
-const StyledVideoContainer = styled.div`
-  width: 100%;
-  height: 0;
-  position: relative;
-  padding-bottom: 56.25%;
+const StyledVideoPlayerContainer = styled.div`
   position: sticky;
   top: 114px;
+  box-shadow: 0px 10px 15px -17px #000;
+  padding-bottom: ${spacing.COMMON};
+  padding-left: ${spacing.HALF};
+  padding-right: ${spacing.HALF};
+  margin-left: -${spacing.HALF};
+  margin-right: -${spacing.HALF};
   visibility: ${props => props.hasStarted ? 'visible' : 'hidden'};
   opacity: ${props => props.hasStarted ? '1' : '0'};
   transition: opacity ${transitions.LENGTH_DOUBLE_MS} ease-out;
+`
+
+const StyledVideoPlayer = styled.div`
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
 
   > div,
   > iframe {
     position: absolute;
     top: 0;
-    left: 0;
+    left: ${spacing.HALF};
+    height: calc(100% - ${spacing.COMMON}) !important;
+    width: calc(100% - ${spacing.COMMON}) !important;
+    left: .75rem;
     border: 0;
   }
 `
@@ -269,65 +281,67 @@ class VideoPlayer extends Component {
     if (hasError) { return null }
 
     return (
-      <StyledVideoContainer hasStarted={hasStarted}>
-        {video.type === STREAM && (
-          <ReactPlayer
-            playing
-            url={video.url}
-            config={this.config}
-            width="100%"
-            height="100%"
-            volume={this.reactPlayerVolume}
-            onStart={this.handleStart}
-            onError={this.handleError}
-          />
-        )}
+      <StyledVideoPlayerContainer hasStarted={hasStarted}>
+        <StyledVideoPlayer>
+          {video.type === STREAM && (
+            <ReactPlayer
+              playing
+              url={video.url}
+              config={this.config}
+              width="100%"
+              height="100%"
+              volume={this.reactPlayerVolume}
+              onStart={this.handleStart}
+              onError={this.handleError}
+            />
+          )}
 
-        {video.type === IFRAME && (
-          <iframe
-            src={this.iframeSrc}
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            scrolling="no"
-            allowFullScreen="no"
-            onLoad={this.handleStart}
-            onError={this.handleError}
-          />
-        )}
+          {video.type === IFRAME && (
+            <iframe
+              src={this.iframeSrc}
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              scrolling="no"
+              allowFullScreen="no"
+              onLoad={this.handleStart}
+              onError={this.handleError}
+            />
+          )}
 
-        <StyledPlayerOverlay>
-          <StyledPlayerOverlayDetails hasStarted={hasStarted}>
-            <StyledAudioIndicator isVideoAudioActive={this.isVideoAudioActive}>
-              {this.isAudioInactive ? <MutedIcon /> : <VolumeIcon />}
+          <StyledPlayerOverlay>
+            <StyledPlayerOverlayDetails hasStarted={hasStarted}>
+              <StyledAudioIndicator isVideoAudioActive={this.isVideoAudioActive}>
+                {this.isAudioInactive ? <MutedIcon /> : <VolumeIcon />}
 
-              <StyledAudioMessage>
-                {this.audioMessage}
-              </StyledAudioMessage>
-            </StyledAudioIndicator>
+                <StyledAudioMessage>
+                  {this.audioMessage}
+                </StyledAudioMessage>
+              </StyledAudioIndicator>
 
-            <StyledControls>
-              <StyledControlsSection>
-                <StyledInfoIcon />
+              <StyledControls>
+                <StyledControlsSection>
+                  <StyledInfoIcon />
 
-                <span>Video and audio feeds may not sync</span>
-              </StyledControlsSection>
+                  <span>Video and audio feeds may not sync</span>
+                </StyledControlsSection>
 
-              <StyledControlsSection>
-                <StyledToggleMessage>Switch source:</StyledToggleMessage>
+                <StyledControlsSection>
+                  <StyledToggleMessage>Switch source:</StyledToggleMessage>
 
-                <Button onClick={this.handleToggleButtonClick}>
-                  <StyledToggle>
-                    <StyledToggleIndicator
-                      hasActiveAudio={hasActiveAudio}
-                    />
-                  </StyledToggle>
-                </Button>
-              </StyledControlsSection>
-            </StyledControls>
-          </StyledPlayerOverlayDetails>
-        </StyledPlayerOverlay>
-      </StyledVideoContainer>
+                  <Button onClick={this.handleToggleButtonClick}>
+                    <StyledToggle>
+                      <StyledToggleIndicator
+                        hasActiveAudio={hasActiveAudio}
+                      />
+                    </StyledToggle>
+                  </Button>
+                </StyledControlsSection>
+              </StyledControls>
+            </StyledPlayerOverlayDetails>
+          </StyledPlayerOverlay>
+        </StyledVideoPlayer>
+      </StyledVideoPlayerContainer>
     )
   }
 }

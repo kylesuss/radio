@@ -3,7 +3,7 @@ import cleanLiveInfo from 'utils/clean-live-info'
 export default ({ body }) => {
   if (!body.track) { return null }
 
-  const isLive = body.live.audio === '1'
+  const isLive = body.live.video === '1'
 
   return {
     timezone: null,

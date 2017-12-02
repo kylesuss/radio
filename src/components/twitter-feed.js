@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { loadScript } from 'utils/async'
+import SectionHeader from 'styled/section-header'
 import * as transitions from 'styles/transitions'
 
 const TWITTER_SCRIPT = '//platform.twitter.com/widgets.js'
 const TWEET_LIMIT = 5
 
 const StyledContainer = styled.div`
-  iframe {
-    opacity: ${props => props.isShowingFeed ? '1' : '0'};
-    transition: opacity ${props => props.isShowingFeed ? transitions.LENGTH_DOUBLE_MS : transitions.LENGTH_COMMON_MS} ease-out;
-  }
+  opacity: ${props => props.isShowingFeed ? '1' : '0'};
+  transition: opacity ${props => props.isShowingFeed ? transitions.LENGTH_DOUBLE_MS : transitions.LENGTH_COMMON_MS} ease-out;
 `
 
 export default class TwitterFeed extends Component {
@@ -90,10 +89,13 @@ export default class TwitterFeed extends Component {
     const { isShowingFeed } = this.state
 
     return (
-      <StyledContainer
-        innerRef={(el) => this.timelineEl = el}
-        isShowingFeed={isShowingFeed}
-      />
+      <StyledContainer isShowingFeed={isShowingFeed}>
+        <SectionHeader>
+          Social Feed
+        </SectionHeader>
+
+        <div ref={(el) => this.timelineEl = el}></div>
+      </StyledContainer>
     )
   }
 }

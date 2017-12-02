@@ -248,7 +248,17 @@ export default [
     logo: logoN10asRadio,
     profileImage: profileN10asRadio,
     liveInfoUrl: 'https://n10as.airtime.pro/api/live-info-v2/',
-    timezone: 'America/Montreal'
+    timezone: 'America/Montreal',
+    links: [{
+      type: 'Web',
+      url: 'http://www.n10.as'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/n10-as'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/n10as'
+    }]
   }, {
     name: 'Boxout.fm',
     streamUrl: 'http://boxoutfm.out.airtime.pro:8000/boxoutfm_a',

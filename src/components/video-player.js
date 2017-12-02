@@ -14,27 +14,16 @@ import * as transitions from 'styles/transitions'
 
 const StyledVideoPlayerContainer = styled.div`
   position: sticky;
-  top: 114px;
-  box-shadow: 0px 10px 15px -17px #000;
-  padding-bottom: ${spacing.COMMON};
-  padding-left: ${spacing.HALF};
-  padding-right: ${spacing.HALF};
-  margin-left: -${spacing.HALF};
-  margin-right: -${spacing.HALF};
+  top: 90px;
   visibility: ${props => props.hasStarted ? 'visible' : 'hidden'};
   opacity: ${props => props.hasStarted ? '1' : '0'};
   transition: opacity ${transitions.LENGTH_DOUBLE_MS} ease-out;
-`
-
-const StyledSectionHeader = styled(SectionHeader)`
-  margin-left: ${spacing.HALF};
-  margin-right: ${spacing.HALF};
+  padding-top: ${spacing.COMMON};
+  background: ${colors.WHITE};
 `
 
 const StyledVideoContainer = styled.div`
   position: relative;
-  padding-left: ${spacing.HALF};
-  padding-right: ${spacing.HALF};
 `
 
 const StyledVideoPlayer = styled.div`
@@ -47,8 +36,8 @@ const StyledVideoPlayer = styled.div`
     position: absolute;
     top: 0;
     left: ${spacing.HALF};
-    width: calc(100% - ${spacing.COMMON}) !important;
-    left: .75rem;
+    width: 100% !important;
+    left: 0;
     border: 0;
   }
 `
@@ -153,6 +142,13 @@ const StyledToggleIndicator = styled.div`
 
 const StyledToggleMessage = styled.div`
   margin-right: 10px;
+`
+
+const StyledShadow = styled.div`
+  box-shadow: 0px 6px 14px -11px ${colors.PURE_BLACK};
+  height: ${spacing.COMMON};
+  margin-left: -${spacing.HALF};
+  margin-right: -${spacing.HALF};
 `
 
 const STREAM = 'stream'
@@ -293,9 +289,9 @@ class VideoPlayer extends Component {
 
     return (
       <StyledVideoPlayerContainer hasStarted={hasStarted}>
-        <StyledSectionHeader>
+        <SectionHeader>
           Live video
-        </StyledSectionHeader>
+        </SectionHeader>
 
         <StyledVideoContainer>
           <StyledVideoPlayer>
@@ -358,6 +354,8 @@ class VideoPlayer extends Component {
             </StyledPlayerOverlay>
           </StyledVideoPlayer>
         </StyledVideoContainer>
+
+        <StyledShadow />
       </StyledVideoPlayerContainer>
     )
   }

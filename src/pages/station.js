@@ -2,14 +2,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
+import Links from 'components/links'
 import StationLiveInfo from 'components/station-live-info'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import VideoPlayer from 'containers/video-player'
 import StyledPage from 'styled/page'
+import * as spacing from 'styles/spacing'
 
 const StyledStation = styled.div`
   width: 100%;
+`
+
+const StyledRightColumn = styled(StyledPage.Column)`
+  margin-top: -${spacing.COMMON};
 `
 
 const scrollOptions = {
@@ -93,14 +99,18 @@ export default class Station extends Component {
             <TwitterFeed twitterHandle={activeStation.twitterHandle} />
           </StyledPage.Column>
 
-          <StyledPage.Column>
+          <StyledRightColumn>
             {activeStation.video && (
               <VideoPlayer
                 name={activeStation.name}
                 video={activeStation.video}
               />
             )}
-          </StyledPage.Column>
+
+            {activeStation.links && (
+              <Links items={activeStation.links} />
+            )}
+          </StyledRightColumn>
         </StyledPage.Content>
       </StyledStation>
     )

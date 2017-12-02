@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { loadScript } from 'utils/async'
 import SectionHeader from 'styled/section-header'
+import * as colors from 'styles/colors'
 import * as transitions from 'styles/transitions'
 
 const TWITTER_SCRIPT = '//platform.twitter.com/widgets.js'
@@ -66,6 +67,7 @@ export default class TwitterFeed extends Component {
   get timelineOptions () {
     return {
       tweetLimit: TWEET_LIMIT,
+      linkColor: colors.PURPLE,
       chrome: 'noheader nofooter noborders'
     }
   }

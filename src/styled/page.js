@@ -15,13 +15,13 @@ const Container = styled.div`
 
 const Content = styled.div`
   width: 100%;
-  padding: ${spacing.COMMON};
+  padding: ${spacing.COMMON} 1.7rem;
   display: flex;
 `
 
 const Column = styled.div`
   flex: 1;
-  margin-left: ${spacing.COMMON};
+  margin-left: 1.7rem;
 
   &:first-child {
     margin-left: 0;

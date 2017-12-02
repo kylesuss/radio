@@ -61,7 +61,17 @@ export default [
       type: 'iframe',
       url: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true',
       mutedUrl: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=true'
-    }
+    },
+    links: [{
+      type: 'Web',
+      url: 'http://www.thelotradio.com/'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/thelotradio'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/thelotradio'
+    }]
   }, {
     name: 'Frission Radio',
     streamUrl: 'http://frission.out.airtime.pro:8000/frission_a',

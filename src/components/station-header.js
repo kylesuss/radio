@@ -14,6 +14,7 @@ import buildLocation from 'utils/build-location'
 const StyledStationHeader = styled.header`
   position: sticky;
   top: -244px;
+  z-index: 1;
 `
 
 const StyledStationStickyHeader = styled.div`

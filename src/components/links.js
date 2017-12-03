@@ -8,7 +8,7 @@ import * as colors from 'styles/colors'
 import * as spacing from 'styles/spacing'
 
 const StyledLinks = styled.section`
-  margin-top: ${spacing.DOUBLE};
+  margin-top: ${props => props.hasItemAbove ? spacing.DOUBLE : spacing.COMMON};
 `
 
 const StyledIconsContainer = styled.div`
@@ -17,13 +17,14 @@ const StyledIconsContainer = styled.div`
 `
 
 const StyledIconContainer = styled.div`
-  color: ${colors.BLUE_GREY};
+  color: ${colors.BORDER};
   font-size: 24px;
 `
 
 const StyledLinkType = styled.span`
   color: ${colors.PURPLE};
   margin-left: 8px;
+  font-size: .85rem;
 `
 
 const StyledLink = styled.a`
@@ -38,8 +39,8 @@ const iconMap = {
   'Web': GlobeIcon
 }
 
-const Links = ({ items }) => (
-  <StyledLinks>
+const Links = ({ items, hasItemAbove }) => (
+  <StyledLinks hasItemAbove={hasItemAbove}>
     <SectionHeader>
       Links
     </SectionHeader>

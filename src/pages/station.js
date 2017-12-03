@@ -108,7 +108,10 @@ export default class Station extends Component {
             )}
 
             {activeStation.links && (
-              <Links items={activeStation.links} />
+              <Links
+                hasItemAbove={!!activeStation.video}
+                items={activeStation.links}
+              />
             )}
           </StyledRightColumn>
         </StyledPage.Content>

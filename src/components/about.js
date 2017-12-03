@@ -8,7 +8,7 @@ import * as colors from 'styles/colors'
 import * as spacing from 'styles/spacing'
 
 const StyledAbout = styled.section`
-  margin-top: ${props => props.hasItemAbove ? spacing.DOUBLE : spacing.COMMON};
+  margin-top: ${spacing.COMMON};
 `
 
 const StyledIconsContainer = styled.div`

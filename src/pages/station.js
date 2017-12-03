@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
-import Links from 'components/links'
+import About from 'components/about'
 import StationLiveInfo from 'components/station-live-info'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
@@ -108,9 +108,10 @@ export default class Station extends Component {
             )}
 
             {activeStation.links && (
-              <Links
+              <About
                 hasItemAbove={!!activeStation.video}
-                items={activeStation.links}
+                links={activeStation.links}
+                description={activeStation.description}
               />
             )}
           </StyledRightColumn>

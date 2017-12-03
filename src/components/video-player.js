@@ -6,7 +6,6 @@ import InfoIcon from 'react-icons/lib/md/info'
 import VolumeIcon from 'react-icons/lib/md/volume-up'
 import MutedIcon from 'react-icons/lib/md/volume-off'
 import Button from 'styled/button'
-import SectionHeader from 'styled/section-header'
 import * as colors from 'styles/colors'
 import * as easing from 'styles/easing'
 import * as spacing from 'styles/spacing'
@@ -289,10 +288,6 @@ class VideoPlayer extends Component {
 
     return (
       <StyledVideoPlayerContainer hasStarted={hasStarted}>
-        <SectionHeader>
-          Live video
-        </SectionHeader>
-
         <StyledVideoContainer>
           <StyledVideoPlayer>
             {video.type === STREAM && (

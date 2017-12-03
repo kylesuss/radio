@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { loadScript } from 'utils/async'
-import SectionHeader from 'styled/section-header'
 import * as colors from 'styles/colors'
 import * as transitions from 'styles/transitions'
 
@@ -92,10 +91,6 @@ export default class TwitterFeed extends Component {
 
     return (
       <StyledContainer isShowingFeed={isShowingFeed}>
-        <SectionHeader>
-          Social Feed
-        </SectionHeader>
-
         <div ref={(el) => this.timelineEl = el}></div>
       </StyledContainer>
     )

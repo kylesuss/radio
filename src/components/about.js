@@ -7,7 +7,7 @@ import GlobeIcon from 'react-icons/lib/fa/globe'
 import * as colors from 'styles/colors'
 import * as spacing from 'styles/spacing'
 
-const StyledLinks = styled.section`
+const StyledAbout = styled.section`
   margin-top: ${props => props.hasItemAbove ? spacing.DOUBLE : spacing.COMMON};
 `
 
@@ -19,6 +19,13 @@ const StyledIconsContainer = styled.div`
 const StyledIconContainer = styled.div`
   color: ${colors.BORDER};
   font-size: 24px;
+`
+
+const StyledDescription = styled.div`
+  color: ${colors.PURE_BLACK};
+  font-size: .85rem;
+  line-height: 1.25rem;
+  margin-bottom: ${spacing.HALF};
 `
 
 const StyledLinkType = styled.span`
@@ -39,33 +46,39 @@ const iconMap = {
   'Web': GlobeIcon
 }
 
-const Links = ({ items, hasItemAbove }) => (
-  <StyledLinks hasItemAbove={hasItemAbove}>
+const About = ({ description, links, hasItemAbove }) => (
+  <StyledAbout hasItemAbove={hasItemAbove}>
     <SectionHeader>
-      Links
+      About
     </SectionHeader>
 
+    <StyledDescription>
+      {description}
+    </StyledDescription>
+
     <StyledIconsContainer>
-      {items.map(item => {
-        const Icon = iconMap[item.type]
+      {links.map(link => {
+        const Icon = iconMap[link.type]
+
         return (
           <StyledLink
-            href={item.url}
-            target="_blank"
+            href={link.url}
+            key={link.type}
             rel="noopener"
+            target="_blank"
           >
-            <StyledIconContainer key={item.type}>
+            <StyledIconContainer key={link.type}>
               <Icon />
             </StyledIconContainer>
 
             <StyledLinkType>
-              {item.type}
+              {link.type}
             </StyledLinkType>
           </StyledLink>
         )
       })}
     </StyledIconsContainer>
-  </StyledLinks>
+  </StyledAbout>
 )
 
-export default Links
+export default About

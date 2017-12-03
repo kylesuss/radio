@@ -80,7 +80,17 @@ export default [
     twitterHandle: 'frissionradio',
     logo: logoFrissionRadio,
     profileImage: profileFrissionRadio,
-    liveInfoUrl: 'https://frission.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://frission.airtime.pro/api/live-info-v2/',
+    links: [{
+      type: 'Web',
+      url: 'https://frissionradio.com'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/frissionradioworldwide'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/frission'
+    }]
   }, {
     name: 'Le Mellotron',
     streamUrl: 'http://shouting.trinoma.net/stream/1/',
@@ -95,7 +105,18 @@ export default [
     video: {
       type: 'stream',
       url: 'http://www.dailymotion.com/video/x2ek01k'
-    }
+    },
+    description: 'Global music radio streaming 24/7 from a bar in the heart of Paris.',
+    links: [{
+      type: 'Web',
+      url: 'http://www.lemellotron.com'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/lemellotron'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/LeMellotron'
+    }]
   }, {
     name: 'LYL Radio',
     streamUrl: 'http://icecast.lyl.live/live',
@@ -106,7 +127,17 @@ export default [
     logo: logoLYLRadio,
     profileImage: profileLYLRadio,
     liveInfoUrl: 'https://freshtransmission.com/live-info/lyl-radio',
-    timezone: 'Europe/Paris'
+    timezone: 'Europe/Paris',
+    links: [{
+      type: 'Web',
+      url: 'http://lyl.live'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/lylradio'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/lylradio'
+    }]
   }, {
     name: 'Soho Radio',
     streamUrl: 'https://streaming.radio.co/s57043ec0a/listen',
@@ -117,7 +148,14 @@ export default [
     logo: logoSOHORadio,
     profileImage: profileSOHORadio,
     liveInfoUrl: 'https://public.radio.co/stations/s57043ec0a/status',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    links: [{
+      type: 'Web',
+      url: 'http://www.sohoradiolondon.com'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/sohoradio'
+    }]
   }, {
     name: 'Berlin Community Radio',
     streamUrl: 'http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a',
@@ -128,7 +166,17 @@ export default [
     logo: logoBerlinCommunityRadio,
     profileImage: profileBerlinCommunityRadio,
     liveInfoUrl: 'https://berlincommunityradio.airtime.pro/api/live-info-v2/',
-    timezone: 'Europe/Berlin'
+    timezone: 'Europe/Berlin',
+    links: [{
+      type: 'Web',
+      url: 'http://www.berlincommunityradio.com'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/berlincommunityradio'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/BCR_Radio'
+    }]
   }, {
     name: 'Balamii',
     streamUrl: 'http://balamii.out.airtime.pro:8000/balamii_a',
@@ -139,7 +187,18 @@ export default [
     logo: logoBalamii,
     profileImage: profileBalamii,
     liveInfoUrl: 'https://balamii.airtime.pro/api/live-info-v2/',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    description: 'Radio station broadcasting from Peckham, London & Downtown NYC',
+    links: [{
+      type: 'Web',
+      url: 'http://player.balamii.com'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/balamii'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/balamii'
+    }]
   }, {
     name: 'Noods Radio',
     streamUrl: 'http://149.255.59.164:8051/live',
@@ -150,7 +209,14 @@ export default [
     logo: logoNoodsRadio,
     profileImage: profileNoodsRadio,
     liveInfoUrl: 'https://freshtransmission.com/live-info/noods-radio',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    links: [{
+      type: 'Web',
+      url: 'http://noodsradio.com'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/NoodsRadio'
+    }]
   }, {
     name: 'Worldwide FM',
     streamUrl: 'http://worldwidefm.out.airtime.pro:8000/worldwidefm_a',
@@ -159,7 +225,17 @@ export default [
     twitterHandle: 'worldwidefm',
     logo: logoWorldwideFM,
     profileImage: profileWorldwideFM,
-    liveInfoUrl: 'https://worldwidefm.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://worldwidefm.airtime.pro/api/live-info-v2/',
+    links: [{
+      type: 'Web',
+      url: 'https://worldwidefm.net'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/worldwide-fm'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/worldwidefm'
+    }]
   }, {
     name: 'Radar Radio',
     streamUrl: 'http://soho.wavestreamer.com:5831/1/;stream.mp3',
@@ -170,7 +246,17 @@ export default [
     logo: logoRadarRadio,
     profileImage: profileRadarRadio,
     liveInfoUrl: 'https://freshtransmission.com/live-info/radar-radio',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    links: [{
+      type: 'Web',
+      url: 'http://www.radarradio.com/'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/radarradio_ldn'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/RadarRadioLDN'
+    }]
   }, {
     name: 'NTS Radio',
     streamUrl: 'http://stream-relay-geo.ntslive.net/stream',
@@ -181,7 +267,18 @@ export default [
     logo: logoNTS,
     profileImage: profileNTS,
     liveInfoUrl: 'https://www.nts.live/api/v2/live',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    description: 'London based independent live radio and music platform, dedicated to championing new music and unearthing lost gems.',
+    links: [{
+      type: 'Web',
+      url: 'https://www.nts.live'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/nts_live'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/NTSRadio'
+    }]
   }, {
     name: 'Basso Radio',
     streamUrl: 'http://stream.basso.fi:8000/stream',
@@ -192,7 +289,14 @@ export default [
     logo: logoBasso,
     profileImage: profileBasso,
     liveInfoUrl: 'https://freshtransmission.com/live-info/basso-radio',
-    timezone: 'Europe/Helsinki'
+    timezone: 'Europe/Helsinki',
+    links: [{
+      type: 'Web',
+      url: 'http://www.basso.fi'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/bassoradio'
+    }]
   }, {
     name: 'Red Bull Radio',
     streamUrl: 'http://broadcast.rbmaradio.net/main',
@@ -200,7 +304,11 @@ export default [
     country: 'Worldwide',
     twitterHandle: 'redbull_radio',
     logo: logoRedBullRadio,
-    profileImage: profileRedBullRadio
+    profileImage: profileRedBullRadio,
+    links: [{
+      type: 'Web',
+      url: 'https://www.redbullradio.com'
+    }]
   }, {
     name: 'Rinse FM',
     streamUrl: 'http://streamer.dgen.net:8000/rinseradio',
@@ -211,7 +319,14 @@ export default [
     logo: logoRinseFM,
     profileImage: profileRinseFM,
     liveInfoUrl: 'https://freshtransmission.com/live-info/rinse-fm',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    links: [{
+      type: 'Web',
+      url: 'http://rinse.fm'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/rinsefm'
+    }]
   }, {
     name: 'TEDER.FM',
     streamUrl: 'http://server1.live1.co.il:8014/teder',
@@ -222,7 +337,14 @@ export default [
     logo: logoTederFM,
     profileImage: profileTederFM,
     liveInfoUrl: 'https://freshtransmission.com/live-info/teder-fm',
-    timezone: 'Asia/Tel_Aviv'
+    timezone: 'Asia/Tel_Aviv',
+    links: [{
+      type: 'Web',
+      url: 'http://teder.fm'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/tederfm'
+    }]
   }, {
     name: 'Red Light Radio',
     streamUrl: 'http://www.michielgardner.nl:8000/redlightradio',
@@ -237,7 +359,17 @@ export default [
     video: {
       type: 'stream',
       url: 'https://cdn-hlm-1.streamnerd.nl/live/redlightradio/playlist.m3u8'
-    }
+    },
+    links: [{
+      type: 'Web',
+      url: 'http://redlightradio.net'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/redlightradio'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/RedLightRadio'
+    }]
   }, {
     name: 'n10.as Radio',
     streamUrl: 'http://n10as.out.airtime.pro:8000/n10as_a',
@@ -269,7 +401,17 @@ export default [
     logo: logoBoxoutFM,
     profileImage: profileBoxoutFM,
     liveInfoUrl: 'https://boxoutfm.airtime.pro/api/live-info-v2/',
-    timezone: 'Asia/Kolkata'
+    timezone: 'Asia/Kolkata',
+    links: [{
+      type: 'Web',
+      url: 'http://boxout.fm'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/boxoutfm'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/boxoutfm'
+    }]
   }, {
     name: 'Netil Radio',
     streamUrl: 'http://edge.mixlr.com/channel/otuyv',
@@ -280,17 +422,34 @@ export default [
     logo: logoNetilRadio,
     profileImage: profileNetilRadio,
     liveInfoUrl: 'https://api.mixlr.com/users/5498175?source=embed',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    links: [{
+      type: 'Web',
+      url: 'http://www.netilradio.com'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/NetilRadio'
+    }]
   }, {
-    name: 'Radio LaBici',
+    name: 'Radio Labici',
     streamUrl: 'http://stream.radiolabici.com:8000/stream',
-    slug: 'radio-la-bici',
+    slug: 'radio-labici',
     city: 'Buenos Aires',
     country: 'Argentina',
     twitterHandle: 'radiolabici',
     logo: logoRadioLaBici,
     profileImage: profileRadioLaBici,
-    timezone: 'America/Argentina/Buenos_Aires'
+    timezone: 'America/Argentina/Buenos_Aires',
+    links: [{
+      type: 'Web',
+      url: 'https://soundcloud.com/radiolabici'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/boxoutfm'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/radiolabici'
+    }]
   }, {
     name: 'Seoul Community Radio',
     streamUrl: 'http://seoulcommunityradio.out.airtime.pro:8000/seoulcommunityradio_a',
@@ -301,7 +460,17 @@ export default [
     logo: logoSeoulCommunityRadio,
     profileImage: profileSeoulCommunityRadio,
     liveInfoUrl: 'https://seoulcommunityradio.airtime.pro/api/live-info-v2/',
-    timezone: 'Asia/Seoul'
+    timezone: 'Asia/Seoul',
+    links: [{
+      type: 'Web',
+      url: 'http://www.seoulcommunityradio.com'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/seoulcommunityradio'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/SCR_Radio'
+    }]
   }, {
     name: 'KMAH Radio',
     streamUrl: 'http://66.55.143.200/proxy/kmahradi?mp=/;stream/1',
@@ -312,7 +481,17 @@ export default [
     logo: logoKmahRadio,
     profileImage: profileKmahRadio,
     liveInfoUrl: 'https://freshtransmission.com/live-info/kmah-radio',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    links: [{
+      type: 'Web',
+      url: 'http://kmah-radio.com'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/kmah-radio'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/kmahradio'
+    }]
   }, {
     name: 'No Fun Radio',
     streamUrl: 'http://nofun.out.airtime.pro:8000/nofun_a',
@@ -323,6 +502,16 @@ export default [
     logo: logoNoFunRadio,
     profileImage: profileNoFunRadio,
     liveInfoUrl: 'https://nofun.airtime.pro/api/live-info-v2',
-    timezone: 'America/Vancouver'
+    timezone: 'America/Vancouver',
+    links: [{
+      type: 'Web',
+      url: 'http://www.nofunradio.com'
+    }, {
+      type: 'SoundCloud',
+      url: 'https://soundcloud.com/nofunradio'
+    }, {
+      type: 'Mixcloud',
+      url: 'https://www.mixcloud.com/nofunradio'
+    }]
   }
 ]

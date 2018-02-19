@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import StationPreview from 'components/station-preview'
-import Player from 'containers/player'
-import StationList from 'containers/station-list'
+import Logo from 'components/logo'
+import Player from 'components/player'
 import StyledApp from 'styled/app'
 import StyledPage from 'styled/page'
 import withKeyboardShortcuts from 'containers/with-keyboard-shortcuts'
@@ -16,10 +15,6 @@ class App extends Component {
     activeStation: PropTypes.object
   }
 
-  state = {
-    activePreviewStation: {}
-  }
-
   get documentTitle () {
     const { activeStation, playerIsPlaying } = this.props
 
@@ -28,49 +23,19 @@ class App extends Component {
       : DEFAULT_TITLE
   }
 
-  handleOpenPreview = (station) => {
-    const { activeStation } = this.props
-
-    if (activeStation.station === station) { return }
-
-    this.setState({ activePreviewStation: station })
-  }
-
-  handleClosePreview = () => this.setState({
-    activePreviewStation: {}
-  })
-
   render () {
-    const { activePreviewStation } = this.state
-    const isShowingStationPreview = !!activePreviewStation.name
-
     return (
       <StyledApp.Container>
         <DocumentTitle title={this.documentTitle} />
 
-        <StyledApp.Header />
+        <Logo />
+        <Player />
 
         <StyledApp.Main>
           <StyledPage.Container>
             {this.props.children}
           </StyledPage.Container>
         </StyledApp.Main>
-
-        <StyledApp.LeftColumn isShowingStationPreview={isShowingStationPreview}>
-          <StationList
-            handleOpenPreview={this.handleOpenPreview}
-            handleClosePreview={this.handleClosePreview}
-            activePreviewStation={activePreviewStation}
-          />
-
-          <Player />
-        </StyledApp.LeftColumn>
-
-        <StationPreview
-          isVisible={isShowingStationPreview}
-          station={activePreviewStation}
-          handleClosePreview={this.handleClosePreview}
-        />
       </StyledApp.Container>
     )
   }

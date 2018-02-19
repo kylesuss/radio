@@ -2,10 +2,12 @@ require('dotenv').config()
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const S3Plugin = require('webpack-s3-plugin')
 const webpack = require('webpack')
+const path = require('path')
 
 const env = process.env.NODE_ENV || 'development'
 const isProd = env === 'production'
 const isDev = env === 'development'
+const srcDir = path.resolve(__dirname, "src")
 
 const config = {
   entry: ['./src/app.js'],
@@ -19,6 +21,7 @@ const config = {
     loaders: [
       {
         test: /\.(js|jsx)$/,
+        include: srcDir,
         loader: 'babel-loader'
       },
       {
@@ -27,17 +30,23 @@ const config = {
       },
       {
         test: /\.css$/,
+        include: [
+          srcDir,
+          path.resolve(__dirname, 'node_modules/normalize.css')
+        ],
         loader: 'raw-loader'
       },
       {
         test: /\.(png|jpg|jpeg)$/,
+        include: path.resolve(__dirname, 'src/images'),
         loader: 'file'
       }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.css', '.json'],
-    modulesDirectories: ['', 'src', 'node_modules']
+    extensions: ['', '.js', '.css', '.json'],
+    modulesDirectories: ['', 'src', 'node_modules'],
+    symlinks: false
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -53,11 +62,11 @@ const config = {
 }
 
 if (isDev) {
-  config.devtool = 'source-map'
+  config.devtool = 'cheap-module-eval-source-map'
   config.devServer = { historyApiFallback: true }
   config.module.preLoaders.push({
     test: /\.(js|jsx)$/,
-    exclude: /node_modules/,
+    include: srcDir,
     loader: 'eslint-loader'
   })
   config.plugins = config.plugins.concat([

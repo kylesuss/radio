@@ -82,9 +82,7 @@ const StyledLogo = styled.img`
 export default class StationList extends Component {
   static propTypes = {
     activeStation: PropTypes.string.isRequired,
-    stations: PropTypes.array.isRequired,
-    handleClosePreview: PropTypes.func.isRequired,
-    activePreviewStation: PropTypes.object
+    stations: PropTypes.array.isRequired
   }
 
   static defaultProps = {
@@ -108,7 +106,6 @@ export default class StationList extends Component {
                   key={station.name}
                   isActive={this.isActiveStation(station.slug)}
                   to={buildStationPath(station.slug)}
-                  onClick={this.handleClosePreview}
                 >
                   <StyledLogoWrapper>
                     <StyledLogo src={station.logo} />

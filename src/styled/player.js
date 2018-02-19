@@ -1,23 +1,19 @@
 import styled, { keyframes } from 'styled-components'
 import StyledButton from 'styled/button'
 import * as colors from 'styles/colors'
-import * as spacing from 'styles/spacing'
 import * as positioning from 'styles/positioning'
 
 const Container = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: ${positioning.WIDTH_LEFT_COLUMN_PX};
+  position: fixed;
+  bottom: ${positioning.BODY_PADDING_PX};
+  left: ${positioning.BODY_PADDING_PX};
+  max-width: 200px;
 `
 
 const Inner = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   height: ${positioning.HEIGHT_PLAYER_PX};
-  padding: .8rem ${spacing.COMMON};
-  box-shadow: 0px 0px 15px -4px ${colors.BLACK};
 `
 
 const StationContainer = styled.div`
@@ -27,7 +23,6 @@ const StationContainer = styled.div`
 const Controls = styled.div`
   display: flex;
   justify-content: center;
-  width: 180px;
 `
 
 const prevNextActiveStyles = `
@@ -36,6 +31,7 @@ const prevNextActiveStyles = `
 
 const PrevControls = styled.div`
   display: flex;
+  font-size: 38px;
 
   &:active {
     ${prevNextActiveStyles}
@@ -44,7 +40,8 @@ const PrevControls = styled.div`
 
 const NextControls = styled.div`
   display: flex;
-  margin-left: .8rem;
+  margin-left: .2rem;
+  font-size: 38px;
 
   &:active {
     ${prevNextActiveStyles}
@@ -52,9 +49,9 @@ const NextControls = styled.div`
 `
 
 const PlayStateControls = styled.div`
-  width: 50px;
-  height: 50px;
-  margin-left: .8rem;
+  width: 46px;
+  height: 46px;
+  margin-left: .2rem;
 `
 
 const animatePlayStateLoading = keyframes`
@@ -79,7 +76,7 @@ const PlayStateInner = styled.div`
   cursor: ${props => props.isLoading ? 'default' : 'pointer'};
   border-radius: 50%;
   margin: 0 auto;
-  background: ${colors.PURPLE};
+  background: ${colors.LIGHT_BLUE};
   transition: width 150ms ease-out,
               height 150ms ease-out;
 
@@ -91,7 +88,7 @@ const PlayStateInner = styled.div`
     bottom: 0;
     left: 0;
     z-index: -1;
-    background: ${colors.PURPLE};
+    background: ${colors.LIGHT_BLUE};
     border-radius: 50%;
     ${props => props.isLoading && `
       animation: ${animatePlayStateLoading} 1s ease-out infinite;
@@ -110,18 +107,6 @@ const PlayStateInner = styled.div`
     transition: filter 250ms ease-out,
                 width 150ms ease-out,
                 height 150ms ease-out;
-  }
-
-  &:hover svg {
-    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, .5));
-    width: 68%;
-    height: 68%;
-  }
-
-  &:active svg {
-    filter: none;
-    width: 58%;
-    height: 58%;
   }
 `
 

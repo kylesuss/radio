@@ -4,25 +4,21 @@ import styled from 'styled-components'
 import TwitterFeed from 'components/twitter-feed'
 import * as positioning from 'styles/positioning'
 import * as transitions from 'styles/transitions'
-import * as shadow from 'styles/shadow'
 import * as easing from 'styles/easing'
 
 const StyledFeedContainer = styled.div`
   position: fixed;
   left: 0;
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
-  top: ${positioning.HEIGHT_HEADER_PX};
+  top: 0;
   right: ${positioning.WIDTH_LEFT_COLUMN_PX};
   bottom: 0;
   overflow: auto;
   padding: .75rem;
   background: #333;
   z-index: ${positioning.Z_INDEX_TWITTER_PREVIEW};
-  transition:
-    transform ${transitions.LENGTH_DOUBLE_MS} ${easing.EASE_OUT_QUINT} ${props => props.isVisible ? transitions.LENGTH_COMMON_MS : '0ms'},
-    box-shadow ${transitions.LENGTH_COMMON_MS} ease-out;
+  transition: transform ${transitions.LENGTH_DOUBLE_MS} ${easing.EASE_OUT_QUINT} ${props => props.isVisible ? transitions.LENGTH_COMMON_MS : '0ms'};
   transform: translateX(0);
-  box-shadow: ${props => props.isVisible ? `${shadow.SETTINGS_COMMON} ${shadow.COLOR_DARK}` : 'none'};
   ${props => props.isVisible && `
     transform: translateX(${positioning.WIDTH_LEFT_COLUMN_PX});
   `}
@@ -30,7 +26,7 @@ const StyledFeedContainer = styled.div`
 
 const StyledUnderlay = styled.div`
   position: fixed;
-  top: ${positioning.HEIGHT_HEADER_PX};
+  top: 0;
   right: 0;
   bottom: 0;
   left: ${positioning.WIDTH_LEFT_COLUMN_PX};

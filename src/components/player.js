@@ -1,18 +1,26 @@
 import React, { Component, createElement } from 'react'
 import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import StyledPlayer from 'styled/player'
 import StyledButton from 'styled/button'
 import * as colors from 'styles/colors'
+import isNil from 'lodash/isNil'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
-import ForwardIcon from 'react-icons/lib/fa/forward'
-import BackwardIcon from 'react-icons/lib/fa/backward'
+import ForwardIcon from 'react-icons/lib/md/chevron-right'
+import BackwardIcon from 'react-icons/lib/md/chevron-left'
+import { togglePlayState, playStation } from 'actions/player'
 import { buildStationPath } from 'constants/routes'
 import PlayerLoadingIcon from 'components/player-loading-icon'
+import StationLiveInfo from 'components/station-live-info'
 import AudioPlayer from 'containers/audio-player'
-import isNil from 'lodash/isNil'
+import {
+  findStationBySlug,
+  findPrevStationBySlug,
+  findNextStationBySlug
+} from 'selectors/station'
 
 const StyledSeekButton = styled(StyledButton)`
   color: ${colors.WHITE};
@@ -36,6 +44,7 @@ class Player extends Component {
 
     this.state = {
       isLoadingAudioSrc: true,
+      liveStationInfo: null,
       streamUrl: uniqueStreamUrl(props.station.streamUrl)
     }
   }
@@ -97,12 +106,19 @@ class Player extends Component {
 
   handleSoundPlaying = () => this.setState({ isLoadingAudioSrc: false })
 
+  handleInfoResponse = (info) => this.setState({ liveStationInfo: info })
+
   render () {
     const { station, isPlaying, videoHasActiveAudio } = this.props
     const { isLoadingAudioSrc, streamUrl } = this.state
 
     return (
       <StyledPlayer.Container>
+        <StationLiveInfo
+          station={station}
+          handleInfoResponse={this.handleInfoResponse}
+        />
+
         <StyledPlayer.Inner>
           {station && (
             <StyledPlayer.StationContainer>
@@ -150,4 +166,26 @@ class Player extends Component {
   }
 }
 
-export default withRouter(Player)
+const mapStateToProps = (state) => {
+  const { stations, player } = state
+
+  return {
+    isPlaying: state.player.isPlaying,
+    station: findStationBySlug(stations.items, player.activeStation),
+    prevStation: findPrevStationBySlug(stations.items, player.activeStation),
+    nextStation: findNextStationBySlug(stations.items, player.activeStation),
+    videoHasActiveAudio: state.video.hasActiveAudio
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  togglePlayState: () => dispatch(togglePlayState()),
+  playStation: (args) => dispatch(playStation(args))
+})
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Player)
+)

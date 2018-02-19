@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
-import About from 'components/about'
-import StationLiveInfo from 'components/station-live-info'
+import { playStation } from 'actions/player'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import VideoPlayer from 'containers/video-player'
+import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
 import * as spacing from 'styles/spacing'
 
 const StyledStation = styled.div`
   width: 100%;
+  padding-top: calc(50vh - 130px);
 `
 
 const StyledRightColumn = styled(StyledPage.Column)`
@@ -22,20 +24,18 @@ const scrollOptions = {
   speed: 400
 }
 
-export default class Station extends Component {
+class Station extends Component {
   static propTypes = {
     station: PropTypes.object.isRequired,
     playStation: PropTypes.func.isRequired,
-    activeStation: PropTypes.string.isRequired,
-    playerHasError: PropTypes.bool.isRequired
+    activeStation: PropTypes.string.isRequired
   }
 
   constructor (props) {
     super(props)
 
     this.state = {
-      activeStation: props.station,
-      liveStationInfo: null
+      activeStation: props.station
     }
   }
 
@@ -68,31 +68,16 @@ export default class Station extends Component {
     if (name !== station.name) { return }
 
     this.setState({
-      activeStation: station,
-      liveStationInfo: null
+      activeStation: station
     }, () => this.playStation())
   }
 
-  handleInfoResponse = (info) => this.setState({
-    liveStationInfo: info
-  })
-
   render () {
-    const { playerHasError } = this.props
-    const { activeStation, liveStationInfo } = this.state
+    const { activeStation } = this.state
 
     return (
       <StyledStation>
-        <StationLiveInfo
-          station={activeStation}
-          handleInfoResponse={this.handleInfoResponse}
-        />
-
-        <StationHeader
-          station={activeStation}
-          liveStationInfo={liveStationInfo}
-          playerHasError={playerHasError}
-        />
+        <StationHeader station={activeStation} />
 
         <StyledPage.Content>
           <StyledPage.Column>
@@ -106,17 +91,29 @@ export default class Station extends Component {
                 video={activeStation.video}
               />
             )}
-
-            {activeStation.links && (
-              <About
-                hasItemAbove={!!activeStation.video}
-                links={activeStation.links}
-                description={activeStation.description}
-              />
-            )}
           </StyledRightColumn>
         </StyledPage.Content>
       </StyledStation>
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  const { slug } = ownProps.params
+
+  return {
+    station: findStationBySlug(state.stations.items, slug),
+    activeStation: state.player.activeStation
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    playStation: (args) => dispatch(playStation(args))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Station)

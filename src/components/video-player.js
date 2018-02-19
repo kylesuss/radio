@@ -17,7 +17,6 @@ const StyledVideoPlayerContainer = styled.div`
   visibility: ${props => props.hasStarted ? 'visible' : 'hidden'};
   opacity: ${props => props.hasStarted ? '1' : '0'};
   transition: opacity ${transitions.LENGTH_DOUBLE_MS} ease-out;
-  padding-top: ${spacing.COMMON};
   background: ${colors.WHITE};
 `
 
@@ -141,13 +140,6 @@ const StyledToggleIndicator = styled.div`
 
 const StyledToggleMessage = styled.div`
   margin-right: 10px;
-`
-
-const StyledShadow = styled.div`
-  box-shadow: 0px 6px 14px -11px ${colors.PURE_BLACK};
-  height: ${spacing.COMMON};
-  margin-left: -${spacing.HALF};
-  margin-right: -${spacing.HALF};
 `
 
 const STREAM = 'stream'
@@ -349,8 +341,6 @@ class VideoPlayer extends Component {
             </StyledPlayerOverlay>
           </StyledVideoPlayer>
         </StyledVideoContainer>
-
-        <StyledShadow />
       </StyledVideoPlayerContainer>
     )
   }

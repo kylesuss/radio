@@ -13,7 +13,7 @@ const base = `
   }
 
   body {
-    background: ${colors.LIGHT_GREY};
+    background: ${colors.BLACK};
     font-family: ${fonts.PRIMARY};
     -webkit-font-smoothing: subpixel-antialiased;
   }

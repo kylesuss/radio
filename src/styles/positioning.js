@@ -1,10 +1,11 @@
+export const BODY_PADDING = 30
+export const BODY_PADDING_PX = `${BODY_PADDING}px`
+
 export const WIDTH_LEFT_COLUMN = 230
 export const WIDTH_LEFT_COLUMN_PX = `${WIDTH_LEFT_COLUMN}px`
 
 export const HEIGHT_PLAYER = 80
 export const HEIGHT_PLAYER_PX = `${HEIGHT_PLAYER}px`
-export const HEIGHT_HEADER = 6
-export const HEIGHT_HEADER_PX = `${HEIGHT_HEADER}px`
 export const HEIGHT_STATION_HEADER_IMAGE = 250
 export const HEIGHT_STATION_HEADER_IMAGE_PX = `${HEIGHT_STATION_HEADER_IMAGE}px`
 export const HEIGHT_STICKY_STATION_HEADER = 84

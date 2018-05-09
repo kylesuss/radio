@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import ArrowIcon from 'react-icons/lib/md/play-arrow'
 import * as colors from 'styles/colors'
@@ -79,7 +80,7 @@ const StyledLogo = styled.img`
   margin-right: ${spacing.HALF};
 `
 
-export default class StationList extends Component {
+class StationList extends Component {
   static propTypes = {
     activeStation: PropTypes.string.isRequired,
     stations: PropTypes.array.isRequired
@@ -130,3 +131,10 @@ export default class StationList extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  stations: state.stations.items,
+  activeStation: state.player.activeStation
+})
+
+export default connect(mapStateToProps)(StationList)

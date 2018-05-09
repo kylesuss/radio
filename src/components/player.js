@@ -1,4 +1,5 @@
 import React, { Component, createElement } from 'react'
+import { compose } from 'redux'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -15,7 +16,7 @@ import { togglePlayState, playStation } from 'actions/player'
 import { buildStationPath } from 'constants/routes'
 import PlayerLoadingIcon from 'components/player-loading-icon'
 import StationLiveInfo from 'components/station-live-info'
-import AudioPlayer from 'containers/audio-player'
+import AudioPlayer from 'components/audio-player'
 import {
   findStationBySlug,
   findPrevStationBySlug,
@@ -183,9 +184,7 @@ const mapDispatchToProps = (dispatch) => ({
   playStation: (args) => dispatch(playStation(args))
 })
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Player)
-)
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(Player)

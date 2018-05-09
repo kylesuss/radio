@@ -6,7 +6,7 @@ import animateScrollTo from 'animated-scroll-to'
 import { playStation } from 'actions/player'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
-import VideoPlayer from 'containers/video-player'
+import VideoPlayer from 'components/video-player'
 import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
 import * as spacing from 'styles/spacing'
@@ -67,9 +67,7 @@ class Station extends Component {
 
     if (name !== station.name) { return }
 
-    this.setState({
-      activeStation: station
-    }, () => this.playStation())
+    this.setState({ activeStation: station }, () => this.playStation())
   }
 
   render () {
@@ -98,20 +96,14 @@ class Station extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { slug } = ownProps.params
+const mapStateToProps = (state, ownProps) => ({
+  station: findStationBySlug(state.stations.items, ownProps.params.slug),
+  activeStation: state.player.activeStation
+})
 
-  return {
-    station: findStationBySlug(state.stations.items, slug),
-    activeStation: state.player.activeStation
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    playStation: (args) => dispatch(playStation(args))
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  playStation: (args) => dispatch(playStation(args))
+})
 
 export default connect(
   mapStateToProps,

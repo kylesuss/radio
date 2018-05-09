@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Sound from 'react-sound'
+import { setPlayerError } from 'actions/player'
 
 class AudioPlayer extends Component {
-  static propTypes = {
-    audioPlayerVolume: PropTypes.number.isRequired,
-    handleSoundPlaying: PropTypes.func.isRequired,
-    handleSoundError: PropTypes.func.isRequired,
-    isPaused: PropTypes.bool.isRequired,
-    playerIsPlaying: PropTypes.bool.isRequired,
-    streamUrl: PropTypes.string.isRequired,
-    setPlayerError: PropTypes.func.isRequired
-  }
-
   constructor (props) {
     super(props)
 
@@ -73,4 +65,26 @@ class AudioPlayer extends Component {
   }
 }
 
-export default AudioPlayer
+AudioPlayer.propTypes = {
+  audioPlayerVolume: PropTypes.number.isRequired,
+  handleSoundPlaying: PropTypes.func.isRequired,
+  handleSoundError: PropTypes.func.isRequired,
+  isPaused: PropTypes.bool.isRequired,
+  playerIsPlaying: PropTypes.bool.isRequired,
+  streamUrl: PropTypes.string.isRequired,
+  setPlayerError: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  playerIsPlaying: state.player.isPlaying,
+  audioPlayerVolume: state.player.audioPlayerVolume
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  setPlayerError: () => dispatch(setPlayerError())
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AudioPlayer)

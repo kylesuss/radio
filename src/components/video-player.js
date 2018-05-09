@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import ReactPlayer from 'react-player'
 import InfoIcon from 'react-icons/lib/md/info'
 import VolumeIcon from 'react-icons/lib/md/volume-up'
 import MutedIcon from 'react-icons/lib/md/volume-off'
+import { muteAudioPlayer, unmuteAudioPlayer } from 'actions/player'
+import { toggleVideoAudioState } from 'actions/video'
 import Button from 'styled/button'
 import * as colors from 'styles/colors'
 import * as easing from 'styles/easing'
@@ -346,4 +349,18 @@ class VideoPlayer extends Component {
   }
 }
 
-export default VideoPlayer
+const mapStateToProps = (state) => ({
+  hasActiveAudio: state.video.hasActiveAudio,
+  playerIsPlaying: state.player.isPlaying
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  muteAudioPlayer: () => dispatch(muteAudioPlayer()),
+  unmuteAudioPlayer: () => dispatch(unmuteAudioPlayer()),
+  toggleVideoAudioState: () => dispatch(toggleVideoAudioState())
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VideoPlayer)

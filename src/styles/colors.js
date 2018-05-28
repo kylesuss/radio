@@ -6,6 +6,7 @@ export const LIGHT_BLUE = '#9fc8ff'
 export const DARK_BLUE = '#1D1F24'
 export const LIGHT_BLUE_BG = '#F7F7FE'
 export const BLUE_GREY = '#7a8b8f'
+export const LABELS = '#cfd4e5'
 
 /* Old */
 export const PURE_WHITE = '#fff'

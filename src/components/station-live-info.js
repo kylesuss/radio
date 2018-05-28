@@ -34,17 +34,17 @@ const StyledLabel = styled.span`
   font-family: ${fonts.SECONDARY};
   font-weight: ${fonts.WEIGHT_BOLD};
   font-style: italic;
-  background: ${colors.PURE_WHITE};
+  background: ${colors.LABELS};
   text-transform: uppercase;
   font-size: 13px;
   padding: 2px 6px;
-  padding-right: 8px;
   margin-right: ${props => props.hasMessage ? '8px' : '0'};
 `
 
 const Value = styled.span`
-  color: ${colors.BLUE_GREY};
+  color: ${colors.BLACK};
   font-size: 13px;
+  font-weight: 500;
   line-height: 20px;
 `
 

@@ -8,6 +8,7 @@ import Navigation from 'components/navigation'
 import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
 import * as colors from 'styles/colors'
+import media from 'styles/media'
 import * as positioning from 'styles/positioning'
 import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
 import DocumentTitle from 'react-document-title'
@@ -18,7 +19,9 @@ const Container = styled.div`
 `
 
 const Main = styled.main`
-  margin-left: ${positioning.WIDTH_LEFT_COLUMN_PX};
+  ${media.mediumScreenUp`
+    margin-left: ${positioning.WIDTH_LEFT_COLUMN_PX};
+  `}
 `
 
 const DEFAULT_TITLE = 'Fresh Transmission - Curated Internet Radio'

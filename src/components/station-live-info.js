@@ -7,6 +7,7 @@ import liveInfoModels from 'constants/live-info-models'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as spacing from 'styles/spacing'
+import media from 'styles/media'
 
 const REFETCH_INTERVAL = 30000 // 30 seconds
 
@@ -16,7 +17,9 @@ const StyledLiveInfo = styled.div`
 `
 
 const StyledItem = styled.div`
-  display: flex;
+  ${media.mediumScreenUp`
+    display: flex;
+  `}
 
   &:nth-child(n + 2) {
     margin-top: 6px
@@ -25,6 +28,10 @@ const StyledItem = styled.div`
 
 const StyledLabelContainer = styled.div`
   display: flex;
+  margin-bottom: 4px;
+  ${media.mediumScreenUp`
+    margin-bottom: 0;
+  `}
 `
 
 const StyledLabel = styled.span`

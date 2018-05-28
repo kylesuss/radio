@@ -30,7 +30,7 @@ const prevNextActiveStyles = `
 const PrevControls = styled.div`
   display: flex;
   align-items: center;
-  font-size: 30px;
+  font-size: 20px;
 
   &:active {
     ${prevNextActiveStyles}
@@ -41,7 +41,7 @@ const NextControls = styled.div`
   display: flex;
   align-items: center;
   margin-left: ${spacing.HALF};
-  font-size: 30px;
+  font-size: 20px;
 
   &:active {
     ${prevNextActiveStyles}

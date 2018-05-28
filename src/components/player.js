@@ -10,8 +10,6 @@ import * as colors from 'styles/colors'
 import isNil from 'lodash/isNil'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
-import ForwardIcon from 'react-icons/lib/md/chevron-right'
-import BackwardIcon from 'react-icons/lib/md/chevron-left'
 import { togglePlayState, playStation } from 'actions/player'
 import { buildStationPath } from 'constants/routes'
 import PlayerLoadingIcon from 'components/player-loading-icon'
@@ -26,7 +24,12 @@ const StyledSeekButton = styled(StyledButton)`
   color: ${colors.WHITE};
   background: ${colors.BLACK};
   box-shadow: 1px 1px 10px #ccc;
+  width: 32px;
   height: 32px;
+`
+
+const StyledReversePlayIcon = styled(PlayIcon)`
+  transform: scaleX(-1);
 `
 
 const uniqueStreamUrl = (url) => `${url}?t=${Date.now()}`
@@ -130,7 +133,7 @@ class Player extends Component {
               <StyledPlayer.Controls>
                 <StyledPlayer.PrevControls>
                   <StyledSeekButton onClick={this.handlePrevClick}>
-                    <BackwardIcon />
+                    <StyledReversePlayIcon />
                   </StyledSeekButton>
                 </StyledPlayer.PrevControls>
 
@@ -149,7 +152,7 @@ class Player extends Component {
 
                 <StyledPlayer.NextControls>
                   <StyledSeekButton onClick={this.handleNextClick}>
-                    <ForwardIcon />
+                    <PlayIcon />
                   </StyledSeekButton>
                 </StyledPlayer.NextControls>
               </StyledPlayer.Controls>

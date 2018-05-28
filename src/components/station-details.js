@@ -91,7 +91,7 @@ const StationDetails = ({ station }) => (
 
         <StyledValue>
           {station.archives.map(archive => (
-            <div>
+            <div key={archive.display}>
               <ExternalLink href={archive.url}>
                 {archive.display}
               </ExternalLink>

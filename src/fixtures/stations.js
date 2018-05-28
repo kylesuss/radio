@@ -73,7 +73,7 @@ export default [
     description: 'Radio station broadcasting from Peckham, London & Downtown NYC'
   }, {
     name: 'Noods Radio',
-    streamUrl: 'http://149.255.59.164:8051/live',
+    streamUrl: 'http://radio.citrus3.com:8862/;stream.mp3',
     slug: 'noods-radio',
     city: 'Bristol',
     country: 'UK',

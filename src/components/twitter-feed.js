@@ -6,7 +6,7 @@ import * as colors from 'styles/colors'
 import * as transitions from 'styles/transitions'
 
 const TWITTER_SCRIPT = '//platform.twitter.com/widgets.js'
-const TWEET_LIMIT = 5
+const TWEET_LIMIT = 1
 
 const StyledContainer = styled.div`
   opacity: ${props => props.isShowingFeed ? '1' : '0'};

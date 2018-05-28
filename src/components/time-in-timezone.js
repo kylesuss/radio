@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment-timezone'
 
@@ -6,6 +6,7 @@ const INTERVAL = 30000 // 30 seconds
 
 class TimeInTimezone extends Component {
   static propTypes = {
+    children: PropTypes.any.isRequired,
     timezone: PropTypes.string.isRequired
   }
 
@@ -19,13 +20,10 @@ class TimeInTimezone extends Component {
   }
 
   render () {
-    const { timezone } = this.props
+    const { children, timezone } = this.props
+    const time = moment().tz(timezone).format('h:mm A')
 
-    return (
-      <span>
-        {moment().tz(timezone).format('h:mm A')}
-      </span>
-    )
+    return children(time)
   }
 }
 

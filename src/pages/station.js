@@ -6,18 +6,11 @@ import animateScrollTo from 'animated-scroll-to'
 import { playStation } from 'actions/player'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
-import VideoPlayer from 'components/video-player'
 import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
-import * as spacing from 'styles/spacing'
 
 const StyledStation = styled.div`
   width: 100%;
-  padding-top: calc(50vh - 130px);
-`
-
-const StyledRightColumn = styled(StyledPage.Column)`
-  margin-top: -${spacing.COMMON};
 `
 
 const scrollOptions = {
@@ -78,18 +71,11 @@ class Station extends Component {
         <StationHeader station={activeStation} />
 
         <StyledPage.Content>
+          <StyledPage.Column />
+
           <StyledPage.Column>
             <TwitterFeed twitterHandle={activeStation.twitterHandle} />
           </StyledPage.Column>
-
-          <StyledRightColumn>
-            {activeStation.video && (
-              <VideoPlayer
-                name={activeStation.name}
-                video={activeStation.video}
-              />
-            )}
-          </StyledRightColumn>
         </StyledPage.Content>
       </StyledStation>
     )

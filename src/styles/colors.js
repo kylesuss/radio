@@ -1,7 +1,11 @@
 /* New Layout */
-export const BLACK = '#000'
+export const BLACK = '#111'
 export const WHITE = '#fff'
+export const PRIMARY_BLUE = '#3d7ccb'
 export const LIGHT_BLUE = '#9fc8ff'
+export const DARK_BLUE = '#1D1F24'
+export const LIGHT_BLUE_BG = '#F7F7FE'
+export const BLUE_GREY = '#7a8b8f'
 
 /* Old */
 export const PURE_WHITE = '#fff'
@@ -11,7 +15,6 @@ export const GREEN = '#0cbba1'
 export const RED = '#bb4e86'
 export const PURPLE = '#a84ebb'
 export const PURPLE_DARK = '#440e58'
-export const BLUE_GREY = '#7a8b8f'
 export const BLUE_GREY_BORDER = '#a3b8bd'
 export const LIGHT_GREY = '#e6e6e6'
 export const BORDER = '#ddd'

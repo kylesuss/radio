@@ -15,7 +15,6 @@ import BackwardIcon from 'react-icons/lib/md/chevron-left'
 import { togglePlayState, playStation } from 'actions/player'
 import { buildStationPath } from 'constants/routes'
 import PlayerLoadingIcon from 'components/player-loading-icon'
-import StationLiveInfo from 'components/station-live-info'
 import AudioPlayer from 'components/audio-player'
 import {
   findStationBySlug,
@@ -25,6 +24,9 @@ import {
 
 const StyledSeekButton = styled(StyledButton)`
   color: ${colors.WHITE};
+  background: ${colors.BLACK};
+  box-shadow: 1px 1px 10px #ccc;
+  height: 32px;
 `
 
 const uniqueStreamUrl = (url) => `${url}?t=${Date.now()}`
@@ -45,7 +47,6 @@ class Player extends Component {
 
     this.state = {
       isLoadingAudioSrc: true,
-      liveStationInfo: null,
       streamUrl: uniqueStreamUrl(props.station.streamUrl)
     }
   }
@@ -107,19 +108,12 @@ class Player extends Component {
 
   handleSoundPlaying = () => this.setState({ isLoadingAudioSrc: false })
 
-  handleInfoResponse = (info) => this.setState({ liveStationInfo: info })
-
   render () {
     const { station, isPlaying, videoHasActiveAudio } = this.props
     const { isLoadingAudioSrc, streamUrl } = this.state
 
     return (
       <StyledPlayer.Container>
-        <StationLiveInfo
-          station={station}
-          handleInfoResponse={this.handleInfoResponse}
-        />
-
         <StyledPlayer.Inner>
           {station && (
             <StyledPlayer.StationContainer>

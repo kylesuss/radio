@@ -1,28 +1,22 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import TimeInTimezone from 'components/time-in-timezone'
-import PinIcon from 'react-icons/lib/md/place'
-import ClockIcon from 'react-icons/lib/md/access-time'
+import StationLiveInfo from 'components/station-live-info'
+import Player from 'components/player'
+import VideoPlayer from 'components/video-player'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
-import * as positioning from 'styles/positioning'
 import * as spacing from 'styles/spacing'
 import buildLocation from 'utils/build-location'
 
 const StyledStationHeader = styled.header`
-  position: sticky;
-  top: -244px;
-  z-index: 1;
-`
-
-const StyledStationStickyHeader = styled.div`
-  background: ${colors.PURE_BLACK};
-  height: ${positioning.HEIGHT_STICKY_STATION_HEADER_PX};
-  display: flex;
+  height: 230px;
+  background: ${colors.LIGHT_BLUE_BG};
+  padding: ${spacing.DOUBLE};
+  position: relative;
 `
 
 const StyledStationDetails = styled.div`
-  height: ${positioning.HEIGHT_STICKY_STATION_HEADER_PX};
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -31,21 +25,9 @@ const StyledStationDetails = styled.div`
 
 const StyledStationMeta = styled.div`
   display: flex;
-`
-
-const StyledStationDetailsTopRow = styled.div`
-  color: ${colors.WHITE};
-  text-transform: uppercase;
-  font-style: italic;
-  font-size: 13px;
-`
-
-const StyledStationDetailsBottomRow = styled.div`
-  display: flex;
-  justify-content: space-between;
   font-size: .85rem;
-  color: ${colors.LIGHT_GREY};
-  margin-top: 14px;
+  color: ${colors.BLUE_GREY};
+  margin-top: ${spacing.HALF};
 `
 
 const StyledStationName = styled.div`
@@ -53,12 +35,9 @@ const StyledStationName = styled.div`
   font-family: ${fonts.SECONDARY};
   font-weight: ${fonts.WEIGHT_BOLD};
   font-style: italic;
-  background: ${colors.PURE_WHITE};
   text-transform: uppercase;
   font-size: 36px;
   line-height: 36px;
-  padding: 6px 17px;
-  padding-right: 23px;
   margin-right: ${props => props.hasMessage ? '8px' : '0'};
 `
 
@@ -73,56 +52,42 @@ const StyledStationInfoElement = styled.div`
   }
 `
 
-const sharedIconStyled = css`
-  color: ${colors.BLUE_GREY};
-  margin-right: 4px;
-`
-
-const StyledPinIcon = styled(PinIcon)`
-  ${sharedIconStyled}
-  font-size: 18px;
-`
-
-const StyledClockIcon = styled(ClockIcon)`
-  ${sharedIconStyled}
-  font-size: 20px;
-`
-
 const StationHeader = ({ station }) => {
   return (
     <StyledStationHeader>
-      <StyledStationStickyHeader>
-        <StyledStationDetails>
-          <StyledStationDetailsTopRow>
-            <StyledStationMeta>
-              <StyledStationInfoElement>
-                <StyledPinIcon />
+      <StyledStationDetails>
+        <StyledStationName>
+          {station.name}
+        </StyledStationName>
 
-                <span>
-                  {buildLocation(
-                    station.city,
-                    station.country
-                  )}
-                </span>
-              </StyledStationInfoElement>
+        <StyledStationMeta>
+          <StyledStationInfoElement>
+            {buildLocation(
+              station.city,
+              station.country
+            )}
+          </StyledStationInfoElement>
 
-              {station.timezone && (
-                <StyledStationInfoElement>
-                  <StyledClockIcon />
+          {station.timezone && (
+            <StyledStationInfoElement>
+              <TimeInTimezone timezone={station.timezone}>
+                {(time) => time}
+              </TimeInTimezone>
+            </StyledStationInfoElement>
+          )}
+        </StyledStationMeta>
 
-                  <TimeInTimezone timezone={station.timezone} />
-                </StyledStationInfoElement>
-              )}
-            </StyledStationMeta>
-          </StyledStationDetailsTopRow>
+        <StationLiveInfo station={station} />
+      </StyledStationDetails>
 
-          <StyledStationDetailsBottomRow>
-            <StyledStationName>
-              {station.name}
-            </StyledStationName>
-          </StyledStationDetailsBottomRow>
-        </StyledStationDetails>
-      </StyledStationStickyHeader>
+      {station.video && (
+        <VideoPlayer
+          name={station.name}
+          video={station.video}
+        />
+      )}
+
+      <Player />
     </StyledStationHeader>
   )
 }

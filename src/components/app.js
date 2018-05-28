@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import Logo from 'components/logo'
-import Player from 'components/player'
+import Header from 'components/header'
+import Navigation from 'components/navigation'
 import { findStationBySlug } from 'selectors/station'
-import StyledApp from 'styled/app'
 import StyledPage from 'styled/page'
+import * as colors from 'styles/colors'
+import * as positioning from 'styles/positioning'
 import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
 import DocumentTitle from 'react-document-title'
+
+const Container = styled.div`
+  background: ${colors.WHITE};
+  margin-top: 0;
+`
+
+const Main = styled.main`
+  margin-left: ${positioning.WIDTH_LEFT_COLUMN_PX};
+`
 
 const DEFAULT_TITLE = 'Fresh Transmission - Curated Internet Radio'
 
@@ -25,18 +36,19 @@ class App extends Component {
     const { children } = this.props
 
     return (
-      <StyledApp.Container>
+      <Container>
         <DocumentTitle title={this.documentTitle} />
 
-        <Logo />
-        <Player />
+        <Header />
 
-        <StyledApp.Main>
+        <Navigation />
+
+        <Main>
           <StyledPage.Container>
             {children}
           </StyledPage.Container>
-        </StyledApp.Main>
-      </StyledApp.Container>
+        </Main>
+      </Container>
     )
   }
 }

@@ -178,7 +178,7 @@ export default [
       url: 'http://www.basso.fi/',
       display: 'basso.fi',
     },
-    description: 'Bass radio is a radio station focused on urban culture and contemporary dance music.'
+    description: 'Basso Radio is a radio station focused on urban culture and contemporary dance music.'
   }, {
     name: 'Red Bull Radio',
     streamUrl: 'http://broadcast.rbmaradio.net/main',

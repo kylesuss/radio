@@ -14,9 +14,9 @@ import { buildStationPath } from 'constants/routes'
 const StyledStationList = styled.div`
   position: absolute;
   top: 0;
+  bottom: 0;
   bottom: ${positioning.HEIGHT_PLAYER_PX};
   width: ${positioning.WIDTH_LEFT_COLUMN_PX};
-  background: ${colors.PURE_WHITE};
   overflow-y: auto;
   -webkit-overflow-scrolling: touch
 `
@@ -37,15 +37,15 @@ const StyledListItemLink = styled(({
 }) => <Link {...rest} />)`
   position: relative;
   display: flex;
-  font-size: 14px;
+  font-size: 13px;
   padding: ${spacing.HALF};
   text-decoration: none;
   transition: background ${transitions.LENGTH_COMMON_MS} ease-out;
-  background: ${props => props.isActive ? colors.LIGHT_GREY : 'transparent'};
+  background: ${props => props.isActive ? '#222' : 'transparent'};
   overflow: hidden;
 
   &:hover {
-    background: ${colors.LIGHT_GREY};
+    background: #222;
   }
 
   &:active > ${StyledLogoWrapper},
@@ -62,8 +62,8 @@ const StyledArrowIcon = styled(({
   top: 50%;
   transform: translateX(${props => props.isActive ? '0' : '24px'}) translateY(-50%) scale(1);
   transition: transform ${transitions.LENGTH_COMMON_MS} ${easing.EASE_OUT_QUINT};
-  color: ${colors.BLACK};
-  opacity: .25;
+  color: ${colors.WHITE};
+  opacity: 1;
   width: 14px;
   height: 14px;
 `
@@ -71,13 +71,7 @@ const StyledArrowIcon = styled(({
 const StyledNameText = styled.div`
   display: inline-block;
   color: ${colors.BLACK};
-`
-
-const StyledLogo = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: ${spacing.HALF};
+  color: #7a8b8f;
 `
 
 class StationList extends Component {
@@ -108,9 +102,6 @@ class StationList extends Component {
                   isActive={this.isActiveStation(station.slug)}
                   to={buildStationPath(station.slug)}
                 >
-                  <StyledLogoWrapper>
-                    <StyledLogo src={station.logo} />
-                  </StyledLogoWrapper>
                   <StyledListItemText>
                     <div>
                       <StyledNameText>

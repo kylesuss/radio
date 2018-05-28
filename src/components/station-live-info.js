@@ -100,10 +100,12 @@ class StationLiveInfo extends Component {
   }
 
   refetchLiveInfo = () => {
+    const { station } = this.props
+
     clearInterval(this.refetchInterval)
 
     this.refetchInterval = setInterval(() => {
-      this.getLiveInfo()
+      this.getLiveInfo(station.slug)
     }, REFETCH_INTERVAL)
   }
 

@@ -73,11 +73,11 @@ class Station extends Component {
 
         <StyledPage.Content>
           <StyledPage.Column>
-            <StationDetails station={activeStation} />
+            <TwitterFeed twitterHandle={activeStation.twitterHandle} />
           </StyledPage.Column>
 
           <StyledPage.Column>
-            <TwitterFeed twitterHandle={activeStation.twitterHandle} />
+            <StationDetails station={activeStation} />
           </StyledPage.Column>
         </StyledPage.Content>
       </StyledStation>

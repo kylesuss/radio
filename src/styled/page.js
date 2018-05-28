@@ -1,17 +1,17 @@
 import styled from 'styled-components'
+import * as positioning from 'styles/positioning'
 import * as spacing from 'styles/spacing'
 
 const Container = styled.div`
+  margin-top: ${positioning.HEIGHT_HEADER};
   display: flex;
   min-width: 792px;
-  min-height: calc(100vh);
-  margin: 0 ${spacing.COMMON};
 `
 
 const Content = styled.div`
   width: 100%;
   display: flex;
-  margin-top: ${spacing.DOUBLE};
+  padding: ${spacing.COMMON} ${spacing.DOUBLE};
 `
 
 const Column = styled.div`

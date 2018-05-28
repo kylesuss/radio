@@ -10,26 +10,27 @@ import * as spacing from 'styles/spacing'
 
 const REFETCH_INTERVAL = 30000 // 30 seconds
 
-const LiveInfo = styled.div`
-  margin-left: ${spacing.HALF};
-  margin-bottom: ${spacing.HALF};
+const StyledLiveInfo = styled.div`
+  height: 46px;
+  margin-top: ${spacing.HALF};
 `
 
-const Item = styled.div`
+const StyledItem = styled.div`
   display: flex;
-  flex-direction: column;
 
-  &:nth-child(n+2) {
-    margin-top: ${spacing.COMMON};
+  &:nth-child(n + 2) {
+    margin-top: 6px
   }
 `
 
-const LabelContainer = styled.div`
+const StyledLabelContainer = styled.div`
   display: flex;
 `
 
-const Label = styled.span`
-  color: #111;
+const StyledLabel = styled.span`
+  display: flex;
+  align-items: center;
+  color: ${colors.DARK_BLUE};
   font-family: ${fonts.SECONDARY};
   font-weight: ${fonts.WEIGHT_BOLD};
   font-style: italic;
@@ -42,9 +43,8 @@ const Label = styled.span`
 `
 
 const Value = styled.span`
-  color: ${colors.PURE_WHITE};
+  color: ${colors.BLUE_GREY};
   font-size: 13px;
-  margin-top: ${spacing.HALF};
   line-height: 20px;
 `
 
@@ -59,6 +59,14 @@ class StationLiveInfo extends Component {
 
   componentDidMount () {
     this.fetchStationData()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { station } = this.props
+
+    if (station.slug !== nextProps.station.slug) {
+      this.setState({ liveStationInfo: null })
+    }
   }
 
   componentDidUpdate (prevProps) {
@@ -121,45 +129,47 @@ class StationLiveInfo extends Component {
     const shouldShowCurrentShowMessage = !shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.show
     const shouldShowCurrentTrackMessage = !shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.track
 
-    return liveStationInfo ? (
-      <LiveInfo>
+    if (!liveStationInfo) { return <StyledLiveInfo /> }
+
+    return (
+      <StyledLiveInfo>
         {shouldShowInactiveMessage && (
-          <Item>
-            <LabelContainer>
-              <Label hasMessage={hasInactiveMessage}>
+          <StyledItem>
+            <StyledLabelContainer>
+              <StyledLabel hasMessage={hasInactiveMessage}>
                 Station currently inactive
-              </Label>
-            </LabelContainer>
+              </StyledLabel>
+            </StyledLabelContainer>
 
             {hasInactiveMessage && (
               <Value>{liveStationInfo.current.inactiveStatus}</Value>
             )}
-          </Item>
+          </StyledItem>
         )}
 
         {shouldShowCurrentShowMessage && (
-          <Item>
-            <LabelContainer>
-              <Label hasMessage>Show</Label>
-            </LabelContainer>
+          <StyledItem>
+            <StyledLabelContainer>
+              <StyledLabel hasMessage>Show</StyledLabel>
+            </StyledLabelContainer>
 
             <Value>{liveStationInfo.current.show}</Value>
-          </Item>
+          </StyledItem>
         )}
 
         {shouldShowCurrentTrackMessage && (
-          <Item>
-            <LabelContainer>
-              <Label hasMessage>Track</Label>
-            </LabelContainer>
+          <StyledItem>
+            <StyledLabelContainer>
+              <StyledLabel hasMessage>Track</StyledLabel>
+            </StyledLabelContainer>
 
             <Value>
               {liveStationInfo.current.track}
             </Value>
-          </Item>
+          </StyledItem>
         )}
-      </LiveInfo>
-    ) : null
+      </StyledLiveInfo>
+    )
   }
 }
 

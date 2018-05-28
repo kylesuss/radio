@@ -1,19 +1,17 @@
 import styled, { keyframes } from 'styled-components'
 import StyledButton from 'styled/button'
 import * as colors from 'styles/colors'
-import * as positioning from 'styles/positioning'
+import * as spacing from 'styles/spacing'
 
 const Container = styled.div`
-  position: fixed;
-  bottom: ${positioning.BODY_PADDING_PX};
-  left: ${positioning.BODY_PADDING_PX};
-  max-width: 200px;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50%);
 `
 
 const Inner = styled.div`
   display: flex;
   align-items: center;
-  height: ${positioning.HEIGHT_PLAYER_PX};
 `
 
 const StationContainer = styled.div`
@@ -31,7 +29,8 @@ const prevNextActiveStyles = `
 
 const PrevControls = styled.div`
   display: flex;
-  font-size: 38px;
+  align-items: center;
+  font-size: 30px;
 
   &:active {
     ${prevNextActiveStyles}
@@ -40,8 +39,9 @@ const PrevControls = styled.div`
 
 const NextControls = styled.div`
   display: flex;
-  margin-left: .2rem;
-  font-size: 38px;
+  align-items: center;
+  margin-left: ${spacing.HALF};
+  font-size: 30px;
 
   &:active {
     ${prevNextActiveStyles}
@@ -51,13 +51,13 @@ const NextControls = styled.div`
 const PlayStateControls = styled.div`
   width: 46px;
   height: 46px;
-  margin-left: .2rem;
+  margin-left: ${spacing.HALF};
 `
 
 const animatePlayStateLoading = keyframes`
   from {
     transform: scale3d(.8, .8, 1);
-    opacity: 1;
+    opacity: 0.4;
   }
 
   to {
@@ -74,9 +74,9 @@ const PlayStateInner = styled.div`
   justify-content: center;
   align-items: center;
   cursor: ${props => props.isLoading ? 'default' : 'pointer'};
-  border-radius: 50%;
   margin: 0 auto;
-  background: ${colors.LIGHT_BLUE};
+  background: ${colors.PRIMARY_BLUE};
+  box-shadow: 1px 1px 10px #ccc;
   transition: width 150ms ease-out,
               height 150ms ease-out;
 
@@ -88,8 +88,7 @@ const PlayStateInner = styled.div`
     bottom: 0;
     left: 0;
     z-index: -1;
-    background: ${colors.LIGHT_BLUE};
-    border-radius: 50%;
+    background: ${colors.PRIMARY_BLUE};
     ${props => props.isLoading && `
       animation: ${animatePlayStateLoading} 1s ease-out infinite;
     `}
@@ -98,6 +97,7 @@ const PlayStateInner = styled.div`
   &:active {
     width: 95%;
     height: 95%;
+    box-shadow: 1px 1px 4px #ccc;
   }
 
   svg {

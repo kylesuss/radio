@@ -5,12 +5,16 @@ import * as fonts from 'styles/fonts'
 import * as positioning from 'styles/positioning'
 
 const StyledLogo = styled.h1`
-  position: fixed;
   top: ${positioning.BODY_PADDING_PX};
   left: ${positioning.BODY_PADDING_PX};
-  color: ${colors.WHITE};
+  font-family: ${fonts.SECONDARY};
   font-weight: ${fonts.WEIGHT_SEMIBOLD};
+  text-transform: uppercase;
+  background: ${colors.BLACK};
+  padding: 5px 7px;
+  color: ${colors.WHITE};
   font-size: 18px;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 `

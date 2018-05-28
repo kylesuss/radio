@@ -2,7 +2,7 @@ import stationsFixtures from 'fixtures/stations'
 import sortBy from 'lodash/sortBy'
 
 const initialState = {
-  items: stationsFixtures.filter(station => station.isActive),
+  items: stationsFixtures.filter(station => station.isActive)
 }
 
 const sortItems = (items, sortOptions) => sortBy(items, (item) => (

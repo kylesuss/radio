@@ -29,12 +29,16 @@ const StyledLabel = styled.div`
   font-style: italic;
   text-transform: uppercase;
   margin-right: ${spacing.HALF};
-  width: 50px;
+  width: 60px;
 `
 
 const StyledValue = styled.div`
   color: ${colors.BLUE_GREY};
   flex: 1;
+
+  > *:nth-child(n + 2) {
+    margin-top: 12px;
+  }
 `
 
 const StationDetails = ({ station }) => (
@@ -64,13 +68,45 @@ const StationDetails = ({ station }) => (
         </StyledValue>
       </StyledStationDetailsRow>
     )}
+
+    {station.twitterHandle && (
+      <StyledStationDetailsRow>
+        <StyledLabel>
+          Twitter
+        </StyledLabel>
+
+        <StyledValue>
+          <ExternalLink href={`https://twitter.com/${station.twitterHandle}`}>
+            @{station.twitterHandle}
+          </ExternalLink>
+        </StyledValue>
+      </StyledStationDetailsRow>
+    )}
+
+    {station.archives && (
+      <StyledStationDetailsRow>
+        <StyledLabel>
+          Archives
+        </StyledLabel>
+
+        <StyledValue>
+          {station.archives.map(archive => (
+            <div>
+              <ExternalLink href={archive.url}>
+                {archive.display}
+              </ExternalLink>
+            </div>
+          ))}
+        </StyledValue>
+      </StyledStationDetailsRow>
+    )}
   </StyledStationDetails>
 )
 
 StationDetails.propTypes = {
   station: PropTypes.shape({
-    description: PropTypes.string,
-  }).isRequired,
+    description: PropTypes.string
+  }).isRequired
 }
 
 export default StationDetails

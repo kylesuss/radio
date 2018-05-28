@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
 import { playStation } from 'actions/player'
+import StationDetails from 'components/station-details'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import { findStationBySlug } from 'selectors/station'
@@ -71,7 +72,9 @@ class Station extends Component {
         <StationHeader station={activeStation} />
 
         <StyledPage.Content>
-          <StyledPage.Column />
+          <StyledPage.Column>
+            <StationDetails station={activeStation} />
+          </StyledPage.Column>
 
           <StyledPage.Column>
             <TwitterFeed twitterHandle={activeStation.twitterHandle} />

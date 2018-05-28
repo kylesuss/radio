@@ -12,6 +12,7 @@ const Content = styled.div`
   width: 100%;
   display: flex;
   padding: ${spacing.COMMON} ${spacing.DOUBLE};
+  margin-top: ${spacing.DOUBLE};
 `
 
 const Column = styled.div`

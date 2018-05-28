@@ -10,9 +10,10 @@ import * as spacing from 'styles/spacing'
 import buildLocation from 'utils/build-location'
 
 const StyledStationHeader = styled.header`
-  height: 230px;
+  height: 242px;
   background: ${colors.LIGHT_BLUE_BG};
   padding: ${spacing.DOUBLE};
+  padding-bottom: calc(${spacing.DOUBLE} + ${spacing.HALF});
   position: relative;
 `
 

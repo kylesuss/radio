@@ -14,6 +14,11 @@ export default [
       mutedUrl: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=true'
     },
     isActive: true,
+    description: 'An independent online radio station live streaming 24/7 from a reclaimed shipping container on an empty lot in NYC.',
+    web: {
+      url: 'http://www.thelotradio.com/',
+      display: 'thelotradio.com',
+    }
   }, {
     name: 'Frission Radio',
     streamUrl: 'http://frission.out.airtime.pro:8000/frission_a',
@@ -22,6 +27,11 @@ export default [
     twitterHandle: 'frissionradio',
     liveInfoUrl: 'https://frission.airtime.pro/api/live-info-v2/',
     isActive: true,
+    web: {
+      url: 'https://frissionradio.com/',
+      display: 'frissionradio.com',
+    },
+    description: 'Our global team of curators are on a mission to deliver the best in new and unearthed music for you to explore. We curate great music in all its unique forms.'
   }, {
     name: 'Le Mellotron',
     streamUrl: 'http://shouting.trinoma.net/stream/1/',
@@ -37,6 +47,10 @@ export default [
     },
     description: 'Global music radio streaming 24/7 from a bar in the heart of Paris.',
     isActive: true,
+    web: {
+      url: 'https://www.lemellotron.com/',
+      display: 'lemellotron.com',
+    }
   }, {
     name: 'LYL Radio',
     streamUrl: 'http://icecast.lyl.live/live',
@@ -47,6 +61,11 @@ export default [
     liveInfoUrl: 'https://freshtransmission.com/live-info/lyl-radio',
     timezone: 'Europe/Paris',
     isActive: true,
+    web: {
+      url: 'http://lyl.live/',
+      display: 'lyl.live',
+    },
+    description: 'Independent live webradio with physical studios in Lyon and Paris & tangible contributors from all around the globe.'
   }, {
     name: 'Soho Radio',
     streamUrl: 'https://streaming.radio.co/s57043ec0a/listen',
@@ -57,6 +76,11 @@ export default [
     liveInfoUrl: 'https://public.radio.co/stations/s57043ec0a/status',
     timezone: 'Europe/London',
     isActive: true,
+    web: {
+      url: 'http://www.sohoradiolondon.com/',
+      display: 'sohoradiolondon.com',
+    },
+    description: 'Straight from the heart of world famous Soho, London. We\'ve got the best of everything Soho has to offer; an unrivalled mix of cultures, styles and genres. From pop to punk via reggae, soul and funk.'
   }, {
     name: 'Berlin Community Radio',
     streamUrl: 'http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a',
@@ -67,6 +91,11 @@ export default [
     liveInfoUrl: 'https://berlincommunityradio.airtime.pro/api/live-info-v2/',
     timezone: 'Europe/Berlin',
     isActive: true,
+    web: {
+      url: 'http://www.berlincommunityradio.com/',
+      display: 'berlincommunityradio.com',
+    },
+    description: 'Berlin Community Radio is an online broadcasting platform presenting everything that is coming from, passing through or influencing the creative scene in Berlin.'
   }, {
     name: 'Balamii',
     streamUrl: 'http://balamii.out.airtime.pro:8000/balamii_a',
@@ -78,6 +107,10 @@ export default [
     timezone: 'Europe/London',
     description: 'Radio station broadcasting from Peckham, London & Downtown NYC',
     isActive: true,
+    web: {
+      url: 'http://player.balamii.com/',
+      display: 'player.balamii.com',
+    }
   }, {
     name: 'Noods Radio',
     streamUrl: 'http://radio.citrus3.com:8862/;stream.mp3',
@@ -88,6 +121,11 @@ export default [
     liveInfoUrl: 'https://freshtransmission.com/live-info/noods-radio',
     timezone: 'Europe/London',
     isActive: true,
+    web: {
+      url: 'http://noodsradio.com/',
+      display: 'noodsradio.com',
+    },
+    description: 'Bristol based independent radio.'
   }, {
     name: 'Worldwide FM',
     streamUrl: 'http://worldwidefm.out.airtime.pro:8000/worldwidefm_a',
@@ -96,6 +134,11 @@ export default [
     twitterHandle: 'worldwidefm',
     liveInfoUrl: 'https://worldwidefm.airtime.pro/api/live-info-v2/',
     isActive: true,
+    web: {
+      url: 'https://worldwidefm.net/',
+      display: 'worldwidefm.net',
+    },
+    description: 'A unique radio platform exploring arts, music and culture from London, Berlin, Tokyo, Kyoto, Los Angeles and beyond.'
   }, {
     name: 'Radar Radio',
     streamUrl: 'http://soho.wavestreamer.com:5831/1/;stream.mp3',
@@ -105,7 +148,7 @@ export default [
     twitterHandle: 'RadarRadioLDN',
     liveInfoUrl: 'https://freshtransmission.com/live-info/radar-radio',
     timezone: 'Europe/London',
-    isActive: false,
+    isActive: false
   }, {
     name: 'NTS Radio',
     streamUrl: 'http://stream-relay-geo.ntslive.net/stream',
@@ -117,6 +160,10 @@ export default [
     timezone: 'Europe/London',
     description: 'London based independent live radio and music platform, dedicated to championing new music and unearthing lost gems.',
     isActive: true,
+    web: {
+      url: 'https://www.nts.live/',
+      display: 'nts.live',
+    }
   }, {
     name: 'Basso Radio',
     streamUrl: 'http://stream.basso.fi:8000/stream',
@@ -127,6 +174,11 @@ export default [
     liveInfoUrl: 'https://freshtransmission.com/live-info/basso-radio',
     timezone: 'Europe/Helsinki',
     isActive: true,
+    web: {
+      url: 'http://www.basso.fi/',
+      display: 'basso.fi',
+    },
+    description: 'Bass radio is a radio station focused on urban culture and contemporary dance music.'
   }, {
     name: 'Red Bull Radio',
     streamUrl: 'http://broadcast.rbmaradio.net/main',
@@ -134,6 +186,11 @@ export default [
     country: 'Worldwide',
     twitterHandle: 'redbull_radio',
     isActive: true,
+    web: {
+      url: 'https://www.redbullradio.com/',
+      display: 'redbullradio.com',
+    },
+    description: 'The best music selection on the web.'
   }, {
     name: 'Rinse FM',
     streamUrl: 'http://streamer.dgen.net:8000/rinseradio',
@@ -144,6 +201,11 @@ export default [
     liveInfoUrl: 'https://freshtransmission.com/live-info/rinse-fm',
     timezone: 'Europe/London',
     isActive: true,
+    web: {
+      url: 'http://rinse.fm/',
+      display: 'rinse.fm',
+    },
+    description: 'Est.1994. Transmitting uncompromising and innovative music out of its East London heartland, it started life as a pirate station established by a group of friends wanting to share the music that inspired them.'
   }, {
     name: 'TEDER.FM',
     streamUrl: 'http://server1.live1.co.il:8014/teder',
@@ -154,6 +216,11 @@ export default [
     liveInfoUrl: 'https://freshtransmission.com/live-info/teder-fm',
     timezone: 'Asia/Tel_Aviv',
     isActive: true,
+    web: {
+      url: 'http://teder.fm/',
+      display: 'teder.fm',
+    },
+    description: 'Teder = radio + bar + shop + spaceship!'
   }, {
     name: 'Red Light Radio',
     streamUrl: 'http://www.michielgardner.nl:8000/redlightradio',
@@ -168,6 +235,11 @@ export default [
       url: 'https://cdn-hlm-1.streamnerd.nl/live/redlightradio/playlist.m3u8'
     },
     isActive: true,
+    web: {
+      url: 'http://redlightradio.net/',
+      display: 'redlightradio.net',
+    },
+    description: 'Red Light Radio is an online radio station broadcasting from a former prostitution window in the red light district of Amsterdam. Red Light Radio brings you daily shows of local DJ’s, live performances and cool personalities doing a one time only radio show. You can expect shows full of afro beat or shows with black metal next to live acoustic performances or DJ sets by artists.'
   }, {
     name: 'n10.as Radio',
     streamUrl: 'http://n10as.out.airtime.pro:8000/n10as_a',
@@ -178,6 +250,11 @@ export default [
     liveInfoUrl: 'https://n10as.airtime.pro/api/live-info-v2/',
     timezone: 'America/Montreal',
     isActive: true,
+    web: {
+      url: 'http://www.n10.as/',
+      display: 'n10.as',
+    },
+    description: 'Montreal & Vancouver based online radio station.'
   }, {
     name: 'Boxout.fm',
     streamUrl: 'http://boxoutfm.out.airtime.pro:8000/boxoutfm_a',
@@ -188,6 +265,11 @@ export default [
     liveInfoUrl: 'https://boxoutfm.airtime.pro/api/live-info-v2/',
     timezone: 'Asia/Kolkata',
     isActive: true,
+    web: {
+      url: 'http://boxout.fm/',
+      display: 'boxout.fm',
+    },
+    description: 'Online Community Radio from India offering a carefully-mined perspective on India’s emergent musical and cultural scenes, both on and off the Internet.'
   }, {
     name: 'Netil Radio',
     streamUrl: 'http://edge.mixlr.com/channel/otuyv',
@@ -198,6 +280,11 @@ export default [
     liveInfoUrl: 'https://api.mixlr.com/users/5498175?source=embed',
     timezone: 'Europe/London',
     isActive: true,
+    web: {
+      url: 'http://www.netilradio.com/',
+      display: 'netilradio.com',
+    },
+    description: 'Broadcasting from a converted shipping container in Netil Market, in the heart of London Fields.'
   }, {
     name: 'Radio Labici',
     streamUrl: 'http://stream.radiolabici.com:8000/stream',
@@ -207,6 +294,11 @@ export default [
     twitterHandle: 'radiolabici',
     timezone: 'America/Argentina/Buenos_Aires',
     isActive: true,
+    web: {
+      url: 'http://www.radiolabici.com/',
+      display: 'radiolabici.com',
+    },
+    description: 'Estación de radio online e independiente que emite a todo el mundo, las 24hs.'
   }, {
     name: 'Seoul Community Radio',
     streamUrl: 'http://seoulcommunityradio.out.airtime.pro:8000/seoulcommunityradio_a',
@@ -216,10 +308,15 @@ export default [
     twitterHandle: 'radio_scr',
     liveInfoUrl: 'https://seoulcommunityradio.airtime.pro/api/live-info-v2/',
     timezone: 'Asia/Seoul',
+    description: 'Seoul Community Radio (SCR) is Korea’s first radio platform dedicated to underground music + culture. Local talent, Global vibes 24/7.',
     isActive: true,
+    web: {
+      url: 'http://www.seoulcommunityradio.com/',
+      display: 'seoulcommunityradio.com',
+    }
   }, {
     name: 'KMAH Radio',
-    streamUrl: 'http://66.55.143.200/proxy/kmahradi?mp=/;stream/1',
+    streamUrl: 'http://soho.wavestreamer.com:4597/1/;stream/1',
     slug: 'kmah-radio',
     city: 'Leeds',
     country: 'UK',
@@ -227,6 +324,11 @@ export default [
     liveInfoUrl: 'https://freshtransmission.com/live-info/kmah-radio',
     timezone: 'Europe/London',
     isActive: true,
+    web: {
+      url: 'http://kmah-radio.com/',
+      display: 'kmah-radio.com',
+    },
+    description: 'Independent radio station broadcasting house, dub, funk, jazz, hip hop, soul, techno and more from the back streets of Leeds.'
   }, {
     name: 'No Fun Radio',
     streamUrl: 'http://nofun.out.airtime.pro:8000/nofun_a',
@@ -237,5 +339,10 @@ export default [
     liveInfoUrl: 'https://nofun.airtime.pro/api/live-info-v2',
     timezone: 'America/Vancouver',
     isActive: true,
+    web: {
+      url: 'http://www.nofunradio.com/',
+      display: 'nofunradio.com',
+    },
+    description: 'Transmitting live audio-visual pleasures from Vancouver\'s Downtown Eastside.'
   }
 ]

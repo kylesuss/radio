@@ -66,7 +66,7 @@ export default class TwitterFeed extends Component {
   get timelineOptions () {
     return {
       tweetLimit: TWEET_LIMIT,
-      linkColor: colors.PURPLE,
+      linkColor: colors.PRIMARY_BLUE,
       chrome: 'noheader nofooter noborders'
     }
   }

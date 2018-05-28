@@ -12,14 +12,16 @@ export default [
       type: 'iframe',
       url: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true',
       mutedUrl: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=true'
-    }
+    },
+    isActive: true,
   }, {
     name: 'Frission Radio',
     streamUrl: 'http://frission.out.airtime.pro:8000/frission_a',
     slug: 'frission-radio',
     country: 'Worldwide',
     twitterHandle: 'frissionradio',
-    liveInfoUrl: 'https://frission.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://frission.airtime.pro/api/live-info-v2/',
+    isActive: true,
   }, {
     name: 'Le Mellotron',
     streamUrl: 'http://shouting.trinoma.net/stream/1/',
@@ -33,7 +35,8 @@ export default [
       type: 'stream',
       url: 'http://www.dailymotion.com/video/x2ek01k'
     },
-    description: 'Global music radio streaming 24/7 from a bar in the heart of Paris.'
+    description: 'Global music radio streaming 24/7 from a bar in the heart of Paris.',
+    isActive: true,
   }, {
     name: 'LYL Radio',
     streamUrl: 'http://icecast.lyl.live/live',
@@ -42,7 +45,8 @@ export default [
     country: 'France',
     twitterHandle: 'lyl_radio',
     liveInfoUrl: 'https://freshtransmission.com/live-info/lyl-radio',
-    timezone: 'Europe/Paris'
+    timezone: 'Europe/Paris',
+    isActive: true,
   }, {
     name: 'Soho Radio',
     streamUrl: 'https://streaming.radio.co/s57043ec0a/listen',
@@ -51,7 +55,8 @@ export default [
     country: 'UK',
     twitterHandle: 'sohoradio',
     liveInfoUrl: 'https://public.radio.co/stations/s57043ec0a/status',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    isActive: true,
   }, {
     name: 'Berlin Community Radio',
     streamUrl: 'http://berlincommunityradio.out.airtime.pro:8000/berlincommunityradio_a',
@@ -60,7 +65,8 @@ export default [
     country: 'Germany',
     twitterHandle: 'BCR_Radio',
     liveInfoUrl: 'https://berlincommunityradio.airtime.pro/api/live-info-v2/',
-    timezone: 'Europe/Berlin'
+    timezone: 'Europe/Berlin',
+    isActive: true,
   }, {
     name: 'Balamii',
     streamUrl: 'http://balamii.out.airtime.pro:8000/balamii_a',
@@ -70,7 +76,8 @@ export default [
     twitterHandle: 'Balamii',
     liveInfoUrl: 'https://balamii.airtime.pro/api/live-info-v2/',
     timezone: 'Europe/London',
-    description: 'Radio station broadcasting from Peckham, London & Downtown NYC'
+    description: 'Radio station broadcasting from Peckham, London & Downtown NYC',
+    isActive: true,
   }, {
     name: 'Noods Radio',
     streamUrl: 'http://radio.citrus3.com:8862/;stream.mp3',
@@ -79,14 +86,16 @@ export default [
     country: 'UK',
     twitterHandle: 'noodsradio',
     liveInfoUrl: 'https://freshtransmission.com/live-info/noods-radio',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    isActive: true,
   }, {
     name: 'Worldwide FM',
     streamUrl: 'http://worldwidefm.out.airtime.pro:8000/worldwidefm_a',
     slug: 'worldwide-fm',
     country: 'Worldwide',
     twitterHandle: 'worldwidefm',
-    liveInfoUrl: 'https://worldwidefm.airtime.pro/api/live-info-v2/'
+    liveInfoUrl: 'https://worldwidefm.airtime.pro/api/live-info-v2/',
+    isActive: true,
   }, {
     name: 'Radar Radio',
     streamUrl: 'http://soho.wavestreamer.com:5831/1/;stream.mp3',
@@ -95,7 +104,8 @@ export default [
     country: 'UK',
     twitterHandle: 'RadarRadioLDN',
     liveInfoUrl: 'https://freshtransmission.com/live-info/radar-radio',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    isActive: false,
   }, {
     name: 'NTS Radio',
     streamUrl: 'http://stream-relay-geo.ntslive.net/stream',
@@ -105,7 +115,8 @@ export default [
     twitterHandle: 'ntslive',
     liveInfoUrl: 'https://www.nts.live/api/v2/live',
     timezone: 'Europe/London',
-    description: 'London based independent live radio and music platform, dedicated to championing new music and unearthing lost gems.'
+    description: 'London based independent live radio and music platform, dedicated to championing new music and unearthing lost gems.',
+    isActive: true,
   }, {
     name: 'Basso Radio',
     streamUrl: 'http://stream.basso.fi:8000/stream',
@@ -114,13 +125,15 @@ export default [
     country: 'Finland',
     twitterHandle: 'bassomedia',
     liveInfoUrl: 'https://freshtransmission.com/live-info/basso-radio',
-    timezone: 'Europe/Helsinki'
+    timezone: 'Europe/Helsinki',
+    isActive: true,
   }, {
     name: 'Red Bull Radio',
     streamUrl: 'http://broadcast.rbmaradio.net/main',
     slug: 'red-bull-radio',
     country: 'Worldwide',
-    twitterHandle: 'redbull_radio'
+    twitterHandle: 'redbull_radio',
+    isActive: true,
   }, {
     name: 'Rinse FM',
     streamUrl: 'http://streamer.dgen.net:8000/rinseradio',
@@ -129,7 +142,8 @@ export default [
     country: 'UK',
     twitterHandle: 'RinseFM',
     liveInfoUrl: 'https://freshtransmission.com/live-info/rinse-fm',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    isActive: true,
   }, {
     name: 'TEDER.FM',
     streamUrl: 'http://server1.live1.co.il:8014/teder',
@@ -138,7 +152,8 @@ export default [
     country: 'Israel',
     twitterHandle: 'teder_fm',
     liveInfoUrl: 'https://freshtransmission.com/live-info/teder-fm',
-    timezone: 'Asia/Tel_Aviv'
+    timezone: 'Asia/Tel_Aviv',
+    isActive: true,
   }, {
     name: 'Red Light Radio',
     streamUrl: 'http://www.michielgardner.nl:8000/redlightradio',
@@ -151,7 +166,8 @@ export default [
     video: {
       type: 'stream',
       url: 'https://cdn-hlm-1.streamnerd.nl/live/redlightradio/playlist.m3u8'
-    }
+    },
+    isActive: true,
   }, {
     name: 'n10.as Radio',
     streamUrl: 'http://n10as.out.airtime.pro:8000/n10as_a',
@@ -160,7 +176,8 @@ export default [
     country: 'Canada',
     twitterHandle: 'n10asradio',
     liveInfoUrl: 'https://n10as.airtime.pro/api/live-info-v2/',
-    timezone: 'America/Montreal'
+    timezone: 'America/Montreal',
+    isActive: true,
   }, {
     name: 'Boxout.fm',
     streamUrl: 'http://boxoutfm.out.airtime.pro:8000/boxoutfm_a',
@@ -169,7 +186,8 @@ export default [
     country: 'India',
     twitterHandle: 'boxoutfm',
     liveInfoUrl: 'https://boxoutfm.airtime.pro/api/live-info-v2/',
-    timezone: 'Asia/Kolkata'
+    timezone: 'Asia/Kolkata',
+    isActive: true,
   }, {
     name: 'Netil Radio',
     streamUrl: 'http://edge.mixlr.com/channel/otuyv',
@@ -178,7 +196,8 @@ export default [
     country: 'UK',
     twitterHandle: 'netilradio',
     liveInfoUrl: 'https://api.mixlr.com/users/5498175?source=embed',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    isActive: true,
   }, {
     name: 'Radio Labici',
     streamUrl: 'http://stream.radiolabici.com:8000/stream',
@@ -186,7 +205,8 @@ export default [
     city: 'Buenos Aires',
     country: 'Argentina',
     twitterHandle: 'radiolabici',
-    timezone: 'America/Argentina/Buenos_Aires'
+    timezone: 'America/Argentina/Buenos_Aires',
+    isActive: true,
   }, {
     name: 'Seoul Community Radio',
     streamUrl: 'http://seoulcommunityradio.out.airtime.pro:8000/seoulcommunityradio_a',
@@ -195,7 +215,8 @@ export default [
     country: 'South Korea',
     twitterHandle: 'radio_scr',
     liveInfoUrl: 'https://seoulcommunityradio.airtime.pro/api/live-info-v2/',
-    timezone: 'Asia/Seoul'
+    timezone: 'Asia/Seoul',
+    isActive: true,
   }, {
     name: 'KMAH Radio',
     streamUrl: 'http://66.55.143.200/proxy/kmahradi?mp=/;stream/1',
@@ -204,7 +225,8 @@ export default [
     country: 'UK',
     twitterHandle: 'kmahradio',
     liveInfoUrl: 'https://freshtransmission.com/live-info/kmah-radio',
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
+    isActive: true,
   }, {
     name: 'No Fun Radio',
     streamUrl: 'http://nofun.out.airtime.pro:8000/nofun_a',
@@ -213,6 +235,7 @@ export default [
     country: 'Canada',
     twitterHandle: 'NoFunRadio',
     liveInfoUrl: 'https://nofun.airtime.pro/api/live-info-v2',
-    timezone: 'America/Vancouver'
+    timezone: 'America/Vancouver',
+    isActive: true,
   }
 ]

@@ -1,14 +1,8 @@
 import cleanLiveInfo from 'utils/clean-live-info'
 
-export default ({ body }) => {
-  if (!body.currentlyPlayingAuto && !body.currentlyPlayingLive) {
-    return null
+export default ({ text }) => ({
+  timezone: null,
+  current: {
+    show: cleanLiveInfo(text.trim())
   }
-
-  return {
-    timezone: null,
-    current: {
-      show: cleanLiveInfo(body.currentlyPlayingLive || body.currentlyPlayingAuto)
-    }
-  }
-}
+})

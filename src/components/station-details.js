@@ -25,7 +25,7 @@ const StyledStationDetailsRow = styled.div`
 const StyledLabel = styled.div`
   color: ${colors.BLACK};
   font-family: ${fonts.SECONDARY};
-  font-weight: 500;
+  font-weight: ${fonts.WEIGHT_BOLD};
   font-style: italic;
   text-transform: uppercase;
   margin-right: ${spacing.HALF};

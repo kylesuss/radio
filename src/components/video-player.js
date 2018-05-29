@@ -11,7 +11,7 @@ import * as transitions from 'styles/transitions'
 
 const StyledVideoPlayerContainer = styled.div`
   position: absolute;
-  width: 428px;
+  width: 394px;
   top: 0;
   right: 0;
   visibility: ${props => props.hasStarted ? 'visible' : 'hidden'};

@@ -12,6 +12,7 @@ import media from 'styles/media'
 const REFETCH_INTERVAL = 30000 // 30 seconds
 
 const StyledLiveInfo = styled.div`
+  display: none;
   height: 46px;
   margin-top: ${spacing.HALF};
 `

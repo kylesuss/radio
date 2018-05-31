@@ -10,8 +10,7 @@ export default ({ body }) => {
   return {
     timezone: body.station.timezone,
     current: {
-      ...(showName ? { show: cleanLiveInfo(showName.replace(showNameTextToReplace, '')) } : {}),
-      ...(trackName ? { track: cleanLiveInfo(trackName) } : {})
+      show: cleanLiveInfo(trackName) || cleanLiveInfo(showName.replace(showNameTextToReplace, ''))
     }
   }
 }

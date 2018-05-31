@@ -19,10 +19,9 @@ const Content = styled.div`
 
 const Column = styled.div`
   flex: 1;
-  margin-bottom: 1.7rem;
+  margin-bottom: ${spacing.COMMON};
   ${media.largeScreenUp`
-    margin-bottom: 0;
-    margin-left: 1.7rem;
+    margin-left: ${spacing.DOUBLE};
   `}
 
   &:first-child {

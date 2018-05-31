@@ -12,8 +12,7 @@ import media from 'styles/media'
 const REFETCH_INTERVAL = 30000 // 30 seconds
 
 const StyledLiveInfo = styled.div`
-  display: none;
-  height: 46px;
+  height: 20px;
   margin-top: ${spacing.HALF};
 `
 
@@ -55,6 +54,8 @@ const Value = styled.span`
   font-weight: 500;
   line-height: 20px;
 `
+
+const noInfoResponse = { current: { noData: true } }
 
 class StationLiveInfo extends Component {
   static propTypes = {
@@ -127,7 +128,9 @@ class StationLiveInfo extends Component {
       body: response.body
     })
 
-    this.setState({ liveStationInfo: normalizedResponse })
+    this.setState({
+      liveStationInfo: normalizedResponse || noInfoResponse
+    })
   }
 
   render () {
@@ -137,9 +140,10 @@ class StationLiveInfo extends Component {
     const hasInactiveMessage = liveStationInfo && !!liveStationInfo.current.inactiveStatus
     const shouldShowInactiveMessage = playerHasError || hasInactiveStatus
     const shouldShowCurrentShowMessage = !shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.show
-    const shouldShowCurrentTrackMessage = !shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.track
-
-    if (!liveStationInfo) { return <StyledLiveInfo /> }
+    const shouldShowNoDataMessage = (
+      !this.liveInfoUrl ||
+      (!shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.noData)
+    )
 
     return (
       <StyledLiveInfo>
@@ -160,22 +164,20 @@ class StationLiveInfo extends Component {
         {shouldShowCurrentShowMessage && (
           <StyledItem>
             <StyledLabelContainer>
-              <StyledLabel hasMessage>Show</StyledLabel>
+              <StyledLabel hasMessage>Now Playing</StyledLabel>
             </StyledLabelContainer>
 
             <Value>{liveStationInfo.current.show}</Value>
           </StyledItem>
         )}
 
-        {shouldShowCurrentTrackMessage && (
+        {shouldShowNoDataMessage && (
           <StyledItem>
             <StyledLabelContainer>
-              <StyledLabel hasMessage>Track</StyledLabel>
+              <StyledLabel>
+                No live info
+              </StyledLabel>
             </StyledLabelContainer>
-
-            <Value>
-              {liveStationInfo.current.track}
-            </Value>
           </StyledItem>
         )}
       </StyledLiveInfo>

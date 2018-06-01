@@ -84,6 +84,7 @@ const StationHeader = ({ station }) => {
 
       {station.video && (
         <VideoPlayer
+          key={station.slug}
           name={station.name}
           video={station.video}
         />

@@ -454,7 +454,7 @@ export default [
       url: 'https://pinatamag.com/',
       display: 'pinatamag.com'
     },
-    description: 'Piñata is a Radio & Magazine based in Montpellier, France. No genre bondaries, stricly good music.',
+    description: 'Piñata is a Radio & Magazine based in Montpellier, France. No genre bondaries, strictly good music.',
     archives: [
       { url: 'https://www.mixcloud.com/pinataradio/', display: 'Mixcloud' },
       { url: 'https://soundcloud.com/pinataradio', display: 'SoundCloud' }

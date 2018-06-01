@@ -15,6 +15,7 @@ import modelSeoulCommunityRadioLiveInfo from 'models/live-info-seoul-community-r
 import modelTederFmLiveInfo from 'models/live-info-teder-fm'
 import modelBoxoutFmLiveInfo from 'models/live-info-boxout-fm'
 import modelNoFunRadioLiveInfo from 'models/live-info-no-fun-radio'
+import modelPinataRadioLiveInfo from 'models/live-info-pinata-radio'
 
 const liveInfoModels = {
   'balamii': modelAirtimeV2LiveInfo,
@@ -31,6 +32,7 @@ const liveInfoModels = {
   'no-fun-radio': modelNoFunRadioLiveInfo,
   'noods-radio': modelNoodsRadioLiveInfo,
   'nts-radio': modelNTSRadioLiveInfo,
+  'pinata-radio': modelPinataRadioLiveInfo,
   'radar-radio': modelRadarRadioLiveInfo,
   'red-light-radio': modelRedLightRadioLiveInfo,
   'rinse-fm': modelRinseFmLiveInfo,

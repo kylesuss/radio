@@ -440,5 +440,24 @@ export default [
     archives: [
       { url: 'https://www.mixcloud.com/CashmereRadio/', display: 'Mixcloud' }
     ]
+  }, {
+    name: 'Piñata Radio',
+    streamUrl: 'https://listen.radioking.com/radio/96031/stream/134656',
+    slug: 'pinata-radio',
+    city: 'Montpellier',
+    country: 'France',
+    twitterHandle: 'pinatamag',
+    liveInfoUrl: 'https://www.radioking.com/widgets/currenttrack.php?radio=96031&format=json',
+    timezone: 'Europe/Paris',
+    isActive: true,
+    web: {
+      url: 'https://pinatamag.com/',
+      display: 'pinatamag.com'
+    },
+    description: 'Piñata is a Radio & Magazine based in Montpellier, France. No genre bondaries, stricly good music.',
+    archives: [
+      { url: 'https://www.mixcloud.com/pinataradio/', display: 'Mixcloud' },
+      { url: 'https://soundcloud.com/pinataradio', display: 'SoundCloud' }
+    ]
   }
 ]

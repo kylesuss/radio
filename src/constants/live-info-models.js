@@ -21,6 +21,7 @@ const liveInfoModels = {
   'basso-radio': modelBassoRadioLiveInfo,
   'berlin-community-radio': modelAirtimeV2LiveInfo,
   'boxout-fm': modelBoxoutFmLiveInfo,
+  'cashmere-radio': modelAirtimeV2LiveInfo,
   'frission-radio': modelAirtimeV2LiveInfo,
   'kmah-radio': modelKmahRadioLiveInfo,
   'le-mellotron': modelLeMellotronInfo,

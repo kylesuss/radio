@@ -422,5 +422,23 @@ export default [
       { url: 'https://www.mixcloud.com/nofunradio/', display: 'Mixcloud' },
       { url: 'https://soundcloud.com/nofunradio', display: 'SoundCloud' }
     ]
+  }, {
+    name: 'Cashmere Radio',
+    streamUrl: 'http://cashmereradio.out.airtime.pro:8000/cashmereradio_b',
+    slug: 'cashmere-radio',
+    city: 'Berlin',
+    country: 'Germany',
+    twitterHandle: 'cashmere_radio',
+    liveInfoUrl: 'https://cashmereradio.airtime.pro/api/live-info-v2',
+    timezone: 'Europe/Berlin',
+    isActive: true,
+    web: {
+      url: 'https://cashmereradio.com/',
+      display: 'cashmereradio.com'
+    },
+    description: 'Cashmere Radio is a not-for-profit community radio station based in Lichtenberg, Berlin.',
+    archives: [
+      { url: 'https://www.mixcloud.com/CashmereRadio/', display: 'Mixcloud' }
+    ]
   }
 ]

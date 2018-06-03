@@ -19,13 +19,19 @@ import {
   findPrevStationBySlug,
   findNextStationBySlug
 } from 'selectors/station'
+import * as transitions from 'styles/transitions'
 
 const StyledSeekButton = styled(StyledButton)`
   color: ${colors.WHITE};
   background: ${colors.BLACK};
+  transition: background ${transitions.LENGTH_COMMON_MS} ease-out;
   box-shadow: 1px 1px 10px #ccc;
   width: 32px;
   height: 32px;
+
+  &:hover {
+    background: ${colors.BLACK_HOVER};
+  }
 `
 
 const StyledReversePlayIcon = styled(PlayIcon)`

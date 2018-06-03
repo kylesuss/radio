@@ -1,7 +1,9 @@
 /* New Layout */
 export const BLACK = '#111'
+export const BLACK_HOVER = '#3a3a3a'
 export const WHITE = '#fff'
 export const PRIMARY_BLUE = '#3d7ccb'
+export const PRIMARY_BLUE_HOVER = '#4589df'
 export const LIGHT_BLUE = '#9fc8ff'
 export const DARK_BLUE = '#1D1F24'
 export const LIGHT_BLUE_BG = '#F7F7FE'

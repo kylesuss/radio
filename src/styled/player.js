@@ -2,6 +2,7 @@ import styled, { keyframes } from 'styled-components'
 import StyledButton from 'styled/button'
 import * as colors from 'styles/colors'
 import * as spacing from 'styles/spacing'
+import * as transitions from 'styles/transitions'
 
 const Container = styled.div`
   position: absolute;
@@ -78,7 +79,12 @@ const PlayStateInner = styled.div`
   background: ${colors.PRIMARY_BLUE};
   box-shadow: 1px 1px 10px #ccc;
   transition: width 150ms ease-out,
-              height 150ms ease-out;
+              height 150ms ease-out,
+              background ${transitions.LENGTH_COMMON_MS} ease-out;
+
+  &:hover {
+    background: ${colors.PRIMARY_BLUE_HOVER};
+  }
 
   &::before {
     content: '';

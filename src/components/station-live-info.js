@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { get } from 'utils/async'
+import get from 'lodash/get'
+import { get as getUrl } from 'utils/async'
 import liveInfoModels from 'constants/live-info-models'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
@@ -58,10 +57,6 @@ const Value = styled.span`
 const noInfoResponse = { current: { noData: true } }
 
 class StationLiveInfo extends Component {
-  static propTypes = {
-    playerHasError: PropTypes.bool.isRequired
-  }
-
   state = {
     liveStationInfo: null
   }
@@ -104,7 +99,7 @@ class StationLiveInfo extends Component {
   }
 
   getLiveInfo = (stationSlug) => {
-    get({ url: this.liveInfoUrl })
+    getUrl({ url: this.liveInfoUrl })
       .then((response) => this.handleInfoResponse(stationSlug, response))
   }
 
@@ -134,20 +129,18 @@ class StationLiveInfo extends Component {
   }
 
   render () {
-    const { playerHasError } = this.props
     const { liveStationInfo } = this.state
-    const hasInactiveStatus = liveStationInfo && liveStationInfo.current.isInactive
-    const hasInactiveMessage = liveStationInfo && !!liveStationInfo.current.inactiveStatus
-    const shouldShowInactiveMessage = playerHasError || hasInactiveStatus
-    const shouldShowCurrentShowMessage = !shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.show
+    const hasInactiveStatus = get(liveStationInfo, 'current.isInactive')
+    const hasInactiveMessage = !!get(liveStationInfo, 'current.inactiveStatus')
+    const shouldShowCurrentShowMessage = !hasInactiveStatus && get(liveStationInfo, 'current.show')
     const shouldShowNoDataMessage = (
       !this.liveInfoUrl ||
-      (!shouldShowInactiveMessage && liveStationInfo && liveStationInfo.current.noData)
+      (!hasInactiveStatus && liveStationInfo && liveStationInfo.current.noData)
     )
 
     return (
       <StyledLiveInfo>
-        {shouldShowInactiveMessage && (
+        {hasInactiveStatus && (
           <StyledItem>
             <StyledLabelContainer>
               <StyledLabel hasMessage={hasInactiveMessage}>
@@ -185,11 +178,4 @@ class StationLiveInfo extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  playerHasError: state.player.hasError
-})
-
-export default connect(
-  mapStateToProps,
-  null
-)(StationLiveInfo)
+export default StationLiveInfo

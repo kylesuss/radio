@@ -35,11 +35,6 @@ export default function (state = initialState, action = {}) {
         ...state,
         audioPlayerVolume: constants.AUDIO_PLAYER_MAX_VOLUME
       }
-    case actions.SET_PLAYER_ERROR:
-      return {
-        ...state,
-        hasError: true
-      }
     default:
       return state
   }

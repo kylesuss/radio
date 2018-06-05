@@ -10,6 +10,11 @@
   },
   "author": "",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "post-commit": "npm test"
+    }
+  },
   "dependencies": {
     "animated-scroll-to": "1.1.7",
     "classnames": "2.2.5",
@@ -60,6 +65,7 @@
     "eslint-plugin-standard": "2.0.1",
     "file-loader": "0.9.0",
     "html-webpack-plugin": "2.24.1",
+    "husky": "1.0.0-rc.8",
     "jest": "22.4.3",
     "jest-localstorage-mock": "2.2.0",
     "jest-styled-components": "5.0.1",

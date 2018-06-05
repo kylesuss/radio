@@ -12,11 +12,6 @@ const props = {
   playerIsPlaying: false,
 }
 
-test('the document title is the default title', () => {
-  const wrapper = shallow(<App  {...props} />)
-  expect(toJson(wrapper)).toMatchSnapshot()
-})
-
 test('it shows the default title when there is no active station playing', () => {
   const wrapper = shallow(<App {...props} />)
   expect(wrapper.instance().documentTitle).toEqual(DEFAULT_TITLE)

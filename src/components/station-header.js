@@ -12,7 +12,7 @@ import buildLocation from 'utils/build-location'
 const StyledStationHeader = styled.header`
   height: 222px;
   display: flex;
-  background: ${colors.LIGHT_BLUE_BG};
+  background: ${colors.BLUE_LIGHT};
   padding: ${spacing.DOUBLE};
   padding-bottom: calc(${spacing.DOUBLE} + ${spacing.HALF});
   position: relative;

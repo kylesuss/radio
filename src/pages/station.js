@@ -9,9 +9,14 @@ import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
+import media from 'styles/media'
+import * as positioning from 'styles/positioning'
 
 const StyledStation = styled.div`
   width: 100%;
+  ${media.mediumScreenUp`
+    margin-left: ${positioning.WIDTH_LEFT_COLUMN_PX};
+  `}
 `
 
 const scrollOptions = {

@@ -6,22 +6,19 @@ import PropTypes from 'prop-types'
 import Header from 'components/header'
 import Navigation from 'components/navigation'
 import { findStationBySlug } from 'selectors/station'
-import StyledPage from 'styled/page'
 import * as colors from 'styles/colors'
-import media from 'styles/media'
 import * as positioning from 'styles/positioning'
 import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
 import DocumentTitle from 'react-document-title'
 
-const Container = styled.div`
+const StyledApp = styled.div`
   background: ${colors.WHITE};
   margin-top: 0;
 `
 
 const Main = styled.main`
-  ${media.mediumScreenUp`
-    margin-left: ${positioning.WIDTH_LEFT_COLUMN_PX};
-  `}
+  margin-top: ${positioning.HEIGHT_HEADER};
+  display: flex;
 `
 
 const DEFAULT_TITLE = 'Fresh Transmission - Curated Internet Radio'
@@ -39,7 +36,7 @@ class App extends Component {
     const { children } = this.props
 
     return (
-      <Container>
+      <StyledApp>
         <DocumentTitle title={this.documentTitle} />
 
         <Header />
@@ -47,11 +44,9 @@ class App extends Component {
         <Navigation />
 
         <Main>
-          <StyledPage.Container>
-            {children}
-          </StyledPage.Container>
+          {children}
         </Main>
-      </Container>
+      </StyledApp>
     )
   }
 }

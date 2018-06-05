@@ -1,12 +1,6 @@
 import styled from 'styled-components'
-import * as positioning from 'styles/positioning'
 import * as spacing from 'styles/spacing'
 import media from 'styles/media'
-
-const Container = styled.div`
-  margin-top: ${positioning.HEIGHT_HEADER};
-  display: flex;
-`
 
 const Content = styled.div`
   width: 100%;
@@ -30,7 +24,6 @@ const Column = styled.div`
 `
 
 export default {
-  Container,
   Content,
   Column
 }

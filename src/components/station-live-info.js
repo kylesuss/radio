@@ -36,7 +36,7 @@ const StyledLabelContainer = styled.div`
 const StyledLabel = styled.span`
   display: flex;
   align-items: center;
-  color: ${colors.DARK_BLUE};
+  color: ${colors.BLUE_DARK};
   font-family: ${fonts.SECONDARY};
   font-weight: ${fonts.WEIGHT_BOLD};
   font-style: italic;

@@ -76,14 +76,14 @@ const PlayStateInner = styled.div`
   align-items: center;
   cursor: ${props => props.isLoading ? 'default' : 'pointer'};
   margin: 0 auto;
-  background: ${colors.PRIMARY_BLUE};
+  background: ${colors.BLUE_PRIMARY};
   box-shadow: 1px 1px 10px #ccc;
   transition: width 150ms ease-out,
               height 150ms ease-out,
               background ${transitions.LENGTH_COMMON_MS} ease-out;
 
   &:hover {
-    background: ${colors.PRIMARY_BLUE_HOVER};
+    background: ${colors.BLUE_PRIMARY_HOVER};
   }
 
   &::before {
@@ -94,7 +94,7 @@ const PlayStateInner = styled.div`
     bottom: 0;
     left: 0;
     z-index: -1;
-    background: ${colors.PRIMARY_BLUE};
+    background: ${colors.BLUE_PRIMARY};
     ${props => props.isLoading && `
       animation: ${animatePlayStateLoading} 1s ease-out infinite;
     `}

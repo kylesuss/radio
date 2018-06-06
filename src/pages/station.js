@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
@@ -7,6 +8,7 @@ import { playStation } from 'actions/player'
 import StationDetails from 'components/station-details'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
+import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
 import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
 import media from 'styles/media'
@@ -99,7 +101,7 @@ const mapDispatchToProps = (dispatch) => ({
   playStation: (args) => dispatch(playStation(args))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withKeyboardShortcuts,
+  connect(mapStateToProps, mapDispatchToProps)
 )(Station)

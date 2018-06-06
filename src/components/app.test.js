@@ -1,7 +1,6 @@
 import React from 'react'
 import { App, DEFAULT_TITLE } from './app'
 import { shallow } from 'enzyme'
-import toJson from 'enzyme-to-json'
 
 jest.mock('root', () => ({
   store: jest.fn()

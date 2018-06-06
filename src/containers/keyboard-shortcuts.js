@@ -1,69 +1,89 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { togglePlayState, playStation } from 'actions/player'
 import { findPrevStationBySlug, findNextStationBySlug } from 'selectors/station'
-import { store } from '../root'
+import { buildStationPath } from 'constants/routes'
 
 const SPACE_KEY = 32
 const LEFT_ARROW_KEY = 37
 const RIGHT_ARROW_KEY = 39
 
-export default (ComposedComponent) => class extends Component {
-  componentDidMount () {
-    window.addEventListener('keydown', this.handleKeyDown)
-  }
+const withKeyboardShortcuts = (ComposedComponent) => {
+  class KeyboardShortcuts extends Component {
+    componentDidMount () {
+      window.addEventListener('keydown', this.handleKeyDown)
+    }
 
-  componentWillUnmount () {
-    window.removeEventListener('keydown', this.handleKeyDown)
-  }
+    componentWillUnmount () {
+      window.removeEventListener('keydown', this.handleKeyDown)
+    }
 
-  // TODO: Is there a better way of doing this?
-  get storeState () {
-    return store.getState()
-  }
+    playStation = (slug) => {
+      const { playStation, router } = this.props
+      playStation(slug)
+      router.push(buildStationPath(slug))
+    }
 
-  get stationList () {
-    return this.storeState.stations.items
-  }
+    handleKeyDown = (event) => {
+      switch (event.keyCode) {
+        case SPACE_KEY:
+          event.preventDefault() // Prevent scroll
+          this.handleSpaceKey()
+          break
+        case LEFT_ARROW_KEY:
+          this.handleLeftArrowKey()
+          break
+        case RIGHT_ARROW_KEY:
+          this.handleRightArrowKey()
+      }
+    }
 
-  get activeSlug () {
-    return this.storeState.player.activeStation
-  }
+    handleSpaceKey = () => this.props.togglePlayState()
 
-  handleKeyDown = (event) => {
-    switch (event.keyCode) {
-      case SPACE_KEY:
-        event.preventDefault() // Prevent scroll
-        this.handleSpaceKey()
-        break
-      case LEFT_ARROW_KEY:
-        this.handleLeftArrowKey()
-        break
-      case RIGHT_ARROW_KEY:
-        this.handleRightArrowKey()
+    handleLeftArrowKey = () => {
+      const { activeStation, stationList } = this.props
+      const prevStation = findPrevStationBySlug(stationList, activeStation)
+      this.playStation(prevStation.slug)
+    }
+
+    handleRightArrowKey = () => {
+      const { activeStation, stationList } = this.props
+      const nextStation = findNextStationBySlug(stationList, activeStation)
+      this.playStation(nextStation.slug)
+    }
+
+    render () {
+      return (
+        <ComposedComponent {...this.props} />
+      )
     }
   }
 
-  handleSpaceKey = () => store.dispatch(togglePlayState())
-
-  handleLeftArrowKey = () => {
-    const { router } = this.props
-    const prevStation = findPrevStationBySlug(this.stationList, this.activeSlug)
-
-    store.dispatch(playStation(prevStation.slug))
-    router.push(`/${prevStation.slug}`)
-  }
-
-  handleRightArrowKey = () => {
-    const { router } = this.props
-    const nextStation = findNextStationBySlug(this.stationList, this.activeSlug)
-
-    store.dispatch(playStation(nextStation.slug))
-    router.push(`/${nextStation.slug}`)
-  }
-
-  render () {
-    return (
-      <ComposedComponent {...this.props} />
-    )
-  }
+  return KeyboardShortcuts
 }
+
+const mapStateToProps = (state) => ({
+  stationList: state.stations.items,
+  activeStation: state.player.activeStation
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  playStation: (slug) => dispatch(playStation(slug)),
+  togglePlayState: () => dispatch(togglePlayState())
+})
+
+const withKeyboardShortcutsAndData = WrappedComponent => (
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withKeyboardShortcuts(WrappedComponent))
+)
+
+export {
+  withKeyboardShortcuts,
+  SPACE_KEY,
+  LEFT_ARROW_KEY,
+  RIGHT_ARROW_KEY
+}
+
+export default withKeyboardShortcutsAndData

@@ -8,7 +8,6 @@ import Navigation from 'components/navigation'
 import { findStationBySlug } from 'selectors/station'
 import * as colors from 'styles/colors'
 import * as positioning from 'styles/positioning'
-import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
 import DocumentTitle from 'react-document-title'
 
 const StyledApp = styled.div`
@@ -69,6 +68,5 @@ export {
 }
 
 export default compose(
-  withKeyboardShortcuts,
   connect(mapStateToProps)
 )(App)

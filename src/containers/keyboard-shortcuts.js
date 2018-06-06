@@ -72,11 +72,11 @@ const mapDispatchToProps = (dispatch) => ({
   togglePlayState: () => dispatch(togglePlayState())
 })
 
-const withKeyboardShortcutsAndData = WrappedComponent => (
+const withKeyboardShortcutsAndData = (ComposedComponent) => (
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(withKeyboardShortcuts(WrappedComponent))
+  )(withKeyboardShortcuts(ComposedComponent))
 )
 
 export {

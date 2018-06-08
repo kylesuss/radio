@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Header from 'components/header'
-import Navigation from 'components/navigation'
+import stationPropTypes from 'prop-types/station'
 import { findStationBySlug } from 'selectors/station'
 import * as colors from 'styles/colors'
 import * as positioning from 'styles/positioning'
@@ -40,8 +40,6 @@ class App extends Component {
 
         <Header />
 
-        <Navigation />
-
         <Main>
           {children}
         </Main>
@@ -51,14 +49,12 @@ class App extends Component {
 }
 
 App.propTypes = {
-  activeStation: PropTypes.shape({
-    name: PropTypes.string
-  }),
+  activeStation: stationPropTypes,
   playerIsPlaying: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  activeStation: findStationBySlug(state.stations.items, state.player.activeStation),
+  activeStation: findStationBySlug(state.stations.items, state.player.activeStationSlug),
   playerIsPlaying: state.player.isPlaying
 })
 

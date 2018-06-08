@@ -4,7 +4,7 @@ import * as constants from 'constants/player'
 const initialState = {
   isPlaying: false,
   hasError: false,
-  activeStation: null,
+  activeStationSlug: null,
   audioPlayerVolume: constants.AUDIO_PLAYER_MAX_VOLUME
 }
 
@@ -14,7 +14,7 @@ export default function (state = initialState, action = {}) {
       return {
         ...state,
         isPlaying: true,
-        activeStation: action.slug,
+        activeStationSlug: action.slug,
         audioPlayerVolume: constants.AUDIO_PLAYER_MAX_VOLUME,
         hasError: false
       }

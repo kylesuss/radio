@@ -76,7 +76,7 @@ const StyledNameText = styled.div`
 
 class StationList extends Component {
   static propTypes = {
-    activeStation: PropTypes.string.isRequired,
+    activeStationSlug: PropTypes.string,
     stations: PropTypes.array.isRequired
   }
 
@@ -84,7 +84,7 @@ class StationList extends Component {
     stations: []
   }
 
-  isActiveStation = (slug) => slug === this.props.activeStation
+  isActiveStation = (slug) => slug === this.props.activeStationSlug
 
   handlePlayStation = (slug) => this.props.playStation(slug)
 
@@ -125,7 +125,7 @@ class StationList extends Component {
 
 const mapStateToProps = (state) => ({
   stations: state.stations.items,
-  activeStation: state.player.activeStation
+  activeStationSlug: state.player.activeStationSlug
 })
 
 export default connect(mapStateToProps)(StationList)

@@ -41,14 +41,14 @@ const withKeyboardShortcuts = (ComposedComponent) => {
     handleSpaceKey = () => this.props.togglePlayState()
 
     handleLeftArrowKey = () => {
-      const { activeStation, stationList } = this.props
-      const prevStation = findPrevStationBySlug(stationList, activeStation)
+      const { activeStationSlug, stationList } = this.props
+      const prevStation = findPrevStationBySlug(stationList, activeStationSlug)
       this.playStation(prevStation.slug)
     }
 
     handleRightArrowKey = () => {
-      const { activeStation, stationList } = this.props
-      const nextStation = findNextStationBySlug(stationList, activeStation)
+      const { activeStationSlug, stationList } = this.props
+      const nextStation = findNextStationBySlug(stationList, activeStationSlug)
       this.playStation(nextStation.slug)
     }
 
@@ -64,7 +64,7 @@ const withKeyboardShortcuts = (ComposedComponent) => {
 
 const mapStateToProps = (state) => ({
   stationList: state.stations.items,
-  activeStation: state.player.activeStation
+  activeStationSlug: state.player.activeStationSlug
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -4,11 +4,13 @@ import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
+import Navigation from 'components/navigation'
 import { playStation } from 'actions/player'
 import StationDetails from 'components/station-details'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
+import stationPropTypes from 'prop-types/station'
 import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
 import media from 'styles/media'
@@ -26,17 +28,13 @@ const scrollOptions = {
 }
 
 class Station extends Component {
-  static propTypes = {
-    station: PropTypes.object.isRequired,
-    playStation: PropTypes.func.isRequired,
-    activeStation: PropTypes.string.isRequired
-  }
-
   constructor (props) {
     super(props)
 
     this.state = {
-      activeStation: props.station
+      // Track the visibleStation so that scroll behavior can happen
+      // before the activeStation becomes the visibleStation.
+      visibleStation: props.activeStation
     }
   }
 
@@ -46,45 +44,49 @@ class Station extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { station } = this.props
+    const { activeStation } = this.props
 
-    if (station.slug !== prevProps.station.slug) {
+    if (activeStation.slug !== prevProps.activeStation.slug) {
       animateScrollTo(0, {
         ...scrollOptions,
-        onComplete: () => this.handleScrollCompletion(station)
+        onComplete: () => this.handleScrollCompletion(activeStation)
       })
     }
   }
 
   playStation = () => {
     const { playStation } = this.props
-    const { activeStation } = this.state
+    const { visibleStation } = this.state
 
-    playStation(activeStation.slug)
+    playStation(visibleStation.slug)
   }
 
-  handleScrollCompletion = (station) => {
-    const { station: { name } } = this.props
+  handleScrollCompletion = (nextStation) => {
+    const { activeStation: { name } } = this.props
 
-    if (name !== station.name) { return }
+    if (name !== nextStation.name) { return }
 
-    this.setState({ activeStation: station }, () => this.playStation())
+    this.setState({ visibleStation: nextStation }, () => this.playStation())
   }
 
   render () {
-    const { activeStation } = this.state
+    const { visibleStation } = this.state
+
+    if (!visibleStation) { return null }
 
     return (
       <StyledStation>
-        <StationHeader station={activeStation} />
+        <Navigation />
+
+        <StationHeader station={visibleStation} />
 
         <StyledPage.Content>
           <StyledPage.Column>
-            <TwitterFeed twitterHandle={activeStation.twitterHandle} />
+            <TwitterFeed twitterHandle={visibleStation.twitterHandle} />
           </StyledPage.Column>
 
           <StyledPage.Column>
-            <StationDetails station={activeStation} />
+            <StationDetails station={visibleStation} />
           </StyledPage.Column>
         </StyledPage.Content>
       </StyledStation>
@@ -92,9 +94,13 @@ class Station extends Component {
   }
 }
 
+Station.propTypes = {
+  activeStation: stationPropTypes.isRequired,
+  playStation: PropTypes.func.isRequired
+}
+
 const mapStateToProps = (state, ownProps) => ({
-  station: findStationBySlug(state.stations.items, ownProps.params.slug),
-  activeStation: state.player.activeStation
+  activeStation: findStationBySlug(state.stations.items, ownProps.params.slug)
 })
 
 const mapDispatchToProps = (dispatch) => ({

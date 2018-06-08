@@ -14,8 +14,8 @@ import { togglePlayState, playStation } from 'actions/player'
 import { buildStationPath } from 'constants/routes'
 import PlayerLoadingIcon from 'components/player-loading-icon'
 import AudioPlayer from 'components/audio-player'
+import stationPropTypes from 'prop-types/station'
 import {
-  findStationBySlug,
   findPrevStationBySlug,
   findNextStationBySlug
 } from 'selectors/station'
@@ -41,16 +41,6 @@ const StyledReversePlayIcon = styled(PlayIcon)`
 const uniqueStreamUrl = (url) => `${url}?t=${Date.now()}`
 
 class Player extends Component {
-  static propTypes = {
-    station: PropTypes.object,
-    isPlaying: PropTypes.bool.isRequired,
-    togglePlayState: PropTypes.func.isRequired,
-    playStation: PropTypes.func.isRequired,
-    prevStation: PropTypes.object.isRequired,
-    nextStation: PropTypes.object.isRequired,
-    videoHasActiveAudio: PropTypes.bool.isRequired
-  }
-
   constructor (props) {
     super(props)
 
@@ -170,14 +160,23 @@ class Player extends Component {
   }
 }
 
+Player.propTypes = {
+  station: stationPropTypes,
+  isPlaying: PropTypes.bool.isRequired,
+  togglePlayState: PropTypes.func.isRequired,
+  playStation: PropTypes.func.isRequired,
+  prevStation: stationPropTypes,
+  nextStation: stationPropTypes,
+  videoHasActiveAudio: PropTypes.bool.isRequired
+}
+
 const mapStateToProps = (state) => {
   const { stations, player } = state
 
   return {
     isPlaying: state.player.isPlaying,
-    station: findStationBySlug(stations.items, player.activeStation),
-    prevStation: findPrevStationBySlug(stations.items, player.activeStation),
-    nextStation: findNextStationBySlug(stations.items, player.activeStation),
+    prevStation: findPrevStationBySlug(stations.items, player.activeStationSlug),
+    nextStation: findNextStationBySlug(stations.items, player.activeStationSlug),
     videoHasActiveAudio: state.video.hasActiveAudio
   }
 }

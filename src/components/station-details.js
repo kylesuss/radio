@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { ExternalLink } from 'components/link'
+import stationPropTypes from 'prop-types/station'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as spacing from 'styles/spacing'
@@ -104,9 +104,7 @@ const StationDetails = ({ station }) => (
 )
 
 StationDetails.propTypes = {
-  station: PropTypes.shape({
-    description: PropTypes.string
-  }).isRequired
+  station: stationPropTypes
 }
 
 export default StationDetails

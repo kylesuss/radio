@@ -90,7 +90,7 @@ const StationHeader = ({ station }) => {
         />
       )}
 
-      <Player />
+      <Player station={station} />
     </StyledStationHeader>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
-import { App, DEFAULT_TITLE } from './app'
 import { shallow } from 'enzyme'
+import stationFixture from 'fixtures/station'
+import { App, DEFAULT_TITLE } from './app'
 
 jest.mock('root', () => ({
   store: jest.fn()
@@ -17,7 +18,6 @@ test('it shows the default title when there is no active station playing', () =>
 })
 
 test('it shows the station title when there is an active station playing', () =>{
-  const activeStation = { name: ':name' }
-  const wrapper = shallow(<App {...props} playerIsPlaying activeStation={activeStation} />)
-  expect(wrapper.instance().documentTitle).toEqual(`${activeStation.name} | ${DEFAULT_TITLE}`)
+  const wrapper = shallow(<App {...props} playerIsPlaying activeStation={stationFixture} />)
+  expect(wrapper.instance().documentTitle).toEqual(`${stationFixture.name} | ${DEFAULT_TITLE}`)
 })

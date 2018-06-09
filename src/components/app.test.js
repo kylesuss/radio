@@ -9,7 +9,7 @@ jest.mock('root', () => ({
 
 const props = {
   activeStation: null,
-  playerIsPlaying: false,
+  playerIsPlaying: false
 }
 
 test('it shows the default title when there is no active station playing', () => {

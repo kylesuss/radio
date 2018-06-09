@@ -4,28 +4,8 @@ import PropTypes from 'prop-types'
 import Sound from 'react-sound'
 
 class AudioPlayer extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      streamUrl: props.streamUrl
-    }
-  }
-
   componentDidMount () {
     window.soundManager && window.soundManager.setup({ debugMode: false })
-  }
-
-  componentWillReceiveProps (nextProps) {
-    const { streamUrl } = this.props
-    const isChangingStreamUrls = nextProps.streamUrl !== streamUrl
-    const stateUpdates = {}
-
-    if (isChangingStreamUrls) {
-      stateUpdates.streamUrl = nextProps.streamUrl
-    }
-
-    Object.keys(stateUpdates).length && this.setState(stateUpdates)
   }
 
   get soundPlayStatus () {
@@ -39,16 +19,10 @@ class AudioPlayer extends Component {
 
   handleSoundPlaying = () => this.props.handleSoundPlaying()
 
-  handleSoundError = () => {
-    const { handleSoundError } = this.props
-    handleSoundError()
-  }
+  handleSoundError = () => this.props.handleSoundError()
 
   render () {
-    const { audioPlayerVolume } = this.props
-    const { streamUrl } = this.state
-
-    if (!streamUrl) { return null }
+    const { audioPlayerVolume, streamUrl } = this.props
 
     return (
       <Sound
@@ -72,9 +46,13 @@ AudioPlayer.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  playerIsPlaying: state.player.isPlaying,
-  audioPlayerVolume: state.player.audioPlayerVolume
+  audioPlayerVolume: state.player.audioPlayerVolume,
+  playerIsPlaying: state.player.isPlaying
 })
+
+export {
+  AudioPlayer
+}
 
 export default connect(
   mapStateToProps,

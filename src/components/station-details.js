@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ExternalLink } from 'components/link'
 import stationPropTypes from 'prop-types/station'
+import { ExternalLink } from 'styled/link'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as spacing from 'styles/spacing'

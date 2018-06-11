@@ -9,12 +9,11 @@ class AudioPlayer extends Component {
   }
 
   get soundPlayStatus () {
-    const { isPaused, playerIsPlaying } = this.props
+    const { playerIsPlaying } = this.props
 
-    if (isPaused) { return Sound.status.STOPPED }
-    if (playerIsPlaying) { return Sound.status.PLAYING }
-
-    return Sound.status.STOPPED
+    return playerIsPlaying
+      ? Sound.status.PLAYING
+      : Sound.status.STOPPED
   }
 
   handleSoundPlaying = () => this.props.handleSoundPlaying()
@@ -40,7 +39,6 @@ AudioPlayer.propTypes = {
   audioPlayerVolume: PropTypes.number.isRequired,
   handleSoundPlaying: PropTypes.func.isRequired,
   handleSoundError: PropTypes.func.isRequired,
-  isPaused: PropTypes.bool.isRequired,
   playerIsPlaying: PropTypes.bool.isRequired,
   streamUrl: PropTypes.string.isRequired
 }

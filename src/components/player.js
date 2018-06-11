@@ -4,7 +4,6 @@ import { compose } from 'redux'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import isNil from 'lodash/isNil'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
 import { togglePlayState, playStation } from 'actions/player'
@@ -150,15 +149,6 @@ class Player extends Component {
     Object.keys(stateUpdates).length && this.setState(stateUpdates)
   }
 
-  get isPaused () {
-    const { station, isPlaying } = this.props
-    return !isNil(station) && !isPlaying
-  }
-
-  get stationPath () {
-    return buildStationPath(this.props.station.slug)
-  }
-
   get playStateIcon () {
     const { isPlaying } = this.props
     const { isLoadingAudioSrc } = this.state
@@ -176,7 +166,7 @@ class Player extends Component {
     const { router, playStation } = this.props
 
     playStation(slug)
-    router.push(`/${slug}`)
+    router.push(buildStationPath(slug))
   }
 
   handleTogglePlayState = () => this.props.togglePlayState()
@@ -197,7 +187,6 @@ class Player extends Component {
           <AudioPlayer
             handleSoundPlaying={this.handleSoundPlaying}
             handleSoundError={this.handleTogglePlayState}
-            isPaused={this.isPaused}
             playerIsPlaying={isPlaying}
             streamUrl={streamUrl}
           />
@@ -230,7 +219,7 @@ Player.propTypes = {
   nextStation: stationPropTypes,
   playStation: PropTypes.func.isRequired,
   prevStation: stationPropTypes,
-  station: stationPropTypes,
+  station: stationPropTypes.isRequired,
   togglePlayState: PropTypes.func.isRequired
 }
 

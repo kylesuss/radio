@@ -13,8 +13,7 @@ const props = {
   togglePlayState: jest.fn(),
   playStation: jest.fn(),
   prevStation: prevStation,
-  nextStation: nextStation,
-  videoHasActiveAudio: false
+  nextStation: nextStation
 }
 
 test('it only renders the audio player when a streamUrl is present', () => {

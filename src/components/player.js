@@ -235,7 +235,8 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export {
-  Player
+  Player,
+  uniqueStreamUrl
 }
 
 export default compose(

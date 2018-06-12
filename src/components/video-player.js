@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
 import ReactPlayer from 'react-player'
-import { muteAudioPlayer, unmuteAudioPlayer } from 'actions/player'
-import { toggleVideoAudioState } from 'actions/video'
+import { VIDEO_TYPE_STREAM, VIDEO_TYPE_IFRAME } from 'constants/video'
 import * as colors from 'styles/colors'
 import * as spacing from 'styles/spacing'
 import * as transitions from 'styles/transitions'
@@ -50,22 +48,11 @@ const StyledPlayerOverlay = styled.div`
   background: transparent;
 `
 
-const STREAM = 'stream'
-const IFRAME = 'iframe'
-const REACT_PLAYER_MAX_VOLUME = 1
 const REACT_PLAYER_MIN_VOLUME = 0
 
 class VideoPlayer extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    playerIsPlaying: PropTypes.bool.isRequired,
-    video: PropTypes.shape({
-      type: PropTypes.oneOf([STREAM, IFRAME]).isRequired,
-      url: PropTypes.string.isRequired
-    }).isRequired
-  }
-
   state = {
+    hasError: false,
     hasStarted: false
   }
 
@@ -74,12 +61,7 @@ class VideoPlayer extends Component {
 
     if (name === nextProps.name) { return }
 
-    this.setState({ hasStarted: false })
-    this.reset()
-  }
-
-  componentWillUnmount () {
-    this.reset()
+    this.setState({ hasError: false, hasStarted: false })
   }
 
   get config () {
@@ -98,87 +80,9 @@ class VideoPlayer extends Component {
     }
   }
 
-  get iframeSrc () {
-    const { hasActiveAudio, playerIsPlaying, video } = this.props
-
-    if (!playerIsPlaying || !hasActiveAudio) {
-      return video.mutedUrl
-    }
-
-    return video.url
-  }
-
-  get reactPlayerVolume () {
-    const { hasActiveAudio, playerIsPlaying } = this.props
-
-    if (!playerIsPlaying || !hasActiveAudio) {
-      return REACT_PLAYER_MIN_VOLUME
-    }
-
-    return REACT_PLAYER_MAX_VOLUME
-  }
-
-  get isAudioInactive () {
-    const { hasActiveAudio, playerIsPlaying } = this.props
-    return !playerIsPlaying || !hasActiveAudio
-  }
-
-  get isVideoAudioActive () {
-    const { hasActiveAudio, playerIsPlaying } = this.props
-    return hasActiveAudio && playerIsPlaying
-  }
-
-  get audioMessage () {
-    const { hasActiveAudio, playerIsPlaying } = this.props
-
-    if (!hasActiveAudio) {
-      return 'Video audio inactive'
-    }
-
-    if (this.isVideoAudioActive) {
-      return 'Video audio active'
-    }
-
-    if (hasActiveAudio && !playerIsPlaying) {
-      return 'Audio paused'
-    }
-  }
-
-  reset = () => {
-    const {
-      hasActiveAudio,
-      toggleVideoAudioState,
-      unmuteAudioPlayer
-    } = this.props
-
-    if (!hasActiveAudio) { return }
-
-    toggleVideoAudioState()
-    unmuteAudioPlayer()
-  }
-
   handleStart = () => this.setState({ hasStarted: true })
 
   handleError = () => this.setState({ hasError: true })
-
-  handleToggleButtonClick = () => {
-    const {
-      hasActiveAudio,
-      toggleVideoAudioState,
-      muteAudioPlayer,
-      unmuteAudioPlayer
-    } = this.props
-
-    if (hasActiveAudio) {
-      // Video audio is going to become inactive
-      unmuteAudioPlayer()
-    } else {
-      // Video audio is going to become active
-      muteAudioPlayer()
-    }
-
-    toggleVideoAudioState()
-  }
 
   render () {
     const { video } = this.props
@@ -190,22 +94,22 @@ class VideoPlayer extends Component {
       <StyledVideoPlayerContainer hasStarted={hasStarted}>
         <StyledVideoContainer>
           <StyledVideoPlayer>
-            {video.type === STREAM && (
+            {video.type === VIDEO_TYPE_STREAM && (
               <ReactPlayer
                 playing
                 url={video.url}
                 config={this.config}
                 width="100%"
                 height="100%"
-                volume={this.reactPlayerVolume}
+                volume={REACT_PLAYER_MIN_VOLUME}
                 onStart={this.handleStart}
                 onError={this.handleError}
               />
             )}
 
-            {video.type === IFRAME && (
+            {video.type === VIDEO_TYPE_IFRAME && (
               <iframe
-                src={this.iframeSrc}
+                src={video.url}
                 width="100%"
                 height="100%"
                 frameBorder="0"
@@ -224,18 +128,15 @@ class VideoPlayer extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  hasActiveAudio: state.video.hasActiveAudio,
-  playerIsPlaying: state.player.isPlaying
-})
+VideoPlayer.propTypes = {
+  name: PropTypes.string.isRequired,
+  video: PropTypes.shape({
+    type: PropTypes.oneOf([
+      VIDEO_TYPE_STREAM,
+      VIDEO_TYPE_IFRAME
+    ]).isRequired,
+    url: PropTypes.string.isRequired
+  }).isRequired
+}
 
-const mapDispatchToProps = (dispatch) => ({
-  muteAudioPlayer: () => dispatch(muteAudioPlayer()),
-  unmuteAudioPlayer: () => dispatch(unmuteAudioPlayer()),
-  toggleVideoAudioState: () => dispatch(toggleVideoAudioState())
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(VideoPlayer)
+export default VideoPlayer

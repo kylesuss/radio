@@ -10,8 +10,7 @@ export default [
     timezone: 'America/New_York',
     video: {
       type: 'iframe',
-      url: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true',
-      mutedUrl: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=true'
+      url: 'https://livestream.com/accounts/25639407/events/7618785/player?width=640&height=360&enableInfoAndActivity=false&defaultDrawer=&autoPlay=true&mute=true'
     },
     isActive: true,
     description: 'An independent online radio station live streaming 24/7 from a reclaimed shipping container on an empty lot in NYC.',

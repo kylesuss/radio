@@ -5,11 +5,6 @@ import moment from 'moment-timezone'
 const INTERVAL = 30000 // 30 seconds
 
 class TimeInTimezone extends Component {
-  static propTypes = {
-    children: PropTypes.any.isRequired,
-    timezone: PropTypes.string.isRequired
-  }
-
   componentDidMount () {
     this.updateTimeInterval = setInterval(() => this.forceUpdate(), INTERVAL)
   }
@@ -25,6 +20,11 @@ class TimeInTimezone extends Component {
 
     return children(time)
   }
+}
+
+TimeInTimezone.propTypes = {
+  children: PropTypes.any.isRequired,
+  timezone: PropTypes.string.isRequired
 }
 
 export default TimeInTimezone

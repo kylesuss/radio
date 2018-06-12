@@ -2,11 +2,11 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment-timezone'
 
-const INTERVAL = 30000 // 30 seconds
+const UPDATE_INTERVAL = 30000 // 30 seconds
 
 class TimeInTimezone extends Component {
   componentDidMount () {
-    this.updateTimeInterval = setInterval(() => this.forceUpdate(), INTERVAL)
+    this.updateTimeInterval = setInterval(() => this.forceUpdate(), UPDATE_INTERVAL)
   }
 
   componentWillUnmount () {
@@ -23,8 +23,12 @@ class TimeInTimezone extends Component {
 }
 
 TimeInTimezone.propTypes = {
-  children: PropTypes.any.isRequired,
+  children: PropTypes.func.isRequired,
   timezone: PropTypes.string.isRequired
+}
+
+export {
+  UPDATE_INTERVAL
 }
 
 export default TimeInTimezone

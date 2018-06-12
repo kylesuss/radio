@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import ArrowIcon from 'react-icons/lib/md/play-arrow'
+import stationPropTypes from 'prop-types/station'
 import * as colors from 'styles/colors'
 import * as easing from 'styles/easing'
 import * as spacing from 'styles/spacing'
@@ -10,6 +11,8 @@ import * as positioning from 'styles/positioning'
 import * as transitions from 'styles/transitions'
 import Link from 'react-router/lib/Link'
 import { buildStationPath } from 'constants/routes'
+
+const greyBackground = '#222'
 
 const StyledStationList = styled.div`
   position: absolute;
@@ -41,11 +44,11 @@ const StyledListItemLink = styled(({
   padding: ${spacing.HALF};
   text-decoration: none;
   transition: background ${transitions.LENGTH_COMMON_MS} ease-out;
-  background: ${props => props.isActive ? '#222' : 'transparent'};
+  background: ${props => props.isActive ? greyBackground : 'transparent'};
   overflow: hidden;
 
   &:hover {
-    background: #222;
+    background: ${greyBackground};
   }
 
   &:active > ${StyledLogoWrapper},
@@ -71,56 +74,40 @@ const StyledArrowIcon = styled(({
 const StyledNameText = styled.div`
   display: inline-block;
   color: ${colors.BLACK};
-  color: #7a8b8f;
+  color: ${colors.BLUE_GREY};
 `
 
-class StationList extends Component {
-  static propTypes = {
-    activeStationSlug: PropTypes.string,
-    stations: PropTypes.array.isRequired
-  }
+const StationList = ({ activeStationSlug, stations }) => (
+  <StyledStationList>
+    {stations.map((station) => {
+      const isActiveStation = station.slug === activeStationSlug
 
-  static defaultProps = {
-    stations: []
-  }
+      return (
+        <StyledListItemLink
+          key={station.name}
+          isActive={isActiveStation}
+          to={buildStationPath(station.slug)}
+        >
+          <StyledListItemText>
+            <StyledNameText>
+              {station.name}
+            </StyledNameText>
+          </StyledListItemText>
 
-  isActiveStation = (slug) => slug === this.props.activeStationSlug
+          <StyledArrowIcon isActive={isActiveStation} />
+        </StyledListItemLink>
+      )
+    })}
+  </StyledStationList>
+)
 
-  handlePlayStation = (slug) => this.props.playStation(slug)
+StationList.propTypes = {
+  activeStationSlug: PropTypes.string,
+  stations: PropTypes.arrayOf(stationPropTypes)
+}
 
-  render () {
-    const { stations } = this.props
-
-    return (
-      <StyledStationList>
-        <div>
-          {
-            stations.map((station) => {
-              return (
-                <StyledListItemLink
-                  key={station.name}
-                  isActive={this.isActiveStation(station.slug)}
-                  to={buildStationPath(station.slug)}
-                >
-                  <StyledListItemText>
-                    <div>
-                      <StyledNameText>
-                        {station.name}
-                      </StyledNameText>
-                    </div>
-                  </StyledListItemText>
-
-                  <StyledArrowIcon
-                    isActive={this.isActiveStation(station.slug)}
-                  />
-                </StyledListItemLink>
-              )
-            })
-          }
-        </div>
-      </StyledStationList>
-    )
-  }
+StationList.defaultProps = {
+  stations: []
 }
 
 const mapStateToProps = (state) => ({

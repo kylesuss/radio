@@ -8,7 +8,6 @@ export default ({ body }) => {
   const showNameTextToReplace = ' (Follow @wwfmnowplaying Twitter for details)'
 
   return {
-    timezone: body.station.timezone,
     current: {
       show: cleanLiveInfo(trackName) || cleanLiveInfo(showName.replace(showNameTextToReplace, ''))
     }

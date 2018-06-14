@@ -7,7 +7,6 @@ export default ({ body }) => {
   if (!title) { return null }
 
   return {
-    timezone: body.time_zone,
     current: {
       show: cleanLiveInfo(title)
     }

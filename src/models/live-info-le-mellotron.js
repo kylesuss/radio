@@ -6,7 +6,6 @@ export default ({ body }) => {
   const isLive = body.live.video === '1'
 
   return {
-    timezone: null,
     current: {
       show: isLive
         ? cleanLiveInfo(body.live.status)

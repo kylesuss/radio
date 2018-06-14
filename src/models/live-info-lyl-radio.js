@@ -8,7 +8,6 @@ export default ({ body }) => {
   const status = cleanLiveInfo(body.current.name)
 
   return {
-    timezone: null,
     current: {
       ...(isInactive ? { isInactive: true, inactiveStatus: status } : { show: status })
     }

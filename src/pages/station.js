@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -10,6 +11,8 @@ import StationDetails from 'components/station-details'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
+import { buildStationPath } from 'constants/routes'
+import { DEFAULT_STREAM_NUMBER } from 'constants/player'
 import stationPropTypes from 'prop-types/station'
 import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
@@ -31,16 +34,38 @@ class Station extends Component {
   constructor (props) {
     super(props)
 
+    const streamNumber = props.params.streamNumber || DEFAULT_STREAM_NUMBER
+    // Track the visibleStation so that scroll behavior can happen
+    // before the activeStation becomes the visibleStation.
+    const visibleStation = props.activeStation
+    const hasStreamMatch = !!visibleStation.streams.find(stream => (
+      stream.number === streamNumber
+    ))
+
     this.state = {
-      // Track the visibleStation so that scroll behavior can happen
-      // before the activeStation becomes the visibleStation.
-      visibleStation: props.activeStation
+      hasStreamMatch,
+      visibleStation
     }
   }
 
   componentDidMount () {
+    this.redirectStreams()
     this.playStation()
     animateScrollTo(0, scrollOptions)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { activeStation, params } = this.props
+    const isChangingStations = activeStation.slug !== nextProps.activeStation.slug
+    const isChangingStreams = params.streamNumber !== nextProps.params.streamNumber
+    const streamNumber = nextProps.params.streamNumber || DEFAULT_STREAM_NUMBER
+    const hasStreamMatch = !!nextProps.activeStation.streams.find(stream => (
+      stream.number === streamNumber
+    ))
+
+    if (isChangingStations || isChangingStreams) {
+      this.setState({ hasStreamMatch })
+    }
   }
 
   componentDidUpdate (prevProps) {
@@ -52,6 +77,15 @@ class Station extends Component {
         onComplete: () => this.handleScrollCompletion(activeStation)
       })
     }
+  }
+
+  redirectStreams = () => {
+    const { router } = this.props
+    const { hasStreamMatch, visibleStation } = this.state
+
+    if (hasStreamMatch) { return }
+
+    router.push(buildStationPath(visibleStation.slug))
   }
 
   playStation = () => {
@@ -70,9 +104,9 @@ class Station extends Component {
   }
 
   render () {
-    const { visibleStation } = this.state
+    const { hasStreamMatch, visibleStation } = this.state
 
-    if (!visibleStation) { return null }
+    if (!visibleStation || !hasStreamMatch) { return null }
 
     return (
       <StyledStation>
@@ -109,5 +143,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
   withKeyboardShortcuts,
+  withRouter,
   connect(mapStateToProps, mapDispatchToProps)
 )(Station)

@@ -3,12 +3,10 @@ import { VIDEO_TYPE_STREAM, VIDEO_TYPE_IFRAME } from 'constants/video'
 
 const station = PropTypes.shape({
   name: PropTypes.string.isRequired,
-  streamUrl: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   city: PropTypes.string,
   country: PropTypes.string,
   twitterHandle: PropTypes.string.isRequired,
-  liveInfoUrl: PropTypes.string,
   timezone: PropTypes.string,
   video: PropTypes.shape({
     type: PropTypes.oneOf([VIDEO_TYPE_STREAM, VIDEO_TYPE_IFRAME]).isRequired,
@@ -24,7 +22,11 @@ const station = PropTypes.shape({
   archives: PropTypes.arrayOf(PropTypes.shape({
     url: PropTypes.string.isRequired,
     display: PropTypes.string.isRequired
-  }))
+  })),
+  streams: PropTypes.arrayOf(PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    liveInfoUrl: PropTypes.string
+  })).isRequired
 })
 
 export default station

@@ -4,6 +4,7 @@ import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
 import PlayerLoadingIcon from 'components/player-loading-icon'
 import { buildStationPath } from 'constants/routes'
+import { DEFAULT_STREAM_NUMBER } from 'constants/player'
 import stationFixture from 'fixtures/station'
 import { Player, uniqueStreamUrl } from './player'
 import AudioPlayer from './audio-player'
@@ -20,6 +21,7 @@ const props = {
   prevStation: prevStation,
   router: { push: jest.fn() },
   station: stationFixture,
+  streamNumber: DEFAULT_STREAM_NUMBER,
   togglePlayState: jest.fn()
 }
 
@@ -99,7 +101,11 @@ describe('prop changes', () => {
       station: {
         ...props.station,
         slug: nextStationSlug,
-        streamUrl: nextStationStreamUrl
+        streams: [{
+          number: DEFAULT_STREAM_NUMBER,
+          url: nextStationStreamUrl,
+          liveInfoUrl: ':nextStationLiveInfoUrl'
+        }]
       }
     }
 
@@ -125,7 +131,7 @@ describe('prop changes', () => {
     wrapper.instance().componentWillReceiveProps(playingProps)
     wrapper.setProps({ isPlaying: true })
 
-    expect(wrapper.state('streamUrl')).toEqual(uniqueStreamUrl(props.station.streamUrl))
+    expect(wrapper.state('streamUrl')).toEqual(uniqueStreamUrl(props.station.streams[0].url))
     expect(wrapper.state('isLoadingAudioSrc')).toEqual(true)
   })
 })

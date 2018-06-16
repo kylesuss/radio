@@ -9,6 +9,7 @@ import PauseIcon from 'react-icons/lib/md/pause'
 import { togglePlayState, playStation } from 'actions/player'
 import AudioPlayer from 'components/audio-player'
 import PlayerLoadingIcon from 'components/player-loading-icon'
+import { DEFAULT_STREAM_NUMBER } from 'constants/player'
 import { buildStationPath } from 'constants/routes'
 import stationPropTypes from 'prop-types/station'
 import { findPrevStationBySlug, findNextStationBySlug } from 'selectors/station'
@@ -119,34 +120,54 @@ const StyledPlayStateButton = styled(StyledButton)`
 
 const uniqueStreamUrl = (url) => `${url}?t=${Date.now()}`
 
+const getStream = (streams, number) => (
+  streams.find(stream => stream.number === number)
+)
+
 class Player extends Component {
   constructor (props) {
     super(props)
 
+    const stream = getStream(props.station.streams, props.streamNumber)
+
     this.state = {
       isLoadingAudioSrc: true,
-      streamUrl: uniqueStreamUrl(props.station.streamUrl)
+      streamUrl: uniqueStreamUrl(stream.url)
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    const { isPlaying, station } = this.props
-    const isChangingStations = nextProps.station.slug !== station.slug
-    const isStartingToPlay = nextProps.isPlaying && !isPlaying
+    const { isPlaying, station, streamNumber } = this.props
     const isStartingToPause = !nextProps.isPlaying && isPlaying
-    const stateUpdates = {}
-
-    if (isChangingStations || isStartingToPlay) {
-      stateUpdates.streamUrl = uniqueStreamUrl(nextProps.station.streamUrl)
-      stateUpdates.isLoadingAudioSrc = true
-    }
 
     if (isStartingToPause) {
-      stateUpdates.streamUrl = null
-      stateUpdates.isLoadingAudioSrc = false
+      this.setState({ streamUrl: null, isLoadingAudioSrc: false })
+      return
     }
 
-    Object.keys(stateUpdates).length && this.setState(stateUpdates)
+    const isChangingStations = nextProps.station.slug !== station.slug
+    const isStartingToPlay = nextProps.isPlaying && !isPlaying
+    const isChangingStreams = nextProps.streamNumber !== streamNumber
+    const isChangingCurrentStationStream = !isChangingStations && isChangingStreams
+    const nextStream = getStream(nextProps.station.streams, nextProps.streamNumber)
+
+    const hasNewStream = (
+      isChangingStations ||
+      isStartingToPlay ||
+      isChangingCurrentStationStream
+    )
+
+    if (!hasNewStream) { return }
+
+    this.setState({
+      streamUrl: uniqueStreamUrl(nextStream.url),
+      isLoadingAudioSrc: true
+    })
+  }
+
+  get activeStream () {
+    const { station, streamNumber } = this.props
+    return station.streams.find(stream => stream.number === streamNumber)
   }
 
   get playStateIcon () {
@@ -220,7 +241,12 @@ Player.propTypes = {
   playStation: PropTypes.func.isRequired,
   prevStation: stationPropTypes,
   station: stationPropTypes.isRequired,
+  streamNumber: PropTypes.string,
   togglePlayState: PropTypes.func.isRequired
+}
+
+Player.defaultProps = {
+  streamNumber: DEFAULT_STREAM_NUMBER
 }
 
 const mapStateToProps = (state) => ({

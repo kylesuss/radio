@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import {
@@ -9,6 +10,7 @@ import {
   LIVE_INFO_INACTIVE_STATUS,
   LIVE_INFO_NO_DATA_STATUS
 } from 'constants/live-info'
+import { DEFAULT_STREAM_NUMBER } from 'constants/player'
 import stationPropTypes from 'prop-types/station'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
@@ -97,8 +99,11 @@ class StationLiveInfo extends Component {
   }
 
   get liveInfoUrl () {
-    const { station } = this.props
-    return station.liveInfoUrl
+    const { station, streamNumber } = this.props
+
+    return station.streams.find(stream => (
+      stream.number === streamNumber
+    )).liveInfoUrl
   }
 
   get modelInfoResponse () {
@@ -190,7 +195,12 @@ class StationLiveInfo extends Component {
 }
 
 StationLiveInfo.propTypes = {
-  station: stationPropTypes.isRequired
+  station: stationPropTypes.isRequired,
+  streamNumber: PropTypes.string
+}
+
+StationLiveInfo.defaultProps = {
+  streamNumber: DEFAULT_STREAM_NUMBER
 }
 
 export {

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { withRouter } from 'react-router'
 import TimeInTimezone from 'components/time-in-timezone'
 import StationLiveInfo from 'components/station-live-info'
 import Player from 'components/player'
@@ -54,45 +55,49 @@ const StyledStationInfoElement = styled.div`
   }
 `
 
-const StationHeader = ({ station }) => {
-  return (
-    <StyledStationHeader>
-      <StyledStationDetails>
-        <StyledStationName>
-          {station.name}
-        </StyledStationName>
+const StationHeader = ({ station, params }) => (
+  <StyledStationHeader>
+    <StyledStationDetails>
+      <StyledStationName>
+        {station.name}
+      </StyledStationName>
 
-        <StyledStationMeta>
-          <StyledStationInfoElement>
-            {buildLocation(
-              station.city,
-              station.country
-            )}
-          </StyledStationInfoElement>
-
-          {station.timezone && (
-            <StyledStationInfoElement>
-              <TimeInTimezone timezone={station.timezone}>
-                {(time) => time}
-              </TimeInTimezone>
-            </StyledStationInfoElement>
+      <StyledStationMeta>
+        <StyledStationInfoElement>
+          {buildLocation(
+            station.city,
+            station.country
           )}
-        </StyledStationMeta>
+        </StyledStationInfoElement>
 
-        <StationLiveInfo station={station} />
-      </StyledStationDetails>
+        {station.timezone && (
+          <StyledStationInfoElement>
+            <TimeInTimezone timezone={station.timezone}>
+              {(time) => time}
+            </TimeInTimezone>
+          </StyledStationInfoElement>
+        )}
+      </StyledStationMeta>
 
-      {station.video && (
-        <VideoPlayer
-          key={station.slug}
-          name={station.name}
-          video={station.video}
-        />
-      )}
+      <StationLiveInfo
+        station={station}
+        streamNumber={params.streamNumber}
+      />
+    </StyledStationDetails>
 
-      <Player station={station} />
-    </StyledStationHeader>
-  )
-}
+    {station.video && (
+      <VideoPlayer
+        key={station.slug}
+        name={station.name}
+        video={station.video}
+      />
+    )}
 
-export default StationHeader
+    <Player
+      station={station}
+      streamNumber={params.streamNumber}
+    />
+  </StyledStationHeader>
+)
+
+export default withRouter(StationHeader)

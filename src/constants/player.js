@@ -1,2 +1,3 @@
 export const AUDIO_PLAYER_MAX_VOLUME = 100
 export const AUDIO_PLAYER_MIN_VOLUME = 0
+export const DEFAULT_STREAM_NUMBER = '1'

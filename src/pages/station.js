@@ -30,20 +30,20 @@ const scrollOptions = {
   speed: 400
 }
 
+const findStreamMatch = (station, streamNumber = DEFAULT_STREAM_NUMBER) => (
+  station.streams.find(stream => stream.number === streamNumber)
+)
+
 class Station extends Component {
   constructor (props) {
     super(props)
 
-    const streamNumber = props.params.streamNumber || DEFAULT_STREAM_NUMBER
     // Track the visibleStation so that scroll behavior can happen
     // before the activeStation becomes the visibleStation.
     const visibleStation = props.activeStation
-    const hasStreamMatch = !!visibleStation.streams.find(stream => (
-      stream.number === streamNumber
-    ))
 
     this.state = {
-      hasStreamMatch,
+      hasStreamMatch: !!findStreamMatch(visibleStation, props.params.streamNumber),
       visibleStation
     }
   }
@@ -58,13 +58,11 @@ class Station extends Component {
     const { activeStation, params } = this.props
     const isChangingStations = activeStation.slug !== nextProps.activeStation.slug
     const isChangingStreams = params.streamNumber !== nextProps.params.streamNumber
-    const streamNumber = nextProps.params.streamNumber || DEFAULT_STREAM_NUMBER
-    const hasStreamMatch = !!nextProps.activeStation.streams.find(stream => (
-      stream.number === streamNumber
-    ))
 
     if (isChangingStations || isChangingStreams) {
-      this.setState({ hasStreamMatch })
+      this.setState({
+        hasStreamMatch: !!findStreamMatch(nextProps.activeStation, nextProps.params.streamNumber)
+      })
     }
   }
 

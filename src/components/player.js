@@ -131,7 +131,7 @@ class Player extends Component {
     const stream = getStream(props.station.streams, props.streamNumber)
 
     this.state = {
-      isLoadingAudioSrc: true,
+      isLoadingAudioSrc: props.isPlaying,
       streamUrl: uniqueStreamUrl(stream.url)
     }
   }

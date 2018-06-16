@@ -50,7 +50,6 @@ class Station extends Component {
 
   componentDidMount () {
     this.redirectStreams()
-    this.playStation()
     animateScrollTo(0, scrollOptions)
   }
 

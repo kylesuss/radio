@@ -73,8 +73,12 @@ const StyledArrowIcon = styled(({
 
 const StyledNameText = styled.div`
   display: inline-block;
-  color: ${colors.BLACK};
   color: ${colors.BLUE_GREY};
+  transition: color ${transitions.LENGTH_COMMON_MS} ease-out;
+
+  ${StyledListItemLink}:hover & {
+    color: ${colors.BLUE_LIGHT};
+  }
 `
 
 const StationList = ({ activeStationSlug, stations }) => (

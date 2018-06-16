@@ -8,13 +8,13 @@ import * as spacing from 'styles/spacing'
 
 const StyledStationDetails = styled.div`
   font-size: 13px;
-  line-height: 16px;
+  line-height: 18px;
 `
 
 const StyledStationDetailsRow = styled.div`
   display: flex;
   padding-top: ${spacing.HALF};
-  padding-bottom: ${spacing.HALF};
+  padding-bottom: ${props => props.withLink ? `calc(${spacing.HALF} + 3px)` : spacing.HALF};
   border-bottom: 1px solid #eee;
 
   &:last-child {
@@ -30,6 +30,7 @@ const StyledLabel = styled.div`
   text-transform: uppercase;
   margin-right: ${spacing.HALF};
   width: 60px;
+  padding-top: 1px;
 `
 
 const StyledValue = styled.div`
@@ -56,7 +57,7 @@ const StationDetails = ({ station }) => (
     )}
 
     {station.web && (
-      <StyledStationDetailsRow>
+      <StyledStationDetailsRow withLink>
         <StyledLabel>
           Web
         </StyledLabel>
@@ -70,7 +71,7 @@ const StationDetails = ({ station }) => (
     )}
 
     {station.twitterHandle && (
-      <StyledStationDetailsRow>
+      <StyledStationDetailsRow withLink>
         <StyledLabel>
           Twitter
         </StyledLabel>
@@ -84,7 +85,7 @@ const StationDetails = ({ station }) => (
     )}
 
     {station.archives && (
-      <StyledStationDetailsRow>
+      <StyledStationDetailsRow withLink>
         <StyledLabel>
           Archives
         </StyledLabel>

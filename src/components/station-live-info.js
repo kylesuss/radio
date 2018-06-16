@@ -21,7 +21,7 @@ const REFETCH_INTERVAL = 30000 // 30 seconds
 
 const StyledLiveInfo = styled.div`
   height: 20px;
-  margin-top: ${spacing.HALF};
+  margin-top: calc(${spacing.HALF} + 2px);
 `
 
 const StyledItem = styled.div`
@@ -59,7 +59,7 @@ const StyledLabel = styled.span`
 const Value = styled.span`
   color: ${colors.BLACK};
   font-size: 13px;
-  font-weight: 500;
+  font-weight: ${fonts.WEIGHT_SEMIBOLD};
   line-height: 20px;
 `
 

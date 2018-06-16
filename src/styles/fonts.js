@@ -1,4 +1,4 @@
-export const PRIMARY = "'Poppins', sans-serif"
+export const PRIMARY = "'Open Sans', sans-serif"
 export const SECONDARY = "'PT Sans', sans-serif"
 
 export const WEIGHT_NORMAL = 400

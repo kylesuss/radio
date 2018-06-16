@@ -9,6 +9,7 @@ import {
   LIVE_INFO_INACTIVE_STATUS,
   LIVE_INFO_NO_DATA_STATUS
 } from 'constants/live-info'
+import stationPropTypes from 'prop-types/station'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as spacing from 'styles/spacing'
@@ -186,6 +187,14 @@ class StationLiveInfo extends Component {
       </StyledLiveInfo>
     )
   }
+}
+
+StationLiveInfo.propTypes = {
+  station: stationPropTypes.isRequired
+}
+
+export {
+  REFETCH_INTERVAL
 }
 
 export default StationLiveInfo

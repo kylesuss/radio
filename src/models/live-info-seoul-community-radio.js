@@ -1,13 +1,6 @@
-import cleanLiveInfo from 'utils/clean-live-info'
+import get from 'lodash/get'
+import { LIVE_INFO_CURRENT_KEY } from 'constants/live-info'
 
-export default ({ body }) => {
-  if (!body.shows.current) { return null }
-
-  const isInactive = !body.tracks.current
-
-  return {
-    current: {
-      ...(isInactive ? { isInactive: true } : { show: cleanLiveInfo(body.tracks.current.name) })
-    }
-  }
-}
+export default ({ body }) => ({
+  [LIVE_INFO_CURRENT_KEY]: get(body, 'tracks.current.name')
+})

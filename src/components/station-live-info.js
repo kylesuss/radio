@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import get from 'lodash/get'
-import { get as getUrl } from 'utils/async'
-import liveInfoModels from 'constants/live-info-models'
+import {
+  LIVE_INFO_MODELS,
+  LIVE_INFO_CURRENT_KEY,
+  LIVE_INFO_STATUS_KEY,
+  LIVE_INFO_ACTIVE_STATUS,
+  LIVE_INFO_INACTIVE_STATUS,
+  LIVE_INFO_NO_DATA_STATUS
+} from 'constants/live-info'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as spacing from 'styles/spacing'
 import media from 'styles/media'
+import { get as getUrl } from 'utils/async'
+import cleanLiveInfo from 'utils/clean-live-info'
 
 const REFETCH_INTERVAL = 30000 // 30 seconds
 
@@ -44,7 +52,7 @@ const StyledLabel = styled.span`
   text-transform: uppercase;
   font-size: 13px;
   padding: 2px 6px;
-  margin-right: ${props => props.hasMessage ? '8px' : '0'};
+  margin-right: 8px;
 `
 
 const Value = styled.span`
@@ -54,10 +62,11 @@ const Value = styled.span`
   line-height: 20px;
 `
 
-const noInfoResponse = { current: { noData: true } }
+const NO_LIVE_INFO_MESSAGE = 'No live info'
 
 class StationLiveInfo extends Component {
   state = {
+    isLoading: false,
     liveStationInfo: null
   }
 
@@ -91,16 +100,44 @@ class StationLiveInfo extends Component {
     return station.liveInfoUrl
   }
 
+  get modelInfoResponse () {
+    const { station } = this.props
+    return LIVE_INFO_MODELS[station.slug]
+  }
+
+  get labelMessage () {
+    const { liveStationInfo } = this.state
+
+    if (!this.liveInfoUrl) { return NO_LIVE_INFO_MESSAGE }
+
+    switch (get(liveStationInfo, `${LIVE_INFO_STATUS_KEY}`)) {
+      case LIVE_INFO_ACTIVE_STATUS:
+        return 'Now playing'
+      case LIVE_INFO_INACTIVE_STATUS:
+        return 'Station currently inactive'
+      case LIVE_INFO_NO_DATA_STATUS:
+      default:
+        return NO_LIVE_INFO_MESSAGE
+    }
+  }
+
   fetchStationData = () => {
     const { station } = this.props
+
     if (!this.liveInfoUrl) { return }
-    this.getLiveInfo(station.slug)
-    this.refetchLiveInfo()
+
+    this.setState({ isLoading: true }, () => {
+      this.getLiveInfo(station.slug)
+      this.refetchLiveInfo()
+    })
   }
 
   getLiveInfo = (stationSlug) => {
     getUrl({ url: this.liveInfoUrl })
-      .then((response) => this.handleInfoResponse(stationSlug, response))
+      .then((response) => {
+        this.setState({ isLoading: false })
+        this.handleInfoResponse(stationSlug, response)
+      })
   }
 
   refetchLiveInfo = () => {
@@ -118,61 +155,34 @@ class StationLiveInfo extends Component {
 
     if (stationSlug !== station.slug) { return }
 
-    const normalizedResponse = liveInfoModels[station.slug]({
+    const normalizedResponse = this.modelInfoResponse({
       text: response.text,
       body: response.body
     })
 
-    this.setState({
-      liveStationInfo: normalizedResponse || noInfoResponse
-    })
+    this.setState({ liveStationInfo: cleanLiveInfo(normalizedResponse) })
   }
 
   render () {
-    const { liveStationInfo } = this.state
-    const hasInactiveStatus = get(liveStationInfo, 'current.isInactive')
-    const hasInactiveMessage = !!get(liveStationInfo, 'current.inactiveStatus')
-    const shouldShowCurrentShowMessage = !hasInactiveStatus && get(liveStationInfo, 'current.show')
-    const shouldShowNoDataMessage = (
-      !this.liveInfoUrl ||
-      (!hasInactiveStatus && liveStationInfo && liveStationInfo.current.noData)
-    )
+    const { isLoading, liveStationInfo } = this.state
 
     return (
       <StyledLiveInfo>
-        {hasInactiveStatus && (
-          <StyledItem>
-            <StyledLabelContainer>
-              <StyledLabel hasMessage={hasInactiveMessage}>
-                Station currently inactive
-              </StyledLabel>
-            </StyledLabelContainer>
-
-            {hasInactiveMessage && (
-              <Value>{liveStationInfo.current.inactiveStatus}</Value>
-            )}
-          </StyledItem>
-        )}
-
-        {shouldShowCurrentShowMessage && (
-          <StyledItem>
-            <StyledLabelContainer>
-              <StyledLabel hasMessage>Now Playing</StyledLabel>
-            </StyledLabelContainer>
-
-            <Value>{liveStationInfo.current.show}</Value>
-          </StyledItem>
-        )}
-
-        {shouldShowNoDataMessage && (
-          <StyledItem>
+        <StyledItem>
+          {!isLoading && (
             <StyledLabelContainer>
               <StyledLabel>
-                No live info
+                {this.labelMessage}
               </StyledLabel>
             </StyledLabelContainer>
-          </StyledItem>
-        )}
+          )}
+
+          {liveStationInfo && (
+            <Value>
+              {liveStationInfo[LIVE_INFO_CURRENT_KEY]}
+            </Value>
+          )}
+        </StyledItem>
       </StyledLiveInfo>
     )
   }

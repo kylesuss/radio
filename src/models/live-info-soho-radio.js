@@ -1,9 +1,11 @@
-import modelRadioCoLiveInfo from 'models/live-info-radio-co'
+import get from 'lodash/get'
+import { LIVE_INFO_CURRENT_KEY } from 'constants/live-info'
 
 export default ({ body }) => {
-  if (body.current_track.title === 'Soho Radio') {
-    return null
-  }
+  const title = get(body, 'current_track.title')
+  const withFillerTitle = title === 'Soho Radio'
 
-  return modelRadioCoLiveInfo({ body })
+  return {
+    [LIVE_INFO_CURRENT_KEY]: withFillerTitle ? null : title
+  }
 }

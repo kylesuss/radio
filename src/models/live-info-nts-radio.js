@@ -1,15 +1,10 @@
-import cleanLiveInfo from 'utils/clean-live-info'
+import get from 'lodash/get'
+import { LIVE_INFO_CURRENT_KEY } from 'constants/live-info'
 
 export default ({ body }) => {
-  if (!body.results) { return null }
-
   const channel1 = body.results.find(result => result.channel_name === '1')
 
-  if (!channel1) { return null }
-
   return {
-    current: {
-      show: cleanLiveInfo(channel1.now.broadcast_title)
-    }
+    [LIVE_INFO_CURRENT_KEY]: get(channel1, 'now.broadcast_title')
   }
 }

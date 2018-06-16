@@ -1,15 +1,12 @@
-import cleanLiveInfo from 'utils/clean-live-info'
+import get from 'lodash/get'
+import { LIVE_INFO_CURRENT_KEY } from 'constants/live-info'
 
 export default ({ body }) => {
-  if (!body.track) { return null }
-
   const isLive = body.live.video === '1'
 
   return {
-    current: {
-      show: isLive
-        ? cleanLiveInfo(body.live.status)
-        : cleanLiveInfo(body.track.display)
-    }
+    [LIVE_INFO_CURRENT_KEY]: isLive
+      ? get(body, 'live.status') || get(body, 'track.display')
+      : get(body, 'track.display')
   }
 }

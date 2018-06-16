@@ -1,7 +1,5 @@
-import cleanLiveInfo from 'utils/clean-live-info'
+import { LIVE_INFO_CURRENT_KEY } from 'constants/live-info'
 
 export default ({ body }) => ({
-  current: {
-    show: cleanLiveInfo(`${body.artist} - ${body.title}`)
-  }
+  [LIVE_INFO_CURRENT_KEY]: `${body.artist} - ${body.title}`
 })

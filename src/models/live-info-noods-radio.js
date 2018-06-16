@@ -1,7 +1,5 @@
-import cleanLiveInfo from 'utils/clean-live-info'
+import { LIVE_INFO_CURRENT_KEY } from 'constants/live-info'
 
-export default ({ text }) => ({
-  current: {
-    show: cleanLiveInfo(text.trim())
-  }
+export default ({ text = '' }) => ({
+  [LIVE_INFO_CURRENT_KEY]: text.trim()
 })

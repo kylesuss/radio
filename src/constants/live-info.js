@@ -8,20 +8,17 @@ import modelNoodsRadioLiveInfo from 'models/live-info-noods-radio'
 import modelWorldWideFmLiveInfo from 'models/live-info-worldwide-fm'
 import modelNTSRadioLiveInfo from 'models/live-info-nts-radio'
 import modelKmahRadioLiveInfo from 'models/live-info-kmah-radio'
-import modelRadarRadioLiveInfo from 'models/live-info-radar-radio'
 import modelBassoRadioLiveInfo from 'models/live-info-basso-radio'
 import modelRinseFmLiveInfo from 'models/live-info-rinse-fm'
 import modelSeoulCommunityRadioLiveInfo from 'models/live-info-seoul-community-radio'
 import modelTederFmLiveInfo from 'models/live-info-teder-fm'
-import modelBoxoutFmLiveInfo from 'models/live-info-boxout-fm'
-import modelNoFunRadioLiveInfo from 'models/live-info-no-fun-radio'
 import modelPinataRadioLiveInfo from 'models/live-info-pinata-radio'
 
-const liveInfoModels = {
+export const LIVE_INFO_MODELS = {
   'balamii': modelAirtimeV2LiveInfo,
   'basso-radio': modelBassoRadioLiveInfo,
   'berlin-community-radio': modelAirtimeV2LiveInfo,
-  'boxout-fm': modelBoxoutFmLiveInfo,
+  'boxout-fm': modelAirtimeV2LiveInfo,
   'cashmere-radio': modelAirtimeV2LiveInfo,
   'frission-radio': modelAirtimeV2LiveInfo,
   'kmah-radio': modelKmahRadioLiveInfo,
@@ -29,11 +26,10 @@ const liveInfoModels = {
   'lyl-radio': modelLiveInfoLylRadio,
   'n10as-radio': modelAirtimeV2LiveInfo,
   'netil-radio': modelNetilRadioLiveInfo,
-  'no-fun-radio': modelNoFunRadioLiveInfo,
+  'no-fun-radio': modelAirtimeV2LiveInfo,
   'noods-radio': modelNoodsRadioLiveInfo,
   'nts-radio': modelNTSRadioLiveInfo,
   'pinata-radio': modelPinataRadioLiveInfo,
-  'radar-radio': modelRadarRadioLiveInfo,
   'red-light-radio': modelRedLightRadioLiveInfo,
   'rinse-fm': modelRinseFmLiveInfo,
   'seoul-community-radio': modelSeoulCommunityRadioLiveInfo,
@@ -43,4 +39,8 @@ const liveInfoModels = {
   'worldwide-fm': modelWorldWideFmLiveInfo
 }
 
-export default liveInfoModels
+export const LIVE_INFO_ACTIVE_STATUS = 'ACTIVE'
+export const LIVE_INFO_INACTIVE_STATUS = 'INACTIVE'
+export const LIVE_INFO_NO_DATA_STATUS = 'NO_DATA'
+export const LIVE_INFO_CURRENT_KEY = 'current'
+export const LIVE_INFO_STATUS_KEY = 'status'

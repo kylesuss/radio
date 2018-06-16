@@ -1,11 +1,6 @@
-import cleanLiveInfo from 'utils/clean-live-info'
+import get from 'lodash/get'
+import { LIVE_INFO_CURRENT_KEY } from 'constants/live-info'
 
-export default ({ body }) => {
-  if (!body.shows.current) { return null }
-
-  return {
-    current: {
-      show: cleanLiveInfo(body.shows.current.name)
-    }
-  }
-}
+export default ({ body }) => ({
+  [LIVE_INFO_CURRENT_KEY]: get(body, 'shows.current.name')
+})

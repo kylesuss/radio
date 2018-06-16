@@ -1,18 +1,21 @@
-import cleanLiveInfo from 'utils/clean-live-info'
+import get from 'lodash/get'
+import {
+  LIVE_INFO_CURRENT_KEY,
+  LIVE_INFO_STATUS_KEY,
+  LIVE_INFO_ACTIVE_STATUS,
+  LIVE_INFO_INACTIVE_STATUS
+} from 'constants/live-info'
 
-export default ({ text }) => {
+export default ({ text = '' }) => {
   const parser = new window.DOMParser()
   const dom = parser.parseFromString(text, 'text/html')
   const nameNode = dom.querySelector('#currentlyPlaying .showname')
-
-  if (!nameNode || !nameNode.textContent) { return }
-
-  const isInactive = !!nameNode.textContent.match(/Back at midday/)
-  const status = cleanLiveInfo(nameNode.textContent)
+  const isInactive = !!get(nameNode, 'textContent', '').match(/Back at midday/)
 
   return {
-    current: {
-      ...(isInactive ? { isInactive: true, inactiveStatus: status } : { show: status })
-    }
+    [LIVE_INFO_STATUS_KEY]: isInactive
+      ? LIVE_INFO_INACTIVE_STATUS
+      : LIVE_INFO_ACTIVE_STATUS,
+    [LIVE_INFO_CURRENT_KEY]: nameNode.textContent
   }
 }

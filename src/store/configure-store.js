@@ -1,8 +1,6 @@
 import rootReducer from 'reducers'
-import { createStore, compose, applyMiddleware } from 'redux'
+import { createStore, compose } from 'redux'
 import persistState, { mergePersistedState } from 'redux-localstorage'
-import browserHistory from 'react-router/lib/browserHistory'
-import { routerMiddleware } from 'react-router-redux'
 import adapter from 'redux-localstorage/lib/adapters/localStorage'
 import filter from 'redux-localstorage-filter'
 
@@ -29,9 +27,6 @@ const storage = compose(
 )(adapter(window.localStorage))
 
 const enhancer = compose(
-  applyMiddleware(
-    routerMiddleware(browserHistory)
-  ),
   persistState(storage, 'app'),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 )

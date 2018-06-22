@@ -1,7 +1,7 @@
 import React, { Component, createElement } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { compose } from 'redux'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
@@ -184,10 +184,10 @@ class Player extends Component {
   }
 
   playStation = (slug) => {
-    const { router, playStation } = this.props
+    const { history, playStation } = this.props
 
     playStation(slug)
-    router.push(buildStationPath(slug))
+    history.push(buildStationPath(slug))
   }
 
   handleTogglePlayState = () => this.props.togglePlayState()
@@ -236,6 +236,9 @@ class Player extends Component {
 }
 
 Player.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
   isPlaying: PropTypes.bool.isRequired,
   nextStation: stationPropTypes,
   playStation: PropTypes.func.isRequired,

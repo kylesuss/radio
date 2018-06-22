@@ -62,7 +62,7 @@ const config = {
 }
 
 if (isDev) {
-  config.devtool = 'cheap-module-eval-source-map'
+  config.devtool = 'source-map'
   config.devServer = { historyApiFallback: true }
   config.module.preLoaders.push({
     test: /\.(js|jsx)$/,

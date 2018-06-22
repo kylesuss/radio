@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -43,7 +43,7 @@ class Station extends Component {
     const visibleStation = props.activeStation
 
     this.state = {
-      hasStreamMatch: !!findStreamMatch(visibleStation, props.params.streamNumber),
+      hasStreamMatch: !!findStreamMatch(visibleStation, props.match.params.streamNumber),
       visibleStation
     }
   }
@@ -54,13 +54,13 @@ class Station extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const { activeStation, params } = this.props
+    const { activeStation, match: { params } } = this.props
     const isChangingStations = activeStation.slug !== nextProps.activeStation.slug
-    const isChangingStreams = params.streamNumber !== nextProps.params.streamNumber
+    const isChangingStreams = params.streamNumber !== nextProps.match.params.streamNumber
 
     if (isChangingStations || isChangingStreams) {
       this.setState({
-        hasStreamMatch: !!findStreamMatch(nextProps.activeStation, nextProps.params.streamNumber)
+        hasStreamMatch: !!findStreamMatch(nextProps.activeStation, nextProps.match.params.streamNumber)
       })
     }
   }
@@ -77,12 +77,12 @@ class Station extends Component {
   }
 
   redirectStreams = () => {
-    const { router } = this.props
+    const { history } = this.props
     const { hasStreamMatch, visibleStation } = this.state
 
     if (hasStreamMatch) { return }
 
-    router.push(buildStationPath(visibleStation.slug))
+    history.push(buildStationPath(visibleStation.slug))
   }
 
   playStation = () => {
@@ -127,11 +127,14 @@ class Station extends Component {
 
 Station.propTypes = {
   activeStation: stationPropTypes.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
   playStation: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  activeStation: findStationBySlug(state.stations.items, ownProps.params.slug)
+  activeStation: findStationBySlug(state.stations.items, ownProps.match.params.slug)
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,10 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 import TimeInTimezone from 'components/time-in-timezone'
 import StationLiveInfo from 'components/station-live-info'
 import Player from 'components/player'
 import VideoPlayer from 'components/video-player'
+import stationPropTypes from 'prop-types/station'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as spacing from 'styles/spacing'
@@ -55,7 +57,7 @@ const StyledStationInfoElement = styled.div`
   }
 `
 
-const StationHeader = ({ station, params }) => (
+const StationHeader = ({ station, match }) => (
   <StyledStationHeader>
     <StyledStationDetails>
       <StyledStationName>
@@ -81,7 +83,7 @@ const StationHeader = ({ station, params }) => (
 
       <StationLiveInfo
         station={station}
-        streamNumber={params.streamNumber}
+        streamNumber={match.params.streamNumber}
       />
     </StyledStationDetails>
 
@@ -95,9 +97,18 @@ const StationHeader = ({ station, params }) => (
 
     <Player
       station={station}
-      streamNumber={params.streamNumber}
+      streamNumber={match.params.streamNumber}
     />
   </StyledStationHeader>
 )
+
+StationHeader.propTypes = {
+  station: stationPropTypes,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      streamNumber: PropTypes.string
+    })
+  })
+}
 
 export default withRouter(StationHeader)

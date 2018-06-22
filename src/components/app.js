@@ -2,13 +2,17 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import DocumentTitle from 'react-document-title'
+import { Switch, Redirect, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Header from 'components/header'
+import Station from 'pages/station'
+import { STATION_PATH, buildStationPath } from 'constants/routes'
 import stationPropTypes from 'prop-types/station'
 import { findStationBySlug } from 'selectors/station'
 import * as colors from 'styles/colors'
 import * as positioning from 'styles/positioning'
-import DocumentTitle from 'react-document-title'
+import randomStation from 'utils/random-station'
 
 const StyledApp = styled.div`
   background: ${colors.WHITE};
@@ -32,8 +36,6 @@ class App extends Component {
   }
 
   render () {
-    const { children } = this.props
-
     return (
       <StyledApp>
         <DocumentTitle title={this.documentTitle} />
@@ -41,7 +43,10 @@ class App extends Component {
         <Header />
 
         <Main>
-          {children}
+          <Switch>
+            <Route path={STATION_PATH} component={Station} />
+            <Redirect to={buildStationPath(randomStation.slug)} />
+          </Switch>
         </Main>
       </StyledApp>
     )

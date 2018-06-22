@@ -10,6 +10,11 @@ const initialState = {
 
 export default function (state = initialState, action = {}) {
   switch (action.type) {
+    case actions.INIT_PLAYER:
+      return {
+        ...state,
+        activeStationSlug: action.slug
+      }
     case actions.PLAY_STATION:
       return {
         ...state,

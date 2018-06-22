@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import DocumentTitle from 'react-document-title'
 import { Switch, Redirect, Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import Header from 'components/header'
 import Station from 'pages/station'
 import { STATION_PATH, buildStationPath } from 'constants/routes'
@@ -28,9 +27,9 @@ const DEFAULT_TITLE = 'Fresh Transmission - Curated Internet Radio'
 
 class App extends Component {
   get documentTitle () {
-    const { activeStation, playerIsPlaying } = this.props
+    const { activeStation } = this.props
 
-    return activeStation && playerIsPlaying
+    return activeStation
       ? `${activeStation.name} | ${DEFAULT_TITLE}`
       : DEFAULT_TITLE
   }
@@ -54,13 +53,11 @@ class App extends Component {
 }
 
 App.propTypes = {
-  activeStation: stationPropTypes,
-  playerIsPlaying: PropTypes.bool.isRequired
+  activeStation: stationPropTypes
 }
 
 const mapStateToProps = (state) => ({
-  activeStation: findStationBySlug(state.stations.items, state.player.activeStationSlug),
-  playerIsPlaying: state.player.isPlaying
+  activeStation: findStationBySlug(state.stations.items, state.player.activeStationSlug)
 })
 
 export {

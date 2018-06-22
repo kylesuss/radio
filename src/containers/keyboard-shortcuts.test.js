@@ -2,7 +2,6 @@ import React from 'react'
 import { mount } from 'enzyme'
 import toJson from 'enzyme-to-json'
 import { buildStationPath } from 'constants/routes'
-import { findPrevStationBySlug, findNextStationBySlug } from 'selectors/station'
 import {
   withKeyboardShortcuts,
   SPACE_KEY,
@@ -10,18 +9,15 @@ import {
   RIGHT_ARROW_KEY
 } from './keyboard-shortcuts'
 
-jest.mock('selectors/station', () => ({
-  findPrevStationBySlug: jest.fn(() => ({ slug: ':prevStationSlug' })),
-  findNextStationBySlug: jest.fn(() => ({ slug: ':nextStationSlug' }))
-}))
-
 const TestComponent = () => <div>test</div>
 
 const Shortcuts = withKeyboardShortcuts(TestComponent)
 
 const props = {
-  playStation: jest.fn(),
-  router: { push: jest.fn() },
+  history: { push: jest.fn() },
+  match: { params: { streamNumber: ':streamNumber' } },
+  nextStationUrl: ':nextStationUrl',
+  prevStationUrl: ':prevStationUrl',
   togglePlayState: jest.fn()
 }
 
@@ -57,24 +53,20 @@ describe('event handler behavior', () => {
   })
 
   test('it handles the left arrow key', () => {
-    const prevStationSlug = ':prevStationSlug'
     const event = { keyCode: LEFT_ARROW_KEY }
     window.addEventListener = buildMockEventListener(event)
 
     const wrapper = mount(<Shortcuts {...props} />)
 
-    expect(props.playStation).toHaveBeenCalledWith(prevStationSlug)
-    expect(props.router.push).toHaveBeenCalledWith(buildStationPath(prevStationSlug))
+    expect(props.history.push).toHaveBeenCalledWith(props.prevStationUrl)
   })
 
   test('it handles the right arrow key', () => {
-    const nextStationSlug = ':nextStationSlug'
     const event = { keyCode: RIGHT_ARROW_KEY }
     window.addEventListener = buildMockEventListener(event)
 
     const wrapper = mount(<Shortcuts {...props} />)
 
-    expect(props.playStation).toHaveBeenCalledWith(nextStationSlug)
-    expect(props.router.push).toHaveBeenCalledWith(buildStationPath(nextStationSlug))
+    expect(props.history.push).toHaveBeenCalledWith(props.nextStationUrl)
   })
 })

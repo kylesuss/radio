@@ -230,7 +230,11 @@ export default [
     ],
     streams: [{
       number: '1',
-      url: 'http://stream-relay-geo.ntslive.net/stream',
+      url: 'https://stream-relay-geo.ntslive.net/stream',
+      liveInfoUrl: 'https://www.nts.live/api/v2/live'
+    }, {
+      number: '2',
+      url: 'https://stream-relay-geo.ntslive.net/stream2',
       liveInfoUrl: 'https://www.nts.live/api/v2/live'
     }]
   }, {
@@ -240,7 +244,7 @@ export default [
     country: 'Finland',
     twitterHandle: 'Bassomedia',
     timezone: 'Europe/Helsinki',
-    isActive: true,
+    isActive: false,
     web: {
       url: 'http://www.basso.fi/',
       display: 'basso.fi'

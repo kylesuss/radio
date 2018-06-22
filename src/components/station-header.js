@@ -7,18 +7,22 @@ import StationLiveInfo from 'components/station-live-info'
 import Player from 'components/player'
 import VideoPlayer from 'components/video-player'
 import stationPropTypes from 'prop-types/station'
+import StreamsTabs from 'components/streams-tabs'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
 import * as spacing from 'styles/spacing'
 import buildLocation from 'utils/build-location'
 
 const StyledStationHeader = styled.header`
-  height: 222px;
+  height: 236px;
   display: flex;
   background: ${colors.BLUE_LIGHT};
   padding: ${spacing.DOUBLE};
   padding-bottom: calc(${spacing.DOUBLE} + ${spacing.HALF});
   position: relative;
+  ${props => props.hasMultipleStreams && `
+    padding-top: calc(${spacing.DOUBLE} + 30px);
+  `}
 `
 
 const StyledStationDetails = styled.div`
@@ -57,58 +61,70 @@ const StyledStationInfoElement = styled.div`
   }
 `
 
-const StationHeader = ({ station, match }) => (
-  <StyledStationHeader>
-    <StyledStationDetails>
-      <StyledStationName>
-        {station.name}
-      </StyledStationName>
+const StationHeader = ({ station, match }) => {
+  const hasMultipleStreams = station.streams.length > 1
 
-      <StyledStationMeta>
-        <StyledStationInfoElement>
-          {buildLocation(
-            station.city,
-            station.country
-          )}
-        </StyledStationInfoElement>
+  return (
+    <StyledStationHeader hasMultipleStreams={hasMultipleStreams}>
+      {hasMultipleStreams && (
+        <StreamsTabs
+          stationSlug={station.slug}
+          streamNumber={match.params.streamNumber}
+          streams={station.streams}
+        />
+      )}
 
-        {station.timezone && (
+      <StyledStationDetails>
+        <StyledStationName>
+          {station.name}
+        </StyledStationName>
+
+        <StyledStationMeta>
           <StyledStationInfoElement>
-            <TimeInTimezone timezone={station.timezone}>
-              {(time) => time}
-            </TimeInTimezone>
+            {buildLocation(
+              station.city,
+              station.country
+            )}
           </StyledStationInfoElement>
-        )}
-      </StyledStationMeta>
 
-      <StationLiveInfo
+          {station.timezone && (
+            <StyledStationInfoElement>
+              <TimeInTimezone timezone={station.timezone}>
+                {(time) => time}
+              </TimeInTimezone>
+            </StyledStationInfoElement>
+          )}
+        </StyledStationMeta>
+
+        <StationLiveInfo
+          station={station}
+          streamNumber={match.params.streamNumber}
+        />
+      </StyledStationDetails>
+
+      {station.video && (
+        <VideoPlayer
+          key={station.slug}
+          name={station.name}
+          video={station.video}
+        />
+      )}
+
+      <Player
         station={station}
         streamNumber={match.params.streamNumber}
       />
-    </StyledStationDetails>
-
-    {station.video && (
-      <VideoPlayer
-        key={station.slug}
-        name={station.name}
-        video={station.video}
-      />
-    )}
-
-    <Player
-      station={station}
-      streamNumber={match.params.streamNumber}
-    />
-  </StyledStationHeader>
-)
+    </StyledStationHeader>
+  )
+}
 
 StationHeader.propTypes = {
   station: stationPropTypes,
   match: PropTypes.shape({
     params: PropTypes.shape({
       streamNumber: PropTypes.string
-    })
-  })
+    }).isRequired
+  }).isRequired
 }
 
 export default withRouter(StationHeader)

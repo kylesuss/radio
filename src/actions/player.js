@@ -22,3 +22,10 @@ export const UNMUTE_AUDIO_PLAYER = 'UNMUTE_AUDIO_PLAYER'
 export const unmuteAudioPlayer = () => ({
   type: UNMUTE_AUDIO_PLAYER
 })
+
+export const INIT_PLAYER = 'INIT_PLAYER'
+
+export const initPlayer = (slug) => ({
+  type: INIT_PLAYER,
+  slug
+})

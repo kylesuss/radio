@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { togglePlayState, playStation } from 'actions/player'
-import { findPrevStationBySlug, findNextStationBySlug } from 'selectors/station'
-import { buildStationPath } from 'constants/routes'
+import { withRouter } from 'react-router-dom'
+import { compose } from 'redux'
+import { togglePlayState } from 'actions/player'
+import { findPrevStationUrl, findNextStationUrl } from 'selectors/station'
 
 const SPACE_KEY = 32
 const LEFT_ARROW_KEY = 37
@@ -16,12 +18,6 @@ const withKeyboardShortcuts = (ComposedComponent) => {
 
     componentWillUnmount () {
       window.removeEventListener('keydown', this.handleKeyDown)
-    }
-
-    playStation = (slug) => {
-      const { playStation, router } = this.props
-      playStation(slug)
-      router.push(buildStationPath(slug))
     }
 
     handleKeyDown = (event) => {
@@ -41,42 +37,60 @@ const withKeyboardShortcuts = (ComposedComponent) => {
     handleSpaceKey = () => this.props.togglePlayState()
 
     handleLeftArrowKey = () => {
-      const { activeStationSlug, stationList } = this.props
-      const prevStation = findPrevStationBySlug(stationList, activeStationSlug)
-      this.playStation(prevStation.slug)
+      const { history, prevStationUrl } = this.props
+      history.push(prevStationUrl)
     }
 
     handleRightArrowKey = () => {
-      const { activeStationSlug, stationList } = this.props
-      const nextStation = findNextStationBySlug(stationList, activeStationSlug)
-      this.playStation(nextStation.slug)
+      const { history, nextStationUrl } = this.props
+      console.log(nextStationUrl)
+      history.push(nextStationUrl)
     }
 
     render () {
+      // eslint-disable-next-line no-unused-vars
+      const { match, nextStationUrl, prevStationUrl, togglePlayState, ...rest } = this.props
+
       return (
-        <ComposedComponent {...this.props} />
+        <ComposedComponent {...rest} />
       )
     }
+  }
+
+  KeyboardShortcuts.propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        streamNumber: PropTypes.string.isRequired
+      }).isRequired
+    }).isRequired,
+    nextStationUrl: PropTypes.string,
+    prevStationUrl: PropTypes.string
   }
 
   return KeyboardShortcuts
 }
 
-const mapStateToProps = (state) => ({
-  stationList: state.stations.items,
-  activeStationSlug: state.player.activeStationSlug
-})
+const mapStateToProps = (state, ownProps) => {
+  const { player: { activeStationSlug }, stations: { items } } = state
+  const currentStreamNumber = ownProps.match.params.streamNumber
+
+  return {
+    nextStationUrl: findNextStationUrl(items, activeStationSlug, currentStreamNumber),
+    prevStationUrl: findPrevStationUrl(items, activeStationSlug, currentStreamNumber)
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
-  playStation: (slug) => dispatch(playStation(slug)),
   togglePlayState: () => dispatch(togglePlayState())
 })
 
 const withKeyboardShortcutsAndData = (ComposedComponent) => (
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(withKeyboardShortcuts(ComposedComponent))
+  compose(
+    withRouter,
+    // mapStateToProps requires props from withRouter
+    connect(mapStateToProps, mapDispatchToProps),
+    withKeyboardShortcuts
+  )(ComposedComponent)
 )
 
 export {

@@ -1,18 +1,17 @@
 import React, { Component, createElement } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { compose } from 'redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
-import { togglePlayState, playStation } from 'actions/player'
+import { togglePlayState } from 'actions/player'
 import AudioPlayer from 'components/audio-player'
 import PlayerLoadingIcon from 'components/player-loading-icon'
 import { DEFAULT_STREAM_NUMBER } from 'constants/player'
-import { buildStationPath } from 'constants/routes'
 import stationPropTypes from 'prop-types/station'
-import { findPrevStationBySlug, findNextStationBySlug } from 'selectors/station'
+import { findPrevStationUrl, findNextStationUrl } from 'selectors/station'
 import StyledButton from 'styled/button'
 import * as colors from 'styles/colors'
 import * as spacing from 'styles/spacing'
@@ -34,7 +33,10 @@ const buttonActiveTransform = `
   transform: translateX(1px) translateY(1px);
 `
 
-const StyledSeekButton = styled(StyledButton)`
+const StyledSeekLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 20px;
   width: 32px;
   height: 32px;
@@ -132,7 +134,7 @@ class Player extends Component {
 
     this.state = {
       isLoadingAudioSrc: props.isPlaying,
-      streamUrl: uniqueStreamUrl(stream.url)
+      streamUrl: props.isPlaying ? uniqueStreamUrl(stream.url) : null
     }
   }
 
@@ -183,23 +185,12 @@ class Player extends Component {
       : createElement(PlayIcon)
   }
 
-  playStation = (slug) => {
-    const { history, playStation } = this.props
-
-    playStation(slug)
-    history.push(buildStationPath(slug))
-  }
-
   handleTogglePlayState = () => this.props.togglePlayState()
-
-  handleNextClick = () => this.playStation(this.props.nextStation.slug)
-
-  handlePrevClick = () => this.playStation(this.props.prevStation.slug)
 
   handleSoundPlaying = () => this.setState({ isLoadingAudioSrc: false })
 
   render () {
-    const { isPlaying } = this.props
+    const { isPlaying, nextStationUrl, prevStationUrl } = this.props
     const { isLoadingAudioSrc, streamUrl } = this.state
 
     return (
@@ -214,9 +205,9 @@ class Player extends Component {
         )}
 
         <StyledControls>
-          <StyledSeekButton onClick={this.handlePrevClick}>
+          <StyledSeekLink to={prevStationUrl}>
             <StyledReversePlayIcon />
-          </StyledSeekButton>
+          </StyledSeekLink>
 
           <StyledPlayStateButton
             onClick={this.handleTogglePlayState}
@@ -226,9 +217,9 @@ class Player extends Component {
             {this.playStateIcon}
           </StyledPlayStateButton>
 
-          <StyledSeekButton onClick={this.handleNextClick}>
+          <StyledSeekLink to={nextStationUrl}>
             <PlayIcon />
-          </StyledSeekButton>
+          </StyledSeekLink>
         </StyledControls>
       </StyledPlayer>
     )
@@ -240,9 +231,7 @@ Player.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
   isPlaying: PropTypes.bool.isRequired,
-  nextStation: stationPropTypes,
-  playStation: PropTypes.func.isRequired,
-  prevStation: stationPropTypes,
+  prevStationUrl: PropTypes.string,
   station: stationPropTypes.isRequired,
   streamNumber: PropTypes.string,
   togglePlayState: PropTypes.func.isRequired
@@ -252,14 +241,18 @@ Player.defaultProps = {
   streamNumber: DEFAULT_STREAM_NUMBER
 }
 
-const mapStateToProps = (state) => ({
-  isPlaying: state.player.isPlaying,
-  nextStation: findNextStationBySlug(state.stations.items, state.player.activeStationSlug),
-  prevStation: findPrevStationBySlug(state.stations.items, state.player.activeStationSlug)
-})
+const mapStateToProps = (state, ownProps) => {
+  const { player: { activeStationSlug }, stations: { items } } = state
+  const currentStreamNumber = ownProps.match.params.streamNumber
+
+  return {
+    isPlaying: state.player.isPlaying,
+    nextStationUrl: findNextStationUrl(items, activeStationSlug, currentStreamNumber),
+    prevStationUrl: findPrevStationUrl(items, activeStationSlug, currentStreamNumber)
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
-  playStation: (args) => dispatch(playStation(args)),
   togglePlayState: () => dispatch(togglePlayState())
 })
 
@@ -270,5 +263,6 @@ export {
 
 export default compose(
   withRouter,
+  // mapStateToProps requires props from withRouter
   connect(mapStateToProps, mapDispatchToProps)
 )(Player)

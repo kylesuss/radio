@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
 import Navigation from 'components/navigation'
-import { playStation } from 'actions/player'
+import { initPlayer, playStation } from 'actions/player'
 import StationDetails from 'components/station-details'
 import StationHeader from 'components/station-header'
 import TwitterFeed from 'components/twitter-feed'
 import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
 import { buildStationPath } from 'constants/routes'
-import { DEFAULT_STREAM_NUMBER } from 'constants/player'
 import stationPropTypes from 'prop-types/station'
 import { findStationBySlug } from 'selectors/station'
 import StyledPage from 'styled/page'
@@ -30,94 +29,70 @@ const scrollOptions = {
   speed: 400
 }
 
-const findStreamMatch = (station, streamNumber = DEFAULT_STREAM_NUMBER) => (
-  station.streams.find(stream => stream.number === streamNumber)
-)
-
 class Station extends Component {
-  constructor (props) {
-    super(props)
-
-    // Track the visibleStation so that scroll behavior can happen
-    // before the activeStation becomes the visibleStation.
-    const visibleStation = props.activeStation
-
-    this.state = {
-      hasStreamMatch: !!findStreamMatch(visibleStation, props.match.params.streamNumber),
-      visibleStation
-    }
-  }
-
   componentDidMount () {
-    this.redirectStreams()
+    const { activeStation, initPlayer } = this.props
+
+    initPlayer(activeStation.slug)
     animateScrollTo(0, scrollOptions)
   }
 
   componentWillReceiveProps (nextProps) {
-    const { activeStation, match: { params } } = this.props
-    const isChangingStations = activeStation.slug !== nextProps.activeStation.slug
-    const isChangingStreams = params.streamNumber !== nextProps.match.params.streamNumber
+    const { activeStation, playStation } = this.props
+    const isChangingStation = activeStation.slug !== nextProps.activeStation.slug
 
-    if (isChangingStations || isChangingStreams) {
-      this.setState({
-        hasStreamMatch: !!findStreamMatch(nextProps.activeStation, nextProps.match.params.streamNumber)
-      })
-    }
+    if (!isChangingStation) { return }
+
+    playStation(nextProps.activeStation.slug)
   }
 
   componentDidUpdate (prevProps) {
     const { activeStation } = this.props
+    const isChangingStation = activeStation.slug !== prevProps.activeStation.slug
 
-    if (activeStation.slug !== prevProps.activeStation.slug) {
-      animateScrollTo(0, {
-        ...scrollOptions,
-        onComplete: () => this.handleScrollCompletion(activeStation)
-      })
-    }
+    if (!isChangingStation) { return }
+
+    animateScrollTo(0, scrollOptions)
   }
 
-  redirectStreams = () => {
-    const { history } = this.props
-    const { hasStreamMatch, visibleStation } = this.state
+  get hasStreamMatch () {
+    const { activeStation, match } = this.props
 
-    if (hasStreamMatch) { return }
-
-    history.push(buildStationPath(visibleStation.slug))
-  }
-
-  playStation = () => {
-    const { playStation } = this.props
-    const { visibleStation } = this.state
-
-    playStation(visibleStation.slug)
+    return !!activeStation.streams.find(stream => (
+      stream.number === match.params.streamNumber
+    ))
   }
 
   handleScrollCompletion = (nextStation) => {
-    const { activeStation: { name } } = this.props
+    const { activeStation, playStation } = this.props
 
-    if (name !== nextStation.name) { return }
+    if (activeStation.name !== nextStation.name) { return }
 
-    this.setState({ visibleStation: nextStation }, () => this.playStation())
+    playStation(nextStation.slug)
   }
 
   render () {
-    const { hasStreamMatch, visibleStation } = this.state
+    const { activeStation } = this.props
 
-    if (!visibleStation || !hasStreamMatch) { return null }
+    if (!activeStation) { return null }
+
+    if (!this.hasStreamMatch) {
+      return <Redirect to={buildStationPath(activeStation.slug)} />
+    }
 
     return (
       <StyledStation>
         <Navigation />
 
-        <StationHeader station={visibleStation} />
+        <StationHeader station={activeStation} />
 
         <StyledPage.Content>
           <StyledPage.Column>
-            <TwitterFeed twitterHandle={visibleStation.twitterHandle} />
+            <TwitterFeed twitterHandle={activeStation.twitterHandle} />
           </StyledPage.Column>
 
           <StyledPage.Column>
-            <StationDetails station={visibleStation} />
+            <StationDetails station={activeStation} />
           </StyledPage.Column>
         </StyledPage.Content>
       </StyledStation>
@@ -130,6 +105,7 @@ Station.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
+  initPlayer: PropTypes.func.isRequired,
   playStation: PropTypes.func.isRequired
 }
 
@@ -138,6 +114,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  initPlayer: (args) => dispatch(initPlayer(args)),
   playStation: (args) => dispatch(playStation(args))
 })
 

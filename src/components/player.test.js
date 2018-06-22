@@ -38,26 +38,6 @@ test('it only renders the audio player when a streamUrl is present', () => {
   expect(missingAudioPlayerComponent.exists()).toEqual(false)
 })
 
-test('it handles the previous button click', () => {
-  const wrapper = shallow(<Player {...props} />)
-  const prevButton = wrapper.find('player__StyledSeekButton').at(0)
-
-  prevButton.simulate('click')
-
-  expect(props.playStation).toHaveBeenCalledWith(prevStationSlug)
-  expect(props.history.push).toHaveBeenCalledWith(buildStationPath(prevStationSlug))
-})
-
-test('it handles the next button click', () => {
-  const wrapper = shallow(<Player {...props} />)
-  const nextButton = wrapper.find('player__StyledSeekButton').at(1)
-
-  nextButton.simulate('click')
-
-  expect(props.playStation).toHaveBeenCalledWith(nextStationSlug)
-  expect(props.history.push).toHaveBeenCalledWith(buildStationPath(nextStationSlug))
-})
-
 test('it handles the play state button click', () => {
   const wrapper = shallow(<Player {...props} />)
   const playStateButton = wrapper.find('player__StyledPlayStateButton')

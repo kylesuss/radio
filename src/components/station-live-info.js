@@ -39,6 +39,7 @@ const StyledItem = styled.div`
 const StyledLabelContainer = styled.div`
   display: flex;
   margin-bottom: 4px;
+  height: 20px;
   ${media.mediumScreenUp`
     margin-bottom: 0;
   `}
@@ -58,11 +59,12 @@ const StyledLabel = styled.span`
   margin-right: 8px;
 `
 
-const Value = styled.span`
+const StyledValue = styled.span`
   color: ${colors.BLACK};
   font-size: 13px;
   font-weight: ${fonts.WEIGHT_SEMIBOLD};
   line-height: 20px;
+  max-width: 500px;
 `
 
 const NO_LIVE_INFO_MESSAGE = 'No live info'
@@ -184,9 +186,9 @@ class StationLiveInfo extends Component {
           )}
 
           {liveStationInfo && (
-            <Value>
+            <StyledValue>
               {liveStationInfo[LIVE_INFO_CURRENT_KEY]}
-            </Value>
+            </StyledValue>
           )}
         </StyledItem>
       </StyledLiveInfo>

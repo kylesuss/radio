@@ -19,7 +19,7 @@ const props = {
   nextStation: nextStation,
   playStation: jest.fn(),
   prevStation: prevStation,
-  router: { push: jest.fn() },
+  history: { push: jest.fn() },
   station: stationFixture,
   streamNumber: DEFAULT_STREAM_NUMBER,
   togglePlayState: jest.fn()
@@ -45,7 +45,7 @@ test('it handles the previous button click', () => {
   prevButton.simulate('click')
 
   expect(props.playStation).toHaveBeenCalledWith(prevStationSlug)
-  expect(props.router.push).toHaveBeenCalledWith(buildStationPath(prevStationSlug))
+  expect(props.history.push).toHaveBeenCalledWith(buildStationPath(prevStationSlug))
 })
 
 test('it handles the next button click', () => {
@@ -55,7 +55,7 @@ test('it handles the next button click', () => {
   nextButton.simulate('click')
 
   expect(props.playStation).toHaveBeenCalledWith(nextStationSlug)
-  expect(props.router.push).toHaveBeenCalledWith(buildStationPath(nextStationSlug))
+  expect(props.history.push).toHaveBeenCalledWith(buildStationPath(nextStationSlug))
 })
 
 test('it handles the play state button click', () => {

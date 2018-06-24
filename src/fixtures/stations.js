@@ -409,7 +409,7 @@ export default [
       liveInfoUrl: 'https://api.mixlr.com/users/5498175?source=embed'
     }]
   }, {
-    name: 'Radio Labici',
+    name: 'Radio LaBici',
     slug: 'radio-labici',
     city: 'Buenos Aires',
     country: 'Argentina',
@@ -426,7 +426,10 @@ export default [
     ],
     streams: [{
       number: '1',
-      url: 'http://stream.radiolabici.com:8000/stream'
+      url: 'http://stream.radiolabici.com:8000/live/'
+    }, {
+      number: '2',
+      url: 'http://stream.radiolabici.com:8006/live/'
     }]
   }, {
     name: 'Seoul Community Radio',

@@ -1,5 +1,5 @@
 import { DEFAULT_STREAM_NUMBER } from 'constants/player'
-import { buildStationPath } from 'constants/routes'
+import { ROOT_PATH, buildStationPath } from 'constants/routes'
 import first from 'lodash/first'
 import last from 'lodash/last'
 
@@ -12,6 +12,8 @@ export const findPrevStationUrl = (
   activeStationSlug,
   currentStreamNumber
 ) => {
+  if (!activeStationSlug) { return ROOT_PATH }
+
   const activeStation = findStationBySlug(stations, activeStationSlug)
 
   if (currentStreamNumber > DEFAULT_STREAM_NUMBER) {
@@ -34,6 +36,8 @@ export const findNextStationUrl = (
   activeStationSlug,
   currentStreamNumber
 ) => {
+  if (!activeStationSlug) { return ROOT_PATH }
+
   const activeStation = findStationBySlug(stations, activeStationSlug)
   const nextStream = activeStation.streams[parseInt(currentStreamNumber)]
 

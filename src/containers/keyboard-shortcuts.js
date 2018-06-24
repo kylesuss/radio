@@ -43,7 +43,6 @@ const withKeyboardShortcuts = (ComposedComponent) => {
 
     handleRightArrowKey = () => {
       const { history, nextStationUrl } = this.props
-      console.log(nextStationUrl)
       history.push(nextStationUrl)
     }
 

@@ -6,7 +6,10 @@ import modelRedLightRadioLiveInfo from 'models/live-info-red-light-radio'
 import modelSohoRadioLiveInfo from 'models/live-info-soho-radio'
 import modelNoodsRadioLiveInfo from 'models/live-info-noods-radio'
 import modelWorldWideFmLiveInfo from 'models/live-info-worldwide-fm'
-import modelNTSRadioLiveInfo from 'models/live-info-nts-radio'
+import {
+  modelNTSRadioLiveInfoStream1,
+  modelNTSRadioLiveInfoStream2
+} from 'models/live-info-nts-radio'
 import modelKmahRadioLiveInfo from 'models/live-info-kmah-radio'
 import modelBassoRadioLiveInfo from 'models/live-info-basso-radio'
 import modelRinseFmLiveInfo from 'models/live-info-rinse-fm'
@@ -15,28 +18,29 @@ import modelTederFmLiveInfo from 'models/live-info-teder-fm'
 import modelPinataRadioLiveInfo from 'models/live-info-pinata-radio'
 
 export const LIVE_INFO_MODELS = {
-  'balamii': modelAirtimeV2LiveInfo,
-  'basso-radio': modelBassoRadioLiveInfo,
-  'berlin-community-radio': modelAirtimeV2LiveInfo,
-  'boxout-fm': modelAirtimeV2LiveInfo,
-  'cashmere-radio': modelAirtimeV2LiveInfo,
-  'frission-radio': modelAirtimeV2LiveInfo,
-  'kmah-radio': modelKmahRadioLiveInfo,
-  'le-mellotron': modelLeMellotronInfo,
-  'lyl-radio': modelLiveInfoLylRadio,
-  'n10as-radio': modelAirtimeV2LiveInfo,
-  'netil-radio': modelNetilRadioLiveInfo,
-  'no-fun-radio': modelAirtimeV2LiveInfo,
-  'noods-radio': modelNoodsRadioLiveInfo,
-  'nts-radio': modelNTSRadioLiveInfo,
-  'pinata-radio': modelPinataRadioLiveInfo,
-  'red-light-radio': modelRedLightRadioLiveInfo,
-  'rinse-fm': modelRinseFmLiveInfo,
-  'seoul-community-radio': modelSeoulCommunityRadioLiveInfo,
-  'soho-radio': modelSohoRadioLiveInfo,
-  'teder-fm': modelTederFmLiveInfo,
-  'the-lot-radio': modelAirtimeV2LiveInfo,
-  'worldwide-fm': modelWorldWideFmLiveInfo
+  'balamii-1': modelAirtimeV2LiveInfo,
+  'basso-radio-1': modelBassoRadioLiveInfo,
+  'berlin-community-radio-1': modelAirtimeV2LiveInfo,
+  'boxout-fm-1': modelAirtimeV2LiveInfo,
+  'cashmere-radio-1': modelAirtimeV2LiveInfo,
+  'frission-radio-1': modelAirtimeV2LiveInfo,
+  'kmah-radio-1': modelKmahRadioLiveInfo,
+  'le-mellotron-1': modelLeMellotronInfo,
+  'lyl-radio-1': modelLiveInfoLylRadio,
+  'n10as-radio-1': modelAirtimeV2LiveInfo,
+  'netil-radio-1': modelNetilRadioLiveInfo,
+  'no-fun-radio-1': modelAirtimeV2LiveInfo,
+  'noods-radio-1': modelNoodsRadioLiveInfo,
+  'nts-radio-1': modelNTSRadioLiveInfoStream1,
+  'nts-radio-2': modelNTSRadioLiveInfoStream2,
+  'pinata-radio-1': modelPinataRadioLiveInfo,
+  'red-light-radio-1': modelRedLightRadioLiveInfo,
+  'rinse-fm-1': modelRinseFmLiveInfo,
+  'seoul-community-radio-1': modelSeoulCommunityRadioLiveInfo,
+  'soho-radio-1': modelSohoRadioLiveInfo,
+  'teder-fm-1': modelTederFmLiveInfo,
+  'the-lot-radio-1': modelAirtimeV2LiveInfo,
+  'worldwide-fm-1': modelWorldWideFmLiveInfo
 }
 
 export const LIVE_INFO_ACTIVE_STATUS = 'ACTIVE'

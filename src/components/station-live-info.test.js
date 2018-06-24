@@ -3,8 +3,9 @@ import { mount } from 'enzyme'
 import * as constants from 'constants/live-info'
 import stationFixture from 'fixtures/station'
 import flushPromises from 'jest/flush-promises'
-import StationLiveInfo, { REFETCH_INTERVAL } from './station-live-info'
+import { DEFAULT_STREAM_NUMBER } from 'constants/player'
 import { get as getUrl } from 'utils/async'
+import { REFETCH_INTERVAL, StationLiveInfo } from './station-live-info'
 
 jest.useFakeTimers()
 jest.mock('utils/async', () => ({
@@ -16,10 +17,13 @@ const modelResponse = ({ body }) => ({
 })
 
 beforeEach(() => {
-  constants.LIVE_INFO_MODELS = { [stationFixture.slug]: modelResponse }
+  constants.LIVE_INFO_MODELS = {
+    [`${stationFixture.slug}-${DEFAULT_STREAM_NUMBER}`]: modelResponse
+  }
 })
 
 const props = {
+  match: { params: { streamNumber: DEFAULT_STREAM_NUMBER } },
   station: stationFixture
 }
 
@@ -42,7 +46,7 @@ test('it fetches the station data', async () => {
 
   expect(getUrl).toHaveBeenCalledTimes(2)
 
-  const nextProps = { station: { ...props.station, slug: ':nextStation' } }
+  const nextProps = { ...props, station: { ...props.station, slug: ':nextStation' } }
   wrapper.instance().componentWillReceiveProps(nextProps)
 
   expect(wrapper.state('liveStationInfo')).toBeNull()

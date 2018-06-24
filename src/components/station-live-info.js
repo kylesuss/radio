@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { withRouter } from 'react-router-dom'
+import { compose } from 'redux'
 import get from 'lodash/get'
 import {
   LIVE_INFO_MODELS,
@@ -80,17 +82,21 @@ class StationLiveInfo extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const { station } = this.props
+    const { match, station } = this.props
+    const isChangingStreams = match.params.streamNumber !== nextProps.match.params.streamNumber
+    const isChangingStation = station.slug !== nextProps.station.slug
 
-    if (station.slug !== nextProps.station.slug) {
+    if (isChangingStation || isChangingStreams) {
       this.setState({ liveStationInfo: null })
     }
   }
 
   componentDidUpdate (prevProps) {
-    const { station } = this.props
+    const { match, station } = this.props
+    const isChangingStreams = match.params.streamNumber !== prevProps.match.params.streamNumber
+    const isChangingStation = station.slug !== prevProps.station.slug
 
-    if (station.slug !== prevProps.station.slug) {
+    if (isChangingStation || isChangingStreams) {
       this.fetchStationData()
     }
   }
@@ -109,8 +115,8 @@ class StationLiveInfo extends Component {
   }
 
   get modelInfoResponse () {
-    const { station } = this.props
-    return LIVE_INFO_MODELS[station.slug]
+    const { station, streamNumber } = this.props
+    return LIVE_INFO_MODELS[`${station.slug}-${streamNumber}`]
   }
 
   get labelMessage () {
@@ -197,6 +203,11 @@ class StationLiveInfo extends Component {
 }
 
 StationLiveInfo.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      streamNumber: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired,
   station: stationPropTypes.isRequired,
   streamNumber: PropTypes.string
 }
@@ -206,7 +217,10 @@ StationLiveInfo.defaultProps = {
 }
 
 export {
-  REFETCH_INTERVAL
+  REFETCH_INTERVAL,
+  StationLiveInfo
 }
 
-export default StationLiveInfo
+export default compose(
+  withRouter
+)(StationLiveInfo)

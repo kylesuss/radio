@@ -76,7 +76,6 @@ const StyledPlayStateButton = styled(StyledButton)`
   justify-content: center;
   align-items: center;
   cursor: ${props => props.isLoading ? 'default' : 'pointer'};
-  opacity: ${props => props.isLoading ? '0.7' : '1'};
   width: 46px;
   height: 46px;
   font-size: 28px;
@@ -86,8 +85,7 @@ const StyledPlayStateButton = styled(StyledButton)`
   box-shadow: 1px 1px 10px ${colors.SHADOW};
   transition: width 150ms ease-out,
               height 150ms ease-out,
-              background ${transitions.LENGTH_COMMON_MS} ease-out,
-              opacity ${transitions.LENGTH_COMMON_MS} ease-out;
+              background ${transitions.LENGTH_COMMON_MS} ease-out;
 
   &:hover {
     background: ${colors.BLUE_PRIMARY_HOVER};

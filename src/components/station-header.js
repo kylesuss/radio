@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { withRouter } from 'react-router-dom'
 import TimeInTimezone from 'components/time-in-timezone'
 import StationLiveInfo from 'components/station-live-info'
@@ -9,6 +9,7 @@ import VideoPlayer from 'components/video-player'
 import stationPropTypes from 'prop-types/station'
 import StreamsTabs from 'components/streams-tabs'
 import * as colors from 'styles/colors'
+import * as easing from 'styles/easing'
 import * as fonts from 'styles/fonts'
 import * as spacing from 'styles/spacing'
 import buildLocation from 'utils/build-location'
@@ -25,11 +26,27 @@ const StyledStationHeader = styled.header`
   `}
 `
 
+const animateStationDetails = keyframes`
+  0% {
+    transform: translateX(-2rem);
+    opacity: 0;
+  }
+
+  75% {
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 1;
+  }
+`
+
 const StyledStationDetails = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
+  animation: ${animateStationDetails} 750ms ${easing.EASE_OUT_QUINT};
 `
 
 const StyledStationMeta = styled.div`
@@ -74,7 +91,7 @@ const StationHeader = ({ station, match }) => {
         />
       )}
 
-      <StyledStationDetails>
+      <StyledStationDetails key={station.name}>
         <StyledStationName>
           {station.name}
         </StyledStationName>

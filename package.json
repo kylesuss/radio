@@ -19,6 +19,7 @@
     "animated-scroll-to": "1.1.7",
     "classnames": "2.2.5",
     "he": "1.1.1",
+    "hex2rgba": "0.0.1",
     "lodash": "4.17.4",
     "moment-timezone": "0.5.14",
     "normalize.css": "7.0.0",

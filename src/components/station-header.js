@@ -26,7 +26,7 @@ const StyledStationHeader = styled.header`
   `}
 `
 
-const animateStationDetails = keyframes`
+const animateStationDetailsMovement = keyframes`
   0% {
     transform: translateX(-2rem);
     opacity: 0;
@@ -41,12 +41,24 @@ const animateStationDetails = keyframes`
   }
 `
 
+const animateStationDetailsOpacity = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`
+
 const StyledStationDetails = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  animation: ${animateStationDetails} 750ms ${easing.EASE_OUT_QUINT};
+  animation:
+    ${animateStationDetailsMovement} 750ms ${easing.EASE_OUT_QUINT},
+    ${animateStationDetailsOpacity} 400ms ease-out;
 `
 
 const StyledStationMeta = styled.div`

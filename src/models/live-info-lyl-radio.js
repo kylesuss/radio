@@ -13,8 +13,8 @@ export default ({ body }) => {
 
   return {
     [LIVE_INFO_STATUS_KEY]: isInactive
-      ? LIVE_INFO_ACTIVE_STATUS
-      : LIVE_INFO_INACTIVE_STATUS,
+      ? LIVE_INFO_INACTIVE_STATUS
+      : LIVE_INFO_ACTIVE_STATUS,
     [LIVE_INFO_CURRENT_KEY]: name
   }
 }

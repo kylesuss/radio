@@ -109,9 +109,21 @@ class StationHeader extends Component {
 
     const currentStationIndex = stationList.findIndex(item => item.slug === station.slug)
     const nextStationIndex = stationList.findIndex(item => item.slug === nextProps.station.slug)
-    const isNavigatingBackward = nextStationIndex < currentStationIndex
 
-    this.setState({ isNavigatingBackward })
+    this.setState({
+      isNavigatingBackward: (() => {
+        switch (nextStationIndex) {
+          case 0:
+            return currentStationIndex + 1 === stationList.length
+              ? false
+              : nextStationIndex < currentStationIndex
+          case stationList.length - 1:
+            return currentStationIndex === 0
+          default:
+            return nextStationIndex < currentStationIndex
+        }
+      })()
+    })
   }
 
   render () {

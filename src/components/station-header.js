@@ -109,6 +109,10 @@ class StationHeader extends Component {
 
     const currentStationIndex = stationList.findIndex(item => item.slug === station.slug)
     const nextStationIndex = stationList.findIndex(item => item.slug === nextProps.station.slug)
+    const defaultCase = (
+      (nextStationIndex < currentStationIndex) &&
+      (Math.abs(nextStationIndex - currentStationIndex) === 1)
+    )
 
     this.setState({
       isNavigatingBackward: (() => {
@@ -116,11 +120,11 @@ class StationHeader extends Component {
           case 0:
             return currentStationIndex + 1 === stationList.length
               ? false
-              : nextStationIndex < currentStationIndex
+              : defaultCase
           case stationList.length - 1:
             return currentStationIndex === 0
           default:
-            return nextStationIndex < currentStationIndex
+            return defaultCase
         }
       })()
     })

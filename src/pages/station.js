@@ -72,7 +72,7 @@ class Station extends Component {
   }
 
   render () {
-    const { activeStation } = this.props
+    const { activeStation, stationList } = this.props
 
     if (!activeStation) { return null }
 
@@ -84,7 +84,10 @@ class Station extends Component {
       <StyledStation>
         <Navigation />
 
-        <StationHeader station={activeStation} />
+        <StationHeader
+          station={activeStation}
+          stationList={stationList}
+        />
 
         <StyledPage.Content>
           <StyledPage.Column>
@@ -106,11 +109,13 @@ Station.propTypes = {
     push: PropTypes.func.isRequired
   }).isRequired,
   initPlayer: PropTypes.func.isRequired,
-  playStation: PropTypes.func.isRequired
+  playStation: PropTypes.func.isRequired,
+  stationList: PropTypes.arrayOf(stationPropTypes).isRequired
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  activeStation: findStationBySlug(state.stations.items, ownProps.match.params.slug)
+  activeStation: findStationBySlug(state.stations.items, ownProps.match.params.slug),
+  stationList: state.stations.items
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
 import { withRouter } from 'react-router-dom'
+import { compose } from 'redux'
 import TimeInTimezone from 'components/time-in-timezone'
 import StationLiveInfo from 'components/station-live-info'
 import Player from 'components/player'
@@ -26,18 +27,23 @@ const StyledStationHeader = styled.header`
   `}
 `
 
-const animateStationDetailsMovement = keyframes`
+const animateStationDetailsFromLeft = keyframes`
   0% {
     transform: translateX(-2rem);
-    opacity: 0;
-  }
-
-  75% {
-    transform: translateX(0);
   }
 
   100% {
-    opacity: 1;
+    transform: translateX(0);
+  }
+`
+
+const animateStationDetailsFromRight = keyframes`
+  0% {
+    transform: translateX(2rem);
+  }
+
+  100% {
+    transform: translateX(0);
   }
 `
 
@@ -57,7 +63,7 @@ const StyledStationDetails = styled.div`
   flex-direction: column;
   justify-content: center;
   animation:
-    ${animateStationDetailsMovement} 750ms ${easing.EASE_OUT_QUINT},
+    ${props => props.isNavigatingBackward ? animateStationDetailsFromLeft : animateStationDetailsFromRight} 550ms ${easing.EASE_OUT_QUINT},
     ${animateStationDetailsOpacity} 400ms ease-out;
 `
 
@@ -90,65 +96,90 @@ const StyledStationInfoElement = styled.div`
   }
 `
 
-const StationHeader = ({ station, match }) => {
-  const hasMultipleStreams = station.streams.length > 1
+class StationHeader extends Component {
+  state = {
+    isNavigatingBackward: false
+  }
 
-  return (
-    <StyledStationHeader hasMultipleStreams={hasMultipleStreams}>
-      {hasMultipleStreams && (
-        <StreamsTabs
-          stationSlug={station.slug}
-          streamNumber={match.params.streamNumber}
-          streams={station.streams}
-        />
-      )}
+  componentWillReceiveProps (nextProps) {
+    const { station, stationList } = this.props
+    const isChangingStation = station.slug !== nextProps.station.slug
 
-      <StyledStationDetails key={station.name}>
-        <StyledStationName>
-          {station.name}
-        </StyledStationName>
+    if (!isChangingStation) { return }
 
-        <StyledStationMeta>
-          <StyledStationInfoElement>
-            {buildLocation(
-              station.city,
-              station.country
-            )}
-          </StyledStationInfoElement>
+    const currentStationIndex = stationList.findIndex(item => item.slug === station.slug)
+    const nextStationIndex = stationList.findIndex(item => item.slug === nextProps.station.slug)
+    const isNavigatingBackward = nextStationIndex > currentStationIndex
 
-          {station.timezone && (
+    this.setState({ isNavigatingBackward })
+  }
+
+  render () {
+    const { station, match } = this.props
+    const { isNavigatingBackward } = this.state
+    const hasMultipleStreams = station.streams.length > 1
+
+    return (
+      <StyledStationHeader hasMultipleStreams={hasMultipleStreams}>
+        {hasMultipleStreams && (
+          <StreamsTabs
+            stationSlug={station.slug}
+            streamNumber={match.params.streamNumber}
+            streams={station.streams}
+          />
+        )}
+
+        <StyledStationDetails
+          key={station.name}
+          isNavigatingBackward={isNavigatingBackward}
+        >
+          <StyledStationName>
+            {station.name}
+          </StyledStationName>
+
+          <StyledStationMeta>
             <StyledStationInfoElement>
-              <TimeInTimezone timezone={station.timezone}>
-                {(time) => time}
-              </TimeInTimezone>
+              {buildLocation(
+                station.city,
+                station.country
+              )}
             </StyledStationInfoElement>
-          )}
-        </StyledStationMeta>
 
-        <StationLiveInfo
+            {station.timezone && (
+              <StyledStationInfoElement>
+                <TimeInTimezone timezone={station.timezone}>
+                  {(time) => time}
+                </TimeInTimezone>
+              </StyledStationInfoElement>
+            )}
+          </StyledStationMeta>
+
+          <StationLiveInfo
+            station={station}
+            streamNumber={match.params.streamNumber}
+          />
+        </StyledStationDetails>
+
+        {station.video && (
+          <VideoPlayer
+            key={station.slug}
+            name={station.name}
+            video={station.video}
+          />
+        )}
+
+        <Player
           station={station}
           streamNumber={match.params.streamNumber}
         />
-      </StyledStationDetails>
-
-      {station.video && (
-        <VideoPlayer
-          key={station.slug}
-          name={station.name}
-          video={station.video}
-        />
-      )}
-
-      <Player
-        station={station}
-        streamNumber={match.params.streamNumber}
-      />
-    </StyledStationHeader>
-  )
+      </StyledStationHeader>
+    )
+  }
 }
 
 StationHeader.propTypes = {
   station: stationPropTypes,
+  stationList: PropTypes.arrayOf(stationPropTypes).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       streamNumber: PropTypes.string
@@ -156,4 +187,6 @@ StationHeader.propTypes = {
   }).isRequired
 }
 
-export default withRouter(StationHeader)
+export default compose(
+  withRouter
+)(StationHeader)

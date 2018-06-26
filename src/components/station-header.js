@@ -63,7 +63,7 @@ const StyledStationDetails = styled.div`
   flex-direction: column;
   justify-content: center;
   animation:
-    ${props => props.isNavigatingBackward ? animateStationDetailsFromLeft : animateStationDetailsFromRight} 550ms ${easing.EASE_OUT_QUINT},
+    ${props => props.isNavigatingBackward ? animateStationDetailsFromRight : animateStationDetailsFromLeft} 550ms ${easing.EASE_OUT_QUINT},
     ${animateStationDetailsOpacity} 400ms ease-out;
 `
 
@@ -109,7 +109,7 @@ class StationHeader extends Component {
 
     const currentStationIndex = stationList.findIndex(item => item.slug === station.slug)
     const nextStationIndex = stationList.findIndex(item => item.slug === nextProps.station.slug)
-    const isNavigatingBackward = nextStationIndex > currentStationIndex
+    const isNavigatingBackward = nextStationIndex < currentStationIndex
 
     this.setState({ isNavigatingBackward })
   }

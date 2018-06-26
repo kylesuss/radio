@@ -4,7 +4,6 @@ import { compose } from 'redux'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import hexToRgba from 'hex2rgba'
 import PlayIcon from 'react-icons/lib/md/play-arrow'
 import PauseIcon from 'react-icons/lib/md/pause'
 import { togglePlayState } from 'actions/player'
@@ -71,6 +70,8 @@ const animatePlayStateLoading = keyframes`
   }
 `
 
+const disabledButtonBlue = '#84addb'
+
 const StyledPlayStateButton = styled(StyledButton)`
   position: relative;
   display: flex;
@@ -82,7 +83,7 @@ const StyledPlayStateButton = styled(StyledButton)`
   font-size: 28px;
   margin: 0 ${spacing.HALF};
   color: ${colors.WHITE};
-  background: ${props => props.isLoading ? hexToRgba(colors.BLUE_PRIMARY, 0.6) : colors.BLUE_PRIMARY};
+  background: ${props => props.isLoading ? disabledButtonBlue : colors.BLUE_PRIMARY};
   box-shadow: 1px 1px 10px ${colors.SHADOW};
   transition: width 150ms ease-out,
               height 150ms ease-out,
@@ -93,7 +94,7 @@ const StyledPlayStateButton = styled(StyledButton)`
   }
 
   &:disabled:hover {
-    background: ${props => props.isLoading ? hexToRgba(colors.BLUE_PRIMARY, 0.6) : colors.BLUE_PRIMARY};
+    background: ${props => props.isLoading ? disabledButtonBlue : colors.BLUE_PRIMARY};
   }
 
   &:active {

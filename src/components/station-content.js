@@ -12,8 +12,8 @@ const StyledStationContent = styled.div`
   opacity: ${props => props.isVisible ? '1' : '0'};
   transform: translateY(${props => props.isVisible ? '0' : spacing.COMMON});
   transition:
-    opacity ${props => props.isVisible ? transitions.LENGTH_DOUBLE_MS : transitions.LENGTH_COMMON_MS} ease-out,
-    transform ${props => props.isVisible ? transitions.LENGTH_DOUBLE_MS : '0ms'} ${easing.EASE_OUT_QUINT} ${props => props.isVisible ? '0ms' : transitions.LENGTH_DOUBLE_MS};
+    opacity ${props => props.isVisible ? '400ms' : transitions.LENGTH_COMMON_MS} ease-out,
+    transform ${props => props.isVisible ? '550ms' : '0ms'} ${easing.EASE_OUT_QUINT} ${props => props.isVisible ? '0ms' : transitions.LENGTH_DOUBLE_MS};
 `
 
 class StationContent extends Component {

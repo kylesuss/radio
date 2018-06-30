@@ -5,7 +5,7 @@ import * as colors from 'styles/colors'
 import * as transitions from 'styles/transitions'
 
 const TWITTER_SCRIPT = '//platform.twitter.com/widgets.js'
-const TWEET_LIMIT = 1
+const TWEET_LIMIT = 2
 
 class TwitterFeed extends Component {
   componentDidMount () {

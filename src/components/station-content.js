@@ -4,11 +4,16 @@ import StationDetails from 'components/station-details'
 import TwitterFeed from 'components/twitter-feed'
 import stationPropTypes from 'prop-types/station'
 import StyledPage from 'styled/page'
+import * as easing from 'styles/easing'
+import * as spacing from 'styles/spacing'
 import * as transitions from 'styles/transitions'
 
 const StyledStationContent = styled.div`
   opacity: ${props => props.isVisible ? '1' : '0'};
-  transition: opacity ${props => props.isVisible ? transitions.LENGTH_DOUBLE_MS : transitions.LENGTH_COMMON_MS} ease-out;
+  transform: translateY(${props => props.isVisible ? '0' : spacing.COMMON});
+  transition:
+    opacity ${props => props.isVisible ? transitions.LENGTH_DOUBLE_MS : transitions.LENGTH_COMMON_MS} ease-out,
+    transform ${props => props.isVisible ? transitions.LENGTH_DOUBLE_MS : '0ms'} ${easing.EASE_OUT_QUINT} ${props => props.isVisible ? '0ms' : transitions.LENGTH_DOUBLE_MS};
 `
 
 class StationContent extends Component {

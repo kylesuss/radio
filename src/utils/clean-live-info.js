@@ -15,7 +15,9 @@ export default (liveInfo) => {
   cleanedText = cleanedText.replace(/_/g, ' ')
 
   const autoStatus = cleanedText ? LIVE_INFO_ACTIVE_STATUS : LIVE_INFO_NO_DATA_STATUS
-  const status = liveInfo[LIVE_INFO_STATUS_KEY] || autoStatus
+  const status = cleanedText
+    ? (liveInfo[LIVE_INFO_STATUS_KEY] || autoStatus)
+    : LIVE_INFO_NO_DATA_STATUS
 
   return {
     ...liveInfo,

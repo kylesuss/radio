@@ -56,20 +56,6 @@ const StationDetails = ({ station }) => (
       </StyledStationDetailsRow>
     )}
 
-    {station.web && (
-      <StyledStationDetailsRow withLink>
-        <StyledLabel>
-          Web
-        </StyledLabel>
-
-        <StyledValue>
-          <ExternalLink href={station.web.url}>
-            {station.web.display}
-          </ExternalLink>
-        </StyledValue>
-      </StyledStationDetailsRow>
-    )}
-
     {station.twitterHandle && (
       <StyledStationDetailsRow withLink>
         <StyledLabel>
@@ -98,6 +84,20 @@ const StationDetails = ({ station }) => (
               </ExternalLink>
             </div>
           ))}
+        </StyledValue>
+      </StyledStationDetailsRow>
+    )}
+
+    {station.web && (
+      <StyledStationDetailsRow withLink>
+        <StyledLabel>
+          Web
+        </StyledLabel>
+
+        <StyledValue>
+          <ExternalLink href={station.web.url}>
+            {station.web.display}
+          </ExternalLink>
         </StyledValue>
       </StyledStationDetailsRow>
     )}

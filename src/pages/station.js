@@ -7,14 +7,12 @@ import styled from 'styled-components'
 import animateScrollTo from 'animated-scroll-to'
 import Navigation from 'components/navigation'
 import { initPlayer, playStation } from 'actions/player'
-import StationDetails from 'components/station-details'
 import StationHeader from 'components/station-header'
-import TwitterFeed from 'components/twitter-feed'
+import StationContent from 'components/station-content'
 import withKeyboardShortcuts from 'containers/keyboard-shortcuts'
 import { buildStationPath } from 'constants/routes'
 import stationPropTypes from 'prop-types/station'
 import { findStationBySlug } from 'selectors/station'
-import StyledPage from 'styled/page'
 import media from 'styles/media'
 import * as positioning from 'styles/positioning'
 
@@ -89,15 +87,9 @@ class Station extends Component {
           stationList={stationList}
         />
 
-        <StyledPage.Content>
-          <StyledPage.Column>
-            <TwitterFeed twitterHandle={activeStation.twitterHandle} />
-          </StyledPage.Column>
-
-          <StyledPage.Column>
-            <StationDetails station={activeStation} />
-          </StyledPage.Column>
-        </StyledPage.Content>
+        <StationContent
+          station={activeStation}
+        />
       </StyledStation>
     )
   }

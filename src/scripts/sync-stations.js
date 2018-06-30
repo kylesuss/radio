@@ -22,7 +22,7 @@ const dynamoDB = new aws.DynamoDB.DocumentClient({
 
 const writeParams = buildWriteItemParams(stations)
 
-dynamoDB.batchWrite(buildWriteItemParams(stations), (err, data) => {
+dynamoDB.batchWrite(writeParams, (err, data) => {
   if (err) {
     console.log(`ERROR: ${err}`)
   }

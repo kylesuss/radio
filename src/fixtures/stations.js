@@ -274,7 +274,8 @@ export default [
     ],
     streams: [{
       number: '1',
-      url: 'http://broadcast.rbmaradio.net/main'
+      url: 'http://broadcast.rbmaradio.net/main',
+      liveInfoUrl: 'https://freshtransmission.com/live-info/red-bull-radio'
     }]
   }, {
     name: 'Rinse FM',

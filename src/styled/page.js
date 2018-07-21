@@ -4,8 +4,14 @@ import media from 'styles/media'
 
 const Content = styled.div`
   width: 100%;
-  padding: ${spacing.COMMON} ${spacing.DOUBLE};
   margin-top: ${spacing.DOUBLE};
+  padding: ${spacing.COMMON} ${spacing.HALF};
+  ${media.smallScreenUp`
+    padding: ${spacing.COMMON} ${spacing.COMMON};
+  `}
+  ${media.mediumScreenUp`
+    padding: ${spacing.COMMON} ${spacing.DOUBLE};
+  `}
   ${media.largeScreenUp`
     display: flex;
   `}

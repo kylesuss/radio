@@ -24,7 +24,6 @@ import cleanLiveInfo from 'utils/clean-live-info'
 const REFETCH_INTERVAL = 30000 // 30 seconds
 
 const StyledLiveInfo = styled.div`
-  height: 20px;
   margin-top: calc(${spacing.HALF} + 2px);
 `
 

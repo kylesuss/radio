@@ -12,6 +12,7 @@ import StreamsTabs from 'components/streams-tabs'
 import * as colors from 'styles/colors'
 import * as easing from 'styles/easing'
 import * as fonts from 'styles/fonts'
+import media from 'styles/media'
 import * as spacing from 'styles/spacing'
 import buildLocation from 'utils/build-location'
 
@@ -19,11 +20,17 @@ const StyledStationHeader = styled.header`
   height: 236px;
   display: flex;
   background: ${colors.BLUE_LIGHT};
-  padding: ${spacing.DOUBLE};
-  padding-bottom: calc(${spacing.DOUBLE} + ${spacing.HALF});
   position: relative;
-  ${props => props.hasMultipleStreams && `
-    padding-top: calc(${spacing.DOUBLE} + 30px);
+  padding: ${spacing.HALF};
+  ${media.smallScreenUp`
+    padding: ${spacing.COMMON};
+  `}
+  ${media.mediumScreenUp`
+    padding: ${spacing.DOUBLE};
+    padding-bottom: calc(${spacing.DOUBLE} + ${spacing.HALF});
+    ${props => props.hasMultipleStreams && `
+      padding-top: calc(${spacing.DOUBLE} + 30px);
+    `}
   `}
 `
 

@@ -9,6 +9,7 @@ import { DEFAULT_STREAM_NUMBER } from 'constants/player'
 import { buildStationPath } from 'constants/routes'
 import * as colors from 'styles/colors'
 import * as fonts from 'styles/fonts'
+import media from 'styles/media'
 import * as spacing from 'styles/spacing'
 import * as transitions from 'styles/transitions'
 
@@ -18,8 +19,14 @@ const StyledStreamsTabs = styled.div`
   left: 0;
   display: flex;
   width: 100%;
-  padding-left: ${spacing.DOUBLE};
   border-bottom: 1px solid ${colors.LABELS};
+  padding-left: ${spacing.HALF};
+  ${media.smallScreenUp`
+    padding-left: ${spacing.COMMON};
+  `}
+  ${media.mediumScreenUp`
+    padding-left: ${spacing.DOUBLE};
+  `}
 `
 
 const StyledStreamTab = styled(({

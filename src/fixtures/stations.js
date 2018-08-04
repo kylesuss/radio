@@ -69,7 +69,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://shouting.trinoma.net/stream/1/',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/le-mellotron'
+      liveInfoUrl: 'https://www.lemellotron.com/nowplaying.header4.php'
     }]
   }, {
     name: 'LYL Radio',
@@ -90,7 +90,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://icecast.lyl.live/live',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/lyl-radio'
+      liveInfoUrl: 'http://airtime.lyl.live/api/live-info'
     }]
   }, {
     name: 'Soho Radio',
@@ -176,7 +176,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://radio.citrus3.com:8862/;stream.mp3',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/noods-radio'
+      liveInfoUrl: 'http://noodsradio.com/icestats.php'
     }]
   }, {
     name: 'Worldwide FM',
@@ -209,7 +209,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://soho.wavestreamer.com:5831/1/;stream.mp3',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/radar-radio'
+      liveInfoUrl: 'http://www.radarradio.com/player'
     }]
   }, {
     name: 'NTS Radio',
@@ -256,7 +256,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://stream.basso.fi:8000/stream',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/basso-radio'
+      liveInfoUrl: 'http://api.basso.fi/v1/upcoming_shows.json'
     }]
   }, {
     name: 'Red Bull Radio',
@@ -275,7 +275,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://broadcast.rbmaradio.net/main',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/red-bull-radio'
+      liveInfoUrl: 'https://www.redbullradio.com/'
     }]
   }, {
     name: 'Rinse FM',
@@ -296,7 +296,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://streamer.dgen.net:8000/rinseradio',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/rinse-fm'
+      liveInfoUrl: 'https://rinse.fm/player/'
     }]
   }, {
     name: 'TEDER.FM',
@@ -317,7 +317,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://server1.live1.co.il:8014/teder',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/teder-fm'
+      liveInfoUrl: 'http://teder.fm/en/live'
     }]
   }, {
     name: 'Red Light Radio',
@@ -343,7 +343,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://www.michielgardner.nl:8000/redlightradio',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/red-light-radio'
+      liveInfoUrl: 'http://redlightradio.net/'
     }]
   }, {
     name: 'n10.as Radio',
@@ -474,7 +474,7 @@ export default [
     streams: [{
       number: '1',
       url: 'http://soho.wavestreamer.com:4597/1/;stream/1',
-      liveInfoUrl: 'https://freshtransmission.com/live-info/kmah-radio'
+      liveInfoUrl: 'http://kmah-radio.com'
     }]
   }, {
     name: 'No Fun Radio',

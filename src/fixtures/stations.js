@@ -406,7 +406,7 @@ export default [
     ],
     streams: [{
       number: '1',
-      url: 'http://edge.mixlr.com/channel/otuyv',
+      url: 'http://edge-studio-01-production.mixlr.com/stations/goxli',
       liveInfoUrl: 'https://api.mixlr.com/users/5498175?source=embed'
     }]
   }, {
